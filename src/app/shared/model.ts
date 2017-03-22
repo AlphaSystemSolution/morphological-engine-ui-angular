@@ -10,60 +10,44 @@ export class NamedTemplate implements ArabicLabel {
   constructor(public name: string, public label: string, public form: string) { }
 }
 
-export const buttonRow1: ArabicLetter[] = [
-  new ArabicLetter('DDAD', 'ض', 'D'),
-  new ArabicLetter('SAD', 'ص', 'S'),
-  new ArabicLetter('THA', 'ث', 'v'),
-  new ArabicLetter('QAF', 'ق', 'q'),
-  new ArabicLetter('FA', 'ف', 'f'),
-  new ArabicLetter('GHAIN', 'غ', 'g'),
-  new ArabicLetter('AIN', 'ع', 'E'),
-  new ArabicLetter('HHA', 'ح', 'H'),
-  new ArabicLetter('KHA', 'خ', 'x'),
-  new ArabicLetter('HA', 'ه', 'h'),
-  new ArabicLetter('JEEM', 'ج', 'j'),
-  new ArabicLetter('DAL', 'د', 'd'),
-  new ArabicLetter('THAL', 'ذ', '*')
-];
-
 export const arabicLetters: ArabicLetter[] = [
-  new ArabicLetter('HAMZA', 'ء', '\''),
-  new ArabicLetter('ALIF_MADDAH', 'آ', '|'),
+  new ArabicLetter('HAMZA', 'ء', '\''), // 0
+  /*new ArabicLetter('ALIF_MADDAH', 'آ', '|'),
   new ArabicLetter('ALIF_HAMZA_ABOVE', 'أ', '>'),
   new ArabicLetter('WAW_HAMZA_ABOVE', 'ؤ', '&'),
   new ArabicLetter('ALIF_HAMZA_BELOW', 'إ', '<'),
   new ArabicLetter('YA_HAMZA_ABOVE', 'ئ', '}'),
-  new ArabicLetter('ALIF', 'ا', 'A'),
-  new ArabicLetter('BA', 'ب', 'b'),
-  new ArabicLetter('TA_MARBUTA', 'ة', 'p'),
-  new ArabicLetter('TA', 'ت', 't'),
-  // new ArabicLetter('THA', 'ث', 'v'),
-  // new ArabicLetter('JEEM', 'ج', 'j'),
-  // new ArabicLetter('HHA', 'ح', 'H'),
-  // new ArabicLetter('KHA', 'خ', 'x'),
-  // new ArabicLetter('DAL', 'د', 'd'),
-  // new ArabicLetter('THAL', 'ذ', '*'),
-  new ArabicLetter('RA', 'ر', 'r'),
-  new ArabicLetter('ZAIN', 'ز', 'z'),
-  new ArabicLetter('SEEN', 'س', 's'),
-  new ArabicLetter('SHEEN', 'ش', '$'),
-  // new ArabicLetter('SAD', 'ص', 'S'),
-  // new ArabicLetter('DDAD', 'ض', 'D'),
-  new ArabicLetter('TTA', 'ط', 'T'),
-  new ArabicLetter('DTHA', 'ظ', 'Z'),
-  // new ArabicLetter('AIN', 'ع', 'E'),
-  // new ArabicLetter('GHAIN', 'غ', 'g'),
-  new ArabicLetter('TATWEEL', 'ـ', '_'),
-  // new ArabicLetter('FA', 'ف', 'f'),
-  // new ArabicLetter('QAF', 'ق', 'q'),
-  new ArabicLetter('KAF', 'ك', 'k'),
-  new ArabicLetter('LAM', 'ل', 'l'),
-  new ArabicLetter('MEEM', 'م', 'm'),
-  new ArabicLetter('NOON', 'ن', 'n'),
-  // new ArabicLetter('HA', 'ه', 'h'),
-  new ArabicLetter('WAW', 'و', 'w'),
-  new ArabicLetter('ALIF_MAKSURA', 'ى', 'Y'),
-  new ArabicLetter('YA', 'ي', 'y')
+  new ArabicLetter('ALIF', 'ا', 'A'),*/
+  new ArabicLetter('BA', 'ب', 'b'), // 1
+  // new ArabicLetter('TA_MARBUTA', 'ة', 'p'),
+  new ArabicLetter('TA', 'ت', 't'), // 2
+  new ArabicLetter('THA', 'ث', 'v'), // 3
+  new ArabicLetter('JEEM', 'ج', 'j'), // 4
+  new ArabicLetter('HHA', 'ح', 'H'), // 5
+  new ArabicLetter('KHA', 'خ', 'x'), // 6
+  new ArabicLetter('DAL', 'د', 'd'), // 7
+  new ArabicLetter('THAL', 'ذ', '*'), // 8
+  new ArabicLetter('RA', 'ر', 'r'), // 9
+  new ArabicLetter('ZAIN', 'ز', 'z'), // 10
+  new ArabicLetter('SEEN', 'س', 's'), // 11
+  new ArabicLetter('SHEEN', 'ش', '$'), // 12
+  new ArabicLetter('SAD', 'ص', 'S'), // 13
+  new ArabicLetter('DDAD', 'ض', 'D'), // 14
+  new ArabicLetter('TTA', 'ط', 'T'), // 15
+  new ArabicLetter('DTHA', 'ظ', 'Z'), // 16
+  new ArabicLetter('AIN', 'ع', 'E'), // 17
+  new ArabicLetter('GHAIN', 'غ', 'g'), // 18
+  // new ArabicLetter('TATWEEL', 'ـ', '_'),
+  new ArabicLetter('FA', 'ف', 'f'), // 19
+  new ArabicLetter('QAF', 'ق', 'q'), // 20
+  new ArabicLetter('KAF', 'ك', 'k'), // 21
+  new ArabicLetter('LAM', 'ل', 'l'), // 22
+  new ArabicLetter('MEEM', 'م', 'm'), // 23
+  new ArabicLetter('NOON', 'ن', 'n'), // 24
+  new ArabicLetter('HA', 'ه', 'h'), // 25
+  new ArabicLetter('WAW', 'و', 'w'), // 26
+  // new ArabicLetter('ALIF_MAKSURA', 'ى', 'Y'),
+  new ArabicLetter('YA', 'ي', 'y') // 27
 ];
 
 export const namedTemplates: NamedTemplate[] = [

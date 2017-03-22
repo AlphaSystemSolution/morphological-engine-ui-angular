@@ -9,8 +9,6 @@ import { ArabicLabel } from '../model';
 })
 export class ArabicButtonComponent implements OnInit {
 
-  private _label: string;
-
   private _letter: ArabicLabel;
 
   constructor() { }
@@ -18,19 +16,12 @@ export class ArabicButtonComponent implements OnInit {
   ngOnInit() {
   }
 
-  get letter(): ArabicLabel {
+  @Input() get letter(): ArabicLabel {
     return this._letter;
-  }
-
-  get label(): string {
-    return this._label;
   }
 
   set letter(letter: ArabicLabel) {
     this._letter = letter;
-    if (this._letter) {
-      this._label = letter.label;
-    }
   }
 
 }
