@@ -1,39 +1,39 @@
 <p-overlayPanel #rootLettersPicker [showCloseIcon]="true" [dismissable]="false">
   <div style="direction: rtl">
-    <app-arabic-button [letter]="letters[0]"></app-arabic-button>
-    <app-arabic-button [letter]="letters[1]"></app-arabic-button>
-    <app-arabic-button [letter]="letters[2]"></app-arabic-button>
-    <app-arabic-button [letter]="letters[3]"></app-arabic-button>
-    <app-arabic-button [letter]="letters[4]"></app-arabic-button>
-    <app-arabic-button [letter]="letters[5]"></app-arabic-button>
-    <app-arabic-button [letter]="letters[6]"></app-arabic-button>
-    <app-arabic-button [letter]="letters[7]"></app-arabic-button>
-    <app-arabic-button [letter]="letters[8]"></app-arabic-button>
-    <app-arabic-button [letter]="letters[9]"></app-arabic-button>
-    <app-arabic-button [letter]="letters[10]"></app-arabic-button>
+    <app-arabic-button #b0 [letter]="letters[0]" (click)="selectLetter(b0.letter)"></app-arabic-button>
+    <app-arabic-button #b1 [letter]="letters[1]" (click)="selectLetter(b1.letter)"></app-arabic-button>
+    <app-arabic-button #b2 [letter]="letters[2]" (click)="selectLetter(b2.letter)"></app-arabic-button>
+    <app-arabic-button #b3 [letter]="letters[3]" (click)="selectLetter(b3.letter)"></app-arabic-button>
+    <app-arabic-button #b4 [letter]="letters[4]" (click)="selectLetter(b4.letter)"></app-arabic-button>
+    <app-arabic-button #b5 [letter]="letters[5]" (click)="selectLetter(b5.letter)"></app-arabic-button>
+    <app-arabic-button #b6 [letter]="letters[6]" (click)="selectLetter(b6.letter)"></app-arabic-button>
+    <app-arabic-button #b7 [letter]="letters[7]" (click)="selectLetter(b7.letter)"></app-arabic-button>
+    <app-arabic-button #b8 [letter]="letters[8]" (click)="selectLetter(b8.letter)"></app-arabic-button>
+    <app-arabic-button #b9 [letter]="letters[9]" (click)="selectLetter(b9.letter)"></app-arabic-button>
+    <app-arabic-button #b10 [letter]="letters[10]" (click)="selectLetter(b10.letter)"></app-arabic-button>
   </div>
   <div>&nbsp;</div>
   <div style="direction: rtl">
-    <app-arabic-button [letter]="letters[11]"></app-arabic-button>
-    <app-arabic-button [letter]="letters[12]"></app-arabic-button>
-    <app-arabic-button [letter]="letters[13]"></app-arabic-button>
-    <app-arabic-button [letter]="letters[14]"></app-arabic-button>
-    <app-arabic-button [letter]="letters[15]"></app-arabic-button>
-    <app-arabic-button [letter]="letters[16]"></app-arabic-button>
-    <app-arabic-button [letter]="letters[17]"></app-arabic-button>
-    <app-arabic-button [letter]="letters[18]"></app-arabic-button>
-    <app-arabic-button [letter]="letters[19]"></app-arabic-button>
-    <app-arabic-button [letter]="letters[20]"></app-arabic-button>
+    <app-arabic-button #b11 [letter]="letters[11]" (click)="selectLetter(b11.letter)"></app-arabic-button>
+    <app-arabic-button #b12 [letter]="letters[12]" (click)="selectLetter(b12.letter)"></app-arabic-button>
+    <app-arabic-button #b13 [letter]="letters[13]" (click)="selectLetter(b13.letter)"></app-arabic-button>
+    <app-arabic-button #b14 [letter]="letters[14]" (click)="selectLetter(b14.letter)"></app-arabic-button>
+    <app-arabic-button #b15 [letter]="letters[15]" (click)="selectLetter(b15.letter)"></app-arabic-button>
+    <app-arabic-button #b16 [letter]="letters[16]" (click)="selectLetter(b16.letter)"></app-arabic-button>
+    <app-arabic-button #b17 [letter]="letters[17]" (click)="selectLetter(b17.letter)"></app-arabic-button>
+    <app-arabic-button #b18 [letter]="letters[18]" (click)="selectLetter(b18.letter)"></app-arabic-button>
+    <app-arabic-button #b19 [letter]="letters[19]" (click)="selectLetter(b19.letter)"></app-arabic-button>
+    <app-arabic-button #b20 [letter]="letters[20]" (click)="selectLetter(b20.letter)"></app-arabic-button>
   </div>
   <div>&nbsp;</div>
   <div style="direction: rtl">
-    <app-arabic-button [letter]="letters[21]"></app-arabic-button>
-    <app-arabic-button [letter]="letters[22]"></app-arabic-button>
-    <app-arabic-button [letter]="letters[23]"></app-arabic-button>
-    <app-arabic-button [letter]="letters[24]"></app-arabic-button>
-    <app-arabic-button [letter]="letters[25]"></app-arabic-button>
-    <app-arabic-button [letter]="letters[26]"></app-arabic-button>
-    <app-arabic-button [letter]="letters[27]"></app-arabic-button>
-    <button type="text" pButton label="     Clear     "></button>
+    <app-arabic-button #b21 [letter]="letters[21]" (click)="selectLetter(b21.letter)"></app-arabic-button>
+    <app-arabic-button #b22 [letter]="letters[22]" (click)="selectLetter(b22.letter)"></app-arabic-button>
+    <app-arabic-button #b23 [letter]="letters[23]" (click)="selectLetter(b23.letter)"></app-arabic-button>
+    <app-arabic-button #b24 [letter]="letters[24]" (click)="selectLetter(b24.letter)"></app-arabic-button>
+    <app-arabic-button #b25 [letter]="letters[25]" (click)="selectLetter(b25.letter)"></app-arabic-button>
+    <app-arabic-button #b26 [letter]="letters[26]" (click)="selectLetter(b26.letter)"></app-arabic-button>
+    <app-arabic-button #b27 [letter]="letters[27]" (click)="selectLetter(b27.letter)"></app-arabic-button>
+    <button type="text" pButton label="     Reset     " (click)="resetSelection()"></button>
   </div>
 </p-overlayPanel>
