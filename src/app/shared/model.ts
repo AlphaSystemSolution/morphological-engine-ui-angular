@@ -10,6 +10,10 @@ export class NamedTemplate implements ArabicLabel {
   constructor(public name: string, public label: string, public form: string) { }
 }
 
+export enum DisplayType {
+  LABEL_ONLY, CODE_ONLY, LABEL_AND_CODE
+}
+
 export const arabicLetters: ArabicLetter[] = [
   new ArabicLetter('HAMZA', 'ء', '\''), // 0
   new ArabicLetter('BA', 'ب', 'b'), // 1
