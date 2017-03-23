@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { OverlayPanelModule, ButtonModule } from 'primeng/primeng';
+import { ButtonModule, OverlayPanelModule, ToggleButtonModule } from 'primeng/primeng';
 import { ArabicButtonComponent } from './arabic-button/arabic-button.component';
 import { ArabicKeyboardComponent } from './arabic-keyboard/arabic-keyboard.component';
 
 @NgModule({
   imports: [
-    CommonModule, ButtonModule, OverlayPanelModule
+    CommonModule, ButtonModule, OverlayPanelModule, ToggleButtonModule
   ],
   exports: [ArabicButtonComponent, ArabicKeyboardComponent],
   declarations: [ArabicButtonComponent, ArabicKeyboardComponent]

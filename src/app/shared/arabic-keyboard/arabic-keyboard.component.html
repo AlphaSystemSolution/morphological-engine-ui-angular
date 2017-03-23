@@ -1,4 +1,15 @@
 <p-overlayPanel #rootLettersPicker [showCloseIcon]="true" [dismissable]="false">
+  <div style="direction: rtl;  text-align: center;">
+    <p-toggleButton #label1 [onLabel]="selectedLetters[0].label" [offLabel]="selectedLetters[0].label" (onChange)="handleSelect($event, 0)"
+      styleClass="ArabicToggleButton"></p-toggleButton>
+    <p-toggleButton #label2 [onLabel]="selectedLetters[1].label" [offLabel]="selectedLetters[1].label" (onChange)="handleSelect($event, 1)"
+      styleClass="ArabicToggleButton"></p-toggleButton>
+    <p-toggleButton #label3 [onLabel]="selectedLetters[2].label" [offLabel]="selectedLetters[2].label" (onChange)="handleSelect($event, 2)"
+      styleClass="ArabicToggleButton"></p-toggleButton>
+    <p-toggleButton #label4 [onLabel]="selectedLetters[3].label" [offLabel]="selectedLetters[3].label" (onChange)="handleSelect($event, 3)"
+      styleClass="ArabicToggleButton"></p-toggleButton>
+  </div>
+  <div>&nbsp;</div>
   <div style="direction: rtl">
     <app-arabic-button #b0 [letter]="letters[0]" (click)="selectLetter(b0.letter)"></app-arabic-button>
     <app-arabic-button #b1 [letter]="letters[1]" (click)="selectLetter(b1.letter)"></app-arabic-button>

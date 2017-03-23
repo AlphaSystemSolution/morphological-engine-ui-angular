@@ -12,14 +12,7 @@ export class NamedTemplate implements ArabicLabel {
 
 export const arabicLetters: ArabicLetter[] = [
   new ArabicLetter('HAMZA', 'ء', '\''), // 0
-  /*new ArabicLetter('ALIF_MADDAH', 'آ', '|'),
-  new ArabicLetter('ALIF_HAMZA_ABOVE', 'أ', '>'),
-  new ArabicLetter('WAW_HAMZA_ABOVE', 'ؤ', '&'),
-  new ArabicLetter('ALIF_HAMZA_BELOW', 'إ', '<'),
-  new ArabicLetter('YA_HAMZA_ABOVE', 'ئ', '}'),
-  new ArabicLetter('ALIF', 'ا', 'A'),*/
   new ArabicLetter('BA', 'ب', 'b'), // 1
-  // new ArabicLetter('TA_MARBUTA', 'ة', 'p'),
   new ArabicLetter('TA', 'ت', 't'), // 2
   new ArabicLetter('THA', 'ث', 'v'), // 3
   new ArabicLetter('JEEM', 'ج', 'j'), // 4
@@ -37,7 +30,6 @@ export const arabicLetters: ArabicLetter[] = [
   new ArabicLetter('DTHA', 'ظ', 'Z'), // 16
   new ArabicLetter('AIN', 'ع', 'E'), // 17
   new ArabicLetter('GHAIN', 'غ', 'g'), // 18
-  // new ArabicLetter('TATWEEL', 'ـ', '_'),
   new ArabicLetter('FA', 'ف', 'f'), // 19
   new ArabicLetter('QAF', 'ق', 'q'), // 20
   new ArabicLetter('KAF', 'ك', 'k'), // 21
@@ -46,8 +38,8 @@ export const arabicLetters: ArabicLetter[] = [
   new ArabicLetter('NOON', 'ن', 'n'), // 24
   new ArabicLetter('HA', 'ه', 'h'), // 25
   new ArabicLetter('WAW', 'و', 'w'), // 26
-  // new ArabicLetter('ALIF_MAKSURA', 'ى', 'Y'),
-  new ArabicLetter('YA', 'ي', 'y') // 27
+  new ArabicLetter('YA', 'ي', 'y'), // 27
+  new ArabicLetter('SPACE', ' ', 'C') // 28
 ];
 
 export const namedTemplates: NamedTemplate[] = [
