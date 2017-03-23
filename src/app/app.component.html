@@ -4,8 +4,9 @@
   </h1>
 
   <div>
+    <span class="ArabicNormal" #result></span>
     <i class="fa fa-search" (click)="picker.show($event)" style="font-size:24px"></i>
-    <app-arabic-keyboard #picker></app-arabic-keyboard>
+    <app-arabic-keyboard #picker (onClose)="handleClose($event)"></app-arabic-keyboard>
   </div>
   <div>
     <div class="ArabicNormal">

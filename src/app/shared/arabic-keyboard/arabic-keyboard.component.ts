@@ -78,7 +78,7 @@ export class ArabicKeyboardComponent implements OnInit, AfterViewInit {
       'firstRadical': this._selectedLetters[0], 'secondRadical': this._selectedLetters[1],
       'thirdRadical': this._selectedLetters[2], 'fourthRadical': this._selectedLetters[3]
     };
-    this.onClose.emit(result);
+    this.onClose.emit({ 'selectedLetters': result });
   }
 
   private hnadleShow(event) {
