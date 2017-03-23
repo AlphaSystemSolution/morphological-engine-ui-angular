@@ -23,7 +23,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     ne.innerHTML = arabicLetters[19].label + arabicLetters[17].label + arabicLetters[22].label;
   }
 
-  private handleClose(event) {
+  handleClose(event) {
     const result = event.selectedLetters;
     const firstRadical: ArabicLetter = <ArabicLetter>result.firstRadical;
     const secondRadical: ArabicLetter = <ArabicLetter>result.secondRadical;
