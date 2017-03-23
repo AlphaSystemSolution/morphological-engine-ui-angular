@@ -1,5 +1,5 @@
 export class ArabicLabel {
-  constructor(public name: string, public label: string) { }
+  constructor(public name: string, public label: string, public code: string) { }
 }
 
 export class ArabicLetter implements ArabicLabel {
@@ -7,7 +7,7 @@ export class ArabicLetter implements ArabicLabel {
 }
 
 export class NamedTemplate implements ArabicLabel {
-  constructor(public name: string, public label: string, public form: string) { }
+  constructor(public name: string, public label: string, public code: string) { }
 }
 
 export enum DisplayType {
