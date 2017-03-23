@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild, Input } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 
 import { OverlayPanel, ToggleButton } from 'primeng/primeng';
 
@@ -17,6 +17,7 @@ export class ArabicKeyboardComponent implements OnInit, AfterViewInit {
   @ViewChild('label2') label2: ToggleButton;
   @ViewChild('label3') label3: ToggleButton;
   @ViewChild('label4') label4: ToggleButton;
+  @Output() onClose: EventEmitter<any> = new EventEmitter();
   private _selectedLetters: ArabicLetter[];
   private currentIndex: number;
 
@@ -70,6 +71,19 @@ export class ArabicKeyboardComponent implements OnInit, AfterViewInit {
       this.currentIndex = nextIndex;
     }
     this.updateState(index, checked);
+  }
+
+  private handleHide(event): void {
+    const result = {
+      'firstRadical': this._selectedLetters[0], 'secondRadical': this._selectedLetters[1],
+      'thirdRadical': this._selectedLetters[2], 'fourthRadical': this._selectedLetters[3]
+    };
+    this.onClose.emit(result);
+  }
+
+  private hnadleShow(event) {
+    this.currentIndex = 0;
+    this.updateState(this.currentIndex, true);
   }
 
   private updateState(index: number, state: boolean) {

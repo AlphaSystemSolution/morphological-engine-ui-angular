@@ -1,4 +1,4 @@
-<p-overlayPanel #rootLettersPicker [showCloseIcon]="true" [dismissable]="false">
+<p-overlayPanel #rootLettersPicker [showCloseIcon]="true" [dismissable]="false" (onBeforeShow)="hnadleShow($event)" (onAfterHide)="handleHide($event)">
   <div style="direction: rtl;  text-align: center;">
     <p-toggleButton #label1 [onLabel]="selectedLetters[0].label" [offLabel]="selectedLetters[0].label" (onChange)="handleSelect($event, 0)"
       styleClass="ArabicToggleButton"></p-toggleButton>
