@@ -3,8 +3,7 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ArabicKeyboardComponent } from '../arabic-keyboard/arabic-keyboard.component';
 import { ArabicDropdownComponent } from '../arabic-dropdown/arabic-dropdown.component';
 import {
-  ArabicLetter, RootLetters, DisplayType, NamedTemplate, MorphologicalInput, ConjugationConfiguration, arabicLetters,
-  namedTemplates, defaultMorphologicalInput
+  ArabicLetter, RootLetters, NamedTemplate, MorphologicalInput, ConjugationConfiguration, namedTemplates, defaultMorphologicalInput
 } from '../model';
 
 @Component({
@@ -22,6 +21,7 @@ export class MorphologicalInputFormComponent implements OnInit {
   // any updated on these fields will be populated bact to "mInput"
   private _rootLetters: RootLetters;
   private _rootLettersText: string;
+  private _template: NamedTemplate;
   private _removePassiveLine: boolean;
   private _skipRuleProcessing: boolean;
 
@@ -31,12 +31,17 @@ export class MorphologicalInputFormComponent implements OnInit {
   constructor(fb: FormBuilder) {
     this.misForm = fb.group({
       'rootLettersText': new FormControl(),
+      'template': new FormControl(),
       'removePassiveLine': new FormControl(),
       'skipRuleProcessing': new FormControl()
     });
   }
 
   ngOnInit() {
+  }
+
+  get namedTemplates(): NamedTemplate[] {
+    return namedTemplates;
   }
 
   @Input() get mInput(): MorphologicalInput {
@@ -53,6 +58,7 @@ export class MorphologicalInputFormComponent implements OnInit {
     this._mInput = src;
     this._rootLetters = this.mInput.rootLetters;
     this._rootLettersText = this.toRootLettersString();
+    this._template = this.mInput.template;
     const conjugationConfiguration: ConjugationConfiguration = this.mInput.conjugationConfiguration;
     this.removePassiveLine = conjugationConfiguration.removePassiveLine;
     this.skipRuleProcessing = conjugationConfiguration.skipRuleProcessing;
@@ -76,6 +82,17 @@ export class MorphologicalInputFormComponent implements OnInit {
 
   set rootLettersText(value: string) {
     this._rootLettersText = value;
+  }
+
+  get template(): NamedTemplate {
+    return this._template;
+  }
+
+  set template(value: NamedTemplate) {
+    this._template = value;
+    if (this.mInput) {
+      this.mInput.template = this.template;
+    }
   }
 
   get removePassiveLine(): boolean {
