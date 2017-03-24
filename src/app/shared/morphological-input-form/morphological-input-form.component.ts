@@ -34,7 +34,7 @@ export class MorphologicalInputFormComponent implements OnInit {
 
   @Input() get mInput(): MorphologicalInput {
     if (this._mInput === null) {
-      this.mInput = null;
+      this._mInput = defaultMorphologicalInput;
     }
     return this._mInput;
   }
@@ -55,7 +55,9 @@ export class MorphologicalInputFormComponent implements OnInit {
 
   set removePassiveLine(value: boolean) {
     this._removePassiveLine = value;
-    this._mInput.conjugationConfiguration.removePassiveLine = this._removePassiveLine;
+    if (this.mInput) {
+      this.mInput.conjugationConfiguration.removePassiveLine = this._removePassiveLine;
+    }
   }
 
   get skipRuleProcessing(): boolean {
@@ -64,7 +66,9 @@ export class MorphologicalInputFormComponent implements OnInit {
 
   set skipRuleProcessing(value: boolean) {
     this._skipRuleProcessing = value;
-    this._mInput.conjugationConfiguration.skipRuleProcessing = this._skipRuleProcessing;
+    if (this.mInput) {
+      this.mInput.conjugationConfiguration.skipRuleProcessing = this._skipRuleProcessing;
+    }
   }
 
 }
