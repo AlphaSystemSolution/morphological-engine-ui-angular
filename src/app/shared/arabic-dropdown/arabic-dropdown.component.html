@@ -3,14 +3,27 @@
   [ngStyle]="style" [class]="styleClass">
   <div class="ui-helper-hidden-accessible" *ngIf="autoWidth">
     <select [required]="required" tabindex="-1">
-                    <option *ngFor="let option of options" [value]="option.value" [selected]="selectedOption == option">{{option.label}}</option>
+                    <option *ngFor="let option of options" [value]="option.name" [selected]="selectedOption == option">
+                        <template [ngIf]="showCode"><span class="code"> ({{option.code}}) &mdash; </span></template>
+                        <span class="ArabicDropdown">  {{option.label}} </span>
+                     </option>
                 </select>
   </div>
   <div class="ui-helper-hidden-accessible">
     <input #in type="text" readonly (focus)="onInputFocus($event)" (blur)="onInputBlur($event)" (keydown)="onKeydown($event)"
       [disabled]="disabled" [attr.tabindex]="tabindex">
   </div>
-  <label [ngClass]="{'ui-dropdown-label ui-inputtext ui-corner-all':true,'ui-dropdown-label-empty':!label}" *ngIf="!editable">{{label||'empty'}}</label>
+  <label [ngClass]="{'ui-dropdown-label ui-inputtext ui-corner-all':true,'ui-dropdown-label-empty':!label}" *ngIf="!editable">
+    <template [ngIf]="showCode">
+      <span class="code">
+        {{code||'empty'}}
+      </span>
+      &mdash;
+    </template>
+    <span class="ArabicDropdown" *ngIf="!itemTemplate">
+      {{label||'empty'}}
+    </span>
+  </label>
   <input type="text" class="ui-dropdown-label ui-inputtext ui-corner-all" *ngIf="editable" [value]="editableLabel" [disabled]="disabled"
     [attr.placeholder]="placeholder" (click)="onEditableInputClick($event)" (input)="onEditableInputChange($event)" (focus)="onEditableInputFocus($event)"
     (blur)="onInputBlur($event)">
@@ -27,7 +40,15 @@
       <ul class="ui-dropdown-items ui-dropdown-list ui-widget-content ui-widget ui-corner-all ui-helper-reset" *ngIf="panelVisible">
         <li *ngFor="let option of optionsToDisplay;let i=index" [ngClass]="{'ui-dropdown-item ui-corner-all':true, 'ui-state-highlight':(selectedOption == option),
                             'ui-dropdown-item-empty':!option.label||option.label.length === 0}" (click)="onItemClick($event, option)">
-          <span *ngIf="!itemTemplate">{{option.label||'empty'}}</span>
+          <template [ngIf]="!itemTemplate && showCode">
+            <span class="code">
+               {{option.code||'empty'}}
+            </span>
+           &mdash;
+          </template>
+          <span class="ArabicDropdown" *ngIf="!itemTemplate">
+            {{option.label||'empty'}}
+          </span>
           <template [pTemplateWrapper]="itemTemplate" [item]="option" *ngIf="itemTemplate"></template>
         </li>
       </ul>

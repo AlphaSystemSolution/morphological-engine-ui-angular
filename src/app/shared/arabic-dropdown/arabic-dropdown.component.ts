@@ -4,12 +4,11 @@ import {
   TemplateRef, IterableDiffers, forwardRef, trigger, state, style, transition, animate, ChangeDetectorRef
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SelectItem } from 'primeng/components/common/api';
 import { PrimeTemplate } from 'primeng/components/common/shared';
 import { DomHandler } from 'primeng/components/dom/domhandler';
 import { ObjectUtils } from 'primeng/components/utils/ObjectUtils';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-
+import { ArabicLabel, DisplayType } from '../model';
 export const DROPDOWN_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => ArabicDropdownComponent),
@@ -37,7 +36,7 @@ export const DROPDOWN_VALUE_ACCESSOR: any = {
 export class ArabicDropdownComponent implements OnInit, AfterViewInit, AfterContentInit, AfterViewChecked,
   DoCheck, OnDestroy, ControlValueAccessor {
 
-  @Input() options: SelectItem[];
+  @Input() options: ArabicLabel[];
 
   @Input() scrollHeight = '200px';
 
@@ -66,6 +65,8 @@ export class ArabicDropdownComponent implements OnInit, AfterViewInit, AfterCont
   @Input() tabindex: number;
 
   @Input() placeholder: string;
+
+  @Input() displayType: DisplayType = DisplayType.LABEL_AND_CODE;
 
   @Output() onChange: EventEmitter<any> = new EventEmitter();
 
@@ -107,15 +108,17 @@ export class ArabicDropdownComponent implements OnInit, AfterViewInit, AfterCont
 
   public selectedOptionUpdated: boolean;
 
-  selectedOption: SelectItem;
+  selectedOption: ArabicLabel;
 
   value: any;
 
-  optionsToDisplay: SelectItem[];
+  optionsToDisplay: ArabicLabel[];
 
   hover: boolean;
 
   focus: boolean;
+
+  showCode: boolean;
 
   differ: any;
 
@@ -142,6 +145,7 @@ export class ArabicDropdownComponent implements OnInit, AfterViewInit, AfterCont
   }
 
   ngOnInit() {
+    this.showCode = (DisplayType.LABEL_AND_CODE === this.displayType) || (DisplayType.CODE_ONLY === this.displayType);
     this.optionsToDisplay = this.options;
     this.updateSelectedOption(null);
   }
@@ -173,6 +177,10 @@ export class ArabicDropdownComponent implements OnInit, AfterViewInit, AfterCont
     }
   }
 
+  get code(): string {
+    return (this.selectedOption ? this.selectedOption.code : this.placeholder);
+  }
+
   get label(): string {
     return (this.selectedOption ? this.selectedOption.label : this.placeholder);
   }
@@ -191,10 +199,10 @@ export class ArabicDropdownComponent implements OnInit, AfterViewInit, AfterCont
     this.selectedOption = option;
     this.value = option.value;
 
-    this.onModelChange(this.value);
+    this.onModelChange(option);
     this.onChange.emit({
       originalEvent: event,
-      value: this.value
+      value: option
     });
   }
 
@@ -330,7 +338,7 @@ export class ArabicDropdownComponent implements OnInit, AfterViewInit, AfterCont
       return;
     }
 
-    const selectedItemIndex = this.selectedOption ? this.findOptionIndex(this.selectedOption.value, this.optionsToDisplay) : -1;
+    const selectedItemIndex = this.selectedOption ? this.findOptionIndex(this.selectedOption.name, this.optionsToDisplay) : -1;
 
     switch (event.which) {
       // down
@@ -400,11 +408,11 @@ export class ArabicDropdownComponent implements OnInit, AfterViewInit, AfterCont
     }
   }
 
-  findOptionIndex(val: any, opts: SelectItem[]): number {
+  findOptionIndex(val: any, opts: ArabicLabel[]): number {
     let index: number = -1;
     if (opts) {
       for (let i = 0; i < opts.length; i++) {
-        if ((val == null && opts[i].value == null) || this.objectUtils.equals(val, opts[i].value)) {
+        if ((val == null && opts[i].name == null) || this.objectUtils.equals(val, opts[i].name)) {
           index = i;
           break;
         }
@@ -414,7 +422,7 @@ export class ArabicDropdownComponent implements OnInit, AfterViewInit, AfterCont
     return index;
   }
 
-  findOption(val: any, opts: SelectItem[]): SelectItem {
+  findOption(val: any, opts: ArabicLabel[]): ArabicLabel {
     const index: number = this.findOptionIndex(val, opts);
     return (index !== -1) ? opts[index] : null;
   }

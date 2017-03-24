@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ButtonModule, OverlayPanelModule, ToggleButtonModule } from 'primeng/primeng';
+import { ButtonModule, OverlayPanelModule, TemplateWrapper, ToggleButtonModule } from 'primeng/primeng';
 import { ArabicButtonComponent } from './arabic-button/arabic-button.component';
 import { ArabicKeyboardComponent } from './arabic-keyboard/arabic-keyboard.component';
 import { ArabicDropdownComponent } from './arabic-dropdown/arabic-dropdown.component';
@@ -9,7 +9,7 @@ import { ArabicDropdownComponent } from './arabic-dropdown/arabic-dropdown.compo
   imports: [
     CommonModule, ButtonModule, OverlayPanelModule, ToggleButtonModule
   ],
-  exports: [ArabicButtonComponent, ArabicKeyboardComponent, ArabicDropdownComponent],
-  declarations: [ArabicButtonComponent, ArabicKeyboardComponent, ArabicDropdownComponent]
+  exports: [ArabicButtonComponent, ArabicKeyboardComponent, ArabicDropdownComponent, TemplateWrapper],
+  declarations: [ArabicButtonComponent, ArabicKeyboardComponent, ArabicDropdownComponent, TemplateWrapper]
 })
 export class SharedModule { }
