@@ -38,6 +38,8 @@ export class ArabicDropdownComponent implements OnInit, AfterViewInit, AfterCont
 
   @Input() options: ArabicLabel[];
 
+  @Input() initialItem: ArabicLabel;
+
   @Input() scrollHeight = '200px';
 
   @Input() filter: boolean;
@@ -147,7 +149,8 @@ export class ArabicDropdownComponent implements OnInit, AfterViewInit, AfterCont
   ngOnInit() {
     this.showCode = (DisplayType.LABEL_AND_CODE === this.displayType) || (DisplayType.CODE_ONLY === this.displayType);
     this.optionsToDisplay = this.options;
-    this.updateSelectedOption(null);
+    const currentItem: ArabicLabel = this.initialItem === null ? null : this.initialItem;
+    this.updateSelectedOption(currentItem);
   }
 
   ngDoCheck() {
@@ -338,7 +341,7 @@ export class ArabicDropdownComponent implements OnInit, AfterViewInit, AfterCont
       return;
     }
 
-    const selectedItemIndex = this.selectedOption ? this.findOptionIndex(this.selectedOption.name, this.optionsToDisplay) : -1;
+    const selectedItemIndex = this.selectedOption ? this.findOptionIndex(this.selectedOption, this.optionsToDisplay) : -1;
 
     switch (event.which) {
       // down
@@ -408,11 +411,11 @@ export class ArabicDropdownComponent implements OnInit, AfterViewInit, AfterCont
     }
   }
 
-  findOptionIndex(val: any, opts: ArabicLabel[]): number {
+  findOptionIndex(val: ArabicLabel, opts: ArabicLabel[]): number {
     let index: number = -1;
     if (opts) {
       for (let i = 0; i < opts.length; i++) {
-        if ((val == null && opts[i].name == null) || this.objectUtils.equals(val, opts[i].name)) {
+        if ((val == null && opts[i].name == null) || this.objectUtils.equals(val.name, opts[i].name)) {
           index = i;
           break;
         }
