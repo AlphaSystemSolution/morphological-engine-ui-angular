@@ -10,9 +10,27 @@ export class NamedTemplate implements ArabicLabel {
   constructor(public name: string, public label: string, public code: string) { }
 }
 
+export class VerbalNoun implements ArabicLabel {
+  constructor(public name: string, public label: string, public code: string) { }
+}
+
+export class NounOfPlaceAndTime implements ArabicLabel {
+  constructor(public name: string, public label: string, public code: string) { }
+}
+
 export class RootLetters {
   constructor(public firstRadical: ArabicLetter, public secondRadical: ArabicLetter, public thirdRadical: ArabicLetter,
     public fourthRadical: ArabicLetter) { }
+}
+
+export class ConjugationConfiguration {
+  constructor(public removePassiveLine: boolean, public skipRuleProcessing: boolean) { }
+}
+
+export class MorphologicalInput {
+  constructor(public rootLetters: RootLetters, public template: NamedTemplate, public translation: string,
+    public conjugationConfiguration: ConjugationConfiguration, public verbalNouns: VerbalNoun[],
+    public nounOfPlaceAndTimes: NounOfPlaceAndTime[]) { }
 }
 
 export enum DisplayType {
