@@ -412,10 +412,11 @@ export class ArabicDropdownComponent implements OnInit, AfterViewInit, AfterCont
   }
 
   findOptionIndex(val: ArabicLabel, opts: ArabicLabel[]): number {
+    const name = (val) ? val.name : null;
     let index: number = -1;
     if (opts) {
       for (let i = 0; i < opts.length; i++) {
-        if ((val == null && opts[i].name == null) || this.objectUtils.equals(val.name, opts[i].name)) {
+        if ((val == null && opts[i].name == null) || this.objectUtils.equals(name, opts[i].name)) {
           index = i;
           break;
         }
