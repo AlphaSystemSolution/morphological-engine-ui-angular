@@ -4,12 +4,13 @@ import { ButtonModule, OverlayPanelModule, TemplateWrapper, ToggleButtonModule }
 import { ArabicButtonComponent } from './arabic-button/arabic-button.component';
 import { ArabicKeyboardComponent } from './arabic-keyboard/arabic-keyboard.component';
 import { ArabicDropdownComponent } from './arabic-dropdown/arabic-dropdown.component';
+import { MorphologicalInputFormComponent } from './morphological-input-form/morphological-input-form.component';
 
 @NgModule({
   imports: [
     CommonModule, ButtonModule, OverlayPanelModule, ToggleButtonModule
   ],
-  exports: [ArabicButtonComponent, ArabicKeyboardComponent, ArabicDropdownComponent, TemplateWrapper],
-  declarations: [ArabicButtonComponent, ArabicKeyboardComponent, ArabicDropdownComponent, TemplateWrapper]
+  exports: [ArabicButtonComponent, ArabicKeyboardComponent, ArabicDropdownComponent, TemplateWrapper, MorphologicalInputFormComponent],
+  declarations: [ArabicButtonComponent, ArabicKeyboardComponent, ArabicDropdownComponent, TemplateWrapper, MorphologicalInputFormComponent]
 })
 export class SharedModule { }
