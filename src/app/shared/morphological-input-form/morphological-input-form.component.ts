@@ -71,4 +71,8 @@ export class MorphologicalInputFormComponent implements OnInit {
     }
   }
 
+  onSubmit(event) {
+    console.log('Form submitted with values: ' + JSON.stringify(event));
+  }
+
 }
