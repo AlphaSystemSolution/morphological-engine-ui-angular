@@ -27,12 +27,6 @@ export class ConjugationConfiguration {
   constructor(public removePassiveLine: boolean, public skipRuleProcessing: boolean) { }
 }
 
-export class MorphologicalInput {
-  constructor(public rootLetters: RootLetters, public template: NamedTemplate, public translation: string,
-    public conjugationConfiguration: ConjugationConfiguration, public verbalNouns: VerbalNoun[],
-    public nounOfPlaceAndTimes: NounOfPlaceAndTime[]) { }
-}
-
 export enum DisplayType {
   LABEL_ONLY, CODE_ONLY, LABEL_AND_CODE
 }
@@ -86,3 +80,18 @@ export const namedTemplates: NamedTemplate[] = [
   new NamedTemplate('FORM_IX_TEMPLATE', 'إِفْعَلَّ يَفْعَلَّ', 'Family IX'),
   new NamedTemplate('FORM_X_TEMPLATE', 'إِسْتَفْعَلَ يَسْتَفْعِلُ', 'Family X')
 ];
+
+export const defaultRootLetters: RootLetters = new RootLetters(arabicLetters[19], arabicLetters[17], arabicLetters[22], arabicLetters[28]);
+
+export const defaultNamedTemplate: NamedTemplate = namedTemplates[0];
+
+export const defaultConjugationConfiguration: ConjugationConfiguration = new ConjugationConfiguration(false, false);
+
+export class MorphologicalInput {
+  constructor(public rootLetters: RootLetters = defaultRootLetters, public template: NamedTemplate = defaultNamedTemplate,
+    public translation: string, public conjugationConfiguration: ConjugationConfiguration = defaultConjugationConfiguration,
+    public verbalNouns: VerbalNoun[] = [], public nounOfPlaceAndTimes: NounOfPlaceAndTime[] = []) { }
+}
+
+export const defaultMorphologicalInput: MorphologicalInput = new MorphologicalInput(defaultRootLetters, defaultNamedTemplate, null,
+  defaultConjugationConfiguration, [], []);
