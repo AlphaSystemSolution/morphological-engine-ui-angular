@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   ButtonModule,
+  InputTextModule,
   InputSwitchModule,
   OverlayPanelModule,
   PanelModule,
@@ -20,6 +21,7 @@ import { MorphologicalInputFormComponent } from './morphological-input-form/morp
     ReactiveFormsModule,
     CommonModule,
     ButtonModule,
+    InputTextModule,
     InputSwitchModule,
     OverlayPanelModule,
     PanelModule,

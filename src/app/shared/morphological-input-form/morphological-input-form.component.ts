@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ArabicKeyboardComponent } from '../arabic-keyboard/arabic-keyboard.component';
 import { ArabicDropdownComponent } from '../arabic-dropdown/arabic-dropdown.component';
@@ -14,8 +14,14 @@ import {
 })
 export class MorphologicalInputFormComponent implements OnInit {
 
+  @ViewChild('picker') picker: ArabicKeyboardComponent;
+
   private _mInput: MorphologicalInput;
 
+  // form fields, these fields will be populated via "set mInput",
+  // any updated on these fields will be populated bact to "mInput"
+  private _rootLetters: RootLetters;
+  private _rootLettersText: string;
   private _removePassiveLine: boolean;
   private _skipRuleProcessing: boolean;
 
@@ -24,6 +30,7 @@ export class MorphologicalInputFormComponent implements OnInit {
 
   constructor(fb: FormBuilder) {
     this.misForm = fb.group({
+      'rootLettersText': new FormControl(),
       'removePassiveLine': new FormControl(),
       'skipRuleProcessing': new FormControl()
     });
@@ -44,9 +51,31 @@ export class MorphologicalInputFormComponent implements OnInit {
       src = defaultMorphologicalInput;
     }
     this._mInput = src;
+    this._rootLetters = this.mInput.rootLetters;
+    this._rootLettersText = this.toRootLettersString();
     const conjugationConfiguration: ConjugationConfiguration = this.mInput.conjugationConfiguration;
     this.removePassiveLine = conjugationConfiguration.removePassiveLine;
     this.skipRuleProcessing = conjugationConfiguration.skipRuleProcessing;
+  }
+
+  get rootLetters(): RootLetters {
+    return this._rootLetters;
+  }
+
+  set rootLetters(value: RootLetters) {
+    this._rootLetters = value;
+    this.rootLettersText = this.toRootLettersString();
+    if (this.mInput) {
+      this.mInput.rootLetters = this._rootLetters;
+    }
+  }
+
+  get rootLettersText(): string {
+    return this._rootLettersText;
+  }
+
+  set rootLettersText(value: string) {
+    this._rootLettersText = value;
   }
 
   get removePassiveLine(): boolean {
@@ -73,6 +102,15 @@ export class MorphologicalInputFormComponent implements OnInit {
 
   onSubmit(event) {
     console.log('Form submitted with values: ' + JSON.stringify(event));
+  }
+
+  handleClose(event) {
+    this.rootLetters = event.rootLetters;
+  }
+
+  private toRootLettersString(): string {
+    const _rl = this.rootLetters;
+    return _rl.firstRadical.label + _rl.secondRadical.label + _rl.thirdRadical.label;
   }
 
 }
