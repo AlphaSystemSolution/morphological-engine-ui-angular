@@ -1,3 +1,25 @@
-<p>
-  morphological-input-form works!
-</p>
+<div>
+  <form [formGroup]="misForm" (ngSubmit)="onSubmit(misForm.value)">
+    <p-panel [toggleable]="true">
+      <p-header class="ui-helper-clearfix">
+        <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px">Select Root Letters &amp; Template</span>
+      </p-header>
+      <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            Remove passive line:
+          </div>
+          <div class="ui-grid-col-4">
+            <p-inputSwitch [formControl]="misForm.get('removePassiveLine')" [(ngModel)]="removePassiveLine"></p-inputSwitch>
+          </div>
+          <div class="ui-grid-col-2">
+            Skip rule processing:
+          </div>
+          <div class="ui-grid-col-4">
+            <p-inputSwitch [formControl]="misForm.get('skipRuleProcessing')" [(ngModel)]="skipRuleProcessing"></p-inputSwitch>
+          </div>
+        </div>
+      </div>
+    </p-panel>
+  </form>
+</div>
