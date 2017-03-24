@@ -1,16 +1,9 @@
 <div>
-  <h1>
-    {{title}}
-  </h1>
-
   <div>
-    <span class="ArabicNormal" #result></span>
-    <i class="fa fa-search" (click)="picker.show($event)" style="font-size:24px"></i>
-    <app-arabic-keyboard #picker (onClose)="handleClose($event)"></app-arabic-keyboard>
+    <app-morphological-input-form [mInput]="morphologicalInput"></app-morphological-input-form>
   </div>
+  <div>&nbsp;</div>
   <div>
-    <div class="ArabicNormal">
-      &#x0646;&#x064e;&#x0635;&#x064e;&#x0631;&#x064e; &#x064a;&#x064e;&#x0646;&#x0652;&#x0635;&#x064f;&#x0631;&#x064f; &#x0028;&#x0646;&#x0020;&#x0635;&#x0020;&#x0631;&#x0029;
-    </div>
+    <router-outlet></router-outlet>
   </div>
 </div>
