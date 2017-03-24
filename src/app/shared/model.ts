@@ -60,7 +60,7 @@ export const arabicLetters: ArabicLetter[] = [
   new ArabicLetter('HA', 'ه', 'h'), // 25
   new ArabicLetter('WAW', 'و', 'w'), // 26
   new ArabicLetter('YA', 'ي', 'y'), // 27
-  new ArabicLetter('SPACE', ' ', 'C') // 28
+  new ArabicLetter('TATWEEL', 'ـ', '_') // 28
 ];
 
 export const namedTemplates: NamedTemplate[] = [
