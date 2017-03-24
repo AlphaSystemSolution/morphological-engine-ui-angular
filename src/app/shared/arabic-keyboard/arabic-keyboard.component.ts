@@ -3,7 +3,7 @@ import { AfterViewInit, Component, OnInit, ViewChild, Input, Output, EventEmitte
 import { OverlayPanel, ToggleButton } from 'primeng/primeng';
 
 import { ArabicButtonComponent } from '../arabic-button/arabic-button.component';
-import { ArabicLetter, arabicLetters } from '../model';
+import { ArabicLetter, RootLetters, arabicLetters } from '../model';
 
 @Component({
   selector: 'app-arabic-keyboard',
@@ -74,11 +74,8 @@ export class ArabicKeyboardComponent implements OnInit, AfterViewInit {
   }
 
   private handleHide(event): void {
-    const result = {
-      'firstRadical': this._selectedLetters[0], 'secondRadical': this._selectedLetters[1],
-      'thirdRadical': this._selectedLetters[2], 'fourthRadical': this._selectedLetters[3]
-    };
-    this.onClose.emit({ 'selectedLetters': result });
+    const result = new RootLetters(this._selectedLetters[0], this._selectedLetters[1], this._selectedLetters[2], this._selectedLetters[3]);
+    this.onClose.emit({ 'rootLetters': result });
   }
 
   private hnadleShow(event) {

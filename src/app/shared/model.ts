@@ -10,6 +10,11 @@ export class NamedTemplate implements ArabicLabel {
   constructor(public name: string, public label: string, public code: string) { }
 }
 
+export class RootLetters {
+  constructor(public firstRadical: ArabicLetter, public secondRadical: ArabicLetter, public thirdRadical: ArabicLetter,
+    public fourthRadical: ArabicLetter) { }
+}
+
 export enum DisplayType {
   LABEL_ONLY, CODE_ONLY, LABEL_AND_CODE
 }
