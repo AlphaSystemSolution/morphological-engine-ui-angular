@@ -1,11 +1,10 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { MorphologicalInputFormModel } from '../morphological-input-form-model';
 import { ApplicationControllerService } from '../application-controller.service';
 import { ArabicKeyboardComponent } from '../arabic-keyboard/arabic-keyboard.component';
 import { ArabicDropdownComponent } from '../arabic-dropdown/arabic-dropdown.component';
-import {
-  ArabicLetter, RootLetters, NamedTemplate, MorphologicalInput, ConjugationConfiguration, namedTemplates, defaultMorphologicalInput
-} from '../model';
+import { NamedTemplate, namedTemplates } from '../model';
 
 @Component({
   selector: 'app-morphological-input-form',
@@ -14,25 +13,15 @@ import {
 })
 export class MorphologicalInputFormComponent implements OnInit {
 
-  @ViewChild('picker') picker: ArabicKeyboardComponent;
-
   private applicationController: ApplicationControllerService;
-  private _mInput: MorphologicalInput;
-
-  // form fields, these fields will be populated via "set mInput",
-  // any updated on these fields will be populated bact to "mInput"
-  private _rootLetters: RootLetters;
-  private _rootLettersText: string;
-  private _template: NamedTemplate;
-  private _translation: string;
-  private _removePassiveLine: boolean;
-  private _skipRuleProcessing: boolean;
+  private _model: MorphologicalInputFormModel;
 
   // morphological Input Selection (MIS) form
   misForm: FormGroup;
 
   constructor(fb: FormBuilder, applicationController: ApplicationControllerService) {
     this.applicationController = applicationController;
+    this._model = this.applicationController.model;
     this.misForm = fb.group({
       'rootLettersText': new FormControl(),
       'template': new FormControl(),
@@ -45,106 +34,21 @@ export class MorphologicalInputFormComponent implements OnInit {
   ngOnInit() {
   }
 
+  get model(): MorphologicalInputFormModel {
+    return this._model;
+  }
+
   get namedTemplates(): NamedTemplate[] {
     return namedTemplates;
   }
 
-  @Input() get mInput(): MorphologicalInput {
-    if (this._mInput === null) {
-      this._mInput = defaultMorphologicalInput;
-    }
-    return this._mInput;
-  }
-
-  set mInput(src: MorphologicalInput) {
-    if (!src) {
-      src = defaultMorphologicalInput;
-    }
-    this._mInput = src;
-    this._rootLetters = this.mInput.rootLetters;
-    this._rootLettersText = this.toRootLettersString();
-    this._template = this.mInput.template;
-    this._translation = this.mInput.translation;
-    const conjugationConfiguration: ConjugationConfiguration = this.mInput.conjugationConfiguration;
-    this.removePassiveLine = conjugationConfiguration.removePassiveLine;
-    this.skipRuleProcessing = conjugationConfiguration.skipRuleProcessing;
-  }
-
-  get rootLetters(): RootLetters {
-    return this._rootLetters;
-  }
-
-  set rootLetters(value: RootLetters) {
-    this._rootLetters = value;
-    this.rootLettersText = this.toRootLettersString();
-    if (this.mInput) {
-      this.mInput.rootLetters = this._rootLetters;
-    }
-  }
-
-  get rootLettersText(): string {
-    return this._rootLettersText;
-  }
-
-  set rootLettersText(value: string) {
-    this._rootLettersText = value;
-  }
-
-  get template(): NamedTemplate {
-    return this._template;
-  }
-
-  set template(value: NamedTemplate) {
-    this._template = value;
-    if (this.mInput) {
-      this.mInput.template = this.template;
-    }
-  }
-
-  get translation(): string {
-    return this._translation;
-  }
-
-  set translation(value: string) {
-    this._translation = value;
-    if (this.mInput) {
-      this.mInput.translation = this.translation;
-    }
-  }
-
-  get removePassiveLine(): boolean {
-    return this._removePassiveLine;
-  }
-
-  set removePassiveLine(value: boolean) {
-    this._removePassiveLine = value;
-    if (this.mInput) {
-      this.mInput.conjugationConfiguration.removePassiveLine = this._removePassiveLine;
-    }
-  }
-
-  get skipRuleProcessing(): boolean {
-    return this._skipRuleProcessing;
-  }
-
-  set skipRuleProcessing(value: boolean) {
-    this._skipRuleProcessing = value;
-    if (this.mInput) {
-      this.mInput.conjugationConfiguration.skipRuleProcessing = this._skipRuleProcessing;
-    }
-  }
-
   onSubmit(event) {
-    console.log('Form submitted with values: ' + JSON.stringify(event));
+    console.log('Form submitted with values: ' + JSON.stringify(this.model.mInput));
   }
 
   handleClose(event) {
-    this.rootLetters = event.rootLetters;
+    this._model.rootLetters = event.rootLetters;
   }
 
-  private toRootLettersString(): string {
-    const _rl = this.rootLetters;
-    return _rl.firstRadical.label + _rl.secondRadical.label + _rl.thirdRadical.label;
-  }
 
 }
