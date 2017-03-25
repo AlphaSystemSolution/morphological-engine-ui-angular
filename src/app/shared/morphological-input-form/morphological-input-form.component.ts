@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { MorphologicalInputFormModel } from '../morphological-input-form-model';
 import { ApplicationControllerService } from '../application-controller.service';
@@ -18,7 +19,7 @@ export class MorphologicalInputFormComponent implements OnInit {
   // morphological Input Selection (MIS) form
   misForm: FormGroup;
 
-  constructor(fb: FormBuilder, private applicationController: ApplicationControllerService) {
+  constructor(fb: FormBuilder, private applicationController: ApplicationControllerService, private router: Router) {
     this._model = this.applicationController.model;
     this.misForm = fb.group({
       'rootLettersText': new FormControl(),
@@ -43,6 +44,7 @@ export class MorphologicalInputFormComponent implements OnInit {
   onSubmit(event) {
     console.log('Form submitted with values: ' + JSON.stringify(this.model.mInput));
     this.applicationController.model = this._model;
+    this.router.navigate(['morphological-chart']);
   }
 
   handleClose(event) {
