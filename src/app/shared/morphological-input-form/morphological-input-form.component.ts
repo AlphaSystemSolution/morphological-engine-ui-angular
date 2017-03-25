@@ -22,6 +22,7 @@ export class MorphologicalInputFormComponent implements OnInit {
   private _rootLetters: RootLetters;
   private _rootLettersText: string;
   private _template: NamedTemplate;
+  private _translation: string;
   private _removePassiveLine: boolean;
   private _skipRuleProcessing: boolean;
 
@@ -32,6 +33,7 @@ export class MorphologicalInputFormComponent implements OnInit {
     this.misForm = fb.group({
       'rootLettersText': new FormControl(),
       'template': new FormControl(),
+      'translation': new FormControl(),
       'removePassiveLine': new FormControl(),
       'skipRuleProcessing': new FormControl()
     });
@@ -59,6 +61,7 @@ export class MorphologicalInputFormComponent implements OnInit {
     this._rootLetters = this.mInput.rootLetters;
     this._rootLettersText = this.toRootLettersString();
     this._template = this.mInput.template;
+    this._translation = this.mInput.translation;
     const conjugationConfiguration: ConjugationConfiguration = this.mInput.conjugationConfiguration;
     this.removePassiveLine = conjugationConfiguration.removePassiveLine;
     this.skipRuleProcessing = conjugationConfiguration.skipRuleProcessing;
@@ -92,6 +95,17 @@ export class MorphologicalInputFormComponent implements OnInit {
     this._template = value;
     if (this.mInput) {
       this.mInput.template = this.template;
+    }
+  }
+
+  get translation(): string {
+    return this._translation;
+  }
+
+  set translation(value: string) {
+    this._translation = value;
+    if (this.mInput) {
+      this.mInput.translation = this.translation;
     }
   }
 
