@@ -13,14 +13,12 @@ import { NamedTemplate, namedTemplates } from '../model';
 })
 export class MorphologicalInputFormComponent implements OnInit {
 
-  private applicationController: ApplicationControllerService;
   private _model: MorphologicalInputFormModel;
 
   // morphological Input Selection (MIS) form
   misForm: FormGroup;
 
-  constructor(fb: FormBuilder, applicationController: ApplicationControllerService) {
-    this.applicationController = applicationController;
+  constructor(fb: FormBuilder, private applicationController: ApplicationControllerService) {
     this._model = this.applicationController.model;
     this.misForm = fb.group({
       'rootLettersText': new FormControl(),
