@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { ApplicationControllerService } from '../application-controller.service';
 import { ArabicKeyboardComponent } from '../arabic-keyboard/arabic-keyboard.component';
 import { ArabicDropdownComponent } from '../arabic-dropdown/arabic-dropdown.component';
 import {
@@ -15,6 +16,7 @@ export class MorphologicalInputFormComponent implements OnInit {
 
   @ViewChild('picker') picker: ArabicKeyboardComponent;
 
+  private applicationController: ApplicationControllerService;
   private _mInput: MorphologicalInput;
 
   // form fields, these fields will be populated via "set mInput",
@@ -29,7 +31,8 @@ export class MorphologicalInputFormComponent implements OnInit {
   // morphological Input Selection (MIS) form
   misForm: FormGroup;
 
-  constructor(fb: FormBuilder) {
+  constructor(fb: FormBuilder, applicationController: ApplicationControllerService) {
+    this.applicationController = applicationController;
     this.misForm = fb.group({
       'rootLettersText': new FormControl(),
       'template': new FormControl(),
