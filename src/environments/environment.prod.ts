@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  dictionaryUrl: 'http://ejtaal.net/aa/index.html#bwq='
 };

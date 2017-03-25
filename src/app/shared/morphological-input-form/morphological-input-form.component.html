@@ -73,10 +73,13 @@
 
         <div class="ui-grid-row">
           <div class="ui-grid-col-2">&nbsp;</div>
-          <div class="ui-grid-col-6">
-            <button pButton type="submit" label="Submit" [disabled]="!misForm.valid"></button>
+          <div class="ui-grid-col-4">
+            <button pButton type="submit" label="View Conjugations" [disabled]="!misForm.valid"></button>
           </div>
-          <div class="ui-grid-col-4">&nbsp;</div>
+          <div class="ui-grid-col-4">
+            <button pButton type="button" label="View Dictionary" (click)="viewDictionary()"></button>
+          </div>
+          <div class="ui-grid-col-2">&nbsp;</div>
         </div>
       </div>
     </p-panel>

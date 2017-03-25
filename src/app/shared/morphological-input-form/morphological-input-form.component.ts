@@ -51,5 +51,8 @@ export class MorphologicalInputFormComponent implements OnInit {
     this._model.rootLetters = event.rootLetters;
   }
 
+  viewDictionary() {
+    this.applicationController.openWithRootLetters(this.model.mInput.rootLetters);
+  }
 
 }
