@@ -44,6 +44,7 @@ export class MorphologicalInputFormComponent implements OnInit {
 
   onSubmit(event) {
     console.log('Form submitted with values: ' + JSON.stringify(this.model.mInput));
+    this.applicationController.model = this._model;
   }
 
   handleClose(event) {
