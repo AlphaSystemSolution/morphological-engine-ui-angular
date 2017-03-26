@@ -13,7 +13,6 @@ export class ApplicationControllerService {
   private _morphologicalChartSubject: BehaviorSubject<any>;
   public morphologicalCharts: Observable<any>;
   private _model: MorphologicalInputFormModel;
-  private dictionaryWindow: any;
 
   constructor(private http: Http) {
     this._model = new MorphologicalInputFormModel();
