@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApplicationControllerService } from '../application-controller.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-morphological-chart',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MorphologicalChartComponent implements OnInit {
 
-  constructor() { }
+  private morphologicalCharts: Observable<any>;
+
+  constructor(private applicationController: ApplicationControllerService) {
+    this.morphologicalCharts = this.applicationController.morphologicalCharts;
+  }
 
   ngOnInit() {
   }

@@ -1,3 +1,4 @@
-<p>
-  morphological-chart works!
-</p>
+<h1> Morphological Chart </h1>
+<div *ngFor="let morphologicalChart of morphologicalCharts | async">
+  <div class="ArabicNormal">{{ morphologicalChart.abbreviatedConjugation.conjugationHeader.title }}</div>
+</div>
