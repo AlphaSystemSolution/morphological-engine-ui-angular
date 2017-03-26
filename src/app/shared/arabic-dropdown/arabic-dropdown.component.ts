@@ -40,7 +40,7 @@ export class ArabicDropdownComponent implements OnInit, AfterViewInit, AfterCont
 
   @Input() initialItem: ArabicLabel;
 
-  @Input() scrollHeight = '200px';
+  @Input() scrollHeight = '400px';
 
   @Input() filter: boolean;
 
@@ -56,7 +56,7 @@ export class ArabicDropdownComponent implements OnInit, AfterViewInit, AfterCont
 
   @Input() readonly: boolean;
 
-  @Input() autoWidth = true;
+  @Input() autoWidth = false;
 
   @Input() required: boolean;
 
