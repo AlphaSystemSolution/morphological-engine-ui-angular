@@ -22,14 +22,6 @@ export class ApplicationControllerService {
     return this._model;
   }
 
-  set model(model: MorphologicalInputFormModel) {
-    if (model) {
-      this._model = model;
-    } else {
-      this._model = new MorphologicalInputFormModel();
-    }
-  }
-
   getMorphologicalChart(): void {
     this._morphologicalChartSubject = new BehaviorSubject<any>([]);
     this.morphologicalCharts = this._morphologicalChartSubject.asObservable();
