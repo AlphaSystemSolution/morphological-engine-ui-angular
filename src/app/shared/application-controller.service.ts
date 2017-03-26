@@ -36,9 +36,6 @@ export class ApplicationControllerService {
     headers.set('Content-Type', 'application/json;charset=UTF-8');
     headers.set('format', 'UNICODE');
     headers.set('translation', m.translation);
-    headers.set('Cache-Control', 'no-cache, no-store, must-revalidate');
-    headers.set('Pragma', 'no-cache');
-    headers.set('Expires', '0');
     const options = new RequestOptions({ headers: headers });
     this.http.get(url, options).map(resp => resp.json()).subscribe(this._morphologicalChartSubject);
   }
