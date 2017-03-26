@@ -16,6 +16,7 @@ import { ArabicKeyboardComponent } from './arabic-keyboard/arabic-keyboard.compo
 import { ArabicDropdownComponent } from './arabic-dropdown/arabic-dropdown.component';
 import { MorphologicalInputFormComponent } from './morphological-input-form/morphological-input-form.component';
 import { MorphologicalChartComponent } from './morphological-chart/morphological-chart.component';
+import { EmptyComponent } from './empty/empty.component';
 
 @NgModule({
   imports: [
@@ -35,13 +36,15 @@ import { MorphologicalChartComponent } from './morphological-chart/morphological
     ArabicDropdownComponent,
     TemplateWrapper,
     MorphologicalInputFormComponent,
-    MorphologicalChartComponent],
+    MorphologicalChartComponent,
+    EmptyComponent],
   declarations: [
     ArabicButtonComponent,
     ArabicKeyboardComponent,
     ArabicDropdownComponent,
     MorphologicalInputFormComponent,
-    MorphologicalChartComponent],
+    MorphologicalChartComponent,
+    EmptyComponent],
   providers: [ApplicationControllerService]
 })
 export class SharedModule { }
