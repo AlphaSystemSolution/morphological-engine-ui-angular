@@ -14,13 +14,10 @@ import { NamedTemplate, namedTemplates } from '../model';
 })
 export class MorphologicalInputFormComponent implements OnInit {
 
-  private _model: MorphologicalInputFormModel;
-
   // morphological Input Selection (MIS) form
   misForm: FormGroup;
 
   constructor(fb: FormBuilder, private applicationController: ApplicationControllerService, private router: Router) {
-    this._model = this.applicationController.model;
     this.misForm = fb.group({
       'rootLettersText': new FormControl(),
       'template': new FormControl(),
@@ -33,17 +30,11 @@ export class MorphologicalInputFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  get model(): MorphologicalInputFormModel {
-    return this._model;
-  }
-
   get namedTemplates(): NamedTemplate[] {
     return namedTemplates;
   }
 
   onSubmit(event) {
-    console.log('Form submitted with values: ' + JSON.stringify(this.model.mInput));
-    this.applicationController.model = this._model;
     this.applicationController.getMorphologicalChart();
     this.router.navigate(['empty']).then(() => {
       this.router.navigate(['morphological-chart']);
@@ -51,11 +42,11 @@ export class MorphologicalInputFormComponent implements OnInit {
   }
 
   handleClose(event) {
-    this._model.rootLetters = event.rootLetters;
+    this.applicationController.model.rootLetters = event.rootLetters;
   }
 
   viewDictionary() {
-    this.applicationController.openWithRootLetters(this.model.mInput.rootLetters);
+    this.applicationController.openWithRootLetters(this.applicationController.model.mInput.rootLetters);
   }
 
 }

@@ -11,7 +11,7 @@
             Select root letters:
           </div>
           <div class="ui-grid-col-4">
-            <input type="text" pInputText class="ArabicNormal" [formControl]="misForm.get('rootLettersText')" [(ngModel)]="model.rootLettersText"
+            <input type="text" pInputText class="ArabicNormal" [formControl]="misForm.get('rootLettersText')" [(ngModel)]="applicationController.model.rootLettersText"
               readonly/>
           </div>
           <div class="ui-grid-col-3">
@@ -29,7 +29,7 @@
             Select template:
           </div>
           <div class="ui-grid-col-5">
-            <app-arabic-dropdown [options]="namedTemplates" [formControl]="misForm.get('template')" [(ngModel)]="model.template"></app-arabic-dropdown>
+            <app-arabic-dropdown [options]="namedTemplates" [formControl]="misForm.get('template')" [(ngModel)]="applicationController.model.template"></app-arabic-dropdown>
           </div>
           <div class="ui-grid-col-5">&nbsp;</div>
         </div>
@@ -43,7 +43,8 @@
             Translation:
           </div>
           <div class="ui-grid-col-5">
-            <input type="text" pInputText [formControl]="misForm.get('translation')" [(ngModel)]="model.translation" />
+            <input type="text" pInputText [formControl]="misForm.get('translation')" [(ngModel)]="applicationController.model.translation"
+            />
           </div>
           <div class="ui-grid-col-5">&nbsp;</div>
         </div>
@@ -57,13 +58,15 @@
             Remove passive line:
           </div>
           <div class="ui-grid-col-2">
-            <p-inputSwitch [formControl]="misForm.get('removePassiveLine')" [(ngModel)]="model.removePassiveLine" onLabel="Yes" offLabel="No"></p-inputSwitch>
+            <p-inputSwitch [formControl]="misForm.get('removePassiveLine')" [(ngModel)]="applicationController.model.removePassiveLine"
+              onLabel="Yes" offLabel="No"></p-inputSwitch>
           </div>
           <div class="ui-grid-col-2">
             Skip rule processing:
           </div>
           <div class="ui-grid-col-2">
-            <p-inputSwitch [formControl]="misForm.get('skipRuleProcessing')" [(ngModel)]="model.skipRuleProcessing" onLabel="Yes" offLabel="No"></p-inputSwitch>
+            <p-inputSwitch [formControl]="misForm.get('skipRuleProcessing')" [(ngModel)]="applicationController.model.skipRuleProcessing"
+              onLabel="Yes" offLabel="No"></p-inputSwitch>
           </div>
           <div class="ui-grid-col-4">&nbsp;</div>
         </div>
