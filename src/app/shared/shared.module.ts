@@ -10,7 +10,6 @@ import {
   TemplateWrapper,
   ToggleButtonModule
 } from 'primeng/primeng';
-import { ApplicationControllerService } from './application-controller.service';
 import { ArabicButtonComponent } from './arabic-button/arabic-button.component';
 import { ArabicKeyboardComponent } from './arabic-keyboard/arabic-keyboard.component';
 import { ArabicDropdownComponent } from './arabic-dropdown/arabic-dropdown.component';
@@ -38,7 +37,6 @@ import { MorphologicalInputFormComponent } from './morphological-input-form/morp
     ArabicButtonComponent,
     ArabicKeyboardComponent,
     ArabicDropdownComponent,
-    MorphologicalInputFormComponent],
-  providers: [ApplicationControllerService]
+    MorphologicalInputFormComponent]
 })
 export class SharedModule { }

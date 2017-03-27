@@ -4,14 +4,15 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { MorphologicalInputFormModel } from './shared/morphological-input-form-model';
 import { RootLetters, MorphologicalInput } from './shared/model';
+import { MorphologicalChart } from './components/model';
 import { environment } from '../environments/environment';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ApplicationControllerService {
 
-  private _morphologicalChartSubject: BehaviorSubject<any>;
-  public morphologicalCharts: Observable<any>;
+  private _morphologicalChartSubject: BehaviorSubject<MorphologicalChart[]>;
+  public morphologicalCharts: Observable<MorphologicalChart[]>;
   private _model: MorphologicalInputFormModel;
 
   constructor(private http: Http) {
@@ -23,7 +24,7 @@ export class ApplicationControllerService {
   }
 
   getMorphologicalChart(): void {
-    this._morphologicalChartSubject = new BehaviorSubject<any>([]);
+    this._morphologicalChartSubject = new BehaviorSubject<MorphologicalChart[]>([]);
     this.morphologicalCharts = this._morphologicalChartSubject.asObservable();
 
     const m: MorphologicalInput = this.model.mInput;

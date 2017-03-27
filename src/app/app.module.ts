@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { ApplicationControllerService } from './application-controller.service';
 import { SharedModule } from './shared/shared.module';
 import { appRoutes } from './app.routes';
 import { AppComponent } from './app.component';
@@ -23,7 +24,7 @@ import { StagingComponent } from './components/staging/staging.component';
     SharedModule,
     appRoutes
   ],
-  providers: [],
+  providers: [ApplicationControllerService],
   bootstrap: [AppComponent],
   exports: [MorphologicalChartComponent, StagingComponent]
 })
