@@ -1,8 +1,8 @@
 import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { MorphologicalChartComponent } from './shared/morphological-chart/morphological-chart.component';
-import { EmptyComponent } from './shared/empty/empty.component';
+import { MorphologicalChartComponent } from './components/morphological-chart/morphological-chart.component';
+import { StagingComponent } from './components/staging/staging.component';
 
 const routes: Routes = [
   {
@@ -11,8 +11,8 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'empty',
-    component: EmptyComponent
+    path: 'staging',
+    component: StagingComponent
   },
   {
     path: 'morphological-chart',

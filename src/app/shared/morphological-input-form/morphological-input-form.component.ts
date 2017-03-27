@@ -36,7 +36,7 @@ export class MorphologicalInputFormComponent implements OnInit {
 
   onSubmit(event) {
     this.applicationController.getMorphologicalChart();
-    this.router.navigate(['empty']).then(() => {
+    this.router.navigate(['staging']).then(() => {
       this.router.navigate(['morphological-chart']);
     });
   }

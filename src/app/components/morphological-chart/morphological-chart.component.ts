@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApplicationControllerService } from '../application-controller.service';
+import { ApplicationControllerService } from '../../shared/application-controller.service';
 import { Observable } from 'rxjs/Observable';
 
 @Component({

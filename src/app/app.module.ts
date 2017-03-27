@@ -6,10 +6,14 @@ import { HttpModule } from '@angular/http';
 import { SharedModule } from './shared/shared.module';
 import { appRoutes } from './app.routes';
 import { AppComponent } from './app.component';
+import { MorphologicalChartComponent } from './components/morphological-chart/morphological-chart.component';
+import { StagingComponent } from './components/staging/staging.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MorphologicalChartComponent,
+    StagingComponent
   ],
   imports: [
     BrowserModule,
@@ -20,6 +24,7 @@ import { AppComponent } from './app.component';
     appRoutes
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [MorphologicalChartComponent, StagingComponent]
 })
 export class AppModule { }
