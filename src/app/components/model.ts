@@ -56,7 +56,7 @@ export interface ConjugationGroup {
 
 export class VerbConjugationGroup implements ConjugationGroup {
   constructor(public termType: string, public masculineThirdPerson: ConjugationTuple, public feminineThirdPerson: ConjugationTuple,
-    public masculineSecondPerson: ConjugationTuple, public feminineSecondPerson: ConjugationTuple) { }
+    public masculineSecondPerson: ConjugationTuple, public feminineSecondPerson: ConjugationTuple, public firstPerson: ConjugationTuple) { }
 }
 
 export class VerbDetailedConjugationPair {
@@ -120,4 +120,12 @@ export class DetailedConjugation {
 
 export class MorphologicalChart {
   constructor(public abbreviatedConjugation: AbbreviatedConjugation, public detailedConjugation: DetailedConjugation) { }
+}
+
+export class DetailedConjugationRow {
+  constructor(public leftSideValues: string[], public rightSideValues: string[]) { }
+}
+
+export class SimpleDetailedConjugationGroup {
+  constructor(public leftTermType: SarfTermType, public rightTermType: SarfTermType, public rows: DetailedConjugationRow[]) { }
 }
