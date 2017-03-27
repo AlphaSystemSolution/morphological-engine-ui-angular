@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { MorphologicalInputFormModel } from '../morphological-input-form-model';
-import { ApplicationControllerService } from '../application-controller.service';
+import { ApplicationControllerService } from '../../application-controller.service';
 import { ArabicKeyboardComponent } from '../arabic-keyboard/arabic-keyboard.component';
 import { ArabicDropdownComponent } from '../arabic-dropdown/arabic-dropdown.component';
 import { NamedTemplate, namedTemplates } from '../model';

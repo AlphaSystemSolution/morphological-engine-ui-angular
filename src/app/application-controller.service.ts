@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { MorphologicalInputFormModel } from './morphological-input-form-model';
-import { RootLetters, MorphologicalInput } from './model';
-import { environment } from '../../environments/environment';
+import { MorphologicalInputFormModel } from './shared/morphological-input-form-model';
+import { RootLetters, MorphologicalInput } from './shared/model';
+import { environment } from '../environments/environment';
 import 'rxjs/add/operator/map';
 
 @Injectable()
