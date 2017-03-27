@@ -9,12 +9,16 @@ import { appRoutes } from './app.routes';
 import { AppComponent } from './app.component';
 import { MorphologicalChartComponent } from './components/morphological-chart/morphological-chart.component';
 import { StagingComponent } from './components/staging/staging.component';
+import { DetailConjugationComponent } from './components/detail-conjugation/detail-conjugation.component';
+import { DetailRowRendererComponent } from './components/detail-conjugation/detail-row-renderer/detail-row-renderer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MorphologicalChartComponent,
-    StagingComponent
+    StagingComponent,
+    DetailConjugationComponent,
+    DetailRowRendererComponent
   ],
   imports: [
     BrowserModule,
@@ -26,6 +30,6 @@ import { StagingComponent } from './components/staging/staging.component';
   ],
   providers: [ApplicationControllerService],
   bootstrap: [AppComponent],
-  exports: [MorphologicalChartComponent, StagingComponent]
+  exports: [MorphologicalChartComponent, StagingComponent, DetailConjugationComponent, DetailRowRendererComponent]
 })
 export class AppModule { }
