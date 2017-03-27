@@ -1,30 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
-.ArabicTitle,.ArabicNormal, .ArabicToggleButton, .ArabicButton, .ArabicDropdown {
+.arabicTitle, .arabicNormal, .arabicToggleButton, .arabicButton, .arabicDropdown {
 	font-family: 'KFGQPC Uthman Taha Naskh';
 	direction: rtl;
 }
 
-.ArabicTitle {
+.arabicTitle {
   font-size: 48px;
 }
 
-.ArabicNormal {
-	font-size: 20px;
+.caption {
+ color: #2E74B5;
 }
 
-.ArabicToggleButton {
+.arabicNormal {
+	font-size: 24px;
+}
+
+.arabicToggleButton {
   font-size: 30px;
 }
 
-.ArabicButton {
+.arabicButton {
   font-size: 24px;
 }
 
-.ArabicDropdown {
+.arabicDropdown {
 	font-size: 22px;
 }
 
 .code {
   font-family: Georgia;
   font-size:12pt
+}
+
+table.morphological-chart {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table.morphological-chart tr td {
+  text-align: center;
+}
+
+tr.morphological-chart td {
+  border: 1px solid black;
+}
+
+tr.morphological-chart-no-border td {
+  border: 0;
 }

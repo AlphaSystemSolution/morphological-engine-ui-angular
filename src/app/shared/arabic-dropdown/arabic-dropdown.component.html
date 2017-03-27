@@ -5,7 +5,7 @@
     <select [required]="required" tabindex="-1">
                     <option *ngFor="let option of options" [value]="option.name" [selected]="selectedOption == option">
                         <template [ngIf]="showCode"><span class="code"> ({{option.code}}) &mdash; </span></template>
-                        <span class="ArabicDropdown">  {{option.label}} </span>
+                        <span class="arabicDropdown">  {{option.label}} </span>
                      </option>
                 </select>
   </div>
@@ -20,7 +20,7 @@
       </span>
       &mdash;
     </template>
-    <span class="ArabicDropdown" *ngIf="!itemTemplate">
+    <span class="arabicDropdown" *ngIf="!itemTemplate">
       {{label||'empty'}}
     </span>
   </label>
@@ -46,7 +46,7 @@
             </span>
            &mdash;
           </template>
-          <span class="ArabicDropdown" *ngIf="!itemTemplate">
+          <span class="arabicDropdown" *ngIf="!itemTemplate">
             {{option.label||'empty'}}
           </span>
           <template [pTemplateWrapper]="itemTemplate" [item]="option" *ngIf="itemTemplate"></template>
