@@ -27,12 +27,23 @@ export class DetailConjugationComponent implements OnInit {
   ngOnInit() {
     this.show = this.detailedConjugation !== null;
     if (this.show) {
+      console.log(this.detailedConjugation.adverbPairs);
       let index = 0;
       this.groups[index++] = this.createVerbGroup(this.detailedConjugation.activeTensePair);
       this.groups[index++] = this.createNounGroup(this.detailedConjugation.activeParticiplePair);
+      const verbalNounPairs = this.detailedConjugation.verbalNounPairs;
+      if (verbalNounPairs && verbalNounPairs.length > 0) {
+        if (verbalNounPairs && verbalNounPairs.length > 0) {
+          verbalNounPairs.forEach(pair => this.groups[index++] = this.createNounGroup(pair));
+        }
+      }
       this.groups[index++] = this.createVerbGroup(this.detailedConjugation.passiveTensePair);
       this.groups[index++] = this.createNounGroup(this.detailedConjugation.passiveParticiplePair);
       this.groups[index++] = this.createVerbGroup(this.detailedConjugation.imperativeAndForbiddingPair);
+      const adverbPairs = this.detailedConjugation.adverbPairs;
+      if (adverbPairs && adverbPairs.length > 0) {
+        adverbPairs.forEach(pair => this.groups[index++] = this.createNounGroup(pair));
+      }
     }
   }
 
