@@ -112,10 +112,10 @@ export class AbbreviatedConjugation {
 }
 
 export class DetailedConjugation {
-  constructor(public activeTensePair: VerbDetailedConjugationPair, public verbalNounPairs: NounConjugationGroup[],
-    public activeParticiplePair: NounConjugationGroup, public passiveTensePair: VerbDetailedConjugationPair,
-    public passiveParticiplePair: NounConjugationGroup, public imperativeAndForbiddingPair: VerbDetailedConjugationPair,
-    public adverbPairs: NounConjugationGroup[]) { }
+  constructor(public activeTensePair: VerbDetailedConjugationPair, public verbalNounPairs: NounDetailedConjugationPair[],
+    public activeParticiplePair: NounDetailedConjugationPair, public passiveTensePair: VerbDetailedConjugationPair,
+    public passiveParticiplePair: NounDetailedConjugationPair, public imperativeAndForbiddingPair: VerbDetailedConjugationPair,
+    public adverbPairs: NounDetailedConjugationPair[]) { }
 }
 
 export class MorphologicalChart {
@@ -128,5 +128,5 @@ export class DetailedConjugationRow {
 
 export class SimpleDetailedConjugationGroup {
   constructor(public leftTermType: string, public leftSideClass: string, public rightTermType: string,
-   public rightSideClass: string,   public rows: DetailedConjugationRow[]) { }
+    public rightSideClass: string, public rows: DetailedConjugationRow[]) { }
 }

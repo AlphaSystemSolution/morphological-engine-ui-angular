@@ -3,10 +3,12 @@ import {
   ConjugationTuple,
   DetailedConjugation,
   DetailedConjugationRow,
+  NounConjugationGroup,
+  NounDetailedConjugationPair,
   SarfTermType,
   SimpleDetailedConjugationGroup,
-  VerbDetailedConjugationPair,
-  VerbConjugationGroup
+  VerbConjugationGroup,
+  VerbDetailedConjugationPair
 } from '../model';
 
 @Component({
@@ -27,7 +29,9 @@ export class DetailConjugationComponent implements OnInit {
     if (this.show) {
       let index = 0;
       this.groups[index++] = this.createVerbGroup(this.detailedConjugation.activeTensePair);
+      this.groups[index++] = this.createNounGroup(this.detailedConjugation.activeParticiplePair);
       this.groups[index++] = this.createVerbGroup(this.detailedConjugation.passiveTensePair);
+      this.groups[index++] = this.createNounGroup(this.detailedConjugation.passiveParticiplePair);
       this.groups[index++] = this.createVerbGroup(this.detailedConjugation.imperativeAndForbiddingPair);
     }
   }
@@ -39,10 +43,9 @@ export class DetailConjugationComponent implements OnInit {
     const rightTerm: SarfTermType = SarfTermType.getByName(rightGroup.termType);
 
     const rows: DetailedConjugationRow[] = [];
-
     let index = 0;
 
-    let row: DetailedConjugationRow = this.createDetailedConjugationRow(leftGroup.masculineThirdPerson, rightGroup.masculineThirdPerson);
+    let row = this.createDetailedConjugationRow(leftGroup.masculineThirdPerson, rightGroup.masculineThirdPerson);
     if (row !== null) {
       rows[index++] = row;
     }
@@ -67,6 +70,44 @@ export class DetailConjugationComponent implements OnInit {
       rows[index++] = row;
     }
     return new SimpleDetailedConjugationGroup(leftTerm.value, 'morphological-chart', rightTerm.value, 'morphological-chart', rows);
+  }
+
+  private createNounGroup(pair: NounDetailedConjugationPair): SimpleDetailedConjugationGroup {
+    const leftGroup: NounConjugationGroup = pair.leftSideConjugations;
+    const rightGroup: NounConjugationGroup = pair.rightSideConjugations;
+    const rightTerm = SarfTermType.getByName(rightGroup.termType).value;
+    const rightSideClass = 'morphological-chart';
+    let leftTerm: string = null;
+    let leftSideClass = 'morphological-chart-no-border';
+    if (leftGroup && leftGroup.termType) {
+      leftTerm = SarfTermType.getByName(leftGroup.termType).value;
+      leftSideClass = 'morphological-chart';
+    }
+    const rows: DetailedConjugationRow[] = [];
+    let index = 0;
+
+    let rightTuple = rightGroup.nominative;
+    let leftTuple = (leftGroup && leftGroup.nominative) ? leftGroup.nominative : new ConjugationTuple(null, null, null);
+    let row = this.createDetailedConjugationRow(leftTuple, rightTuple);
+    if (row !== null) {
+      rows[index++] = row;
+    }
+
+    rightTuple = rightGroup.accusative;
+    leftTuple = (leftGroup && leftGroup.accusative) ? leftGroup.accusative : new ConjugationTuple(null, null, null);
+    row = this.createDetailedConjugationRow(leftTuple, rightTuple);
+    if (row !== null) {
+      rows[index++] = row;
+    }
+
+    rightTuple = rightGroup.genitive;
+    leftTuple = (leftGroup && leftGroup.genitive) ? leftGroup.genitive : new ConjugationTuple(null, null, null);
+    row = this.createDetailedConjugationRow(leftTuple, rightTuple);
+    if (row !== null) {
+      rows[index++] = row;
+    }
+
+    return new SimpleDetailedConjugationGroup(leftTerm, leftSideClass, rightTerm, rightSideClass, rows);
   }
 
   private createValues(tuple: ConjugationTuple): string[] {
