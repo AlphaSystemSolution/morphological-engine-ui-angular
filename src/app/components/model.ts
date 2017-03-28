@@ -127,5 +127,6 @@ export class DetailedConjugationRow {
 }
 
 export class SimpleDetailedConjugationGroup {
-  constructor(public leftTermType: SarfTermType, public rightTermType: SarfTermType, public rows: DetailedConjugationRow[]) { }
+  constructor(public leftTermType: string, public leftSideClass: string, public rightTermType: string,
+   public rightSideClass: string,   public rows: DetailedConjugationRow[]) { }
 }

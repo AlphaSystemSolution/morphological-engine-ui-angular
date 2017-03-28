@@ -1,7 +1,35 @@
 <div style="overflow-x: auto" *ngIf="show">
   <table class="morphological-chart">
-    <tr class="morphological-chart">
-      <td colspan="7">HERE</td>
-    </tr>
+    <template ngFor let-group [ngForOf]="groups">
+      <tr>
+        <td [class]="group.leftSideClass" style="width: 49.5%" colspan="3">
+          <div class="arabicCaption">{{group.leftTermType || '&nbsp;'}}</div>
+        </td>
+        <td style="width: 1%">&nbsp;</td>
+        <td [class]="group.rightSideClass" style="width: 49.5%" colspan="3">
+          <div class="arabicCaption">{{ group.rightTermType || '&nbsp;' }}</div>
+        </td>
+      </tr>
+      <template ngFor let-rowData [ngForOf]="group.rows">
+        <tr>
+          <template ngFor let-row [ngForOf]="rowData.leftSideValues">
+            <td [class]="group.leftSideClass" style="width: 16.33%">
+              <div class="arabicNormal">{{row || '&nbsp;'}}</div>
+            </td>
+          </template>
+          <td style="width: 1%">&nbsp;</td>
+          <template ngFor let-row [ngForOf]="rowData.rightSideValues">
+            <td [class]="group.rightSideClass" style="width: 16.33%">
+               <div class="arabicNormal">{{row || '&nbsp;'}}</div>
+            </td>
+          </template>
+        </tr>
+      </template>
+      <tr>
+        <td style="width: 49.5%" colspan="3">&nbsp;</td>
+        <td style="width: 1%">&nbsp;</td>
+        <td style="width: 49.5%" colspan="3">&nbsp;</td>
+      </tr>
+    </template>
   </table>
 </div>

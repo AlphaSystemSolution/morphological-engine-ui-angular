@@ -18,14 +18,17 @@ export class DetailConjugationComponent implements OnInit {
 
   @Input() detailedConjugation: DetailedConjugation;
   show: boolean;
-  activeTensePairGroup: SimpleDetailedConjugationGroup;
+  groups: SimpleDetailedConjugationGroup[] = [];
 
   constructor() { }
 
   ngOnInit() {
     this.show = this.detailedConjugation !== null;
     if (this.show) {
-      const pair = this.detailedConjugation.activeTensePair;
+      let index = 0;
+      this.groups[index++] = this.createVerbGroup(this.detailedConjugation.activeTensePair);
+      this.groups[index++] = this.createVerbGroup(this.detailedConjugation.passiveTensePair);
+      this.groups[index++] = this.createVerbGroup(this.detailedConjugation.imperativeAndForbiddingPair);
     }
   }
 
@@ -41,49 +44,44 @@ export class DetailConjugationComponent implements OnInit {
 
     let row: DetailedConjugationRow = this.createDetailedConjugationRow(leftGroup.masculineThirdPerson, rightGroup.masculineThirdPerson);
     if (row !== null) {
-      rows[index] = row;
-      index++;
+      rows[index++] = row;
     }
 
     row = this.createDetailedConjugationRow(leftGroup.feminineThirdPerson, rightGroup.feminineThirdPerson);
     if (row !== null) {
-      rows[index] = row;
-      index++;
+      rows[index++] = row;
     }
 
     row = this.createDetailedConjugationRow(leftGroup.masculineSecondPerson, rightGroup.masculineSecondPerson);
     if (row !== null) {
-      rows[index] = row;
-      index++;
+      rows[index++] = row;
     }
 
     row = this.createDetailedConjugationRow(leftGroup.feminineSecondPerson, rightGroup.feminineSecondPerson);
     if (row !== null) {
-      rows[index] = row;
-      index++;
+      rows[index++] = row;
     }
 
     row = this.createDetailedConjugationRow(leftGroup.firstPerson, rightGroup.firstPerson);
     if (row !== null) {
-      rows[index] = row;
-      index++;
+      rows[index++] = row;
     }
-    return new SimpleDetailedConjugationGroup(leftTerm, rightTerm, rows);
+    return new SimpleDetailedConjugationGroup(leftTerm.value, 'morphological-chart', rightTerm.value, 'morphological-chart', rows);
   }
 
   private createValues(tuple: ConjugationTuple): string[] {
     const result: string[] = [];
 
     let value = tuple.plural;
-    value = value === null ? ' ' : value;
+    value = value === null ? null : value;
     result[0] = value;
 
     value = tuple.dual;
-    value = value === null ? ' ' : value;
+    value = value === null ? null : value;
     result[1] = value;
 
     value = tuple.singular;
-    value = value === null ? ' ' : value;
+    value = value === null ? null : value;
     result[2] = value;
     return result;
   }

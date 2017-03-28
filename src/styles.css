@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-.arabicTitle, .arabicNormal, .arabicToggleButton, .arabicButton, .arabicDropdown {
+.arabicTitle, .arabicNormal, .arabicCaption, .arabicToggleButton, .arabicButton, .arabicDropdown {
 	font-family: 'KFGQPC Uthman Taha Naskh';
 	direction: rtl;
 }
@@ -14,6 +14,12 @@
 
 .arabicNormal {
 	font-size: 24px;
+}
+
+.arabicCaption {
+ font-size: 30px;
+ font-weight: bolder;
+ color: #2E74B5;
 }
 
 .arabicToggleButton {
@@ -42,10 +48,10 @@ table.morphological-chart tr td {
   text-align: center;
 }
 
-tr.morphological-chart td {
+td.morphological-chart {
   border: 1px solid black;
 }
 
-tr.morphological-chart-no-border td {
+td.morphological-chart-no-border {
   border: 0;
 }
