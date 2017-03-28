@@ -1,9 +1,6 @@
 <div>
   <form [formGroup]="misForm" (ngSubmit)="onSubmit(misForm.value)">
-    <p-panel [toggleable]="true">
-      <p-header class="ui-helper-clearfix">
-        <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px">Select Root Letters &amp; Template</span>
-      </p-header>
+    <p-panel header="Select Root Letters &amp; Template" [toggleable]="true">
       <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
         <!-- RootLetters row -->
         <div class="ui-grid-row">
