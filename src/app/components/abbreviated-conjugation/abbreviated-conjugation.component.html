@@ -1,3 +1,72 @@
-<p>
-  abbreviated-conjugation works!
-</p>
+<div *ngIf="show">
+  <table class="morphological-chart">
+    <!-- start of "title" row -->
+    <tr>
+      <td colspan="4" style="width: 100%">
+        <div class="arabicTitle">{{ title || '&nbsp;' }}</div>
+      </td>
+    </tr>
+    <!-- end of "title" row -->
+    <!-- start of "header"" row" -->
+    <tr>
+      <td class="morphological-chart" colspan="2" style="width: 50%">
+        <div> {{ translation || '&nbsp;'}} </div>
+      </td>
+      <td class="morphological-chart" colspan="2" style="text-align: right; width: 50%">
+        <div class="arabicNormal"> {{ typeLabel1 || '&nbsp;'}} </div>
+        <div class="arabicNormal"> {{ typeLabel2 || '&nbsp;'}} </div>
+        <div class="arabicNormal"> {{ typeLabel3 || '&nbsp;'}} </div>
+      </td>
+    </tr>
+    <!-- end of "header"" row" -->
+    <!-- start of "abbreviated conjugation" rows -->
+    <!-- start of active line -->
+    <template [ngIf]="showActive">
+      <tr>
+        <template ngFor let-value [ngForOf]="activeLine">
+          <td class="morphological-chart" style="width: 25%">
+            <div class="arabicNormal"> {{ value || '&nbsp;'}} </div>
+          </td>
+        </template>
+      </tr>
+    </template>
+    <!-- end of active line -->
+    <!-- start of passive line -->
+    <template [ngIf]="showPassive">
+      <tr>
+        <template ngFor let-value [ngForOf]="passiveLine">
+          <td class="morphological-chart" style="width: 25%">
+            <div class="arabicNormal"> {{ value || '&nbsp;'}} </div>
+          </td>
+        </template>
+      </tr>
+    </template>
+    <!-- end of passive line -->
+    <!-- start of imperativeAndForbidding line -->
+    <template [ngIf]="showImperativeAndForbidding">
+      <tr>
+        <template ngFor let-value [ngForOf]="imperativeAndForbiddingLine">
+          <td class="morphological-chart" colspan="2" style="width: 50%">
+            <div class="arabicNormal"> {{ value || '&nbsp;'}} </div>
+          </td>
+        </template>
+      </tr>
+    </template>
+    <!-- end of imperativeAndForbidding line -->
+     <!-- start of adverb line -->
+    <template [ngIf]="showAdverb">
+      <tr>
+        <template ngFor let-value [ngForOf]="adverbLine">
+          <td class="morphological-chart" colspan="4" style="width: 100%">
+            <div class="arabicNormal"> {{ value || '&nbsp;'}} </div>
+          </td>
+        </template>
+      </tr>
+    </template>
+    <!-- end of adverb line -->
+    <!-- end of "abbreviated conjugation" rows -->
+    <tr>
+      <td colspan="4" style="width: 100%">&nbsp;</td>
+    </tr>
+  </table>
+</div>

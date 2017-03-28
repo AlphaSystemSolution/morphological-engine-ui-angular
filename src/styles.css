@@ -6,10 +6,8 @@
 
 .arabicTitle {
   font-size: 48px;
-}
-
-.caption {
- color: #2E74B5;
+  font-weight: bolder;
+  color: #2E74B5;
 }
 
 .arabicNormal {
