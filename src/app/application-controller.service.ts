@@ -37,6 +37,12 @@ export class ApplicationControllerService {
     headers.set('Content-Type', 'application/json;charset=UTF-8');
     headers.set('format', 'UNICODE');
     headers.set('translation', m.translation);
+    const conjugationConfiguration = m.conjugationConfiguration;
+    if (conjugationConfiguration) {
+      headers.set('removePassiveLine', '' + conjugationConfiguration.removePassiveLine);
+      headers.set('skipRuleProcessing', '' + conjugationConfiguration.skipRuleProcessing);
+    }
+
     const options = new RequestOptions({ headers: headers });
     this.http.get(url, options).map(resp => resp.json()).subscribe(this._morphologicalChartSubject);
   }
