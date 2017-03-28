@@ -10,13 +10,15 @@ import { AppComponent } from './app.component';
 import { MorphologicalChartComponent } from './components/morphological-chart/morphological-chart.component';
 import { StagingComponent } from './components/staging/staging.component';
 import { DetailConjugationComponent } from './components/detail-conjugation/detail-conjugation.component';
+import { AbbreviatedConjugationComponent } from './components/abbreviated-conjugation/abbreviated-conjugation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MorphologicalChartComponent,
     StagingComponent,
-    DetailConjugationComponent
+    DetailConjugationComponent,
+    AbbreviatedConjugationComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +30,6 @@ import { DetailConjugationComponent } from './components/detail-conjugation/deta
   ],
   providers: [ApplicationControllerService],
   bootstrap: [AppComponent],
-  exports: [MorphologicalChartComponent, StagingComponent, DetailConjugationComponent]
+  exports: [MorphologicalChartComponent, StagingComponent, DetailConjugationComponent, AbbreviatedConjugationComponent]
 })
 export class AppModule { }
