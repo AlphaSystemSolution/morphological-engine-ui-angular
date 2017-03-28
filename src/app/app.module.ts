@@ -10,17 +10,13 @@ import { AppComponent } from './app.component';
 import { MorphologicalChartComponent } from './components/morphological-chart/morphological-chart.component';
 import { StagingComponent } from './components/staging/staging.component';
 import { DetailConjugationComponent } from './components/detail-conjugation/detail-conjugation.component';
-import { DetailRowRendererComponent } from './components/detail-conjugation/detail-row-renderer/detail-row-renderer.component';
-import { DetailedConjugationGroupComponent } from './components/detail-conjugation/detailed-conjugation-group/detailed-conjugation-group.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MorphologicalChartComponent,
     StagingComponent,
-    DetailConjugationComponent,
-    DetailRowRendererComponent,
-    DetailedConjugationGroupComponent
+    DetailConjugationComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +28,6 @@ import { DetailedConjugationGroupComponent } from './components/detail-conjugati
   ],
   providers: [ApplicationControllerService],
   bootstrap: [AppComponent],
-  exports: [MorphologicalChartComponent, StagingComponent, DetailConjugationComponent, DetailRowRendererComponent, DetailedConjugationGroupComponent]
+  exports: [MorphologicalChartComponent, StagingComponent, DetailConjugationComponent]
 })
 export class AppModule { }
