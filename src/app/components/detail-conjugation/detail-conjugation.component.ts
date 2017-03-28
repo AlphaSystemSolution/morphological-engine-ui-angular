@@ -37,8 +37,14 @@ export class DetailConjugationComponent implements OnInit {
           verbalNounPairs.forEach(pair => this.groups[index++] = this.createNounGroup(pair));
         }
       }
-      this.groups[index++] = this.createVerbGroup(this.detailedConjugation.passiveTensePair);
-      this.groups[index++] = this.createNounGroup(this.detailedConjugation.passiveParticiplePair);
+      const passiveTensePair = this.detailedConjugation.passiveTensePair;
+      if (passiveTensePair) {
+        this.groups[index++] = this.createVerbGroup(passiveTensePair);
+      }
+      const passiveParticiplePair = this.detailedConjugation.passiveParticiplePair;
+      if (passiveParticiplePair) {
+        this.groups[index++] = this.createNounGroup(passiveParticiplePair);
+      }
       this.groups[index++] = this.createVerbGroup(this.detailedConjugation.imperativeAndForbiddingPair);
       const adverbPairs = this.detailedConjugation.adverbPairs;
       if (adverbPairs && adverbPairs.length > 0) {
