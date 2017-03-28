@@ -41,7 +41,7 @@ export class AbbreviatedConjugationComponent implements OnInit {
         this.translation = conjugationHeader.translation;
         this.typeLabel1 = conjugationHeader.typeLabel1;
         this.typeLabel2 = conjugationHeader.typeLabel2;
-        this.typeLabel2 = conjugationHeader.typeLabel2;
+        this.typeLabel3 = conjugationHeader.typeLabel3;
       }
 
       const activeLine = this.abbreviatedConjugation.activeLine;
