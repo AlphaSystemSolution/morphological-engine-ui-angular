@@ -49,4 +49,8 @@ export class MorphologicalInputFormComponent implements OnInit {
     this.applicationController.openWithRootLetters(this.applicationController.model.mInput.rootLetters);
   }
 
+  hnadleSelectTemplate(event) {
+    console.log(JSON.stringify(event));
+  }
+
 }
