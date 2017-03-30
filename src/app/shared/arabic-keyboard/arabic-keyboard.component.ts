@@ -73,14 +73,14 @@ export class ArabicKeyboardComponent implements OnInit, AfterViewInit {
     this.updateState(index, checked);
   }
 
+   hnadleShow(event) {
+    this.currentIndex = 0;
+    this.updateState(this.currentIndex, true);
+  }
+
   private handleHide(event): void {
     const result = new RootLetters(this._selectedLetters[0], this._selectedLetters[1], this._selectedLetters[2], this._selectedLetters[3]);
     this.onClose.emit({ 'rootLetters': result });
-  }
-
-  private hnadleShow(event) {
-    this.currentIndex = 0;
-    this.updateState(this.currentIndex, true);
   }
 
   private updateState(index: number, state: boolean) {
