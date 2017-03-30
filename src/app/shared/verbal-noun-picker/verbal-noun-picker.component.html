@@ -1,4 +1,4 @@
-<p-overlayPanel #verbalNounPicker [showCloseIcon]="true" [dismissable]="false" (onBeforeShow)="reset($event)" (onAfterHide)="handleHide($event)">
+<p-overlayPanel #verbalNounPicker [showCloseIcon]="true" [dismissable]="true" (onBeforeShow)="reset($event)" (onAfterHide)="handleHide($event)">
   <template ngFor let-values [ngForOf]="avaialbleValues">
     <div style="direction: rtl">
       <template ngFor let-value [ngForOf]="values">
