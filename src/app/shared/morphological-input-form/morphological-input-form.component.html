@@ -55,8 +55,8 @@
             Verbal Noun(s):
           </div>
           <div class="ui-grid-col-4">
-            <!--input type="text" pInputText class="arabicNormal" [formControl]="misForm.get('rootLettersText')" [(ngModel)]="applicationController.model.rootLettersText"
-              readonly/-->&nbsp;
+            <input type="text" pInputText class="arabicNormal" [formControl]="misForm.get('verbalNouns')" [(ngModel)]="applicationController.model.verbalNounsText"
+              readonly/>
           </div>
           <div class="ui-grid-col-3">
             <i class="fa fa-search" (click)="verbalNounPicker.show($event)" style="font-size:24px"></i>
@@ -102,4 +102,4 @@
 </div>
 
 <app-arabic-keyboard #picker (onClose)="handleClose($event)"></app-arabic-keyboard>
-<app-verbal-noun-picker #verbalNounPicker></app-verbal-noun-picker>
+<app-verbal-noun-picker #verbalNounPicker (onSelect)="updateVerbalNoun($event)"></app-verbal-noun-picker>

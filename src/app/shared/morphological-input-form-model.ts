@@ -1,4 +1,7 @@
-import { RootLetters, NamedTemplate, MorphologicalInput, ConjugationConfiguration, namedTemplates, arabicLetters } from './model';
+import {
+  RootLetters, NamedTemplate, MorphologicalInput, ConjugationConfiguration, VerbalNoun, namedTemplates,
+  arabicLetters
+} from './model';
 
 export class MorphologicalInputFormModel {
 
@@ -10,6 +13,8 @@ export class MorphologicalInputFormModel {
   private _translation: string;
   private _removePassiveLine: boolean;
   private _skipRuleProcessing: boolean;
+  private _verbalNouns: VerbalNoun[];
+  private _verbalNounsText: string;
 
   private static createDefaultValue(): MorphologicalInput {
     const rootLetters: RootLetters = new RootLetters(arabicLetters[19], arabicLetters[17], arabicLetters[22], arabicLetters[28]);
@@ -19,6 +24,19 @@ export class MorphologicalInputFormModel {
 
   private static toRootLettersString(rootLetters: RootLetters): string {
     return rootLetters.firstRadical.label + rootLetters.secondRadical.label + rootLetters.thirdRadical.label;
+  }
+
+  private static toVerbalNounsString(verbalNouns: VerbalNoun[]): string {
+    let result = '';
+    if (verbalNouns && verbalNouns.length > 0) {
+      let verbalNoun = verbalNouns[0];
+      result += verbalNoun.label;
+      for (let i = 1; i < verbalNouns.length; i++) {
+        verbalNoun = verbalNouns[i];
+        result += ' و ' + verbalNoun.label;
+      }
+    }
+    return result;
   }
 
   constructor() {
@@ -40,6 +58,7 @@ export class MorphologicalInputFormModel {
     this._rootLettersText = MorphologicalInputFormModel.toRootLettersString(this._rootLetters);
     this._template = this.mInput.template;
     this._translation = this.mInput.translation;
+    this._verbalNouns = this.mInput.verbalNouns;
     const conjugationConfiguration: ConjugationConfiguration = this.mInput.conjugationConfiguration;
     this.removePassiveLine = conjugationConfiguration.removePassiveLine;
     this.skipRuleProcessing = conjugationConfiguration.skipRuleProcessing;
@@ -85,6 +104,26 @@ export class MorphologicalInputFormModel {
     if (this.mInput) {
       this.mInput.translation = this.translation;
     }
+  }
+
+  get verbalNouns(): VerbalNoun[] {
+    return this._verbalNouns;
+  }
+
+  set verbalNouns(values: VerbalNoun[]) {
+    this._verbalNouns = values;
+    this.verbalNounsText = MorphologicalInputFormModel.toVerbalNounsString(this.verbalNouns);
+    if (this.mInput) {
+      this.mInput.verbalNouns = values;
+    }
+  }
+
+  get verbalNounsText(): string {
+    return this._verbalNounsText;
+  }
+
+  set verbalNounsText(value: string) {
+    this._verbalNounsText = value;
   }
 
   get removePassiveLine(): boolean {

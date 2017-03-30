@@ -24,6 +24,7 @@ export class MorphologicalInputFormComponent implements OnInit {
       'rootLettersText': new FormControl(),
       'template': new FormControl(),
       'translation': new FormControl(),
+      'verbalNouns': new FormControl(),
       'removePassiveLine': new FormControl(),
       'skipRuleProcessing': new FormControl()
     });
@@ -53,6 +54,15 @@ export class MorphologicalInputFormComponent implements OnInit {
 
   handleSelectTemplate(event) {
     this.verbalNounPicker.form = <NamedTemplate>event.value;
+  }
+
+  updateVerbalNoun(event) {
+    const verbalNouns = [];
+    let index = 0;
+    event.forEach(e => {
+      verbalNouns[index++] = e.value;
+    });
+    this.applicationController.model.verbalNouns = verbalNouns;
   }
 
 }

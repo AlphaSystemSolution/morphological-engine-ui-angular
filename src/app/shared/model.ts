@@ -81,7 +81,7 @@ export const namedTemplates: NamedTemplate[] = [
   new NamedTemplate('FORM_X_TEMPLATE', 'إِسْتَفْعَلَ يَسْتَفْعِلُ', 'Family X')
 ];
 
-export const verbalNouns: VerbalNoun[] = [
+export const verbalNounPatterns: VerbalNoun[] = [
   new VerbalNoun('VERBAL_NOUN_V1', 'فَعْلٌ', 'VERBAL_NOUN_V1'), // 0
   new VerbalNoun('VERBAL_NOUN_V2', 'فُعُلٌ', 'VERBAL_NOUN_V2'), // 1
   new VerbalNoun('VERBAL_NOUN_V3', 'فُعْلٌ', 'VERBAL_NOUN_V3'), // 2
@@ -125,46 +125,46 @@ export const verbalNouns: VerbalNoun[] = [
 ];
 
 export const formITemplates: VerbalNoun[][] = [
-  [verbalNouns[0], verbalNouns[1], verbalNouns[3], verbalNouns[4]],
-  [verbalNouns[5], verbalNouns[6], verbalNouns[7], verbalNouns[8]],
-  [verbalNouns[9], verbalNouns[10], verbalNouns[11], verbalNouns[12]],
-  [verbalNouns[13], verbalNouns[14], verbalNouns[26], verbalNouns[27]]
+  [verbalNounPatterns[0], verbalNounPatterns[1], verbalNounPatterns[3], verbalNounPatterns[4]],
+  [verbalNounPatterns[5], verbalNounPatterns[6], verbalNounPatterns[7], verbalNounPatterns[8]],
+  [verbalNounPatterns[9], verbalNounPatterns[10], verbalNounPatterns[11], verbalNounPatterns[12]],
+  [verbalNounPatterns[13], verbalNounPatterns[14], verbalNounPatterns[26], verbalNounPatterns[27]]
 ];
 
 export const formIITemplates: VerbalNoun[][] = [
-  [verbalNouns[28]]
+  [verbalNounPatterns[28]]
 ];
 
 export const formIIITemplates: VerbalNoun[][] = [
-  [verbalNouns[30], verbalNouns[31]]
+  [verbalNounPatterns[30], verbalNounPatterns[31]]
 ];
 
 export const formIVTemplates: VerbalNoun[][] = [
-  [verbalNouns[33]]
+  [verbalNounPatterns[33]]
 ];
 
 export const formVTemplates: VerbalNoun[][] = [
-  [verbalNouns[34]]
+  [verbalNounPatterns[34]]
 ];
 
 export const formVITemplates: VerbalNoun[][] = [
-  [verbalNouns[35]]
+  [verbalNounPatterns[35]]
 ];
 
 export const formVIITemplates: VerbalNoun[][] = [
-  [verbalNouns[36]]
+  [verbalNounPatterns[36]]
 ];
 
 export const formVIIITemplates: VerbalNoun[][] = [
-  [verbalNouns[37]]
+  [verbalNounPatterns[37]]
 ];
 
 export const formIXTemplates: VerbalNoun[][] = [
-  [verbalNouns[38]]
+  [verbalNounPatterns[38]]
 ];
 
 export const formXTemplates: VerbalNoun[][] = [
-  [verbalNouns[39]]
+  [verbalNounPatterns[39]]
 ];
 
 export const defaultRootLetters: RootLetters = new RootLetters(arabicLetters[19], arabicLetters[17], arabicLetters[22], arabicLetters[28]);
