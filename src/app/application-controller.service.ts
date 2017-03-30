@@ -37,6 +37,11 @@ export class ApplicationControllerService {
     headers.set('Content-Type', 'application/json;charset=UTF-8');
     headers.set('format', 'UNICODE');
     headers.set('translation', m.translation);
+    const verbalNounValues: string[] = [];
+    const verbalNouns = this.model.mInput.verbalNouns;
+    let index = 0;
+    verbalNouns.forEach(vn => verbalNounValues[index++] = vn.name);
+    headers.set('verbalNouns', verbalNounValues);
     const conjugationConfiguration = m.conjugationConfiguration;
     if (conjugationConfiguration) {
       headers.set('removePassiveLine', '' + conjugationConfiguration.removePassiveLine);
