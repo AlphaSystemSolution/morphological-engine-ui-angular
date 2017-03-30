@@ -1,7 +1,7 @@
-import { Component, Input, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { OverlayPanel } from 'primeng/primeng';
 import {
-  NamedTemplate, VerbalNoun, defaultNamedTemplate, verbalNouns,
+  NamedTemplate, VerbalNoun, defaultNamedTemplate, verbalNounPatterns,
   formIITemplates, formIIITemplates, formIVTemplates, formVTemplates,
   formVITemplates, formVIITemplates, formVIIITemplates, formIXTemplates, formXTemplates
 } from '../model';
@@ -16,15 +16,56 @@ export class VerbalNounPickerComponent implements OnInit {
 
   @ViewChild('verbalNounPicker') verbalNounPicker: OverlayPanel;
   @ViewChildren(ToggleSelectorComponent) buttons: QueryList<ToggleSelectorComponent>;
+  @Output() onSelect: EventEmitter<any> = new EventEmitter();
   private _form: NamedTemplate;
   avaialbleValues: VerbalNoun[][] = [
-    [verbalNouns[0], verbalNouns[1], verbalNouns[3], verbalNouns[4], verbalNouns[5]],
-    [verbalNouns[6], verbalNouns[7], verbalNouns[8], verbalNouns[9], verbalNouns[10]],
-    [verbalNouns[11], verbalNouns[12], verbalNouns[13], verbalNouns[14], verbalNouns[26]],
-    [verbalNouns[27], verbalNouns[28], verbalNouns[30], verbalNouns[31]],
-    [verbalNouns[33], verbalNouns[34], verbalNouns[35], verbalNouns[36]],
-    [verbalNouns[37], verbalNouns[38], verbalNouns[39]]
+    [verbalNounPatterns[0], verbalNounPatterns[1], verbalNounPatterns[3], verbalNounPatterns[4], verbalNounPatterns[5]],
+    [verbalNounPatterns[6], verbalNounPatterns[7], verbalNounPatterns[8], verbalNounPatterns[9], verbalNounPatterns[10]],
+    [verbalNounPatterns[11], verbalNounPatterns[12], verbalNounPatterns[13], verbalNounPatterns[14], verbalNounPatterns[26]],
+    [verbalNounPatterns[27], verbalNounPatterns[28], verbalNounPatterns[30], verbalNounPatterns[31]],
+    [verbalNounPatterns[33], verbalNounPatterns[34], verbalNounPatterns[35], verbalNounPatterns[36]],
+    [verbalNounPatterns[37], verbalNounPatterns[38], verbalNounPatterns[39]]
   ];
+
+  private static getDefaultValues(form: NamedTemplate): VerbalNoun[][] {
+    let defaultValues: VerbalNoun[][];
+    const code = form.code;
+    switch (code) {
+      case 'Family II':
+        defaultValues = formIITemplates;
+        break;
+      case 'Family III':
+        defaultValues = formIIITemplates;
+        break;
+      case 'Family IV':
+        defaultValues = formIVTemplates;
+        break;
+      case 'Family V':
+        defaultValues = formVTemplates;
+        break;
+      case 'Family IV':
+        defaultValues = formIVTemplates;
+        break;
+      case 'Family VI':
+        defaultValues = formVITemplates;
+        break;
+      case 'Family VII':
+        defaultValues = formVITemplates;
+        break;
+      case 'Family VIII':
+        defaultValues = formVITemplates;
+        break;
+      case 'Family IX':
+        defaultValues = formIXTemplates;
+        break;
+      case 'Family X':
+        defaultValues = formXTemplates;
+        break;
+      default:
+        break;
+    }
+    return defaultValues;
+  }
 
   constructor() { }
 
@@ -70,47 +111,12 @@ export class VerbalNounPickerComponent implements OnInit {
   }
 
   handleSelectVerbalNoun(event) {
-    console.log('>>>>>>>>>>>>>>> ' + JSON.stringify(event));
+    this.emitOnSelect();
   }
 
   private handleFormChanged() {
     this.buttons.forEach(button => button.select = false);
-    let defaultValues: VerbalNoun[][];
-    const code = this.form.code;
-    switch (code) {
-      case 'Family II':
-        defaultValues = formIITemplates;
-        break;
-      case 'Family III':
-        defaultValues = formIIITemplates;
-        break;
-      case 'Family IV':
-        defaultValues = formIVTemplates;
-        break;
-      case 'Family V':
-        defaultValues = formVTemplates;
-        break;
-      case 'Family IV':
-        defaultValues = formIVTemplates;
-        break;
-      case 'Family VI':
-        defaultValues = formVITemplates;
-        break;
-      case 'Family VII':
-        defaultValues = formVITemplates;
-        break;
-      case 'Family VIII':
-        defaultValues = formVITemplates;
-        break;
-      case 'Family IX':
-        defaultValues = formIXTemplates;
-        break;
-      case 'Family X':
-        defaultValues = formXTemplates;
-        break;
-      default:
-        break;
-    }
+    const defaultValues = VerbalNounPickerComponent.getDefaultValues(this.form);
 
     if (defaultValues) {
       this.buttons.forEach(button => {
@@ -119,10 +125,22 @@ export class VerbalNounPickerComponent implements OnInit {
             if (button.value.name === value.name) {
               button.select = true;
             }
-          });
-        });
-      });
-    }
+          }); // end of values.forEach
+        }); // end of defaultValues.forEach
+      }); // end of this.buttons.forEach
+    } // end of if
+    this.emitOnSelect();
+  } // end of function handleFormChanged
+
+  private emitOnSelect() {
+    const result: any[] = [];
+    let index = 0;
+    this.buttons.forEach(button => {
+      if (button.checked) {
+        result[index++] = { 'checked': true, 'value': button.value };
+      }
+    });
+    this.onSelect.emit(result);
   }
 
 }
