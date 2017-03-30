@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { MorphologicalInputFormModel } from '../morphological-input-form-model';
 import { ApplicationControllerService } from '../../application-controller.service';
 import { ArabicKeyboardComponent } from '../arabic-keyboard/arabic-keyboard.component';
 import { ArabicDropdownComponent } from '../arabic-dropdown/arabic-dropdown.component';
+import { VerbalNounPickerComponent } from '../verbal-noun-picker/verbal-noun-picker.component';
 import { NamedTemplate, namedTemplates } from '../model';
 
 @Component({
@@ -14,6 +15,7 @@ import { NamedTemplate, namedTemplates } from '../model';
 })
 export class MorphologicalInputFormComponent implements OnInit {
 
+  @ViewChild('verbalNounPicker') verbalNounPicker: VerbalNounPickerComponent;
   // morphological Input Selection (MIS) form
   misForm: FormGroup;
 
@@ -49,8 +51,8 @@ export class MorphologicalInputFormComponent implements OnInit {
     this.applicationController.openWithRootLetters(this.applicationController.model.mInput.rootLetters);
   }
 
-  hnadleSelectTemplate(event) {
-    console.log(JSON.stringify(event));
+  handleSelectTemplate(event) {
+    this.verbalNounPicker.form = <NamedTemplate>event.value;
   }
 
 }

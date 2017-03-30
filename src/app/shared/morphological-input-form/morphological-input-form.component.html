@@ -27,7 +27,7 @@
           </div>
           <div class="ui-grid-col-5">
             <app-arabic-dropdown [options]="namedTemplates" [formControl]="misForm.get('template')" [(ngModel)]="applicationController.model.template"
-              (onChange)="hnadleSelectTemplate($event)"></app-arabic-dropdown>
+              (onChange)="handleSelectTemplate($event)"></app-arabic-dropdown>
           </div>
           <div class="ui-grid-col-5">&nbsp;</div>
         </div>
@@ -48,6 +48,20 @@
         </div>
         <div class="ui-grid-row">
           <div class="ui-grid-col-12">&nbsp;</div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            Verbal Noun(s):
+          </div>
+          <div class="ui-grid-col-4">
+            <!--input type="text" pInputText class="arabicNormal" [formControl]="misForm.get('rootLettersText')" [(ngModel)]="applicationController.model.rootLettersText"
+              readonly/-->&nbsp;
+          </div>
+          <div class="ui-grid-col-3">
+            <i class="fa fa-search" (click)="verbalNounPicker.show($event)" style="font-size:24px"></i>
+          </div>
+          <div class="ui-grid-col-3">&nbsp;</div>
         </div>
 
         <!-- ConjugationConfiguration row -->
@@ -88,3 +102,4 @@
 </div>
 
 <app-arabic-keyboard #picker (onClose)="handleClose($event)"></app-arabic-keyboard>
+<app-verbal-noun-picker #verbalNounPicker></app-verbal-noun-picker>
