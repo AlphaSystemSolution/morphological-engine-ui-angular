@@ -1,3 +1,10 @@
-<p>
-  verbal-noun-picker works!
-</p>
+<p-overlayPanel #verbalNounPicker [showCloseIcon]="true" [dismissable]="false" (onBeforeShow)="reset($event)" (onAfterHide)="handleHide($event)">
+  <template ngFor let-values [ngForOf]="avaialbleValues">
+    <div style="direction: rtl">
+      <template ngFor let-value [ngForOf]="values">
+        <app-toggle-selector [value]="value" styleClass="verbalNounToggleSelector" (onChange)="handleSelectVerbalNoun($event)"></app-toggle-selector>
+      </template>
+      <div>&nbsp;</div>
+    </div>
+  </template>
+</p-overlayPanel>
