@@ -27,7 +27,6 @@ export class DetailConjugationComponent implements OnInit {
   ngOnInit() {
     this.show = this.detailedConjugation !== null;
     if (this.show) {
-      console.log(this.detailedConjugation.adverbPairs);
       let index = 0;
       this.groups[index++] = this.createVerbGroup(this.detailedConjugation.activeTensePair);
       this.groups[index++] = this.createNounGroup(this.detailedConjugation.activeParticiplePair);
