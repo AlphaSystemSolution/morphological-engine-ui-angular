@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild, ViewChildren, Input, Output, EventEmitter, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren, Input, Output, EventEmitter, QueryList } from '@angular/core';
 
 import { OverlayPanel } from 'primeng/primeng';
 
@@ -10,7 +10,7 @@ import { ArabicLetter, RootLetters, arabicLetters } from '../model';
   templateUrl: './arabic-keyboard.component.html',
   styleUrls: ['./arabic-keyboard.component.css']
 })
-export class ArabicKeyboardComponent implements OnInit, AfterViewInit {
+export class ArabicKeyboardComponent implements OnInit {
 
   @ViewChild('rootLettersPicker') rootLettersPicker: OverlayPanel;
   @ViewChildren(ToggleSelectorComponent) buttons: QueryList<ToggleSelectorComponent>;
@@ -22,9 +22,6 @@ export class ArabicKeyboardComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.resetSelection();
-  }
-
-  ngAfterViewInit(): void {
   }
 
   get letters(): ArabicLetter[] {
