@@ -11,6 +11,7 @@ import { MorphologicalChartComponent } from './components/morphological-chart/mo
 import { StagingComponent } from './components/staging/staging.component';
 import { DetailConjugationComponent } from './components/detail-conjugation/detail-conjugation.component';
 import { AbbreviatedConjugationComponent } from './components/abbreviated-conjugation/abbreviated-conjugation.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AbbreviatedConjugationComponent } from './components/abbreviated-conjug
     MorphologicalChartComponent,
     StagingComponent,
     DetailConjugationComponent,
-    AbbreviatedConjugationComponent
+    AbbreviatedConjugationComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +32,6 @@ import { AbbreviatedConjugationComponent } from './components/abbreviated-conjug
   ],
   providers: [ApplicationControllerService],
   bootstrap: [AppComponent],
-  exports: [MorphologicalChartComponent, StagingComponent, DetailConjugationComponent, AbbreviatedConjugationComponent]
+  exports: [MorphologicalChartComponent, StagingComponent, DetailConjugationComponent, AbbreviatedConjugationComponent, HomeComponent]
 })
 export class AppModule { }
