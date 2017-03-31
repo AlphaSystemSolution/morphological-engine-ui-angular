@@ -8,7 +8,8 @@ import {
   OverlayPanelModule,
   PanelModule,
   TemplateWrapper,
-  ToggleButtonModule
+  ToggleButtonModule,
+  ToolbarModule
 } from 'primeng/primeng';
 import { ArabicButtonComponent } from './arabic-button/arabic-button.component';
 import { ArabicKeyboardComponent } from './arabic-keyboard/arabic-keyboard.component';
@@ -27,16 +28,20 @@ import { ToggleSelectorComponent } from './toggle-selector/toggle-selector.compo
     InputSwitchModule,
     OverlayPanelModule,
     PanelModule,
-    ToggleButtonModule
+    ToggleButtonModule,
+    ToolbarModule
   ],
   exports: [
+    ButtonModule,
+    ToolbarModule,
     ArabicButtonComponent,
     ArabicKeyboardComponent,
     ArabicDropdownComponent,
     TemplateWrapper,
     MorphologicalInputFormComponent,
     VerbalNounPickerComponent,
-    ToggleSelectorComponent],
+    ToggleSelectorComponent
+    ],
   declarations: [
     ArabicButtonComponent,
     ArabicKeyboardComponent,
