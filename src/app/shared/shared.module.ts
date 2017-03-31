@@ -12,7 +12,6 @@ import {
 import { ArabicButtonComponent } from './arabic-button/arabic-button.component';
 import { ArabicKeyboardComponent } from './arabic-keyboard/arabic-keyboard.component';
 import { ArabicDropdownComponent } from './arabic-dropdown/arabic-dropdown.component';
-import { MorphologicalInputFormComponent } from './morphological-input-form/morphological-input-form.component';
 import { VerbalNounPickerComponent } from './verbal-noun-picker/verbal-noun-picker.component';
 import { ToggleSelectorComponent } from './toggle-selector/toggle-selector.component';
 
@@ -32,7 +31,6 @@ import { ToggleSelectorComponent } from './toggle-selector/toggle-selector.compo
     ArabicKeyboardComponent,
     ArabicDropdownComponent,
     TemplateWrapper,
-    MorphologicalInputFormComponent,
     VerbalNounPickerComponent,
     ToggleSelectorComponent
     ],
@@ -40,7 +38,6 @@ import { ToggleSelectorComponent } from './toggle-selector/toggle-selector.compo
     ArabicButtonComponent,
     ArabicKeyboardComponent,
     ArabicDropdownComponent,
-    MorphologicalInputFormComponent,
     VerbalNounPickerComponent,
     ToggleSelectorComponent]
 })

@@ -12,6 +12,7 @@ import { SharedModule } from './shared/shared.module';
 import { appRoutes } from './app.routes';
 import { AppComponent } from './app.component';
 import { MorphologicalChartComponent } from './components/morphological-chart/morphological-chart.component';
+import { MorphologicalInputFormComponent } from './components/morphological-input-form/morphological-input-form.component';
 import { StagingComponent } from './components/staging/staging.component';
 import { DetailConjugationComponent } from './components/detail-conjugation/detail-conjugation.component';
 import { AbbreviatedConjugationComponent } from './components/abbreviated-conjugation/abbreviated-conjugation.component';
@@ -23,6 +24,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
   declarations: [
     AppComponent,
     MorphologicalChartComponent,
+    MorphologicalInputFormComponent,
     StagingComponent,
     DetailConjugationComponent,
     AbbreviatedConjugationComponent,
@@ -45,6 +47,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
   bootstrap: [AppComponent],
   exports: [
     MorphologicalChartComponent,
+    MorphologicalInputFormComponent,
     StagingComponent,
     DetailConjugationComponent,
     AbbreviatedConjugationComponent,
