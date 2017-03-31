@@ -101,5 +101,5 @@
   </form>
 </div>
 
-<app-arabic-keyboard #picker (onClose)="handleClose($event)"></app-arabic-keyboard>
+<app-arabic-keyboard #picker [rootLetters]="applicationController.model.rootLetters" (onClose)="handleClose($event)"></app-arabic-keyboard>
 <app-verbal-noun-picker #verbalNounPicker (onSelect)="updateVerbalNoun($event)"></app-verbal-noun-picker>
