@@ -2,7 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
+import {
+  ButtonModule,
+  DataTableModule,
+  ToolbarModule
+} from 'primeng/primeng';
 import { ApplicationControllerService } from './application-controller.service';
 import { SharedModule } from './shared/shared.module';
 import { appRoutes } from './app.routes';
@@ -31,6 +35,9 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    ButtonModule,
+    DataTableModule,
+    ToolbarModule,
     SharedModule,
     appRoutes
   ],

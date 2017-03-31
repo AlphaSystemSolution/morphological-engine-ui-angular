@@ -2,14 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
-  ButtonModule,
   InputTextModule,
   InputSwitchModule,
   OverlayPanelModule,
   PanelModule,
   TemplateWrapper,
-  ToggleButtonModule,
-  ToolbarModule
+  ToggleButtonModule
 } from 'primeng/primeng';
 import { ArabicButtonComponent } from './arabic-button/arabic-button.component';
 import { ArabicKeyboardComponent } from './arabic-keyboard/arabic-keyboard.component';
@@ -23,17 +21,13 @@ import { ToggleSelectorComponent } from './toggle-selector/toggle-selector.compo
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    ButtonModule,
     InputTextModule,
     InputSwitchModule,
     OverlayPanelModule,
     PanelModule,
-    ToggleButtonModule,
-    ToolbarModule
+    ToggleButtonModule
   ],
   exports: [
-    ButtonModule,
-    ToolbarModule,
     ArabicButtonComponent,
     ArabicKeyboardComponent,
     ArabicDropdownComponent,
