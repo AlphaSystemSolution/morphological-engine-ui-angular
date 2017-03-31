@@ -24,7 +24,7 @@ export class ToggleSelectorComponent implements OnInit {
     return this.toggle.checked;
   }
 
-  get select(): boolean {
+  @Input() get select(): boolean {
     return this._select;
   }
 
