@@ -1,8 +1,8 @@
-import { AfterViewInit, Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, ViewChildren, Input, Output, EventEmitter, QueryList } from '@angular/core';
 
-import { OverlayPanel, ToggleButton } from 'primeng/primeng';
+import { OverlayPanel } from 'primeng/primeng';
 
-import { ArabicButtonComponent } from '../arabic-button/arabic-button.component';
+import { ToggleSelectorComponent } from '../toggle-selector/toggle-selector.component';
 import { ArabicLetter, RootLetters, arabicLetters } from '../model';
 
 @Component({
@@ -13,40 +13,51 @@ import { ArabicLetter, RootLetters, arabicLetters } from '../model';
 export class ArabicKeyboardComponent implements OnInit, AfterViewInit {
 
   @ViewChild('rootLettersPicker') rootLettersPicker: OverlayPanel;
-  @ViewChild('label1') label1: ToggleButton;
-  @ViewChild('label2') label2: ToggleButton;
-  @ViewChild('label3') label3: ToggleButton;
-  @ViewChild('label4') label4: ToggleButton;
+  @ViewChildren(ToggleSelectorComponent) buttons: QueryList<ToggleSelectorComponent>;
   @Output() onClose: EventEmitter<any> = new EventEmitter();
-  private _selectedLetters: ArabicLetter[];
+  private _rootLetters: RootLetters;
   private currentIndex: number;
 
   constructor() { }
 
   ngOnInit() {
-    this._selectedLetters = [];
     this.resetSelection();
   }
 
   ngAfterViewInit(): void {
-    this.updateState(this.currentIndex, true);
   }
 
   get letters(): ArabicLetter[] {
     return arabicLetters;
   }
 
-  get selectedLetters(): ArabicLetter[] {
-    return this._selectedLetters;
-  }
-
   show(event): void {
     this.rootLettersPicker.show(event);
   }
 
+  @Input() get rootLetters(): RootLetters {
+    return this._rootLetters;
+  }
+
+  set rootLetters(value: RootLetters) {
+    this._rootLetters = value;
+  }
+
   selectLetter(letter: ArabicLetter): void {
-    // update this letter @ currentIndex
-    this._selectedLetters[this.currentIndex] = letter;
+    switch (this.currentIndex) {
+      case 0:
+        this.rootLetters.firstRadical = letter;
+        break;
+      case 1:
+        this.rootLetters.secondRadical = letter;
+        break;
+      case 2:
+        this.rootLetters.thirdRadical = letter;
+        break;
+      case 3:
+        this.rootLetters.firstRadical = letter;
+        break;
+    }
     // update currentIndex
     this.currentIndex = (this.currentIndex + 1) % 4;
     this.updateState(this.currentIndex, true);
@@ -54,13 +65,10 @@ export class ArabicKeyboardComponent implements OnInit, AfterViewInit {
 
   resetSelection(): void {
     this.currentIndex = 0;
-    this._selectedLetters[0] = this.letters[19];
-    this._selectedLetters[1] = this.letters[17];
-    this._selectedLetters[2] = this.letters[22];
-    this._selectedLetters[3] = this.letters[28];
+    this.rootLetters = new RootLetters(this.letters[19], this.letters[17], this.letters[22], this.letters[28]);
   }
 
-  handleSelect(event, index: number): void {
+  handleSelect(event, index: number) {
     const checked: boolean = event.checked;
     if (checked) {
       this.updateState(this.currentIndex, false);
@@ -73,43 +81,17 @@ export class ArabicKeyboardComponent implements OnInit, AfterViewInit {
     this.updateState(index, checked);
   }
 
-   hnadleShow(event) {
+  handleShow(event) {
     this.currentIndex = 0;
     this.updateState(this.currentIndex, true);
   }
 
   private handleHide(event): void {
-    const result = new RootLetters(this._selectedLetters[0], this._selectedLetters[1], this._selectedLetters[2], this._selectedLetters[3]);
-    this.onClose.emit({ 'rootLetters': result });
+    this.onClose.emit({ 'rootLetters': this.rootLetters });
   }
 
   private updateState(index: number, state: boolean) {
-    switch (index) {
-      case 0:
-        this.label1.checked = state;
-        this.label2.checked = false;
-        this.label3.checked = false;
-        this.label4.checked = false;
-        break;
-      case 1:
-        this.label1.checked = false;
-        this.label2.checked = state;
-        this.label3.checked = false;
-        this.label4.checked = false;
-        break;
-      case 2:
-        this.label1.checked = false;
-        this.label2.checked = false;
-        this.label3.checked = state;
-        this.label4.checked = false;
-        break;
-      case 3:
-        this.label1.checked = false;
-        this.label2.checked = false;
-        this.label3.checked = false;
-        this.label4.checked = state;
-        break;
-    }
+    this.buttons.forEach((button, i) => button.select = (i === index));
   }
 
 }
