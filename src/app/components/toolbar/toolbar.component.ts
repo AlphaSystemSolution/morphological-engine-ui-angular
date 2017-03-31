@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApplicationControllerService } from '../../application-controller.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -6,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(public applicationController: ApplicationControllerService) { }
 
   ngOnInit() {
+  }
+
+  handleButtonClick(id: string) {
+    console.log('Button clicked: ' + id);
   }
 
 }
