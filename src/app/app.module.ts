@@ -12,6 +12,7 @@ import { StagingComponent } from './components/staging/staging.component';
 import { DetailConjugationComponent } from './components/detail-conjugation/detail-conjugation.component';
 import { AbbreviatedConjugationComponent } from './components/abbreviated-conjugation/abbreviated-conjugation.component';
 import { HomeComponent } from './components/home/home.component';
+import { ExportConjugationComponent } from './components/export-conjugation/export-conjugation.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HomeComponent } from './components/home/home.component';
     StagingComponent,
     DetailConjugationComponent,
     AbbreviatedConjugationComponent,
-    HomeComponent
+    HomeComponent,
+    ExportConjugationComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +34,6 @@ import { HomeComponent } from './components/home/home.component';
   ],
   providers: [ApplicationControllerService],
   bootstrap: [AppComponent],
-  exports: [MorphologicalChartComponent, StagingComponent, DetailConjugationComponent, AbbreviatedConjugationComponent, HomeComponent]
+  exports: [MorphologicalChartComponent, StagingComponent, DetailConjugationComponent, AbbreviatedConjugationComponent, HomeComponent, ExportConjugationComponent]
 })
 export class AppModule { }
