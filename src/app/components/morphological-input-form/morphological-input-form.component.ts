@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { MorphologicalInputFormModel } from '../morphological-input-form-model';
+import { MorphologicalInputFormModel } from '../../shared/morphological-input-form-model';
 import { ApplicationControllerService } from '../../application-controller.service';
-import { ArabicKeyboardComponent } from '../arabic-keyboard/arabic-keyboard.component';
-import { ArabicDropdownComponent } from '../arabic-dropdown/arabic-dropdown.component';
-import { VerbalNounPickerComponent } from '../verbal-noun-picker/verbal-noun-picker.component';
-import { NamedTemplate, namedTemplates } from '../model';
+import { ArabicKeyboardComponent } from '../../shared/arabic-keyboard/arabic-keyboard.component';
+import { ArabicDropdownComponent } from '../../shared/arabic-dropdown/arabic-dropdown.component';
+import { VerbalNounPickerComponent } from '../../shared/verbal-noun-picker/verbal-noun-picker.component';
+import { NamedTemplate, namedTemplates } from '../../shared/model';
 
 @Component({
   selector: 'app-morphological-input-form',
