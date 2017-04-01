@@ -1,2 +1,30 @@
-<app-toolbar></app-toolbar>
+<app-toolbar (onAction)="performAction($event)"></app-toolbar>
 <div>&nbsp;</div>
+
+<p-dataTable [value]="data" [(selection)]="selectedRows" selectionMode="multiple" [responsive]="true" (onRowSelect)="selectRow($event)">
+  <p-column [style]="&#123;'width':'38px'&#125;" selectionMode="multiple"></p-column>
+  <p-column field="rootLetters" header="Root Letters">
+    <template let-rl="rowData" pTemplate="body">
+      <div class="arabicNormal">{{ rl.rootLetters.label }}</div>
+    </template>
+  </p-column>
+  <p-column field="template" header="Family">
+    <template let-rl="rowData" pTemplate="body">
+      <div style="direction: rtl">
+        <span class="arabicNormal">{{ rl.template.label }}</span> &mdash; <span>{{ rl.template.code}}</span>
+      </div>
+    </template>
+  </p-column>
+  <p-column field="verbalNounsText" header="Verbal Nouns">
+    <template let-rl="rowData" pTemplate="body">
+      <div class="arabicNormal">{{ rl.verbalNounsText }}</div>
+    </template>
+  </p-column>
+  <p-column field="translation" header="Translation">
+    <template let-rl="rowData" pTemplate="body">
+      <div style="font-size: 14px">{{ rl.translation }}</div>
+    </template>
+  </p-column>
+</p-dataTable>
+
+<app-morphological-input-form #form [(visible)]="displayDialog" (onHide)="hnadleHide($event)"></app-morphological-input-form>
