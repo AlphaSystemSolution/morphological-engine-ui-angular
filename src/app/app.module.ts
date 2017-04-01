@@ -9,6 +9,7 @@ import {
   DataTableModule,
   DialogModule,
   InputSwitchModule,
+  SplitButtonModule,
   ToolbarModule
 } from 'primeng/primeng';
 import { ApplicationControllerService } from './application-controller.service';
@@ -46,6 +47,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     DataTableModule,
     DialogModule,
     InputSwitchModule,
+    SplitButtonModule,
     ToolbarModule,
     SharedModule,
     appRoutes

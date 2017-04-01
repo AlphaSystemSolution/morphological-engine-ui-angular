@@ -1,9 +1,6 @@
 <p-toolbar>
   <div class="ui-toolbar-group-left">
-    <button pButton type="button" label="Add" icon="fa-plus-square" (click)="handleButtonClick('ADD')"></button>
-    <button pButton type="button" label="Edit" icon="fa-pencil-square" (click)="handleButtonClick('EDIT')"></button>
-    <button pButton type="button" label="Duplicate" icon="fa-clone" (click)="handleButtonClick('DUPLICATE')"></button>
-    <button pButton type="button" label="Remove" icon="fa-times" (click)="handleButtonClick('REMOVE')"></button>
-    <button pButton type="button" label="View Conjugation(s)" icon="fa-search" (click)="handleButtonClick('VIEW')"></button>
+    <p-splitButton label="Actions" [model]="actionItems"></p-splitButton>
+    <p-splitButton label="View" icon="fa-search" [model]="viewItems"></p-splitButton>
   </div>
 </p-toolbar>
