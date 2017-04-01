@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ApplicationControllerService } from '../../application-controller.service';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-toolbar',
@@ -7,13 +6,14 @@ import { ApplicationControllerService } from '../../application-controller.servi
 })
 export class ToolbarComponent implements OnInit {
 
-  constructor(public applicationController: ApplicationControllerService) { }
+  @Output() onAction: EventEmitter<string> = new EventEmitter();
+  constructor() { }
 
   ngOnInit() {
   }
 
-  handleButtonClick(id: string) {
-    console.log('Button clicked: ' + id);
+  handleButtonClick(action: string) {
+    this.onAction.emit(action);
   }
 
 }
