@@ -44,47 +44,18 @@ export class HomeComponent implements OnInit {
   }
 
   performAction(action) {
-    console.log(JSON.stringify(action));
     switch (action) {
       case 'ADD':
-        this.displayDialog = true;
-        this.newRow = true;
+       this.doAdd();
         break;
       case 'EDIT':
-        if (!this.selectedRow) {
-          break;
-        }
-        this.selectedRow = MorphologicalInputFormModel.cloneMorphologicalInput(this.selectedRow);
-        this.form.model.mInput = this.selectedRow;
-        this.newRow = false;
-        this.displayDialog = true;
+        this.doEdit();
         break;
       case 'DUPLICATE':
-        if (!this.selectedRow) {
-          break;
-        }
-        this.displayDialog = true;
-        this.newRow = true;
-        this.form.model.mInput = this.selectedRow;
+        this.doDuplicate();
         break;
       case 'REMOVE':
-        if (!this.selectedRow) {
-          break;
-        }
-        this.confirmationService.confirm({
-          message: 'Do you want to remove this record?',
-          header: 'Remove Confirmation',
-          icon: 'fa fa-times',
-          accept: () => {
-            this.data.splice(this.findSelectedRowIndex(), 1);
-            this.selectedRows = [];
-            this.selectedRow = null;
-          },
-          reject: () => {
-            this.selectedRows = [];
-            this.selectedRow = null;
-          }
-        });
+        this.doRemove();
         break;
     }
   }
@@ -110,6 +81,50 @@ export class HomeComponent implements OnInit {
       }
     });
     return index;
+  }
+
+  private doAdd() {
+    this.displayDialog = true;
+    this.newRow = true;
+  }
+
+  private doEdit() {
+    if (!this.selectedRow) {
+      return;
+    }
+    this.selectedRow = MorphologicalInputFormModel.cloneMorphologicalInput(this.selectedRow);
+    this.form.model.mInput = this.selectedRow;
+    this.newRow = false;
+    this.displayDialog = true;
+  }
+
+  private doDuplicate() {
+    if (!this.selectedRow) {
+      return;
+    }
+    this.displayDialog = true;
+    this.newRow = true;
+    this.form.model.mInput = this.selectedRow;
+  }
+
+  private doRemove() {
+    if (!this.selectedRow) {
+      return;
+    }
+    this.confirmationService.confirm({
+      message: 'Do you want to remove this record?',
+      header: 'Remove Confirmation',
+      icon: 'fa fa-times',
+      accept: () => {
+        this.data.splice(this.findSelectedRowIndex(), 1);
+        this.selectedRows = [];
+        this.selectedRow = null;
+      },
+      reject: () => {
+        this.selectedRows = [];
+        this.selectedRow = null;
+      }
+    });
   }
 
 }
