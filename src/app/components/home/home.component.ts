@@ -39,14 +39,13 @@ export class HomeComponent implements OnInit {
       this.save(result);
     }
     this.displayDialog = false;
-    this.selectedRows = [];
-    this.selectedRow = null;
+     this.clearSelectedRows();
   }
 
   performAction(action) {
     switch (action) {
       case 'ADD':
-       this.doAdd();
+        this.doAdd();
         break;
       case 'EDIT':
         this.doEdit();
@@ -56,6 +55,12 @@ export class HomeComponent implements OnInit {
         break;
       case 'REMOVE':
         this.doRemove();
+        break;
+      case 'DICTIONARY':
+        this.viewDictionary();
+        break;
+      default:
+        console.log(action);
         break;
     }
   }
@@ -117,14 +122,23 @@ export class HomeComponent implements OnInit {
       icon: 'fa fa-times',
       accept: () => {
         this.data.splice(this.findSelectedRowIndex(), 1);
-        this.selectedRows = [];
-        this.selectedRow = null;
+        this.clearSelectedRows();
       },
-      reject: () => {
-        this.selectedRows = [];
-        this.selectedRow = null;
-      }
+      reject: () => this.clearSelectedRows()
     });
+  }
+
+  private viewDictionary() {
+    if (!this.selectedRow) {
+      return;
+    }
+    this.applicationController.openWithRootLetters(this.selectedRow.rootLetters);
+     this.clearSelectedRows();
+  }
+
+  private clearSelectedRows() {
+    this.selectedRows = [];
+    this.selectedRow = null;
   }
 
 }
