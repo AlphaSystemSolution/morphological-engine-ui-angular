@@ -97,7 +97,7 @@ export class HomeComponent implements OnInit {
     if (!this.selectedRow) {
       return;
     }
-    this.selectedRow = MorphologicalInputFormModel.cloneMorphologicalInput(this.selectedRow);
+    this.selectedRow = MorphologicalInput.copy(this.selectedRow, true);
     this.form.model.mInput = this.selectedRow;
     this.newRow = false;
     this.displayDialog = true;
