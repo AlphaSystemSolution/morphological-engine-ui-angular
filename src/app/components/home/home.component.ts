@@ -109,7 +109,7 @@ export class HomeComponent implements OnInit {
     }
     this.displayDialog = true;
     this.newRow = true;
-    this.form.model.mInput = this.selectedRow;
+    this.form.model.mInput = MorphologicalInput.copy(this.selectedRow, false);
   }
 
   private doRemove() {
