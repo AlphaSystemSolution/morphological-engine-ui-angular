@@ -3,26 +3,31 @@
 
 <p-dataTable [value]="data" [(selection)]="selectedRows" selectionMode="multiple" [responsive]="true" (onRowSelect)="selectRow($event)">
   <p-column [style]="&#123;'width':'38px'&#125;" selectionMode="multiple"></p-column>
-  <p-column field="rootLetters" header="Root Letters">
-    <template let-rl="rowData" pTemplate="body">
-      <div class="arabicNormal">{{ rl.rootLetters.label }}</div>
+  <p-column field="rootLetters" header="Root Letters" [style]="{'width': '200px'}">
+    <template let-mi="rowData" pTemplate="body">
+      <div class="arabicNormal">{{ mi.rootLetters.label }}</div>
     </template>
   </p-column>
-  <p-column field="template" header="Family">
-    <template let-rl="rowData" pTemplate="body">
+  <p-column field="template" header="Family" [style]="{'width': '350px'}">
+    <template let-mi="rowData" pTemplate="body">
       <div style="direction: rtl">
-        <span class="arabicNormal">{{ rl.template.label }}</span> &mdash; <span>{{ rl.template.code}}</span>
+        <span class="arabicNormal">{{ mi.template.label }}</span> &mdash; <span>{{ mi.template.code}}</span>
       </div>
     </template>
   </p-column>
   <p-column field="verbalNounsText" header="Verbal Nouns">
-    <template let-rl="rowData" pTemplate="body">
-      <div class="arabicNormal">{{ rl.verbalNounsText }}</div>
+    <template let-mi="rowData" pTemplate="body">
+      <div class="arabicNormal">{{ mi.verbalNounsText }}</div>
     </template>
   </p-column>
   <p-column field="translation" header="Translation">
-    <template let-rl="rowData" pTemplate="body">
-      <div style="font-size: 14px">{{ rl.translation }}</div>
+    <template let-mi="rowData" pTemplate="body">
+      <div style="font-size: 14px">{{ mi.translation }}</div>
+    </template>
+  </p-column>
+  <p-column styleClass="col-button" [style]="{'width': '50px'}">
+    <template let-mi="rowData" pTemplate="body">
+      <button type="button" pButton icon="fa-caret-down"></button>
     </template>
   </p-column>
 </p-dataTable>
