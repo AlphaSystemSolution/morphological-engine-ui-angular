@@ -1,9 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {
   ButtonModule,
+  ConfirmDialogModule,
+  ConfirmationService,
   DataTableModule,
   DialogModule,
   InputSwitchModule,
@@ -40,6 +42,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     ReactiveFormsModule,
     HttpModule,
     ButtonModule,
+    ConfirmDialogModule,
     DataTableModule,
     DialogModule,
     InputSwitchModule,
@@ -47,7 +50,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     SharedModule,
     appRoutes
   ],
-  providers: [ApplicationControllerService],
+  providers: [ApplicationControllerService, ConfirmationService],
   bootstrap: [AppComponent],
   exports: [
     MorphologicalChartComponent,
@@ -58,6 +61,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     HomeComponent,
     ExportConjugationComponent,
     ToolbarComponent
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
