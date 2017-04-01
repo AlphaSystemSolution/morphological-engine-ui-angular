@@ -220,6 +220,19 @@ export class MorphologicalInput {
   set id(id: string) {
     this._id = id;
   }
+
+  get verbalNounsText(): string {
+    let result = '';
+    if (this.verbalNouns && this.verbalNouns.length > 0) {
+      let verbalNoun = this.verbalNouns[0];
+      result += verbalNoun.label;
+      for (let i = 1; i < this.verbalNouns.length; i++) {
+        verbalNoun = this.verbalNouns[i];
+        result += ' و ' + verbalNoun.label;
+      }
+    }
+    return result;
+  }
 }
 
 export const defaultMorphologicalInput: MorphologicalInput = new MorphologicalInput(defaultRootLetters, defaultNamedTemplate, null,
