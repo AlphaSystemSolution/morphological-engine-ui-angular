@@ -1,14 +1,14 @@
 <app-toolbar (onAction)="performAction($event)"></app-toolbar>
 <div>&nbsp;</div>
 
-<p-dataTable [value]="data" [(selection)]="selectedRows" selectionMode="multiple" [responsive]="true" (onRowSelect)="selectRow($event)">
+<p-dataTable [value]="data" [(selection)]="selectedRows" selectionMode="multiple" [responsive]="true" [editable]="true" (onRowSelect)="selectRow($event)">
   <p-column [style]="&#123;'width':'38px'&#125;" selectionMode="multiple"></p-column>
   <p-column field="rootLetters" header="Root Letters" [style]="{'width': '200px'}">
     <template let-mi="rowData" pTemplate="body">
       <div class="arabicNormal">{{ mi.rootLetters.label }}</div>
     </template>
   </p-column>
-  <p-column field="template" header="Family" [style]="{'width': '350px'}">
+  <p-column field="template" header="Family" [style]="{'width': '350px'}" [editable]="true">
     <template let-mi="rowData" pTemplate="body">
       <div style="direction: rtl">
         <span class="arabicNormal">{{ mi.template.label }}</span> &mdash; <span>{{ mi.template.code}}</span>
@@ -25,11 +25,7 @@
       <div style="font-size: 14px">{{ mi.translation }}</div>
     </template>
   </p-column>
-  <p-column styleClass="col-button" [style]="{'width': '50px'}">
-    <template let-mi="rowData" pTemplate="body">
-      <button type="button" pButton icon="fa-caret-down"></button>
-    </template>
-  </p-column>
 </p-dataTable>
 
+<p-confirmDialog width="425"></p-confirmDialog>
 <app-morphological-input-form #form [(visible)]="displayDialog" (onHide)="hnadleHide($event)"></app-morphological-input-form>

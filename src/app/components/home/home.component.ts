@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ConfirmationService } from 'primeng/primeng';
 import { ApplicationControllerService } from '../../application-controller.service';
 import { MorphologicalInputFormComponent } from '../morphological-input-form/morphological-input-form.component';
 import { MorphologicalInputFormModel } from '../../shared/morphological-input-form-model';
@@ -18,7 +19,7 @@ export class HomeComponent implements OnInit {
   data: MorphologicalInput[] = [];
   selectedRows: MorphologicalInput[] = [];
 
-  constructor(public applicationController: ApplicationControllerService) {
+  constructor(private applicationController: ApplicationControllerService, private confirmationService: ConfirmationService) {
     this.data[0] = MorphologicalInputFormModel.createDefaultValue();
   }
 
@@ -38,6 +39,8 @@ export class HomeComponent implements OnInit {
       this.save(result);
     }
     this.displayDialog = false;
+    this.selectedRows = [];
+    this.selectedRow = null;
   }
 
   performAction(action) {
@@ -48,15 +51,46 @@ export class HomeComponent implements OnInit {
         this.newRow = true;
         break;
       case 'EDIT':
+        if (!this.selectedRow) {
+          break;
+        }
+        this.selectedRow = MorphologicalInputFormModel.cloneMorphologicalInput(this.selectedRow);
         this.form.model.mInput = this.selectedRow;
         this.newRow = false;
         this.displayDialog = true;
+        break;
+      case 'DUPLICATE':
+        if (!this.selectedRow) {
+          break;
+        }
+        this.displayDialog = true;
+        this.newRow = true;
+        this.form.model.mInput = this.selectedRow;
+        break;
+      case 'REMOVE':
+        if (!this.selectedRow) {
+          break;
+        }
+        this.confirmationService.confirm({
+          message: 'Do you want to remove this record?',
+          header: 'Remove Confirmation',
+          icon: 'fa fa-times',
+          accept: () => {
+            this.data.splice(this.findSelectedRowIndex(), 1);
+            this.selectedRows = [];
+            this.selectedRow = null;
+          },
+          reject: () => {
+            this.selectedRows = [];
+            this.selectedRow = null;
+          }
+        });
         break;
     }
   }
 
   selectRow(event) {
-    this.selectedRow = MorphologicalInputFormModel.cloneMorphologicalInput(event.data);
+    this.selectedRow = event.data;
   }
 
   private save(result: MorphologicalInput) {
