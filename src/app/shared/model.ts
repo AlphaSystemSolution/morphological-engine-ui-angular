@@ -207,6 +207,25 @@ export const defaultConjugationConfiguration: ConjugationConfiguration = new Con
 export class MorphologicalInput {
 
   private _id: string;
+
+  static copy(src: MorphologicalInput, copyId: boolean): MorphologicalInput {
+    if (!src) {
+      return null;
+    }
+    const srcRootLetters = src.rootLetters;
+    const rootLetters: RootLetters = new RootLetters(srcRootLetters.firstRadical, srcRootLetters.secondRadical,
+      srcRootLetters.thirdRadical, srcRootLetters.fourthRadical);
+    const srcConjugationConfiguration = src.conjugationConfiguration;
+    const conjugationConfiguration: ConjugationConfiguration = new ConjugationConfiguration(srcConjugationConfiguration.removePassiveLine,
+      srcConjugationConfiguration.skipRuleProcessing);
+    const result: MorphologicalInput = new MorphologicalInput(rootLetters, src.template, src.translation, conjugationConfiguration,
+      src.verbalNouns, null);
+    if (copyId) {
+      result.id = src.id;
+    }
+    return result;
+  }
+
   constructor(public rootLetters: RootLetters = defaultRootLetters, public template: NamedTemplate = defaultNamedTemplate,
     public translation: string, public conjugationConfiguration: ConjugationConfiguration = defaultConjugationConfiguration,
     public verbalNouns: VerbalNoun[] = [], public nounOfPlaceAndTimes: NounOfPlaceAndTime[] = []) {

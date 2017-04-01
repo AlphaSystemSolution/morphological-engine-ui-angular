@@ -22,21 +22,6 @@ export class MorphologicalInputFormModel {
     return new MorphologicalInput(rootLetters, namedTemplates[0], null, conjugationConfiguration, [], []);
   }
 
-  static cloneMorphologicalInput(src: MorphologicalInput): MorphologicalInput {
-    let result: MorphologicalInput = null;
-    if (src) {
-      const srcRootLetters = src.rootLetters;
-      const rootLetters: RootLetters = new RootLetters(srcRootLetters.firstRadical, srcRootLetters.secondRadical,
-        srcRootLetters.thirdRadical, srcRootLetters.fourthRadical);
-      const srcConjugationConfiguration = src.conjugationConfiguration;
-      const conjugationConfiguration: ConjugationConfiguration = new ConjugationConfiguration(srcConjugationConfiguration.removePassiveLine,
-        srcConjugationConfiguration.skipRuleProcessing);
-      result = new MorphologicalInput(rootLetters, src.template, src.translation, conjugationConfiguration, src.verbalNouns, null);
-      result.id = src.id;
-    }
-    return result;
-  }
-
   constructor() {
     this.mInput = MorphologicalInputFormModel.createDefaultValue();
   }
