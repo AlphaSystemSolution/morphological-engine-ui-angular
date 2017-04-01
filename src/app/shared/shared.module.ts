@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   InputTextModule,
-  InputSwitchModule,
   OverlayPanelModule,
   PanelModule,
   TemplateWrapper,
@@ -21,7 +20,6 @@ import { ToggleSelectorComponent } from './toggle-selector/toggle-selector.compo
     ReactiveFormsModule,
     CommonModule,
     InputTextModule,
-    InputSwitchModule,
     OverlayPanelModule,
     PanelModule,
     ToggleButtonModule

@@ -5,6 +5,8 @@ import { HttpModule } from '@angular/http';
 import {
   ButtonModule,
   DataTableModule,
+  DialogModule,
+  InputSwitchModule,
   ToolbarModule
 } from 'primeng/primeng';
 import { ApplicationControllerService } from './application-controller.service';
@@ -39,6 +41,8 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     HttpModule,
     ButtonModule,
     DataTableModule,
+    DialogModule,
+    InputSwitchModule,
     ToolbarModule,
     SharedModule,
     appRoutes
