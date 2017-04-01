@@ -1,26 +1,57 @@
+import { IdGenerator } from '../utils/IdGenerator';
+
 export class ArabicLabel {
   constructor(public name: string, public label: string, public code: string) { }
+
+  equals(other: ArabicLabel): boolean {
+    return (other !== null) && (other.name === this.name);
+  }
 }
 
-export class ArabicLetter implements ArabicLabel {
-  constructor(public name: string, public label: string, public code: string) { }
+export class ArabicLetter extends ArabicLabel {
+  constructor(public name: string, public label: string, public code: string) {
+    super(name, label, code);
+  }
 }
 
-export class NamedTemplate implements ArabicLabel {
-  constructor(public name: string, public label: string, public code: string) { }
+export class NamedTemplate extends ArabicLabel {
+  constructor(public name: string, public label: string, public code: string) {
+    super(name, label, code);
+  }
 }
 
-export class VerbalNoun implements ArabicLabel {
-  constructor(public name: string, public label: string, public code: string) { }
+export class VerbalNoun extends ArabicLabel {
+  constructor(public name: string, public label: string, public code: string) {
+    super(name, label, code);
+  }
 }
 
-export class NounOfPlaceAndTime implements ArabicLabel {
-  constructor(public name: string, public label: string, public code: string) { }
+export class NounOfPlaceAndTime extends ArabicLabel {
+  constructor(public name: string, public label: string, public code: string) {
+    super(name, label, code);
+  }
 }
 
 export class RootLetters {
   constructor(public firstRadical: ArabicLetter, public secondRadical: ArabicLetter, public thirdRadical: ArabicLetter,
     public fourthRadical: ArabicLetter) { }
+
+  get label(): string {
+    let label = this.firstRadical.label + this.secondRadical.label + this.thirdRadical.label;
+    if (this.fourthRadical !== null && this.fourthRadical.name !== 'TATWEEL') {
+      label += this.fourthRadical.label;
+    }
+    return label;
+  }
+
+  equals(other: RootLetters): boolean {
+    let result = (this.firstRadical.equals(other.firstRadical)) && (this.secondRadical.equals(other.secondRadical))
+      && (this.thirdRadical.equals(other.thirdRadical));
+    if (this.fourthRadical !== null) {
+      result = result && (this.fourthRadical.equals(other.fourthRadical));
+    }
+    return result;
+  }
 }
 
 export class ConjugationConfiguration {
@@ -174,9 +205,21 @@ export const defaultNamedTemplate: NamedTemplate = namedTemplates[0];
 export const defaultConjugationConfiguration: ConjugationConfiguration = new ConjugationConfiguration(false, false);
 
 export class MorphologicalInput {
+
+  private _id: string;
   constructor(public rootLetters: RootLetters = defaultRootLetters, public template: NamedTemplate = defaultNamedTemplate,
     public translation: string, public conjugationConfiguration: ConjugationConfiguration = defaultConjugationConfiguration,
-    public verbalNouns: VerbalNoun[] = [], public nounOfPlaceAndTimes: NounOfPlaceAndTime[] = []) { }
+    public verbalNouns: VerbalNoun[] = [], public nounOfPlaceAndTimes: NounOfPlaceAndTime[] = []) {
+    this._id = IdGenerator.nextId();
+  }
+
+  get id(): string {
+    return this._id;
+  }
+
+  set id(id: string) {
+    this._id = id;
+  }
 }
 
 export const defaultMorphologicalInput: MorphologicalInput = new MorphologicalInput(defaultRootLetters, defaultNamedTemplate, null,
