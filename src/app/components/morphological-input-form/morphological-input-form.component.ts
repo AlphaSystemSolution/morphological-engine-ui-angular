@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { MorphologicalInputFormModel } from '../../shared/morphological-input-form-model';
 import { ArabicKeyboardComponent } from '../../shared/arabic-keyboard/arabic-keyboard.component';
 import { ArabicDropdownComponent } from '../../shared/arabic-dropdown/arabic-dropdown.component';
@@ -17,18 +16,9 @@ export class MorphologicalInputFormComponent implements OnInit {
   private _model: MorphologicalInputFormModel;
   @Input() visible: boolean;
   @Output() onHide: EventEmitter<any> = new EventEmitter();
-  mode = 'ADD';
-  // morphological Input Selection (MIS) form
-  misForm: FormGroup;
 
-  constructor(fb: FormBuilder) {
+  constructor() {
     this._model = new MorphologicalInputFormModel();
-    this.misForm = fb.group({
-      'template': new FormControl(),
-      'translation': new FormControl(),
-      'removePassiveLine': new FormControl(),
-      'skipRuleProcessing': new FormControl()
-    });
   }
 
   ngOnInit() {
@@ -44,10 +34,6 @@ export class MorphologicalInputFormComponent implements OnInit {
 
   get namedTemplates(): NamedTemplate[] {
     return namedTemplates;
-  }
-
-  onSubmit(event) {
-    // TODO:
   }
 
   hideDialog(event, status: string) {
