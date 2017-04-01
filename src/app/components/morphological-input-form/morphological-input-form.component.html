@@ -3,95 +3,74 @@
   <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
     <!-- RootLetters row -->
     <div class="ui-grid-row">
-      <div class="ui-grid-col-2">
-        Select root letters:
-      </div>
-      <div class="ui-grid-col-8">
+      <div class="ui-grid-col-6"> Select root letters: </div>
+      <div class="ui-grid-col-6">&nbsp;</div>
+    </div>
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-10">
         <div class="arabicNormal" style="border:1px solid lightgray; text-align: center">{{ model.rootLettersText || '&nbsp;' }}</div>
       </div>
       <div class="ui-grid-col-2">
         <i class="fa fa-search" (click)="picker.show($event)" style="font-size:24px"></i>
       </div>
     </div>
-    <div class="ui-grid-row">
-      <div class="ui-grid-col-12">&nbsp;</div>
-    </div>
-    <div class="ui-grid-row">
-      <div class="ui-grid-col-12">&nbsp;</div>
-    </div>
 
     <!-- NamedTemplate row -->
     <div class="ui-grid-row">
-      <div class="ui-grid-col-2">
-        Select template:
-      </div>
-      <div class="ui-grid-col-8">
+      <div class="ui-grid-col-6"> Select template: </div>
+      <div class="ui-grid-col-6">&nbsp;</div>
+    </div>
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-12">
         <app-arabic-dropdown [options]="namedTemplates" [(ngModel)]="model.template" (onChange)="handleSelectTemplate($event)"></app-arabic-dropdown>
       </div>
-      <div class="ui-grid-col-2">&nbsp;</div>
-    </div>
-    <div class="ui-grid-row">
-      <div class="ui-grid-col-12">&nbsp;</div>
-    </div>
-    <div class="ui-grid-row">
-      <div class="ui-grid-col-12">&nbsp;</div>
     </div>
 
     <!-- translation row -->
     <div class="ui-grid-row">
-      <div class="ui-grid-col-2">
-        Translation:
-      </div>
-      <div class="ui-grid-col-8">
-        <input type="text" pInputText style="font-size: 18px; font-family: 'Candara'" [(ngModel)]="model.translation" size="60" />
-      </div>
-      <div class="ui-grid-col-2">&nbsp;</div>
+      <div class="ui-grid-col-6"> Translation: </div>
+      <div class="ui-grid-col-6">&nbsp;</div>
     </div>
     <div class="ui-grid-row">
-      <div class="ui-grid-col-12">&nbsp;</div>
-    </div>
-    <div class="ui-grid-row">
-      <div class="ui-grid-col-12">&nbsp;</div>
+      <div class="ui-grid-col-12">
+        <input type="text" pInputText style="font-size: 18px; font-family: 'Candara'" [(ngModel)]="model.translation" size="30" />
+      </div>
     </div>
 
     <div class="ui-grid-row">
-      <div class="ui-grid-col-2">
-        Verbal Noun(s):
-      </div>
-      <div class="ui-grid-col-8">
+      <div class="ui-grid-col-8"> Verbal Noun(s): </div>
+      <div class="ui-grid-col-4">&nbsp;</div>
+    </div>
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-10">
         <div class="arabicNormal" style="border:1px solid lightgray; text-align: center">{{ model.verbalNounsText || '&nbsp;' }}</div>
       </div>
       <div class="ui-grid-col-2">
         <i class="fa fa-search" (click)="verbalNounPicker.show($event)" style="font-size:24px"></i>
       </div>
     </div>
-    <div class="ui-grid-row">
-      <div class="ui-grid-col-12">&nbsp;</div>
-    </div>
-    <div class="ui-grid-row">
-      <div class="ui-grid-col-12">&nbsp;</div>
-    </div>
 
     <!-- ConjugationConfiguration row -->
     <div class="ui-grid-row">
-      <div class="ui-grid-col-2">
-        Remove passive line:
-      </div>
-      <div class="ui-grid-col-4">
+      <div class="ui-grid-col-6"> Remove passive line: </div>
+      <div class="ui-grid-col-6">&nbsp;</div>
+    </div>
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-6">
         <p-inputSwitch [(ngModel)]="model.removePassiveLine" onLabel="Yes" offLabel="No"></p-inputSwitch>
       </div>
-      <div class="ui-grid-col-2">
-        Skip rule processing:
-      </div>
-      <div class="ui-grid-col-4">
+      <div class="ui-grid-col-6">&nbsp;</div>
+    </div>
+
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-6"> Skip rule processing: </div>
+      <div class="ui-grid-col-6">&nbsp;</div>
+    </div>
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-6">
         <p-inputSwitch [(ngModel)]="model.skipRuleProcessing" onLabel="Yes" offLabel="No"></p-inputSwitch>
       </div>
-    </div>
-    <div class="ui-grid-row">
-      <div class="ui-grid-col-12">&nbsp;</div>
-    </div>
-    <div class="ui-grid-row">
-      <div class="ui-grid-col-12">&nbsp;</div>
+      <div class="ui-grid-col-6">&nbsp;</div>
     </div>
 
   </div>
