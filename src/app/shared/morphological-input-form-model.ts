@@ -37,23 +37,6 @@ export class MorphologicalInputFormModel {
     return result;
   }
 
-  private static toRootLettersString(rootLetters: RootLetters): string {
-    return rootLetters.firstRadical.label + rootLetters.secondRadical.label + rootLetters.thirdRadical.label;
-  }
-
-  private static toVerbalNounsString(verbalNouns: VerbalNoun[]): string {
-    let result = '';
-    if (verbalNouns && verbalNouns.length > 0) {
-      let verbalNoun = verbalNouns[0];
-      result += verbalNoun.label;
-      for (let i = 1; i < verbalNouns.length; i++) {
-        verbalNoun = verbalNouns[i];
-        result += ' و ' + verbalNoun.label;
-      }
-    }
-    return result;
-  }
-
   constructor() {
     this.mInput = MorphologicalInputFormModel.createDefaultValue();
   }
@@ -70,7 +53,7 @@ export class MorphologicalInputFormModel {
     }
 
     this._rootLetters = this.mInput.rootLetters;
-    this._rootLettersText = MorphologicalInputFormModel.toRootLettersString(this._rootLetters);
+    this._rootLettersText = this._rootLetters.label;
     this._template = this.mInput.template;
     this._translation = this.mInput.translation;
     this._verbalNouns = this.mInput.verbalNouns;
@@ -85,7 +68,7 @@ export class MorphologicalInputFormModel {
 
   set rootLetters(value: RootLetters) {
     this._rootLetters = value;
-    this.rootLettersText = MorphologicalInputFormModel.toRootLettersString(this._rootLetters);
+    this.rootLettersText = this._rootLetters.label;
     if (this.mInput) {
       this.mInput.rootLetters = this._rootLetters;
     }
@@ -127,9 +110,9 @@ export class MorphologicalInputFormModel {
 
   set verbalNouns(values: VerbalNoun[]) {
     this._verbalNouns = values;
-    this.verbalNounsText = MorphologicalInputFormModel.toVerbalNounsString(this.verbalNouns);
     if (this.mInput) {
       this.mInput.verbalNouns = values;
+      this.verbalNounsText = this.mInput.verbalNounsText;
     }
   }
 
