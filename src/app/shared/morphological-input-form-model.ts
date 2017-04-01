@@ -16,10 +16,25 @@ export class MorphologicalInputFormModel {
   private _verbalNouns: VerbalNoun[];
   private _verbalNounsText: string;
 
-  private static createDefaultValue(): MorphologicalInput {
+  static createDefaultValue(): MorphologicalInput {
     const rootLetters: RootLetters = new RootLetters(arabicLetters[19], arabicLetters[17], arabicLetters[22], arabicLetters[28]);
     const conjugationConfiguration: ConjugationConfiguration = new ConjugationConfiguration(false, false);
     return new MorphologicalInput(rootLetters, namedTemplates[0], null, conjugationConfiguration, [], []);
+  }
+
+  static cloneMorphologicalInput(src: MorphologicalInput): MorphologicalInput {
+    let result: MorphologicalInput = null;
+    if (src) {
+      const srcRootLetters = src.rootLetters;
+      const rootLetters: RootLetters = new RootLetters(srcRootLetters.firstRadical, srcRootLetters.secondRadical,
+        srcRootLetters.thirdRadical, srcRootLetters.fourthRadical);
+      const srcConjugationConfiguration = src.conjugationConfiguration;
+      const conjugationConfiguration: ConjugationConfiguration = new ConjugationConfiguration(srcConjugationConfiguration.removePassiveLine,
+        srcConjugationConfiguration.skipRuleProcessing);
+      result = new MorphologicalInput(rootLetters, src.template, src.translation, conjugationConfiguration, src.verbalNouns, null);
+      result.id = src.id;
+    }
+    return result;
   }
 
   private static toRootLettersString(rootLetters: RootLetters): string {
