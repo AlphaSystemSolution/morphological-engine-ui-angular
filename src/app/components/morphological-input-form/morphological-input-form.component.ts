@@ -1,10 +1,10 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { MorphologicalInputFormModel } from '../../shared/morphological-input-form-model';
 import { ArabicKeyboardComponent } from '../../shared/arabic-keyboard/arabic-keyboard.component';
 import { ArabicDropdownComponent } from '../../shared/arabic-dropdown/arabic-dropdown.component';
 import { VerbalNounPickerComponent } from '../../shared/verbal-noun-picker/verbal-noun-picker.component';
-import { NamedTemplate, namedTemplates } from '../../shared/model';
+import { NamedTemplate, MorphologicalInput, namedTemplates } from '../../shared/model';
 
 @Component({
   selector: 'app-morphological-input-form',
@@ -15,6 +15,8 @@ export class MorphologicalInputFormComponent implements OnInit {
 
   @ViewChild('verbalNounPicker') verbalNounPicker: VerbalNounPickerComponent;
   private _model: MorphologicalInputFormModel;
+  @Input() visible: boolean;
+  @Output() onHide: EventEmitter<any> = new EventEmitter();
   mode = 'ADD';
   // morphological Input Selection (MIS) form
   misForm: FormGroup;
@@ -22,10 +24,8 @@ export class MorphologicalInputFormComponent implements OnInit {
   constructor(fb: FormBuilder) {
     this._model = new MorphologicalInputFormModel();
     this.misForm = fb.group({
-      'rootLettersText': new FormControl(),
       'template': new FormControl(),
       'translation': new FormControl(),
-      'verbalNouns': new FormControl(),
       'removePassiveLine': new FormControl(),
       'skipRuleProcessing': new FormControl()
     });
@@ -34,7 +34,7 @@ export class MorphologicalInputFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  @Input() get model(): MorphologicalInputFormModel {
+  get model(): MorphologicalInputFormModel {
     return this._model;
   }
 
@@ -48,6 +48,21 @@ export class MorphologicalInputFormComponent implements OnInit {
 
   onSubmit(event) {
     // TODO:
+  }
+
+  hideDialog(event, status: string) {
+    let _result: MorphologicalInput;
+    this.visible = false;
+    switch (status) {
+      case 'submit':
+        _result = this.model.mInput;
+        break;
+      case 'cancel':
+        _result = null;
+        break;
+    }
+    this._model = new MorphologicalInputFormModel();
+    this.onHide.emit({ 'originalEvent': event, 'status': status, 'result': _result });
   }
 
   handleClose(event) {

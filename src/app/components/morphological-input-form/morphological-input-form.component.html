@@ -1,99 +1,109 @@
-<div>
+<p-dialog header="Add / Update Morphological Chart Input" [(visible)]="visible" [responsive]="true" showEffect="fade" [modal]="true"
+   [closable]="false">
   <form [formGroup]="misForm">
-    <p-panel header="Select Root Letters &amp; Template" [toggleable]="true">
-      <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
-        <!-- RootLetters row -->
-        <div class="ui-grid-row">
-          <div class="ui-grid-col-2">
-            Select root letters:
-          </div>
-          <div class="ui-grid-col-4">
-            <input type="text" pInputText class="arabicNormal" [formControl]="misForm.get('rootLettersText')" [(ngModel)]="model.rootLettersText"
-              readonly/>
-          </div>
-          <div class="ui-grid-col-3">
-            <i class="fa fa-search" (click)="picker.show($event)" style="font-size:24px"></i>
-          </div>
-          <div class="ui-grid-col-3">&nbsp;</div>
+    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+      <!-- RootLetters row -->
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2">
+          Select root letters:
         </div>
-        <div class="ui-grid-row">
-          <div class="ui-grid-col-12">&nbsp;</div>
+        <div class="ui-grid-col-8">
+          <div class="arabicNormal" style="border:1px solid lightgray; text-align: center">{{ model.rootLettersText || '&nbsp;' }}</div>
         </div>
-
-        <!-- NamedTemplate row -->
-        <div class="ui-grid-row">
-          <div class="ui-grid-col-2">
-            Select template:
-          </div>
-          <div class="ui-grid-col-5">
-            <app-arabic-dropdown [options]="namedTemplates" [formControl]="misForm.get('template')" [(ngModel)]="model.template" (onChange)="handleSelectTemplate($event)"></app-arabic-dropdown>
-          </div>
-          <div class="ui-grid-col-5">&nbsp;</div>
-        </div>
-        <div class="ui-grid-row">
-          <div class="ui-grid-col-12">&nbsp;</div>
-        </div>
-
-        <!-- translation row -->
-        <div class="ui-grid-row">
-          <div class="ui-grid-col-2">
-            Translation:
-          </div>
-          <div class="ui-grid-col-5">
-            <input type="text" pInputText [formControl]="misForm.get('translation')" [(ngModel)]="model.translation" />
-          </div>
-          <div class="ui-grid-col-5">&nbsp;</div>
-        </div>
-        <div class="ui-grid-row">
-          <div class="ui-grid-col-12">&nbsp;</div>
-        </div>
-
-        <div class="ui-grid-row">
-          <div class="ui-grid-col-2">
-            Verbal Noun(s):
-          </div>
-          <div class="ui-grid-col-4">
-            <input type="text" pInputText class="arabicNormal" [formControl]="misForm.get('verbalNouns')" [(ngModel)]="model.verbalNounsText"
-              readonly/>
-          </div>
-          <div class="ui-grid-col-3">
-            <i class="fa fa-search" (click)="verbalNounPicker.show($event)" style="font-size:24px"></i>
-          </div>
-          <div class="ui-grid-col-3">&nbsp;</div>
-        </div>
-
-        <!-- ConjugationConfiguration row -->
-        <div class="ui-grid-row">
-          <div class="ui-grid-col-2">
-            Remove passive line:
-          </div>
-          <div class="ui-grid-col-2">
-            <p-inputSwitch [formControl]="misForm.get('removePassiveLine')" [(ngModel)]="model.removePassiveLine" onLabel="Yes" offLabel="No"></p-inputSwitch>
-          </div>
-          <div class="ui-grid-col-2">
-            Skip rule processing:
-          </div>
-          <div class="ui-grid-col-2">
-            <p-inputSwitch [formControl]="misForm.get('skipRuleProcessing')" [(ngModel)]="model.skipRuleProcessing" onLabel="Yes" offLabel="No"></p-inputSwitch>
-          </div>
-          <div class="ui-grid-col-4">&nbsp;</div>
-        </div>
-        <div class="ui-grid-row">
-          <div class="ui-grid-col-12">&nbsp;</div>
-        </div>
-
-        <div class="ui-grid-row">
-          <div class="ui-grid-col-2">&nbsp;</div>
-          <div class="ui-grid-col-4">
-            <button pButton type="button" label="Add / Update" [disabled]="!misForm.valid"></button>
-          </div>
-          <div class="ui-grid-col-4">&nbsp;</div>
-          <div class="ui-grid-col-2">&nbsp;</div>
+        <div class="ui-grid-col-2">
+          <i class="fa fa-search" (click)="picker.show($event)" style="font-size:24px"></i>
         </div>
       </div>
-    </p-panel>
-  </form>
-</div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-12">&nbsp;</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-12">&nbsp;</div>
+      </div>
 
+      <!-- NamedTemplate row -->
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2">
+          Select template:
+        </div>
+        <div class="ui-grid-col-8">
+          <app-arabic-dropdown [options]="namedTemplates" [formControl]="misForm.get('template')" [(ngModel)]="model.template" (onChange)="handleSelectTemplate($event)"></app-arabic-dropdown>
+        </div>
+        <div class="ui-grid-col-2">&nbsp;</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-12">&nbsp;</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-12">&nbsp;</div>
+      </div>
+
+      <!-- translation row -->
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2">
+          Translation:
+        </div>
+        <div class="ui-grid-col-8">
+          <input type="text" pInputText style="font-size: 18px; font-family: 'Candara'" [formControl]="misForm.get('translation')"
+            [(ngModel)]="model.translation" size="60" />
+        </div>
+        <div class="ui-grid-col-2">&nbsp;</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-12">&nbsp;</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-12">&nbsp;</div>
+      </div>
+
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2">
+          Verbal Noun(s):
+        </div>
+        <div class="ui-grid-col-8">
+          <div class="arabicNormal" style="border:1px solid lightgray; text-align: center">{{ model.verbalNounsText || '&nbsp;' }}</div>
+        </div>
+        <div class="ui-grid-col-2">
+          <i class="fa fa-search" (click)="verbalNounPicker.show($event)" style="font-size:24px"></i>
+        </div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-12">&nbsp;</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-12">&nbsp;</div>
+      </div>
+
+      <!-- ConjugationConfiguration row -->
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2">
+          Remove passive line:
+        </div>
+        <div class="ui-grid-col-4">
+          <p-inputSwitch [formControl]="misForm.get('removePassiveLine')" [(ngModel)]="model.removePassiveLine" onLabel="Yes" offLabel="No"></p-inputSwitch>
+        </div>
+        <div class="ui-grid-col-2">
+          Skip rule processing:
+        </div>
+        <div class="ui-grid-col-4">
+          <p-inputSwitch [formControl]="misForm.get('skipRuleProcessing')" [(ngModel)]="model.skipRuleProcessing" onLabel="Yes" offLabel="No"></p-inputSwitch>
+        </div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-12">&nbsp;</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-12">&nbsp;</div>
+      </div>
+
+    </div>
+    <p-footer>
+      <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+        <button pButton type="button" label="Add / Update" (click)="hideDialog($event, 'submit')"></button>
+        <button pButton type="button" label="Cancel" (click)="hideDialog($event, 'cancel')"></button>
+      </div>
+    </p-footer>
+  </form>
+</p-dialog>
 <app-arabic-keyboard #picker [rootLetters]="model.rootLetters" (onClose)="handleClose($event)"></app-arabic-keyboard>
 <app-verbal-noun-picker #verbalNounPicker (onSelect)="updateVerbalNoun($event)"></app-verbal-noun-picker>
