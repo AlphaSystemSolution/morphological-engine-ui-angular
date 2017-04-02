@@ -19,6 +19,7 @@ import {
 export class DetailConjugationComponent implements OnInit {
 
   @Input() detailedConjugation: DetailedConjugation;
+  @Input() title: string;
   show: boolean;
   pastTense: VerbConjugationGroup;
   presentTense: VerbConjugationGroup;

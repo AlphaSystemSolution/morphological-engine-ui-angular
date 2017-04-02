@@ -9,6 +9,7 @@ import {
   DataTableModule,
   DialogModule,
   InputSwitchModule,
+  PanelModule,
   SplitButtonModule,
   ToolbarModule
 } from 'primeng/primeng';
@@ -51,6 +52,7 @@ import { NounConjugationComponent } from './components/detail-conjugation/noun-c
     DataTableModule,
     DialogModule,
     InputSwitchModule,
+    PanelModule,
     SplitButtonModule,
     ToolbarModule,
     SharedModule,

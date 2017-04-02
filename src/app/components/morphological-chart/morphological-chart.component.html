@@ -3,5 +3,5 @@
 </div>
 <div *ngFor="let morphologicalChart of morphologicalCharts | async">
   <app-abbreviated-conjugation [abbreviatedConjugation]="morphologicalChart.abbreviatedConjugation"></app-abbreviated-conjugation>
-  <app-detail-conjugation [detailedConjugation]="morphologicalChart.detailedConjugation"></app-detail-conjugation>
+  <app-detail-conjugation [detailedConjugation]="morphologicalChart.detailedConjugation" [title]="morphologicalChart.abbreviatedConjugation.conjugationHeader.title"></app-detail-conjugation>
 </div>
