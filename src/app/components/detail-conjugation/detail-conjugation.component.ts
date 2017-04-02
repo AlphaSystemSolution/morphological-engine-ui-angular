@@ -20,6 +20,12 @@ export class DetailConjugationComponent implements OnInit {
 
   @Input() detailedConjugation: DetailedConjugation;
   show: boolean;
+  pastTense: VerbConjugationGroup;
+  presentTense: VerbConjugationGroup;
+  pastPassiveTense: VerbConjugationGroup;
+  presentPassiveTense: VerbConjugationGroup;
+  imperative: VerbConjugationGroup;
+  forbidding: VerbConjugationGroup;
   groups: SimpleDetailedConjugationGroup[] = [];
 
   constructor() { }
@@ -27,6 +33,15 @@ export class DetailConjugationComponent implements OnInit {
   ngOnInit() {
     this.show = this.detailedConjugation !== null;
     if (this.show) {
+      this.pastTense = this.detailedConjugation.activeTensePair.rightSideConjugations;
+      this.presentTense = this.detailedConjugation.activeTensePair.leftSideConjugations;
+
+      this.pastPassiveTense = this.detailedConjugation.passiveTensePair.rightSideConjugations;
+      this.presentPassiveTense = this.detailedConjugation.passiveTensePair.leftSideConjugations;
+
+      this.imperative = this.detailedConjugation.imperativeAndForbiddingPair.rightSideConjugations;
+      this.forbidding = this.detailedConjugation.imperativeAndForbiddingPair.leftSideConjugations;
+
       let index = 0;
       this.groups[index++] = this.createVerbGroup(this.detailedConjugation.activeTensePair);
       this.groups[index++] = this.createNounGroup(this.detailedConjugation.activeParticiplePair);

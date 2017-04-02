@@ -1,5 +1,11 @@
 <div style="overflow-x: auto" *ngIf="show">
-  <table class="morphological-chart">
+  <app-verb-conjugation [group]="pastTense"></app-verb-conjugation>
+  <app-verb-conjugation [group]="presentTense"></app-verb-conjugation>
+  <app-verb-conjugation [group]="pastPassiveTense"></app-verb-conjugation>
+  <app-verb-conjugation [group]="presentPassiveTense"></app-verb-conjugation>
+  <app-verb-conjugation [group]="imperative"></app-verb-conjugation>
+  <app-verb-conjugation [group]="forbidding"></app-verb-conjugation>
+  <!--table class="morphological-chart">
     <template ngFor let-group [ngForOf]="groups">
       <tr>
         <td [class]="group.leftSideClass" style="width: 49.5%" colspan="3">
@@ -31,5 +37,5 @@
         <td style="width: 49.5%" colspan="3">&nbsp;</td>
       </tr>
     </template>
-  </table>
+  </table-->
 </div>
