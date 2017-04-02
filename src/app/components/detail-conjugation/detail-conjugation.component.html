@@ -3,10 +3,18 @@
   <app-verb-conjugation [group]="presentTense"></app-verb-conjugation>
   <app-noun-conjugation [group]="masculineActiveParticiple"></app-noun-conjugation>
   <app-noun-conjugation [group]="feminineActiveParticiple"></app-noun-conjugation>
-  <app-verb-conjugation [group]="pastPassiveTense"></app-verb-conjugation>
-  <app-verb-conjugation [group]="presentPassiveTense"></app-verb-conjugation>
-  <app-noun-conjugation [group]="masculinePassiveParticiple"></app-noun-conjugation>
-  <app-noun-conjugation [group]="femininePassiveParticiple"></app-noun-conjugation>
+  <template [ngIf]="pastPassiveTense">
+    <app-verb-conjugation [group]="pastPassiveTense"></app-verb-conjugation>
+  </template>
+  <template [ngIf]="presentPassiveTense">
+    <app-verb-conjugation [group]="presentPassiveTense"></app-verb-conjugation>
+  </template>
+  <template [ngIf]="masculinePassiveParticiple">
+    <app-noun-conjugation [group]="masculinePassiveParticiple"></app-noun-conjugation>
+  </template>
+  <template [ngIf]="presentPassiveTense">
+    <app-noun-conjugation [group]="femininePassiveParticiple"></app-noun-conjugation>
+  </template>
   <app-verb-conjugation [group]="imperative"></app-verb-conjugation>
   <app-verb-conjugation [group]="forbidding"></app-verb-conjugation>
   <!--table class="morphological-chart">

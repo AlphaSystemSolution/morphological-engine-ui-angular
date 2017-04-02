@@ -43,11 +43,17 @@ export class DetailConjugationComponent implements OnInit {
       this.masculineActiveParticiple = this.detailedConjugation.activeParticiplePair.rightSideConjugations;
       this.feminineActiveParticiple = this.detailedConjugation.activeParticiplePair.leftSideConjugations;
 
-      this.pastPassiveTense = this.detailedConjugation.passiveTensePair.rightSideConjugations;
-      this.presentPassiveTense = this.detailedConjugation.passiveTensePair.leftSideConjugations;
+      const passiveTensePair = this.detailedConjugation.passiveTensePair;
+      if (passiveTensePair) {
+        this.pastPassiveTense = passiveTensePair.rightSideConjugations;
+        this.presentPassiveTense = passiveTensePair.leftSideConjugations;
+      }
 
-      this.masculinePassiveParticiple = this.detailedConjugation.passiveParticiplePair.rightSideConjugations;
-      this.femininePassiveParticiple = this.detailedConjugation.passiveParticiplePair.leftSideConjugations;
+      const passiveParticiplePair = this.detailedConjugation.passiveParticiplePair;
+      if (passiveParticiplePair) {
+        this.masculinePassiveParticiple = passiveParticiplePair.rightSideConjugations;
+        this.femininePassiveParticiple = passiveParticiplePair.leftSideConjugations;
+      }
 
       this.imperative = this.detailedConjugation.imperativeAndForbiddingPair.rightSideConjugations;
       this.forbidding = this.detailedConjugation.imperativeAndForbiddingPair.leftSideConjugations;
