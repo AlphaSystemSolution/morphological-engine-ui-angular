@@ -58,6 +58,19 @@ export class ConjugationConfiguration {
   constructor(public removePassiveLine: boolean, public skipRuleProcessing: boolean) { }
 }
 
+export class NounStatus extends ArabicLabel {
+
+  static NOMINATIVE: NounStatus = new NounStatus('NOMINATIVE', 'مرفوع', 'Nominative');
+  static ACCUSATIVE: NounStatus = new NounStatus('ACCUSATIVE', 'منصوب', 'Accusative');
+  static GENITIVE: NounStatus = new NounStatus('GENITIVE', 'مجرور', 'Genitive');
+
+  static VALUES: NumberType[] = [NounStatus.NOMINATIVE, NounStatus.ACCUSATIVE, NounStatus.GENITIVE];
+
+  constructor(public name: string, public label: string, public code: string) {
+    super(name, label, code);
+  }
+}
+
 export class NumberType extends ArabicLabel {
 
   static SINGULAR: NumberType = new NumberType('SINGULAR', 'مفرد', 'Singular');
