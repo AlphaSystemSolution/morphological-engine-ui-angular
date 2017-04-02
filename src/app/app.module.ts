@@ -25,6 +25,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ExportConjugationComponent } from './components/export-conjugation/export-conjugation.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { VerbConjugationComponent } from './components/detail-conjugation/verb-conjugation/verb-conjugation.component';
+import { NounConjugationComponent } from './components/detail-conjugation/noun-conjugation/noun-conjugation.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { VerbConjugationComponent } from './components/detail-conjugation/verb-c
     HomeComponent,
     ExportConjugationComponent,
     ToolbarComponent,
-    VerbConjugationComponent
+    VerbConjugationComponent,
+    NounConjugationComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,8 @@ import { VerbConjugationComponent } from './components/detail-conjugation/verb-c
     HomeComponent,
     ExportConjugationComponent,
     ToolbarComponent,
-    VerbConjugationComponent
+    VerbConjugationComponent,
+    NounConjugationComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
