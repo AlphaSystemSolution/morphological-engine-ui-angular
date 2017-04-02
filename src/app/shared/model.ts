@@ -9,6 +9,36 @@ export class ArabicLabel {
 }
 
 export class ArabicLetter extends ArabicLabel {
+  static HAMZA = new ArabicLetter('HAMZA', 'ء', '\'');
+  static BA = new ArabicLetter('BA', 'ب', 'b');
+  static TA = new ArabicLetter('TA', 'ت', 't');
+  static THA = new ArabicLetter('THA', 'ث', 'v');
+  static JEEM = new ArabicLetter('JEEM', 'ج', 'j');
+  static HHA = new ArabicLetter('HHA', 'ح', 'H');
+  static KHA = new ArabicLetter('KHA', 'خ', 'x');
+  static DAL = new ArabicLetter('DAL', 'د', 'd');
+  static THAL = new ArabicLetter('THAL', 'ذ', '*');
+  static RA = new ArabicLetter('RA', 'ر', 'r');
+  static ZAIN = new ArabicLetter('ZAIN', 'ز', 'z');
+  static SEEN = new ArabicLetter('SEEN', 'س', 's');
+  static SHEEN = new ArabicLetter('SHEEN', 'ش', '$');
+  static SAD = new ArabicLetter('SAD', 'ص', 'S');
+  static DDAD = new ArabicLetter('DDAD', 'ض', 'D');
+  static TTA = new ArabicLetter('TTA', 'ط', 'T');
+  static DTHA = new ArabicLetter('DTHA', 'ظ', 'Z');
+  static AIN = new ArabicLetter('AIN', 'ع', 'E');
+  static GHAIN = new ArabicLetter('GHAIN', 'غ', 'g');
+  static FA = new ArabicLetter('FA', 'ف', 'f');
+  static QAF = new ArabicLetter('QAF', 'ق', 'q');
+  static KAF = new ArabicLetter('KAF', 'ك', 'k');
+  static LAM = new ArabicLetter('LAM', 'ل', 'l');
+  static MEEM = new ArabicLetter('MEEM', 'م', 'm');
+  static NOON = new ArabicLetter('NOON', 'ن', 'n');
+  static HA = new ArabicLetter('HA', 'ه', 'h');
+  static WAW = new ArabicLetter('WAW', 'و', 'w');
+  static YA = new ArabicLetter('YA', 'ي', 'y');
+  static TATWEEL = new ArabicLetter('TATWEEL', 'ـ', '_');
+
   constructor(public name: string, public label: string, public code: string) {
     super(name, label, code);
   }
@@ -102,35 +132,35 @@ export enum DisplayType {
 }
 
 export const arabicLetters: ArabicLetter[] = [
-  new ArabicLetter('HAMZA', 'ء', '\''), // 0
-  new ArabicLetter('BA', 'ب', 'b'), // 1
-  new ArabicLetter('TA', 'ت', 't'), // 2
-  new ArabicLetter('THA', 'ث', 'v'), // 3
-  new ArabicLetter('JEEM', 'ج', 'j'), // 4
-  new ArabicLetter('HHA', 'ح', 'H'), // 5
-  new ArabicLetter('KHA', 'خ', 'x'), // 6
-  new ArabicLetter('DAL', 'د', 'd'), // 7
-  new ArabicLetter('THAL', 'ذ', '*'), // 8
-  new ArabicLetter('RA', 'ر', 'r'), // 9
-  new ArabicLetter('ZAIN', 'ز', 'z'), // 10
-  new ArabicLetter('SEEN', 'س', 's'), // 11
-  new ArabicLetter('SHEEN', 'ش', '$'), // 12
-  new ArabicLetter('SAD', 'ص', 'S'), // 13
-  new ArabicLetter('DDAD', 'ض', 'D'), // 14
-  new ArabicLetter('TTA', 'ط', 'T'), // 15
-  new ArabicLetter('DTHA', 'ظ', 'Z'), // 16
-  new ArabicLetter('AIN', 'ع', 'E'), // 17
-  new ArabicLetter('GHAIN', 'غ', 'g'), // 18
-  new ArabicLetter('FA', 'ف', 'f'), // 19
-  new ArabicLetter('QAF', 'ق', 'q'), // 20
-  new ArabicLetter('KAF', 'ك', 'k'), // 21
-  new ArabicLetter('LAM', 'ل', 'l'), // 22
-  new ArabicLetter('MEEM', 'م', 'm'), // 23
-  new ArabicLetter('NOON', 'ن', 'n'), // 24
-  new ArabicLetter('HA', 'ه', 'h'), // 25
-  new ArabicLetter('WAW', 'و', 'w'), // 26
-  new ArabicLetter('YA', 'ي', 'y'), // 27
-  new ArabicLetter('TATWEEL', 'ـ', '_') // 28
+  ArabicLetter.HAMZA, // 0
+  ArabicLetter.BA, // 1
+  ArabicLetter.TA, // 2
+  ArabicLetter.THA, // 3
+  ArabicLetter.JEEM, // 4
+  ArabicLetter.HHA, // 5
+  ArabicLetter.KHA, // 6
+  ArabicLetter.DAL, // 7
+  ArabicLetter.THAL, // 8
+  ArabicLetter.RA, // 9
+  ArabicLetter.ZAIN, // 10
+  ArabicLetter.SEEN, // 11
+  ArabicLetter.SHEEN, // 12
+  ArabicLetter.SAD, // 13
+  ArabicLetter.DDAD, // 14
+  ArabicLetter.TTA, // 15
+  ArabicLetter.DTHA, // 16
+  ArabicLetter.AIN, // 17
+  ArabicLetter.GHAIN, // 18
+  ArabicLetter.FA, // 19
+  ArabicLetter.QAF, // 20
+  ArabicLetter.KAF, // 21
+  ArabicLetter.LAM, // 22
+  ArabicLetter.MEEM, // 23
+  ArabicLetter.NOON, // 24
+  ArabicLetter.HA, // 25
+  ArabicLetter.WAW, // 26
+  ArabicLetter.YA, // 27
+  ArabicLetter.TATWEEL, // 28
 ];
 
 export const namedTemplates: NamedTemplate[] = [
@@ -295,3 +325,10 @@ export class MorphologicalInput {
 
 export const defaultMorphologicalInput: MorphologicalInput = new MorphologicalInput(defaultRootLetters, defaultNamedTemplate, null,
   defaultConjugationConfiguration, [], []);
+
+export class ArabicConstants {
+  static PARTICIPLE_PREFIX = new ArabicLabel('PARTICIPLE_PREFIX', 'فهو', 'Participle prefix');
+  static IMPERATIVE_PREFIX = new ArabicLabel('IMPERATIVE_PREFIX', 'الأمر منه', 'Imperative prefix');
+  static FORBIDDING_PREFIX = new ArabicLabel('FORBIDDING_PREFIX', 'ونهي عنه', 'Forbidding prefix');
+  static ADVERBS_PREFIX = new ArabicLabel('ADVERBS_PREFIX', 'والظرف منه', 'Adverbs prefix');
+}
