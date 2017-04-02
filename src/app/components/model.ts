@@ -1,3 +1,4 @@
+import { ConversationType } from '../shared/model';
 export class SarfTermType {
 
   static getByName(name: string): SarfTermType {
@@ -47,7 +48,16 @@ export class SarfTermType {
 }
 
 export class ConjugationTuple {
+  private _type: string;
   constructor(public singular: string, public dual: string, public plural: string) { }
+
+  get type(): string {
+    return this._type;
+  }
+
+  set type(value: string) {
+    this._type = value;
+  }
 }
 
 export interface ConjugationGroup {
