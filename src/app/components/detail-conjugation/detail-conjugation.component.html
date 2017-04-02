@@ -1,8 +1,12 @@
 <div style="overflow-x: auto" *ngIf="show">
   <app-verb-conjugation [group]="pastTense"></app-verb-conjugation>
   <app-verb-conjugation [group]="presentTense"></app-verb-conjugation>
+  <app-noun-conjugation [group]="masculineActiveParticiple"></app-noun-conjugation>
+  <app-noun-conjugation [group]="feminineActiveParticiple"></app-noun-conjugation>
   <app-verb-conjugation [group]="pastPassiveTense"></app-verb-conjugation>
   <app-verb-conjugation [group]="presentPassiveTense"></app-verb-conjugation>
+  <app-noun-conjugation [group]="masculinePassiveParticiple"></app-noun-conjugation>
+  <app-noun-conjugation [group]="femininePassiveParticiple"></app-noun-conjugation>
   <app-verb-conjugation [group]="imperative"></app-verb-conjugation>
   <app-verb-conjugation [group]="forbidding"></app-verb-conjugation>
   <!--table class="morphological-chart">

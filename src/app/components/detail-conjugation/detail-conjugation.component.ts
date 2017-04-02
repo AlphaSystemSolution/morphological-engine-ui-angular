@@ -22,8 +22,12 @@ export class DetailConjugationComponent implements OnInit {
   show: boolean;
   pastTense: VerbConjugationGroup;
   presentTense: VerbConjugationGroup;
+  masculineActiveParticiple: NounConjugationGroup;
+  feminineActiveParticiple: NounConjugationGroup;
   pastPassiveTense: VerbConjugationGroup;
   presentPassiveTense: VerbConjugationGroup;
+  masculinePassiveParticiple: NounConjugationGroup;
+  femininePassiveParticiple: NounConjugationGroup;
   imperative: VerbConjugationGroup;
   forbidding: VerbConjugationGroup;
   groups: SimpleDetailedConjugationGroup[] = [];
@@ -36,8 +40,14 @@ export class DetailConjugationComponent implements OnInit {
       this.pastTense = this.detailedConjugation.activeTensePair.rightSideConjugations;
       this.presentTense = this.detailedConjugation.activeTensePair.leftSideConjugations;
 
+      this.masculineActiveParticiple = this.detailedConjugation.activeParticiplePair.rightSideConjugations;
+      this.feminineActiveParticiple = this.detailedConjugation.activeParticiplePair.leftSideConjugations;
+
       this.pastPassiveTense = this.detailedConjugation.passiveTensePair.rightSideConjugations;
       this.presentPassiveTense = this.detailedConjugation.passiveTensePair.leftSideConjugations;
+
+      this.masculinePassiveParticiple = this.detailedConjugation.passiveParticiplePair.rightSideConjugations;
+      this.femininePassiveParticiple = this.detailedConjugation.passiveParticiplePair.leftSideConjugations;
 
       this.imperative = this.detailedConjugation.imperativeAndForbiddingPair.rightSideConjugations;
       this.forbidding = this.detailedConjugation.imperativeAndForbiddingPair.leftSideConjugations;

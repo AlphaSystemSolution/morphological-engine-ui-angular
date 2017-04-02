@@ -12,7 +12,7 @@ export class VerbConjugationComponent implements OnInit {
   @Input() group: VerbConjugationGroup;
   termType: string;
   values: ConjugationTuple[] = [];
-  numbers: ArabicLabel[] = [];
+  numbers: NumberType[] = [];
   constructor() { }
 
   ngOnInit() {
