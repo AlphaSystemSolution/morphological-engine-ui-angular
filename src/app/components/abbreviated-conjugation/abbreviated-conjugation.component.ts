@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ArabicConstants, ArabicLetter } from '../../shared/model';
 import {
   ActiveLine,
   AdverbLine,
@@ -26,10 +27,8 @@ export class AbbreviatedConjugationComponent implements OnInit {
   typeLabel1: string;
   typeLabel2: string;
   typeLabel3: string;
-  activeLine: string[] = [];
-  passiveLine: string[] = [];
-  imperativeAndForbiddingLine: string[] = [];
-  adverbLine: string[] = [];
+  abbreviatedConjugationText: string;
+
   constructor() { }
 
   ngOnInit() {
@@ -45,31 +44,31 @@ export class AbbreviatedConjugationComponent implements OnInit {
       }
 
       const activeLine = this.abbreviatedConjugation.activeLine;
-      this.showActive = activeLine !== null;
-      if (this.showActive) {
-        this.activeLine[0] = activeLine.activeParticipleValue;
-        this.activeLine[1] = activeLine.verbalNoun;
-        this.activeLine[2] = activeLine.presentTense;
-        this.activeLine[3] = activeLine.pastTense;
+      this.abbreviatedConjugationText = activeLine.pastTense + ' ' + activeLine.presentTense;
+
+      const verbalNoun = activeLine.verbalNoun;
+      if (verbalNoun) {
+        this.abbreviatedConjugationText += ' ' + activeLine.verbalNoun;
       }
+      this.abbreviatedConjugationText += ' ' + activeLine.activeParticipleValue;
+
       const passiveLine = this.abbreviatedConjugation.passiveLine;
-      this.showPassive = passiveLine !== null;
-      if (this.showPassive) {
-        this.passiveLine[0] = passiveLine.passiveParticipleMasculine;
-        this.passiveLine[1] = passiveLine.verbalNoun;
-        this.passiveLine[2] = passiveLine.presentPassiveTense;
-        this.passiveLine[3] = passiveLine.pastPassiveTense;
+      if (passiveLine) {
+        this.abbreviatedConjugationText += ' ' + ArabicLetter.WAW.label + ' ' + passiveLine.pastPassiveTense + ' ' +
+          passiveLine.presentPassiveTense;
+        if (verbalNoun) {
+          this.abbreviatedConjugationText += ' ' + activeLine.verbalNoun;
+        }
+        this.abbreviatedConjugationText += ' ' + passiveLine.passiveParticipleValue;
       }
+
       const imperativeAndForbiddingLine = this.abbreviatedConjugation.imperativeAndForbiddingLine;
-      this.showImperativeAndForbidding = imperativeAndForbiddingLine !== null;
-      if (this.showImperativeAndForbidding) {
-        this.imperativeAndForbiddingLine[0] = imperativeAndForbiddingLine.forbiddingWithPrefix;
-        this.imperativeAndForbiddingLine[1] = imperativeAndForbiddingLine.imperativeWithPrefix;
-      }
+      this.abbreviatedConjugationText += ' ' + imperativeAndForbiddingLine.imperativeWithPrefix + ' ' +
+        imperativeAndForbiddingLine.forbiddingWithPrefix + ' ';
+
       const adverbLine = this.abbreviatedConjugation.adverbLine;
-      this.showAdverb = adverbLine !== null;
-      if (this.showAdverb) {
-        this.adverbLine[0] = adverbLine.adverb;
+      if (adverbLine) {
+        this.abbreviatedConjugationText += ' ' + adverbLine.adverb;
       }
     }
   }
