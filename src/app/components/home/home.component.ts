@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/primeng';
 import { ApplicationControllerService } from '../../application-controller.service';
 import { MorphologicalInputFormComponent } from '../morphological-input-form/morphological-input-form.component';
@@ -19,7 +20,8 @@ export class HomeComponent implements OnInit {
   data: MorphologicalInput[] = [];
   selectedRows: MorphologicalInput[] = [];
 
-  constructor(private applicationController: ApplicationControllerService, private confirmationService: ConfirmationService) {
+  constructor(private applicationController: ApplicationControllerService, private confirmationService: ConfirmationService,
+    private router: Router) {
     this.data[0] = MorphologicalInputFormModel.createDefaultValue();
   }
 
@@ -39,7 +41,7 @@ export class HomeComponent implements OnInit {
       this.save(result);
     }
     this.displayDialog = false;
-     this.clearSelectedRows();
+    this.clearSelectedRows();
   }
 
   performAction(action) {
@@ -58,6 +60,9 @@ export class HomeComponent implements OnInit {
         break;
       case 'DICTIONARY':
         this.viewDictionary();
+        break;
+      case 'CONJUGATION':
+        this.viewConjugations();
         break;
       default:
         console.log(action);
@@ -133,7 +138,18 @@ export class HomeComponent implements OnInit {
       return;
     }
     this.applicationController.openWithRootLetters(this.selectedRow.rootLetters);
-     this.clearSelectedRows();
+    this.clearSelectedRows();
+  }
+
+  private viewConjugations() {
+    if (!this.selectedRows) {
+      return;
+    }
+    this.applicationController.getMorphologicalChart(this.selectedRows[0]);
+    this.router.navigate(['home']).then(() => {
+      this.router.navigate(['morphological-chart']);
+    });
+    this.clearSelectedRows();
   }
 
   private clearSelectedRows() {
