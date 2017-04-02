@@ -1,6 +1,9 @@
 <div style="overflow-x: auto" *ngIf="show">
   <app-verb-conjugation [group]="pastTense"></app-verb-conjugation>
   <app-verb-conjugation [group]="presentTense"></app-verb-conjugation>
+  <template ngFor let-group [ngForOf]="verbalNouns">
+    <app-noun-conjugation [group]="group"></app-noun-conjugation>
+  </template>
   <app-noun-conjugation [group]="masculineActiveParticiple"></app-noun-conjugation>
   <app-noun-conjugation [group]="feminineActiveParticiple"></app-noun-conjugation>
   <template [ngIf]="pastPassiveTense">
@@ -17,37 +20,7 @@
   </template>
   <app-verb-conjugation [group]="imperative"></app-verb-conjugation>
   <app-verb-conjugation [group]="forbidding"></app-verb-conjugation>
-  <!--table class="morphological-chart">
-    <template ngFor let-group [ngForOf]="groups">
-      <tr>
-        <td [class]="group.leftSideClass" style="width: 49.5%" colspan="3">
-          <div class="arabicCaption">{{group.leftTermType || '&nbsp;'}}</div>
-        </td>
-        <td style="width: 1%">&nbsp;</td>
-        <td [class]="group.rightSideClass" style="width: 49.5%" colspan="3">
-          <div class="arabicCaption">{{ group.rightTermType || '&nbsp;' }}</div>
-        </td>
-      </tr>
-      <template ngFor let-rowData [ngForOf]="group.rows">
-        <tr>
-          <template ngFor let-row [ngForOf]="rowData.leftSideValues">
-            <td [class]="group.leftSideClass" style="width: 16.33%">
-              <div class="arabicNormal">{{row || '&nbsp;'}}</div>
-            </td>
-          </template>
-          <td style="width: 1%">&nbsp;</td>
-          <template ngFor let-row [ngForOf]="rowData.rightSideValues">
-            <td [class]="group.rightSideClass" style="width: 16.33%">
-               <div class="arabicNormal">{{row || '&nbsp;'}}</div>
-            </td>
-          </template>
-        </tr>
-      </template>
-      <tr>
-        <td style="width: 49.5%" colspan="3">&nbsp;</td>
-        <td style="width: 1%">&nbsp;</td>
-        <td style="width: 49.5%" colspan="3">&nbsp;</td>
-      </tr>
-    </template>
-  </table-->
+  <template ngFor let-group [ngForOf]="adverbs">
+    <app-noun-conjugation [group]="group"></app-noun-conjugation>
+  </template>
 </div>

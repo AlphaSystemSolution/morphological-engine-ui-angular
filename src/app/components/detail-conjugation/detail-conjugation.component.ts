@@ -30,6 +30,8 @@ export class DetailConjugationComponent implements OnInit {
   femininePassiveParticiple: NounConjugationGroup;
   imperative: VerbConjugationGroup;
   forbidding: VerbConjugationGroup;
+  verbalNouns: NounConjugationGroup[];
+  adverbs: NounConjugationGroup[];
   groups: SimpleDetailedConjugationGroup[] = [];
 
   constructor() { }
@@ -57,7 +59,30 @@ export class DetailConjugationComponent implements OnInit {
 
       this.imperative = this.detailedConjugation.imperativeAndForbiddingPair.rightSideConjugations;
       this.forbidding = this.detailedConjugation.imperativeAndForbiddingPair.leftSideConjugations;
+
+      this.verbalNouns = this.getNounArrayTypeValues(this.detailedConjugation.verbalNounPairs);
+      this.adverbs = this.getNounArrayTypeValues(this.detailedConjugation.adverbPairs);
     }
+  }
+
+  private getNounArrayTypeValues(pairs: NounDetailedConjugationPair[]): NounConjugationGroup[] {
+    if (!pairs) {
+      return [];
+    }
+    const groups: NounConjugationGroup[] = [];
+    pairs.forEach(pair => {
+      if (pair) {
+        let group = pair.rightSideConjugations;
+        if (group) {
+          groups.push(group);
+        }
+        group = pair.leftSideConjugations;
+        if (group) {
+          groups.push(group);
+        }
+      }
+    });
+    return groups;
   }
 
 }
