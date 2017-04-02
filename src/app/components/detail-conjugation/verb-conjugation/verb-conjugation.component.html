@@ -1,18 +1,13 @@
-<div>
+<p-panel [collapsed]="true" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+  <p-header>
+    <div class="ui-helper-clearfix" style="text-align: center;">
+      <span class="ui-panel-title arabicCaption" style="display:inline-block;margin-top:2px">
+         {{ termType }}
+         </span>
+    </div>
+  </p-header>
   <p-dataTable [value]="values" [responsive]="true">
     <p-headerColumnGroup>
-      <p-row>
-        <p-column colspan="3">
-          <template pTemplate="header">
-            <div class="arabicCaption">{{ termType }}</div>
-          </template>
-        </p-column>
-        <p-column rowspan="2">
-          <template pTemplate="header">
-            <div class="arabicCaption">&nbsp;</div>
-          </template>
-        </p-column>
-      </p-row>
       <p-row>
         <p-column>
           <template pTemplate="header">
@@ -27,6 +22,11 @@
         <p-column>
           <template pTemplate="header">
             <div class="arabicCaption">{{ numbers[0].label }}</div>
+          </template>
+        </p-column>
+        <p-column>
+          <template pTemplate="header">
+            <div class="arabicCaption">&nbsp;</div>
           </template>
         </p-column>
       </p-row>
@@ -52,5 +52,5 @@
       </template>
     </p-column>
   </p-dataTable>
-</div>
+</p-panel>
 <div>&nbsp;</div>
