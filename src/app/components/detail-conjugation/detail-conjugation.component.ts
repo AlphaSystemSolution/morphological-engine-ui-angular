@@ -2,11 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import {
   ConjugationTuple,
   DetailedConjugation,
-  DetailedConjugationRow,
   NounConjugationGroup,
   NounDetailedConjugationPair,
   SarfTermType,
-  SimpleDetailedConjugationGroup,
   VerbConjugationGroup,
   VerbDetailedConjugationPair
 } from '../model';
@@ -33,7 +31,6 @@ export class DetailConjugationComponent implements OnInit {
   forbidding: VerbConjugationGroup;
   verbalNouns: NounConjugationGroup[];
   adverbs: NounConjugationGroup[];
-  groups: SimpleDetailedConjugationGroup[] = [];
 
   constructor() { }
 

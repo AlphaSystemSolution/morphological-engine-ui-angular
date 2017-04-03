@@ -131,12 +131,3 @@ export class DetailedConjugation {
 export class MorphologicalChart {
   constructor(public abbreviatedConjugation: AbbreviatedConjugation, public detailedConjugation: DetailedConjugation) { }
 }
-
-export class DetailedConjugationRow {
-  constructor(public leftSideValues: string[], public rightSideValues: string[]) { }
-}
-
-export class SimpleDetailedConjugationGroup {
-  constructor(public leftTermType: string, public leftSideClass: string, public rightTermType: string,
-    public rightSideClass: string, public rows: DetailedConjugationRow[]) { }
-}
