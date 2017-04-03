@@ -284,7 +284,7 @@ export class MorphologicalInput {
     const srcRootLetters = src.rootLetters;
     const rootLetters: RootLetters = new RootLetters(srcRootLetters.firstRadical, srcRootLetters.secondRadical,
       srcRootLetters.thirdRadical, srcRootLetters.fourthRadical);
-    const srcConjugationConfiguration = src.conjugationConfiguration;
+    const srcConjugationConfiguration = src.configuration;
     const conjugationConfiguration: ConjugationConfiguration = new ConjugationConfiguration(srcConjugationConfiguration.removePassiveLine,
       srcConjugationConfiguration.skipRuleProcessing);
     const result: MorphologicalInput = new MorphologicalInput(rootLetters, src.template, src.translation, conjugationConfiguration,
@@ -296,7 +296,7 @@ export class MorphologicalInput {
   }
 
   constructor(public rootLetters: RootLetters = defaultRootLetters, public template: NamedTemplate = defaultNamedTemplate,
-    public translation: string, public conjugationConfiguration: ConjugationConfiguration = defaultConjugationConfiguration,
+    public translation: string, public configuration: ConjugationConfiguration = defaultConjugationConfiguration,
     public verbalNouns: VerbalNoun[] = [], public nounOfPlaceAndTimes: NounOfPlaceAndTime[] = []) {
     this._id = IdGenerator.nextId();
   }

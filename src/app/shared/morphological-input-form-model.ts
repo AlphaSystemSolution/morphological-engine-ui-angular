@@ -42,7 +42,7 @@ export class MorphologicalInputFormModel {
     this._template = this.mInput.template;
     this._translation = this.mInput.translation;
     this._verbalNouns = this.mInput.verbalNouns;
-    const conjugationConfiguration: ConjugationConfiguration = this.mInput.conjugationConfiguration;
+    const conjugationConfiguration: ConjugationConfiguration = this.mInput.configuration;
     this.removePassiveLine = conjugationConfiguration.removePassiveLine;
     this.skipRuleProcessing = conjugationConfiguration.skipRuleProcessing;
   }
@@ -116,7 +116,7 @@ export class MorphologicalInputFormModel {
   set removePassiveLine(value: boolean) {
     this._removePassiveLine = value;
     if (this.mInput) {
-      this.mInput.conjugationConfiguration.removePassiveLine = this._removePassiveLine;
+      this.mInput.configuration.removePassiveLine = this._removePassiveLine;
     }
   }
 
@@ -127,7 +127,7 @@ export class MorphologicalInputFormModel {
   set skipRuleProcessing(value: boolean) {
     this._skipRuleProcessing = value;
     if (this.mInput) {
-      this.mInput.conjugationConfiguration.skipRuleProcessing = this._skipRuleProcessing;
+      this.mInput.configuration.skipRuleProcessing = this._skipRuleProcessing;
     }
   }
 }

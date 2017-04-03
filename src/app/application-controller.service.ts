@@ -35,7 +35,7 @@ export class ApplicationControllerService {
     let index = 0;
     verbalNouns.forEach(vn => verbalNounValues[index++] = vn.name);
     headers.set('verbalNouns', verbalNounValues);
-    const conjugationConfiguration = input.conjugationConfiguration;
+    const conjugationConfiguration = input.configuration;
     if (conjugationConfiguration) {
       headers.set('removePassiveLine', '' + conjugationConfiguration.removePassiveLine);
       headers.set('skipRuleProcessing', '' + conjugationConfiguration.skipRuleProcessing);
@@ -60,7 +60,7 @@ export class ApplicationControllerService {
     let index = 0;
     verbalNouns.forEach(vn => verbalNounValues[index++] = vn.name);
     headers.set('verbalNouns', verbalNounValues);
-    const conjugationConfiguration = input.conjugationConfiguration;
+    const conjugationConfiguration = input.configuration;
     if (conjugationConfiguration) {
       headers.set('removePassiveLine', '' + conjugationConfiguration.removePassiveLine);
       headers.set('skipRuleProcessing', '' + conjugationConfiguration.skipRuleProcessing);
