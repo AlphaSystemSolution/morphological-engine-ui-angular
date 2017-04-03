@@ -4,7 +4,6 @@ import {
   ActiveLine,
   AdverbLine,
   AbbreviatedConjugation,
-  AbbreviatedConjugationColumn,
   ConjugationHeader,
   ImperativeAndForbiddingLine,
   PassiveLine
