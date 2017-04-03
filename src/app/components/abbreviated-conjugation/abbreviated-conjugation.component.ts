@@ -4,6 +4,7 @@ import {
   ActiveLine,
   AdverbLine,
   AbbreviatedConjugation,
+  AbbreviatedConjugationColumn,
   ConjugationHeader,
   ImperativeAndForbiddingLine,
   PassiveLine
@@ -18,16 +19,12 @@ export class AbbreviatedConjugationComponent implements OnInit {
 
   @Input() abbreviatedConjugation: AbbreviatedConjugation;
   show: boolean;
-  showActive: boolean;
   showPassive: boolean;
-  showImperativeAndForbidding: boolean;
-  showAdverb: boolean;
   title: string;
   translation: string;
   typeLabel1: string;
   typeLabel2: string;
   typeLabel3: string;
-  abbreviatedConjugationText: string;
 
   constructor() { }
 
@@ -42,34 +39,7 @@ export class AbbreviatedConjugationComponent implements OnInit {
         this.typeLabel2 = conjugationHeader.typeLabel2;
         this.typeLabel3 = conjugationHeader.typeLabel3;
       }
-
-      const activeLine = this.abbreviatedConjugation.activeLine;
-      this.abbreviatedConjugationText = activeLine.pastTense + ' ' + activeLine.presentTense;
-
-      const verbalNoun = activeLine.verbalNoun;
-      if (verbalNoun) {
-        this.abbreviatedConjugationText += ' ' + activeLine.verbalNoun;
-      }
-      this.abbreviatedConjugationText += ' ' + activeLine.activeParticipleValue;
-
-      const passiveLine = this.abbreviatedConjugation.passiveLine;
-      if (passiveLine) {
-        this.abbreviatedConjugationText += ' ' + ArabicLetter.WAW.label + ' ' + passiveLine.pastPassiveTense + ' ' +
-          passiveLine.presentPassiveTense;
-        if (verbalNoun) {
-          this.abbreviatedConjugationText += ' ' + activeLine.verbalNoun;
-        }
-        this.abbreviatedConjugationText += ' ' + passiveLine.passiveParticipleValue;
-      }
-
-      const imperativeAndForbiddingLine = this.abbreviatedConjugation.imperativeAndForbiddingLine;
-      this.abbreviatedConjugationText += ' ' + imperativeAndForbiddingLine.imperativeWithPrefix + ' ' +
-        imperativeAndForbiddingLine.forbiddingWithPrefix + ' ';
-
-      const adverbLine = this.abbreviatedConjugation.adverbLine;
-      if (adverbLine) {
-        this.abbreviatedConjugationText += ' ' + adverbLine.adverb;
-      }
+      this.showPassive = this.abbreviatedConjugation.passiveLine !== null;
     }
   }
 
