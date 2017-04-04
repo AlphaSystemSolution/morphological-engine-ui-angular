@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild, ViewChildren, Input, Output, EventEmitter
 import { OverlayPanel } from 'primeng/primeng';
 
 import { ToggleSelectorComponent } from '../toggle-selector/toggle-selector.component';
-import { ArabicLetter, RootLetters, arabicLetters } from '../model';
+import { ArabicLetter, RootLetters } from '../model';
 
 @Component({
   selector: 'app-arabic-keyboard',
@@ -25,7 +25,7 @@ export class ArabicKeyboardComponent implements OnInit {
   }
 
   get letters(): ArabicLetter[] {
-    return arabicLetters;
+    return ArabicLetter.arabicLetters;
   }
 
   show(event): void {

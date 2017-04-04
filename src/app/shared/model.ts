@@ -55,6 +55,38 @@ export class ArabicLetter extends ArabicLabel {
   static YA = new ArabicLetter('YA', 'ي', 'y');
   static TATWEEL = new ArabicLetter('TATWEEL', 'ـ', '_');
 
+  static arabicLetters: ArabicLetter[] = [
+    ArabicLetter.HAMZA, // 0
+    ArabicLetter.BA, // 1
+    ArabicLetter.TA, // 2
+    ArabicLetter.THA, // 3
+    ArabicLetter.JEEM, // 4
+    ArabicLetter.HHA, // 5
+    ArabicLetter.KHA, // 6
+    ArabicLetter.DAL, // 7
+    ArabicLetter.THAL, // 8
+    ArabicLetter.RA, // 9
+    ArabicLetter.ZAIN, // 10
+    ArabicLetter.SEEN, // 11
+    ArabicLetter.SHEEN, // 12
+    ArabicLetter.SAD, // 13
+    ArabicLetter.DDAD, // 14
+    ArabicLetter.TTA, // 15
+    ArabicLetter.DTHA, // 16
+    ArabicLetter.AIN, // 17
+    ArabicLetter.GHAIN, // 18
+    ArabicLetter.FA, // 19
+    ArabicLetter.QAF, // 20
+    ArabicLetter.KAF, // 21
+    ArabicLetter.LAM, // 22
+    ArabicLetter.MEEM, // 23
+    ArabicLetter.NOON, // 24
+    ArabicLetter.HA, // 25
+    ArabicLetter.WAW, // 26
+    ArabicLetter.YA, // 27
+    ArabicLetter.TATWEEL, // 28
+  ];
+
   constructor(public name: string, public label: string, public code: string) {
     super(name, label, code);
   }
@@ -206,38 +238,6 @@ export enum DisplayType {
   LABEL_ONLY, CODE_ONLY, LABEL_AND_CODE
 }
 
-export const arabicLetters: ArabicLetter[] = [
-  ArabicLetter.HAMZA, // 0
-  ArabicLetter.BA, // 1
-  ArabicLetter.TA, // 2
-  ArabicLetter.THA, // 3
-  ArabicLetter.JEEM, // 4
-  ArabicLetter.HHA, // 5
-  ArabicLetter.KHA, // 6
-  ArabicLetter.DAL, // 7
-  ArabicLetter.THAL, // 8
-  ArabicLetter.RA, // 9
-  ArabicLetter.ZAIN, // 10
-  ArabicLetter.SEEN, // 11
-  ArabicLetter.SHEEN, // 12
-  ArabicLetter.SAD, // 13
-  ArabicLetter.DDAD, // 14
-  ArabicLetter.TTA, // 15
-  ArabicLetter.DTHA, // 16
-  ArabicLetter.AIN, // 17
-  ArabicLetter.GHAIN, // 18
-  ArabicLetter.FA, // 19
-  ArabicLetter.QAF, // 20
-  ArabicLetter.KAF, // 21
-  ArabicLetter.LAM, // 22
-  ArabicLetter.MEEM, // 23
-  ArabicLetter.NOON, // 24
-  ArabicLetter.HA, // 25
-  ArabicLetter.WAW, // 26
-  ArabicLetter.YA, // 27
-  ArabicLetter.TATWEEL, // 28
-];
-
 export const namedTemplates: NamedTemplate[] = [
   NamedTemplate.FORM_I_CATEGORY_A_GROUP_U_TEMPLATE,
   NamedTemplate.FORM_I_CATEGORY_A_GROUP_I_TEMPLATE,
@@ -342,7 +342,7 @@ export const formXTemplates: VerbalNoun[][] = [
   [VerbalNoun.VERBAL_NOUN_FORM_X]
 ];
 
-export const defaultRootLetters: RootLetters = new RootLetters(arabicLetters[19], arabicLetters[17], arabicLetters[22], arabicLetters[28]);
+export const defaultRootLetters: RootLetters = new RootLetters(ArabicLetter.FA, ArabicLetter.AIN, ArabicLetter.LAM, ArabicLetter.TATWEEL);
 
 export const defaultNamedTemplate: NamedTemplate = namedTemplates[0];
 
