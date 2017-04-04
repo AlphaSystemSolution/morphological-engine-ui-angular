@@ -332,3 +332,41 @@ export class ArabicConstants {
   static FORBIDDING_PREFIX = new ArabicLabel('FORBIDDING_PREFIX', 'ونهي عنه', 'Forbidding prefix');
   static ADVERBS_PREFIX = new ArabicLabel('ADVERBS_PREFIX', 'والظرف منه', 'Adverbs prefix');
 }
+
+export class ConjugationData {
+  id = IdGenerator.nextId();
+  template: string;
+  rootLetters: any;
+  configuration: ConjugationConfiguration;
+  translation: string;
+  verbalNouns: string[];
+
+  private static createRootLetters(src: RootLetters): any {
+    const fr: ArabicLetter = src.fourthRadical;
+    let fourthRadical = null;
+    if (fr !== null && !ArabicLetter.TATWEEL.equals(fr)) {
+      fourthRadical = fr.name;
+    }
+    return {
+      firstRadical: src.firstRadical.name, secondRadical: src.secondRadical.name, thirdRadical: src.thirdRadical.name,
+      fourthRadical: fourthRadical
+    };
+  }
+
+  private static createVerbalNouns(verbalNouns: VerbalNoun[]): string[] {
+    if (!verbalNouns && verbalNouns.length <= 0) {
+      return null;
+    }
+    const result = [];
+    verbalNouns.forEach(vn => result.push(vn.name));
+    return result;
+  }
+
+  constructor(input: MorphologicalInput) {
+    this.template = input.template.name;
+    this.translation = input.translation;
+    this.configuration = input.configuration;
+    this.rootLetters = ConjugationData.createRootLetters(input.rootLetters);
+    this.verbalNouns = ConjugationData.createVerbalNouns(input.verbalNouns);
+  }
+}
