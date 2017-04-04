@@ -3,7 +3,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { MorphologicalInputFormModel } from './shared/morphological-input-form-model';
-import { ConjugationData, RootLetters, MorphologicalInput } from './shared/model';
+import { ConjugationTemplate, RootLetters, MorphologicalInput } from './shared/model';
 import { MorphologicalChart } from './components/model';
 import { environment } from '../environments/environment';
 import 'rxjs/add/operator/map';
@@ -30,10 +30,8 @@ export class ApplicationControllerService {
     headers.set('Content-Type', 'application/json;charset=UTF-8');
 
     const options = new RequestOptions({ headers: headers });
-    const data = [];
-    inputs.forEach(input => data.push(new ConjugationData(input)));
-    const body: any = { chartConfiguration: {}, data: data };
-
+    const body: ConjugationTemplate = ConjugationTemplate.createConjugationTemplate(null, inputs);
+    console.log(JSON.stringify(body));
     const response = this.http.post(url, body, options);
     if ('STREAM' === format) {
       // TODO: figure out how to convert response into BLOB
