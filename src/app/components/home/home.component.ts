@@ -145,7 +145,7 @@ export class HomeComponent implements OnInit {
     if (!this.selectedRows) {
       return;
     }
-    this.applicationController.getMorphologicalChart(this.selectedRows[0]);
+    this.applicationController.getMorphologicalChart(this.selectedRows);
     this.router.navigate(['home']).then(() => {
       this.router.navigate(['morphological-chart']);
     });
