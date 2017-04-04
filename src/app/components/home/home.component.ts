@@ -17,12 +17,10 @@ export class HomeComponent implements OnInit {
   displayDialog: boolean;
   newRow: boolean;
   selectedRow: MorphologicalInput;
-  data: MorphologicalInput[] = [];
   selectedRows: MorphologicalInput[] = [];
 
   constructor(private applicationController: ApplicationControllerService, private confirmationService: ConfirmationService,
     private router: Router) {
-    this.data[0] = MorphologicalInputFormModel.createDefaultValue();
   }
 
   ngOnInit() {
@@ -76,16 +74,16 @@ export class HomeComponent implements OnInit {
 
   private save(result: MorphologicalInput) {
     if (this.newRow) {
-      this.data.push(result);
+      this.applicationController.data.push(result);
       this.newRow = false;
     } else {
-      this.data[this.findSelectedRowIndex()] = this.selectedRow;
+      this.applicationController.data[this.findSelectedRowIndex()] = this.selectedRow;
     }
   }
 
   private findSelectedRowIndex(): number {
     let index = -1;
-    this.data.filter((o, i) => {
+    this.applicationController.data.filter((o, i) => {
       if (o.id === this.selectedRow.id) {
         index = i;
       }
@@ -126,7 +124,7 @@ export class HomeComponent implements OnInit {
       header: 'Remove Confirmation',
       icon: 'fa fa-times',
       accept: () => {
-        this.data.splice(this.findSelectedRowIndex(), 1);
+        this.applicationController.data.splice(this.findSelectedRowIndex(), 1);
         this.clearSelectedRows();
       },
       reject: () => this.clearSelectedRows()
@@ -146,8 +144,8 @@ export class HomeComponent implements OnInit {
       return;
     }
     this.applicationController.getMorphologicalChart(this.selectedRows);
-    this.router.navigate(['home']).then(() => {
-      this.router.navigate(['morphological-chart']);
+    this.router.navigate(['staging']).then(() => {
+      this.router.navigate(['home']);
     });
     this.clearSelectedRows();
   }

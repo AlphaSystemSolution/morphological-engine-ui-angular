@@ -13,8 +13,10 @@ export class ApplicationControllerService {
 
   private _morphologicalChartSubject: BehaviorSubject<MorphologicalChart[]>;
   public morphologicalCharts: Observable<MorphologicalChart[]>;
+  data: MorphologicalInput[] = [];
 
   constructor(private http: Http) {
+    this.data[0] = MorphologicalInputFormModel.createDefaultValue();
   }
 
   getMorphologicalChart(inputs: MorphologicalInput[], format: string = 'UNICODE'): void {

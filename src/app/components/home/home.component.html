@@ -1,7 +1,7 @@
 <app-toolbar (onAction)="performAction($event)"></app-toolbar>
 <div>&nbsp;</div>
 
-<p-dataTable [value]="data" [(selection)]="selectedRows" selectionMode="multiple" [responsive]="true" [editable]="true" (onRowSelect)="selectRow($event)">
+<p-dataTable [value]="applicationController.data" [(selection)]="selectedRows" selectionMode="multiple" [responsive]="true" [editable]="true" (onRowSelect)="selectRow($event)">
   <p-column [style]="&#123;'width':'38px'&#125;" selectionMode="multiple"></p-column>
   <p-column field="rootLetters" header="Root Letters" [style]="{'width': '200px'}">
     <template let-mi="rowData" pTemplate="body">
@@ -26,6 +26,8 @@
     </template>
   </p-column>
 </p-dataTable>
+
+<app-morphological-chart></app-morphological-chart>
 
 <p-confirmDialog width="425"></p-confirmDialog>
 <app-morphological-input-form #form [(visible)]="displayDialog" (onHide)="hnadleHide($event)"></app-morphological-input-form>

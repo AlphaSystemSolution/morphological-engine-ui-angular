@@ -2,6 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
+import { StagingComponent } from './components/staging/staging.component'
 import { MorphologicalChartComponent } from './components/morphological-chart/morphological-chart.component';
 
 const routes: Routes = [
@@ -16,7 +17,7 @@ const routes: Routes = [
   },
   {
     path: 'staging',
-    redirectTo: '/home'
+    component: StagingComponent
   },
   {
     path: 'morphological-chart',
