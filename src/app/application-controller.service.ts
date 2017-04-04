@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, ResponseContentType, RequestOptions } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { MorphologicalInputFormModel } from './shared/morphological-input-form-model';
@@ -21,31 +21,25 @@ export class ApplicationControllerService {
     this._morphologicalChartSubject = new BehaviorSubject<MorphologicalChart[]>([]);
     this.morphologicalCharts = this._morphologicalChartSubject.asObservable();
 
-    const path = 'morphologicalChart';
-    const url = environment.morphologicalEngineBaseUrl + path;
+    const path = 'morphologicalChart/format/';
+    const url = environment.morphologicalEngineBaseUrl + path + format;
     console.log(url);
     const headers = new Headers();
-    let contentType = 'application/json;charset=UTF-8';
-    const formatStream = 'STREAM' === format;
-    if (formatStream) {
-      contentType = 'application/x-www-form-urlencoded';
-      headers.set('responseType', 'Blob');
-    }
-    headers.set('Content-Type', contentType);
-    headers.set('format', format);
+    headers.set('Content-Type', 'application/json;charset=UTF-8');
 
     const options = new RequestOptions({ headers: headers });
     const data = [];
     inputs.forEach(input => data.push(new ConjugationData(input)));
     const body: any = { chartConfiguration: {}, data: data };
-    console.log(JSON.stringify(body));
+
     const response = this.http.post(url, body, options);
-    if (formatStream) {
-      response.subscribe(resp => {
-        const blob = new Blob([resp.blob()], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
-        const url2 = window.URL.createObjectURL(blob);
-        console.log('>>>>>>>>>>>>> ' + JSON.stringify(url2));
-        window.open(url2, 'export');
+    if ('STREAM' === format) {
+      // TODO: figure out how to convert response into BLOB
+      response.map(resp => resp.text()).subscribe(_blob => {
+        const blob = new Blob([_blob]);
+
+        console.log('/////////////////// ' + JSON.stringify(_blob));
+        console.log('>>>>>>>>>>>>>>> ' + JSON.stringify(blob));
       });
     } else {
       response.map(resp => resp.json()).subscribe(this._morphologicalChartSubject);
