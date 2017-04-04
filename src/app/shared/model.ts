@@ -1,5 +1,21 @@
 import { IdGenerator } from '../utils/IdGenerator';
 
+export class Document {
+  private _id: string;
+
+  constructor() {
+    this.id = IdGenerator.nextId();
+  }
+
+  get id(): string {
+    return this._id;
+  }
+
+  set id(id: string) {
+    this._id = id ? id : IdGenerator.nextId();
+  }
+}
+
 export class ArabicLabel {
   constructor(public name: string, public label: string, public code: string) { }
 
@@ -332,9 +348,8 @@ export const defaultNamedTemplate: NamedTemplate = namedTemplates[0];
 
 export const defaultConjugationConfiguration: ConjugationConfiguration = new ConjugationConfiguration(false, false);
 
-export class MorphologicalInput {
+export class MorphologicalInput extends Document {
 
-  private _id: string;
 
   static copy(src: MorphologicalInput, copyId: boolean): MorphologicalInput {
     if (!src) {
@@ -357,15 +372,7 @@ export class MorphologicalInput {
   constructor(public rootLetters: RootLetters = defaultRootLetters, public template: NamedTemplate = defaultNamedTemplate,
     public translation: string, public configuration: ConjugationConfiguration = defaultConjugationConfiguration,
     public verbalNouns: VerbalNoun[] = [], public nounOfPlaceAndTimes: NounOfPlaceAndTime[] = []) {
-    this._id = IdGenerator.nextId();
-  }
-
-  get id(): string {
-    return this._id;
-  }
-
-  set id(id: string) {
-    this._id = id;
+    super();
   }
 
   get verbalNounsText(): string {
@@ -392,8 +399,48 @@ export class ArabicConstants {
   static ADVERBS_PREFIX = new ArabicLabel('ADVERBS_PREFIX', 'والظرف منه', 'Adverbs prefix');
 }
 
-export class ConjugationData {
-  id = IdGenerator.nextId();
+export enum PageOrientation {
+  PORTRAIT, LANDSCAPE
+}
+
+export class PageOption extends Document {
+  private _orientation: string;
+
+  get orientation() {
+    return this._orientation;
+  }
+
+  set orientation(orientation: string) {
+    this._orientation = orientation;
+  }
+}
+
+export class ChartConfiguration extends Document {
+
+  omitToc = false;
+  omitAbbreviatedConjugation = false;
+  omitDetailedConjugation = false;
+  omitTitle = false;
+  omitHeader = false;
+  omitSarfTermCaption = false;
+  sortDirective = 'NONE';
+  sortDirection = 'ASCENDING';
+  arabicFontFamily = 'KFGQPC Uthman Taha Naskh';
+  translationFontFamily = 'Candara';
+  arabicFontSize = 14;
+  translationFontSize = 12;
+  headingFontSize = 30;
+  pageOption: PageOption;
+
+  constructor() {
+    super();
+    const po = new PageOption();
+    po.orientation = PageOrientation[PageOrientation.PORTRAIT];
+    this.pageOption = po;
+  }
+}
+
+export class ConjugationData extends Document {
   template: string;
   rootLetters: any;
   configuration: ConjugationConfiguration;
@@ -422,10 +469,30 @@ export class ConjugationData {
   }
 
   constructor(input: MorphologicalInput) {
+    super();
     this.template = input.template.name;
     this.translation = input.translation;
     this.configuration = input.configuration;
     this.rootLetters = ConjugationData.createRootLetters(input.rootLetters);
     this.verbalNouns = ConjugationData.createVerbalNouns(input.verbalNouns);
+  }
+}
+
+export class ConjugationTemplate extends Document {
+  data: ConjugationData[] = [];
+  chartConfiguration = new ChartConfiguration();
+
+  static createConjugationTemplate(chartConfiguration: ChartConfiguration, inputs: MorphologicalInput[]): ConjugationTemplate {
+    const template = new ConjugationTemplate();
+    if (!chartConfiguration) {
+      chartConfiguration = new ChartConfiguration();
+    }
+    template.chartConfiguration = chartConfiguration;
+    if (inputs && inputs.length > 0) {
+      const data: ConjugationData[] = [];
+      inputs.forEach(input => data.push(new ConjugationData(input)));
+      template.data = data;
+    }
+    return template;
   }
 }
