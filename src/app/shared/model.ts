@@ -274,6 +274,11 @@ export class VerbalNoun extends ArabicLabel {
     [VerbalNoun.VERBAL_NOUN_FORM_X]
   ];
 
+  static getByName(name: string): VerbalNoun {
+    const results = VerbalNoun.verbalNounPatterns.filter(al => (al.name === name));
+    return (results && results.length > 0) ? results[0] : null;
+  }
+
   constructor(public name: string, public label: string, public code: string) {
     super(name, label, code);
   }
