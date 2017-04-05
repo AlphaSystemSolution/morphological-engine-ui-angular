@@ -1,12 +1,19 @@
 import { ConjugationConfiguration, Document } from './common';
 import { MorphologicalInput } from './morphological-input';
-import { RootLetters } from './root-letters';
+import { RootLetters as _RootLetters } from './root-letters';
 import { ArabicLetter } from './arabic-letter';
 import { VerbalNoun } from './verbal-noun';
 
+export class RootLetters {
+  firstRadical: string;
+  secondRadical: string;
+  thirdRadical: string;
+  fourthRadical: string;
+}
+
 export class ConjugationData extends Document {
   template: string;
-  rootLetters: any;
+  rootLetters: RootLetters;
   configuration: ConjugationConfiguration;
   translation: string;
   verbalNouns: string[];
@@ -21,16 +28,18 @@ export class ConjugationData extends Document {
     return result;
   }
 
-  private static createRootLetters(src: RootLetters): any {
+  private static createRootLetters(src: _RootLetters): RootLetters {
     const fr: ArabicLetter = src.fourthRadical;
     let fourthRadical = null;
     if (fr !== null && !ArabicLetter.TATWEEL.equals(fr)) {
       fourthRadical = fr.name;
     }
-    return {
-      firstRadical: src.firstRadical.name, secondRadical: src.secondRadical.name, thirdRadical: src.thirdRadical.name,
-      fourthRadical: fourthRadical
-    };
+    const rootLetters = new RootLetters();
+    rootLetters.firstRadical = src.firstRadical.name;
+    rootLetters.secondRadical = src.secondRadical.name;
+    rootLetters.thirdRadical = src.thirdRadical.name;
+    rootLetters.fourthRadical = fourthRadical;
+    return rootLetters;
   }
 
   private static createVerbalNouns(verbalNouns: VerbalNoun[]): string[] {
