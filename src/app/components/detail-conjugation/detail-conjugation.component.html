@@ -1,10 +1,8 @@
 <div *ngIf="show">
-  <p-panel [collapsed]="true" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+  <p-panel [collapsed]="true" [toggleable]="true" [style]="{'margin-top':'20px'}">
     <p-header>
-      <div class="ui-helper-clearfix">
-        <span class="ui-panel-title arabicNormal" style="display:inline-block;margin-top:2px">
-          صرف كبير &mdash; {{ title }}
-         </span>
+      <div class="ui-helper-clearfix" style="text-align: center;">
+        <span class="ui-panel-title arabicCaption" style="display:inline-block;margin-top:2px">          صرف كبير          </span>
       </div>
     </p-header>
     <app-verb-conjugation [group]="pastTense"></app-verb-conjugation>
