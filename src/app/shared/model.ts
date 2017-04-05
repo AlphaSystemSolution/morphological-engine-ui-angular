@@ -114,6 +114,7 @@ export class NamedTemplate extends ArabicLabel {
   static FORM_IX_TEMPLATE = new NamedTemplate('FORM_IX_TEMPLATE', 'إِفْعَلَّ يَفْعَلَّ', 'IX');
   static FORM_X_TEMPLATE = new NamedTemplate('FORM_X_TEMPLATE', 'إِسْتَفْعَلَ يَسْتَفْعِلُ', 'X');
 
+
   static namedTemplates: NamedTemplate[] = [
     NamedTemplate.FORM_I_CATEGORY_A_GROUP_U_TEMPLATE,
     NamedTemplate.FORM_I_CATEGORY_A_GROUP_I_TEMPLATE,
@@ -131,6 +132,11 @@ export class NamedTemplate extends ArabicLabel {
     NamedTemplate.FORM_IX_TEMPLATE,
     NamedTemplate.FORM_X_TEMPLATE
   ];
+
+  static getByName(name: string): NamedTemplate {
+    const results = NamedTemplate.namedTemplates.filter(al => (al.name === name));
+    return (results && results.length > 0) ? results[0] : null;
+  }
 
   constructor(public name: string, public label: string, public code: string) {
     super(name, label, code);
