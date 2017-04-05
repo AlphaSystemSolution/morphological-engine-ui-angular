@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-file',
@@ -7,13 +7,17 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class FileComponent implements OnInit {
 
+  @ViewChild('input') input: ElementRef;
   @Input() importDialog: boolean;
+  @Input() mode = 'import';
   @Output() onClose: EventEmitter<any> = new EventEmitter();
+  header = 'Import';
   private file: File;
 
   constructor() { }
 
   ngOnInit() {
+    this.header = this.mode === 'import' ? 'Import' : 'Export';
   }
 
   onChooseClick(event, fileInput) {
@@ -34,12 +38,20 @@ export class FileComponent implements OnInit {
 
   hideDialog(event, action) {
     this.importDialog = false;
-    let result: File = null;
-    if ('submit' === action) {
-      result = this.file;
+    if (this.mode === 'import') {
+      let result: File = null;
+      if ('submit' === action) {
+        result = this.file;
+      }
+      this.file = null;
+      this.onClose.emit({ originalEvent: event, file: result });
+    } else {
+      let result: string = null;
+      if ('submit' === action) {
+        result = this.input.nativeElement.value;
+      }
+      this.onClose.emit({ originalEvent: event, file: result });
     }
-    this.file = null;
-    this.onClose.emit({ originalEvent: event, file: result });
   }
 
 }

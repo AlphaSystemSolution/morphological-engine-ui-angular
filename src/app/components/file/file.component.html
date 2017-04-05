@@ -1,15 +1,28 @@
-<p-dialog header="Import" [(visible)]="importDialog" [responsive]="true" showEffect="fade" [modal]="true" [closable]="false" [width]="650">
+<p-dialog [header]="header" [(visible)]="importDialog" [responsive]="true" showEffect="fade" [modal]="true" [closable]="false"
+  [width]="650">
   <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
-    <div class="ui-grid-row">
-      <div class="ui-grid-col-8">
-        <input #input type="text" pInputText style="font-size: 18px; font-family: 'Candara'" readonly size="40" />
-      </div>
-      <div class="ui-grid-col-4">
-        <button type="button" label="Choose a file" icon="fa-file-text" pButton class="ui-fileupload-choose" (click)="onChooseClick($event, fileinput)">
+    <template [ngIf]="mode === 'import'">
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-8">
+          <input #input type="text" pInputText style="font-size: 18px; font-family: 'Candara'" readonly size="40" />
+        </div>
+        <div class="ui-grid-col-4">
+          <button type="button" label="Choose a file" icon="fa-file-text" pButton class="ui-fileupload-choose" (click)="onChooseClick($event, fileinput)">
             <input #fileinput type="file" (change)="onFileSelect($event, input)"/>
         </button>
+        </div>
       </div>
-    </div>
+    </template>
+    <template [ngIf]="mode === 'export'">
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-4">
+          Please enter name of file:
+        </div>
+        <div class="ui-grid-col-8">
+          <input #input type="text" pInputText style="font-size: 18px; font-family: 'Candara'" size="40" />
+        </div>
+      </div>
+    </template>
   </div>
   <p-footer>
     <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
