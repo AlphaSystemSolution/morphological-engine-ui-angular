@@ -7,12 +7,17 @@ import { MenuItem } from 'primeng/primeng';
 })
 export class ToolbarComponent implements OnInit {
 
+  fileItems: MenuItem[];
   actionItems: MenuItem[];
   viewItems: MenuItem[];
   @Output() onAction: EventEmitter<string> = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
+    this.fileItems = [
+      { label: 'Import', icon: 'fa-download', command: () => this.handleButtonClick('IMPORT') },
+      { label: 'Export', icon: 'fa-upload', command: () => this.handleButtonClick('EXPORT') }
+    ];
     this.actionItems = [
       { label: 'Add', icon: 'fa-plus-square', command: () => this.handleButtonClick('ADD') },
       { label: 'Edit', icon: 'fa-pencil-square', command: () => this.handleButtonClick('EDIT') },
