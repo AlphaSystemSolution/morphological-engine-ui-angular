@@ -16,9 +16,16 @@ export class MorphologicalInputFormModel {
   private _verbalNounsText: string;
 
   static createDefaultValue(): MorphologicalInput {
-    const rootLetters: RootLetters = new RootLetters(ArabicLetter.FA, ArabicLetter.AIN, ArabicLetter.LAM, ArabicLetter.TATWEEL);
-    const conjugationConfiguration: ConjugationConfiguration = new ConjugationConfiguration(false, false);
-    return new MorphologicalInput(rootLetters, NamedTemplate.FORM_I_CATEGORY_A_GROUP_U_TEMPLATE, null, conjugationConfiguration, [], []);
+    const rootLetters: RootLetters = new RootLetters();
+    const conjugationConfiguration: ConjugationConfiguration = new ConjugationConfiguration();
+    const result = new MorphologicalInput();
+    result.rootLetters = rootLetters;
+    result.template = NamedTemplate.FORM_I_CATEGORY_A_GROUP_U_TEMPLATE;
+    result.translation = null;
+    result.configuration = conjugationConfiguration;
+    result.verbalNouns = [];
+    result.nounOfPlaceAndTimes = [];
+    return result;
   }
 
   constructor() {
