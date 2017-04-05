@@ -28,13 +28,11 @@ export class ApplicationControllerService {
 
     const path = 'morphologicalChart/format/';
     const url = environment.morphologicalEngineBaseUrl + path + format;
-    console.log(url);
     const headers = new Headers();
     headers.set('Content-Type', 'application/json;charset=UTF-8');
 
     const options = new RequestOptions({ headers: headers });
     const body: ConjugationTemplate = ConjugationTemplate.createConjugationTemplate(null, inputs);
-    console.log(JSON.stringify(body));
     const response = this.http.post(url, body, options);
     if ('STREAM' === format) {
       // TODO: figure out how to convert response into BLOB
