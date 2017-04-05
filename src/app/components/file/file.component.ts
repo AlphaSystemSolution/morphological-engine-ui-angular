@@ -8,7 +8,7 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild }
 export class FileComponent implements OnInit {
 
   @ViewChild('input') input: ElementRef;
-  @Input() importDialog: boolean;
+  @Input() visible: boolean;
   @Input() mode = 'import';
   @Output() onClose: EventEmitter<any> = new EventEmitter();
   header = 'Import';
@@ -37,7 +37,7 @@ export class FileComponent implements OnInit {
   }
 
   hideDialog(event, action) {
-    this.importDialog = false;
+    this.visible = false;
     if (this.mode === 'import') {
       let result: File = null;
       if ('submit' === action) {
