@@ -464,6 +464,16 @@ export class ConjugationData extends Document {
   translation: string;
   verbalNouns: string[];
 
+  static fromMorphologicalInput(input: MorphologicalInput): ConjugationData {
+    const result = new ConjugationData();
+    result.template = input.template.name;
+    result.translation = input.translation;
+    result.configuration = input.configuration;
+    result.rootLetters = ConjugationData.createRootLetters(input.rootLetters);
+    result.verbalNouns = ConjugationData.createVerbalNouns(input.verbalNouns);
+    return result;
+  }
+
   private static createRootLetters(src: RootLetters): any {
     const fr: ArabicLetter = src.fourthRadical;
     let fourthRadical = null;
@@ -484,15 +494,6 @@ export class ConjugationData extends Document {
     verbalNouns.forEach(vn => result.push(vn.name));
     return result;
   }
-
-  constructor(input: MorphologicalInput) {
-    super();
-    this.template = input.template.name;
-    this.translation = input.translation;
-    this.configuration = input.configuration;
-    this.rootLetters = ConjugationData.createRootLetters(input.rootLetters);
-    this.verbalNouns = ConjugationData.createVerbalNouns(input.verbalNouns);
-  }
 }
 
 export class ConjugationTemplate extends Document {
@@ -507,7 +508,7 @@ export class ConjugationTemplate extends Document {
     template.chartConfiguration = chartConfiguration;
     if (inputs && inputs.length > 0) {
       const data: ConjugationData[] = [];
-      inputs.forEach(input => data.push(new ConjugationData(input)));
+      inputs.forEach(input => data.push(ConjugationData.fromMorphologicalInput(input)));
       template.data = data;
     }
     return template;
