@@ -1,0 +1,12 @@
+.ui-fileupload-choose input {
+    display: none;
+}
+
+.ui-fileupload-choose.ui-state-disabled input {
+    cursor: default;
+}
+
+.ui-fileupload-choose {
+    position: relative;
+    overflow: hidden;
+}
