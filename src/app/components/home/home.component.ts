@@ -4,7 +4,8 @@ import { ConfirmationService } from 'primeng/primeng';
 import { ApplicationControllerService } from '../../application-controller.service';
 import { MorphologicalInputFormComponent } from '../morphological-input-form/morphological-input-form.component';
 import { MorphologicalInputFormModel } from '../../shared/morphological-input-form-model';
-import { ConjugationConfiguration, MorphologicalInput } from '../../shared/model';
+import { ConjugationConfiguration } from '../../model/common';
+import { MorphologicalInput } from '../../model/morphological-input';
 
 @Component({
   selector: 'app-home',

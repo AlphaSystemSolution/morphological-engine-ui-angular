@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ConjugationTuple, VerbConjugationGroup, SarfTermType } from '../../model';
-import { ArabicLabel, ConversationType, NumberType } from '../../../shared/model';
+import { ConversationType, NumberType } from '../../../model/common';
 
 @Component({
   selector: 'app-verb-conjugation',

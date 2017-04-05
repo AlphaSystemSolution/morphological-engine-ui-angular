@@ -8,7 +8,8 @@ import { PrimeTemplate } from 'primeng/components/common/shared';
 import { DomHandler } from 'primeng/components/dom/domhandler';
 import { ObjectUtils } from 'primeng/components/utils/ObjectUtils';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import { ArabicLabel, DisplayType } from '../model';
+import { ArabicLabel, DisplayType } from '../../model/common';
+
 export const DROPDOWN_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => ArabicDropdownComponent),

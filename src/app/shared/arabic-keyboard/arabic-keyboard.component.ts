@@ -3,7 +3,8 @@ import { Component, OnInit, ViewChild, ViewChildren, Input, Output, EventEmitter
 import { OverlayPanel } from 'primeng/primeng';
 
 import { ToggleSelectorComponent } from '../toggle-selector/toggle-selector.component';
-import { ArabicLetter, RootLetters } from '../model';
+import { ArabicLetter } from '../../model/arabic-letter';
+import { RootLetters } from '../../model/root-letters';
 
 @Component({
   selector: 'app-arabic-keyboard',

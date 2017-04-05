@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { ArabicLabel } from '../model';
+import { ArabicLabel } from '../../model/common';
 import { ToggleButton } from 'primeng/primeng';
 @Component({
   selector: 'app-toggle-selector',

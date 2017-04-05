@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { ArabicLabel } from '../model';
+import { ArabicLabel } from '../../model/common';
 
 @Component({
   selector: 'app-arabic-button',

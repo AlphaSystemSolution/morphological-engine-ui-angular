@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ConjugationTuple, NounConjugationGroup, SarfTermType } from '../../model';
-import { ArabicLabel, NounStatus, NumberType } from '../../../shared/model';
+import { NounStatus, NumberType } from '../../../model/common';
 
 @Component({
   selector: 'app-noun-conjugation',

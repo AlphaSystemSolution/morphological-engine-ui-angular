@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { OverlayPanel } from 'primeng/primeng';
-import { NamedTemplate, VerbalNoun, defaultNamedTemplate } from '../model';
+import { NamedTemplate } from '../../model/named-template';
+import { VerbalNoun } from '../../model/verbal-noun';
 import { ToggleSelectorComponent } from '../toggle-selector/toggle-selector.component';
 
 @Component({
@@ -73,13 +74,13 @@ export class VerbalNounPickerComponent implements OnInit {
 
   @Input() get form(): NamedTemplate {
     if (!this._form) {
-      this.form = defaultNamedTemplate;
+      this.form = NamedTemplate.FORM_I_CATEGORY_A_GROUP_U_TEMPLATE;
     }
     return this._form;
   }
 
   set form(form: NamedTemplate) {
-    this._form = (form === null) ? defaultNamedTemplate : form;
+    this._form = (form === null) ? NamedTemplate.FORM_I_CATEGORY_A_GROUP_U_TEMPLATE : form;
     this.handleFormChanged();
   }
 

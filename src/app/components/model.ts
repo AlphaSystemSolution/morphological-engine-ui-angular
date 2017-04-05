@@ -1,4 +1,5 @@
-import { ConversationType } from '../shared/model';
+import { ConversationType } from '../model/common';
+
 export class SarfTermType {
 
   static getByName(name: string): SarfTermType {

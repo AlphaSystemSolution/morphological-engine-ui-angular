@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ArabicConstants, ArabicLetter } from '../../shared/model';
+import { ArabicLetter } from '../../model/arabic-letter';
 import {
   ActiveLine,
   AdverbLine,

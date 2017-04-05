@@ -3,7 +3,8 @@ import { MorphologicalInputFormModel } from '../../shared/morphological-input-fo
 import { ArabicKeyboardComponent } from '../../shared/arabic-keyboard/arabic-keyboard.component';
 import { ArabicDropdownComponent } from '../../shared/arabic-dropdown/arabic-dropdown.component';
 import { VerbalNounPickerComponent } from '../../shared/verbal-noun-picker/verbal-noun-picker.component';
-import { NamedTemplate, MorphologicalInput } from '../../shared/model';
+import { NamedTemplate } from '../../model/named-template';
+import { MorphologicalInput } from '../../model/morphological-input';
 
 @Component({
   selector: 'app-morphological-input-form',

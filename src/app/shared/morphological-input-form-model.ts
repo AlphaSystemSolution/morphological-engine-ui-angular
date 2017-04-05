@@ -1,6 +1,9 @@
-import {
-  ArabicLetter, RootLetters, NamedTemplate, MorphologicalInput, ConjugationConfiguration, VerbalNoun
-} from './model';
+import { ArabicLetter } from '../model/arabic-letter';
+import { RootLetters } from '../model/root-letters';
+import { NamedTemplate } from '../model/named-template';
+import { MorphologicalInput } from '../model/morphological-input';
+import { ConjugationConfiguration } from '../model/common';
+import { VerbalNoun } from '../model/verbal-noun';
 
 export class MorphologicalInputFormModel {
 
