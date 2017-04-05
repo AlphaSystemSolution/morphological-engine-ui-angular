@@ -87,7 +87,9 @@ export class ApplicationControllerService {
     this.data = [];
     const template: ConjugationTemplate = JSON.parse(text);
     const data = template.data;
-    data.forEach(d => this.data.push(MorphologicalInput.fromConjugationData(d)));
+    if (data) {
+      data.forEach(d => this.data.push(MorphologicalInput.fromConjugationData(d)));
+    }
   }
 
   exportFile(fileName: string) {
