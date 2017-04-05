@@ -64,8 +64,11 @@ export class ArabicLetter extends ArabicLabel {
   ];
 
   static getByName(name: string): ArabicLetter {
+    if (!name) {
+      return ArabicLetter.TATWEEL;
+    }
     const results = ArabicLetter.arabicLetters.filter(al => (al.name === name));
-    return (results && results.length > 0) ? results[0] : null;
+    return (results && results.length > 0) ? results[0] : ArabicLetter.TATWEEL;
   }
 
   constructor(public name: string, public label: string, public code: string) {

@@ -37,8 +37,11 @@ export class NamedTemplate extends ArabicLabel {
   ];
 
   static getByName(name: string): NamedTemplate {
+    if (!name) {
+      return NamedTemplate.FORM_I_CATEGORY_A_GROUP_U_TEMPLATE;
+    }
     const results = NamedTemplate.namedTemplates.filter(al => (al.name === name));
-    return (results && results.length > 0) ? results[0] : null;
+    return (results && results.length > 0) ? results[0] : NamedTemplate.FORM_I_CATEGORY_A_GROUP_U_TEMPLATE;
   }
 
   constructor(public name: string, public label: string, public code: string) {
