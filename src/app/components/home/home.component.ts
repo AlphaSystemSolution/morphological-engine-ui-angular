@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   @ViewChild(MorphologicalInputFormComponent) form: MorphologicalInputFormComponent;
   displayDialog: boolean;
   newRow: boolean;
+  importDialog: boolean;
   selectedRow: MorphologicalInput;
   selectedRows: MorphologicalInput[] = [];
 
@@ -44,6 +45,9 @@ export class HomeComponent implements OnInit {
 
   performAction(action) {
     switch (action) {
+      case 'IMPORT':
+        this.import();
+        break;
       case 'ADD':
         this.doAdd();
         break;
@@ -70,6 +74,27 @@ export class HomeComponent implements OnInit {
 
   selectRow(event) {
     this.selectedRow = event.data;
+  }
+
+  loadFile(event) {
+    const file: File = event.file;
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        // this 'text' is the content of the file
+        const text = reader.result;
+        console.log('>>>>>>>> ' + text);
+      };
+      reader.readAsText(file);
+    }
+  }
+
+  private import() {
+    this.importDialog = true;
+  }
+
+  private export() {
+    // TODO:
   }
 
   private save(result: MorphologicalInput) {

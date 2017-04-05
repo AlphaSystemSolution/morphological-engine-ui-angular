@@ -31,3 +31,4 @@
 
 <p-confirmDialog width="425"></p-confirmDialog>
 <app-morphological-input-form #form [(visible)]="displayDialog" (onHide)="hnadleHide($event)"></app-morphological-input-form>
+<app-file [importDialog]="importDialog" (onClose)="loadFile($event)"></app-file>
