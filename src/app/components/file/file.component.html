@@ -8,7 +8,7 @@
         </div>
         <div class="ui-grid-col-4">
           <button type="button" label="Choose a file" icon="fa-file-text" pButton class="ui-fileupload-choose" (click)="onChooseClick($event, fileinput)">
-            <input #fileinput type="file" (change)="onFileSelect($event, input)"/>
+            <input #fileinput type="file" accept=".json" (change)="onFileSelect($event, input)"/>
         </button>
         </div>
       </div>
