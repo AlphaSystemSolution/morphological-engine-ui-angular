@@ -114,6 +114,24 @@ export class NamedTemplate extends ArabicLabel {
   static FORM_IX_TEMPLATE = new NamedTemplate('FORM_IX_TEMPLATE', 'إِفْعَلَّ يَفْعَلَّ', 'IX');
   static FORM_X_TEMPLATE = new NamedTemplate('FORM_X_TEMPLATE', 'إِسْتَفْعَلَ يَسْتَفْعِلُ', 'X');
 
+  static namedTemplates: NamedTemplate[] = [
+    NamedTemplate.FORM_I_CATEGORY_A_GROUP_U_TEMPLATE,
+    NamedTemplate.FORM_I_CATEGORY_A_GROUP_I_TEMPLATE,
+    NamedTemplate.FORM_I_CATEGORY_A_GROUP_A_TEMPLATE,
+    NamedTemplate.FORM_I_CATEGORY_U_TEMPLATE,
+    NamedTemplate.FORM_I_CATEGORY_I_GROUP_A_TEMPLATE,
+    NamedTemplate.FORM_I_CATEGORY_I_GROUP_I_TEMPLATE,
+    NamedTemplate.FORM_II_TEMPLATE,
+    NamedTemplate.FORM_III_TEMPLATE,
+    NamedTemplate.FORM_IV_TEMPLATE,
+    NamedTemplate.FORM_V_TEMPLATE,
+    NamedTemplate.FORM_VI_TEMPLATE,
+    NamedTemplate.FORM_VII_TEMPLATE,
+    NamedTemplate.FORM_VIII_TEMPLATE,
+    NamedTemplate.FORM_IX_TEMPLATE,
+    NamedTemplate.FORM_X_TEMPLATE
+  ];
+
   constructor(public name: string, public label: string, public code: string) {
     super(name, label, code);
   }
@@ -243,24 +261,6 @@ export enum DisplayType {
   LABEL_ONLY, CODE_ONLY, LABEL_AND_CODE
 }
 
-export const namedTemplates: NamedTemplate[] = [
-  NamedTemplate.FORM_I_CATEGORY_A_GROUP_U_TEMPLATE,
-  NamedTemplate.FORM_I_CATEGORY_A_GROUP_I_TEMPLATE,
-  NamedTemplate.FORM_I_CATEGORY_A_GROUP_A_TEMPLATE,
-  NamedTemplate.FORM_I_CATEGORY_U_TEMPLATE,
-  NamedTemplate.FORM_I_CATEGORY_I_GROUP_A_TEMPLATE,
-  NamedTemplate.FORM_I_CATEGORY_I_GROUP_I_TEMPLATE,
-  NamedTemplate.FORM_II_TEMPLATE,
-  NamedTemplate.FORM_III_TEMPLATE,
-  NamedTemplate.FORM_IV_TEMPLATE,
-  NamedTemplate.FORM_V_TEMPLATE,
-  NamedTemplate.FORM_VI_TEMPLATE,
-  NamedTemplate.FORM_VII_TEMPLATE,
-  NamedTemplate.FORM_VIII_TEMPLATE,
-  NamedTemplate.FORM_IX_TEMPLATE,
-  NamedTemplate.FORM_X_TEMPLATE
-];
-
 export const verbalNounPatterns: VerbalNoun[] = [
   VerbalNoun.VERBAL_NOUN_V1, // 0
   VerbalNoun.VERBAL_NOUN_V2, // 1
@@ -349,7 +349,7 @@ export const formXTemplates: VerbalNoun[][] = [
 
 export const defaultRootLetters: RootLetters = new RootLetters(ArabicLetter.FA, ArabicLetter.AIN, ArabicLetter.LAM, ArabicLetter.TATWEEL);
 
-export const defaultNamedTemplate: NamedTemplate = namedTemplates[0];
+export const defaultNamedTemplate: NamedTemplate = NamedTemplate.FORM_I_CATEGORY_A_GROUP_U_TEMPLATE;
 
 export const defaultConjugationConfiguration: ConjugationConfiguration = new ConjugationConfiguration(false, false);
 

@@ -1,5 +1,5 @@
 import {
-  ArabicLetter, RootLetters, NamedTemplate, MorphologicalInput, ConjugationConfiguration, VerbalNoun, namedTemplates
+  ArabicLetter, RootLetters, NamedTemplate, MorphologicalInput, ConjugationConfiguration, VerbalNoun
 } from './model';
 
 export class MorphologicalInputFormModel {
@@ -18,7 +18,7 @@ export class MorphologicalInputFormModel {
   static createDefaultValue(): MorphologicalInput {
     const rootLetters: RootLetters = new RootLetters(ArabicLetter.FA, ArabicLetter.AIN, ArabicLetter.LAM, ArabicLetter.TATWEEL);
     const conjugationConfiguration: ConjugationConfiguration = new ConjugationConfiguration(false, false);
-    return new MorphologicalInput(rootLetters, namedTemplates[0], null, conjugationConfiguration, [], []);
+    return new MorphologicalInput(rootLetters, NamedTemplate.FORM_I_CATEGORY_A_GROUP_U_TEMPLATE, null, conjugationConfiguration, [], []);
   }
 
   constructor() {

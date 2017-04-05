@@ -3,7 +3,7 @@ import { MorphologicalInputFormModel } from '../../shared/morphological-input-fo
 import { ArabicKeyboardComponent } from '../../shared/arabic-keyboard/arabic-keyboard.component';
 import { ArabicDropdownComponent } from '../../shared/arabic-dropdown/arabic-dropdown.component';
 import { VerbalNounPickerComponent } from '../../shared/verbal-noun-picker/verbal-noun-picker.component';
-import { NamedTemplate, MorphologicalInput, namedTemplates } from '../../shared/model';
+import { NamedTemplate, MorphologicalInput } from '../../shared/model';
 
 @Component({
   selector: 'app-morphological-input-form',
@@ -33,7 +33,7 @@ export class MorphologicalInputFormComponent implements OnInit {
   }
 
   get namedTemplates(): NamedTemplate[] {
-    return namedTemplates;
+    return NamedTemplate.namedTemplates;
   }
 
   hideDialog(event, status: string) {
