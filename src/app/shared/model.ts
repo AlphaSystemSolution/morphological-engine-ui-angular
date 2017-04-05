@@ -187,6 +187,93 @@ export class VerbalNoun extends ArabicLabel {
   static VERBAL_NOUN_FORM_IX = new VerbalNoun('VERBAL_NOUN_FORM_IX', 'إِفْعِلَالٌ', 'VERBAL_NOUN_FORM_IX');
   static VERBAL_NOUN_FORM_X = new VerbalNoun('VERBAL_NOUN_FORM_X', 'إِسْتَفْعَالٌ', 'VERBAL_NOUN_FORM_X');
 
+  static verbalNounPatterns: VerbalNoun[] = [
+    VerbalNoun.VERBAL_NOUN_V1, // 0
+    VerbalNoun.VERBAL_NOUN_V2, // 1
+    VerbalNoun.VERBAL_NOUN_V3, // 2
+    VerbalNoun.VERBAL_NOUN_V4, // 3
+    VerbalNoun.VERBAL_NOUN_V5, // 4
+    VerbalNoun.VERBAL_NOUN_V6, // 5
+    VerbalNoun.VERBAL_NOUN_V7, // 6
+    VerbalNoun.VERBAL_NOUN_V8, // 7
+    VerbalNoun.VERBAL_NOUN_V9, // 8
+    VerbalNoun.VERBAL_NOUN_V10, // 9
+    VerbalNoun.VERBAL_NOUN_V11, // 10
+    VerbalNoun.VERBAL_NOUN_V12, // 11
+    VerbalNoun.VERBAL_NOUN_V13, // 12
+    VerbalNoun.VERBAL_NOUN_V14, // 13
+    VerbalNoun.VERBAL_NOUN_V15, // 14
+    VerbalNoun.VERBAL_NOUN_V16, // 15
+    VerbalNoun.VERBAL_NOUN_V17, // 16
+    VerbalNoun.VERBAL_NOUN_V18, // 17
+    VerbalNoun.VERBAL_NOUN_V19, // 18
+    VerbalNoun.VERBAL_NOUN_V20, // 19
+    VerbalNoun.VERBAL_NOUN_V21, // 20
+    VerbalNoun.VERBAL_NOUN_V22, // 21
+    VerbalNoun.VERBAL_NOUN_V23, // 22
+    VerbalNoun.VERBAL_NOUN_V24, // 23
+    VerbalNoun.VERBAL_NOUN_V25, // 24
+    VerbalNoun.VERBAL_NOUN_V26, // 25
+    VerbalNoun.VERBAL_NOUN_V27, // 26
+    VerbalNoun.VERBAL_NOUN_V28, // 27
+    VerbalNoun.VERBAL_NOUN_FORM_II, // 28
+    VerbalNoun.VERBAL_NOUN_FORM_II_DEFECTIVE_VERB, // 29
+    VerbalNoun.VERBAL_NOUN_FORM_III_V1, // 30
+    VerbalNoun.VERBAL_NOUN_FORM_III_V2, // 31
+    VerbalNoun.VERBAL_NOUN_FORM_III_DEFECTIVE_VERB, // 32
+    VerbalNoun.VERBAL_NOUN_FORM_IV, // 33
+    VerbalNoun.VERBAL_NOUN_FORM_V, // 34
+    VerbalNoun.VERBAL_NOUN_FORM_VI, // 35
+    VerbalNoun.VERBAL_NOUN_FORM_VII, // 36
+    VerbalNoun.VERBAL_NOUN_FORM_VIII, // 37
+    VerbalNoun.VERBAL_NOUN_FORM_IX, // 38
+    VerbalNoun.VERBAL_NOUN_FORM_X, // 39
+  ];
+
+  static formITemplates: VerbalNoun[][] = [
+    [VerbalNoun.VERBAL_NOUN_V1, VerbalNoun.VERBAL_NOUN_V2, VerbalNoun.VERBAL_NOUN_V3, VerbalNoun.VERBAL_NOUN_V4],
+    [VerbalNoun.VERBAL_NOUN_V5, VerbalNoun.VERBAL_NOUN_V6, VerbalNoun.VERBAL_NOUN_V7, VerbalNoun.VERBAL_NOUN_V8],
+    [VerbalNoun.VERBAL_NOUN_V9, VerbalNoun.VERBAL_NOUN_V10, VerbalNoun.VERBAL_NOUN_V11, VerbalNoun.VERBAL_NOUN_V12],
+    [VerbalNoun.VERBAL_NOUN_V13, VerbalNoun.VERBAL_NOUN_V14, VerbalNoun.VERBAL_NOUN_V15, VerbalNoun.VERBAL_NOUN_V27],
+    [VerbalNoun.VERBAL_NOUN_V28]
+  ];
+
+  static formIITemplates: VerbalNoun[][] = [
+    [VerbalNoun.VERBAL_NOUN_FORM_II]
+  ];
+
+  static formIIITemplates: VerbalNoun[][] = [
+    [VerbalNoun.VERBAL_NOUN_FORM_III_V1, VerbalNoun.VERBAL_NOUN_FORM_III_V2]
+  ];
+
+  static formIVTemplates: VerbalNoun[][] = [
+    [VerbalNoun.VERBAL_NOUN_FORM_IV]
+  ];
+
+  static formVTemplates: VerbalNoun[][] = [
+    [VerbalNoun.VERBAL_NOUN_FORM_V]
+  ];
+
+  static formVITemplates: VerbalNoun[][] = [
+    [VerbalNoun.VERBAL_NOUN_FORM_VI]
+  ];
+
+  static formVIITemplates: VerbalNoun[][] = [
+    [VerbalNoun.VERBAL_NOUN_FORM_VII]
+  ];
+
+  static formVIIITemplates: VerbalNoun[][] = [
+    [VerbalNoun.VERBAL_NOUN_FORM_VIII]
+  ];
+
+  static formIXTemplates: VerbalNoun[][] = [
+    [VerbalNoun.VERBAL_NOUN_FORM_IX]
+  ];
+
+  static formXTemplates: VerbalNoun[][] = [
+    [VerbalNoun.VERBAL_NOUN_FORM_X]
+  ];
+
   constructor(public name: string, public label: string, public code: string) {
     super(name, label, code);
   }
@@ -266,93 +353,6 @@ export class ConversationType extends ArabicLabel {
 export enum DisplayType {
   LABEL_ONLY, CODE_ONLY, LABEL_AND_CODE
 }
-
-export const verbalNounPatterns: VerbalNoun[] = [
-  VerbalNoun.VERBAL_NOUN_V1, // 0
-  VerbalNoun.VERBAL_NOUN_V2, // 1
-  VerbalNoun.VERBAL_NOUN_V3, // 2
-  VerbalNoun.VERBAL_NOUN_V4, // 3
-  VerbalNoun.VERBAL_NOUN_V5, // 4
-  VerbalNoun.VERBAL_NOUN_V6, // 5
-  VerbalNoun.VERBAL_NOUN_V7, // 6
-  VerbalNoun.VERBAL_NOUN_V8, // 7
-  VerbalNoun.VERBAL_NOUN_V9, // 8
-  VerbalNoun.VERBAL_NOUN_V10, // 9
-  VerbalNoun.VERBAL_NOUN_V11, // 10
-  VerbalNoun.VERBAL_NOUN_V12, // 11
-  VerbalNoun.VERBAL_NOUN_V13, // 12
-  VerbalNoun.VERBAL_NOUN_V14, // 13
-  VerbalNoun.VERBAL_NOUN_V15, // 14
-  VerbalNoun.VERBAL_NOUN_V16, // 15
-  VerbalNoun.VERBAL_NOUN_V17, // 16
-  VerbalNoun.VERBAL_NOUN_V18, // 17
-  VerbalNoun.VERBAL_NOUN_V19, // 18
-  VerbalNoun.VERBAL_NOUN_V20, // 19
-  VerbalNoun.VERBAL_NOUN_V21, // 20
-  VerbalNoun.VERBAL_NOUN_V22, // 21
-  VerbalNoun.VERBAL_NOUN_V23, // 22
-  VerbalNoun.VERBAL_NOUN_V24, // 23
-  VerbalNoun.VERBAL_NOUN_V25, // 24
-  VerbalNoun.VERBAL_NOUN_V26, // 25
-  VerbalNoun.VERBAL_NOUN_V27, // 26
-  VerbalNoun.VERBAL_NOUN_V28, // 27
-  VerbalNoun.VERBAL_NOUN_FORM_II, // 28
-  VerbalNoun.VERBAL_NOUN_FORM_II_DEFECTIVE_VERB, // 29
-  VerbalNoun.VERBAL_NOUN_FORM_III_V1, // 30
-  VerbalNoun.VERBAL_NOUN_FORM_III_V2, // 31
-  VerbalNoun.VERBAL_NOUN_FORM_III_DEFECTIVE_VERB, // 32
-  VerbalNoun.VERBAL_NOUN_FORM_IV, // 33
-  VerbalNoun.VERBAL_NOUN_FORM_V, // 34
-  VerbalNoun.VERBAL_NOUN_FORM_VI, // 35
-  VerbalNoun.VERBAL_NOUN_FORM_VII, // 36
-  VerbalNoun.VERBAL_NOUN_FORM_VIII, // 37
-  VerbalNoun.VERBAL_NOUN_FORM_IX, // 38
-  VerbalNoun.VERBAL_NOUN_FORM_X, // 39
-];
-
-export const formITemplates: VerbalNoun[][] = [
-  [VerbalNoun.VERBAL_NOUN_V1, VerbalNoun.VERBAL_NOUN_V2, VerbalNoun.VERBAL_NOUN_V3, VerbalNoun.VERBAL_NOUN_V4],
-  [VerbalNoun.VERBAL_NOUN_V5, VerbalNoun.VERBAL_NOUN_V6, VerbalNoun.VERBAL_NOUN_V7, VerbalNoun.VERBAL_NOUN_V8],
-  [VerbalNoun.VERBAL_NOUN_V9, VerbalNoun.VERBAL_NOUN_V10, VerbalNoun.VERBAL_NOUN_V11, VerbalNoun.VERBAL_NOUN_V12],
-  [VerbalNoun.VERBAL_NOUN_V13, VerbalNoun.VERBAL_NOUN_V14, VerbalNoun.VERBAL_NOUN_V15, VerbalNoun.VERBAL_NOUN_V27],
-  [VerbalNoun.VERBAL_NOUN_V28]
-];
-
-export const formIITemplates: VerbalNoun[][] = [
-  [VerbalNoun.VERBAL_NOUN_FORM_II]
-];
-
-export const formIIITemplates: VerbalNoun[][] = [
-  [VerbalNoun.VERBAL_NOUN_FORM_III_V1, VerbalNoun.VERBAL_NOUN_FORM_III_V2]
-];
-
-export const formIVTemplates: VerbalNoun[][] = [
-  [VerbalNoun.VERBAL_NOUN_FORM_IV]
-];
-
-export const formVTemplates: VerbalNoun[][] = [
-  [VerbalNoun.VERBAL_NOUN_FORM_V]
-];
-
-export const formVITemplates: VerbalNoun[][] = [
-  [VerbalNoun.VERBAL_NOUN_FORM_VI]
-];
-
-export const formVIITemplates: VerbalNoun[][] = [
-  [VerbalNoun.VERBAL_NOUN_FORM_VII]
-];
-
-export const formVIIITemplates: VerbalNoun[][] = [
-  [VerbalNoun.VERBAL_NOUN_FORM_VIII]
-];
-
-export const formIXTemplates: VerbalNoun[][] = [
-  [VerbalNoun.VERBAL_NOUN_FORM_IX]
-];
-
-export const formXTemplates: VerbalNoun[][] = [
-  [VerbalNoun.VERBAL_NOUN_FORM_X]
-];
 
 export const defaultRootLetters: RootLetters = new RootLetters(ArabicLetter.FA, ArabicLetter.AIN, ArabicLetter.LAM, ArabicLetter.TATWEEL);
 

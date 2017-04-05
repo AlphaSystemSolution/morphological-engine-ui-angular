@@ -1,10 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { OverlayPanel } from 'primeng/primeng';
-import {
-  NamedTemplate, VerbalNoun, defaultNamedTemplate, verbalNounPatterns,
-  formIITemplates, formIIITemplates, formIVTemplates, formVTemplates,
-  formVITemplates, formVIITemplates, formVIIITemplates, formIXTemplates, formXTemplates
-} from '../model';
+import { NamedTemplate, VerbalNoun, defaultNamedTemplate } from '../model';
 import { ToggleSelectorComponent } from '../toggle-selector/toggle-selector.component';
 
 @Component({
@@ -35,34 +31,34 @@ export class VerbalNounPickerComponent implements OnInit {
     const code = form.code;
     switch (code) {
       case 'Family II':
-        defaultValues = formIITemplates;
+        defaultValues = VerbalNoun.formIITemplates;
         break;
       case 'Family III':
-        defaultValues = formIIITemplates;
+        defaultValues = VerbalNoun.formIIITemplates;
         break;
       case 'Family IV':
-        defaultValues = formIVTemplates;
+        defaultValues = VerbalNoun.formIVTemplates;
         break;
       case 'Family V':
-        defaultValues = formVTemplates;
+        defaultValues = VerbalNoun.formVTemplates;
         break;
       case 'Family IV':
-        defaultValues = formIVTemplates;
+        defaultValues = VerbalNoun.formIVTemplates;
         break;
       case 'Family VI':
-        defaultValues = formVITemplates;
+        defaultValues = VerbalNoun.formVITemplates;
         break;
       case 'Family VII':
-        defaultValues = formVITemplates;
+        defaultValues = VerbalNoun.formVITemplates;
         break;
       case 'Family VIII':
-        defaultValues = formVITemplates;
+        defaultValues = VerbalNoun.formVITemplates;
         break;
       case 'Family IX':
-        defaultValues = formIXTemplates;
+        defaultValues = VerbalNoun.formIXTemplates;
         break;
       case 'Family X':
-        defaultValues = formXTemplates;
+        defaultValues = VerbalNoun.formXTemplates;
         break;
       default:
         break;
