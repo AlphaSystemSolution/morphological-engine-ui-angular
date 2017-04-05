@@ -291,8 +291,8 @@ export class NounOfPlaceAndTime extends ArabicLabel {
 }
 
 export class RootLetters {
-  constructor(public firstRadical: ArabicLetter, public secondRadical: ArabicLetter, public thirdRadical: ArabicLetter,
-    public fourthRadical: ArabicLetter) { }
+  constructor(public firstRadical: ArabicLetter = ArabicLetter.FA, public secondRadical: ArabicLetter = ArabicLetter.AIN,
+    public thirdRadical: ArabicLetter = ArabicLetter.LAM, public fourthRadical: ArabicLetter = ArabicLetter.TATWEEL) { }
 
   get label(): string {
     let label = this.firstRadical.label + this.secondRadical.label + this.thirdRadical.label;
@@ -313,7 +313,7 @@ export class RootLetters {
 }
 
 export class ConjugationConfiguration {
-  constructor(public removePassiveLine: boolean, public skipRuleProcessing: boolean) { }
+  constructor(public removePassiveLine: boolean = false, public skipRuleProcessing: boolean = false) { }
 }
 
 export class NounStatus extends ArabicLabel {
@@ -367,6 +367,12 @@ export const defaultConjugationConfiguration: ConjugationConfiguration = new Con
 
 export class MorphologicalInput extends Document {
 
+  private _rootLetters: RootLetters;
+  private _template: NamedTemplate;
+  private _translation: string;
+  private _configuration: ConjugationConfiguration;
+  private _verbalNouns: VerbalNoun[];
+  private _nounOfPlaceAndTimes: NounOfPlaceAndTime[];
 
   static copy(src: MorphologicalInput, copyId: boolean): MorphologicalInput {
     if (!src) {
@@ -378,18 +384,80 @@ export class MorphologicalInput extends Document {
     const srcConjugationConfiguration = src.configuration;
     const conjugationConfiguration: ConjugationConfiguration = new ConjugationConfiguration(srcConjugationConfiguration.removePassiveLine,
       srcConjugationConfiguration.skipRuleProcessing);
-    const result: MorphologicalInput = new MorphologicalInput(rootLetters, src.template, src.translation, conjugationConfiguration,
-      src.verbalNouns, null);
+    const result: MorphologicalInput = new MorphologicalInput();
+    result.rootLetters = src.rootLetters;
+    result.template = src.template;
+    result.translation = src.translation;
+    result.configuration = src.configuration;
+    result.verbalNouns = src.verbalNouns;
+    result.nounOfPlaceAndTimes = src.nounOfPlaceAndTimes;
     if (copyId) {
       result.id = src.id;
     }
     return result;
   }
 
-  constructor(public rootLetters: RootLetters = defaultRootLetters, public template: NamedTemplate = defaultNamedTemplate,
-    public translation: string, public configuration: ConjugationConfiguration = defaultConjugationConfiguration,
-    public verbalNouns: VerbalNoun[] = [], public nounOfPlaceAndTimes: NounOfPlaceAndTime[] = []) {
-    super();
+  get rootLetters(): RootLetters {
+    return this._rootLetters;
+  }
+
+  set rootLetters(value: RootLetters) {
+    if (!value) {
+      value = defaultRootLetters;
+    }
+    this._rootLetters = value;
+  }
+
+  get template(): NamedTemplate {
+    return this._template;
+  }
+
+  set template(value: NamedTemplate) {
+    if (!value) {
+      value = NamedTemplate.FORM_I_CATEGORY_A_GROUP_U_TEMPLATE;
+    }
+    this._template = value;
+  }
+
+  get translation(): string {
+    return this._translation;
+  }
+
+  set translation(value: string) {
+    this._translation = value;
+  }
+
+  get configuration(): ConjugationConfiguration {
+    return this._configuration;
+  }
+
+  set configuration(value: ConjugationConfiguration) {
+    if (!value) {
+      value = defaultConjugationConfiguration;
+    }
+    this._configuration = value;
+  }
+
+  get verbalNouns(): VerbalNoun[] {
+    return this._verbalNouns;
+  }
+
+  set verbalNouns(values: VerbalNoun[]) {
+    if (!values) {
+      values = [];
+    }
+    this._verbalNouns = values;
+  }
+
+  get nounOfPlaceAndTimes(): NounOfPlaceAndTime[] {
+    return this._nounOfPlaceAndTimes;
+  }
+
+  set nounOfPlaceAndTimes(values: NounOfPlaceAndTime[]) {
+    if (!values) {
+      values = [];
+    }
+    this._nounOfPlaceAndTimes = values;
   }
 
   get verbalNounsText(): string {
@@ -406,8 +474,8 @@ export class MorphologicalInput extends Document {
   }
 }
 
-export const defaultMorphologicalInput: MorphologicalInput = new MorphologicalInput(defaultRootLetters, defaultNamedTemplate, null,
-  defaultConjugationConfiguration, [], []);
+// export const defaultMorphologicalInput: MorphologicalInput = new MorphologicalInput(defaultRootLetters, defaultNamedTemplate, null,
+//   defaultConjugationConfiguration, [], []);
 
 export class ArabicConstants {
   static PARTICIPLE_PREFIX = new ArabicLabel('PARTICIPLE_PREFIX', 'فهو', 'Participle prefix');
