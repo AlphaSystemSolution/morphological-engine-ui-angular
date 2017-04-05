@@ -31,7 +31,6 @@ export class FileComponent implements OnInit {
     const files = event.dataTransfer ? event.dataTransfer.files : event.target.files;
     if (files && files.length > 0) {
       this.file = files[0];
-      console.log('FILE: ' + this.file.name);
       input.value = this.file.name;
     }
   }
