@@ -1,8 +1,10 @@
 import { ConjugationConfiguration, Document } from './common';
+import { ArabicLetter } from './arabic-letter';
 import { RootLetters } from './root-letters';
 import { NamedTemplate } from './named-template';
 import { VerbalNoun } from './verbal-noun';
 import { NounOfPlaceAndTime } from './noun-of-place-and-time';
+import { ConjugationData } from './conjugation-data';
 
 export class MorphologicalInput extends Document {
 
@@ -33,6 +35,36 @@ export class MorphologicalInput extends Document {
     if (copyId) {
       result.id = src.id;
     }
+    return result;
+  }
+
+  static fromConjugationData(src: ConjugationData): MorphologicalInput {
+    const result: MorphologicalInput = new MorphologicalInput();
+    result.template = NamedTemplate.getByName(src.template);
+    const rl = src.rootLetters;
+    if (rl) {
+      const rootLetters = new RootLetters();
+      rootLetters.firstRadical = ArabicLetter.getByName(rl.firstRadical);
+      rootLetters.secondRadical = ArabicLetter.getByName(rl.secondRadical);
+      rootLetters.thirdRadical = ArabicLetter.getByName(rl.thirdRadical);
+      rootLetters.fourthRadical = ArabicLetter.getByName(rl.fourthRadical);
+      result.rootLetters = rootLetters;
+    }
+    result.translation = src.translation;
+    result.configuration = src.configuration;
+    const _verbalNouns = src.verbalNouns;
+    if (_verbalNouns) {
+      const verbalNouns = [];
+      _verbalNouns.forEach(vn => {
+        const verbalNoun = VerbalNoun.getByName(vn);
+        if (verbalNoun) {
+          verbalNouns.push(verbalNoun);
+        }
+      });
+      result.verbalNouns = verbalNouns;
+    }
+
+    result.nounOfPlaceAndTimes = [];
     return result;
   }
 
