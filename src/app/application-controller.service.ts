@@ -81,6 +81,11 @@ export class ApplicationControllerService {
     window.open(url, 'dictionary');
   }
 
+  importFile(text: string) {
+    const template: ConjugationTemplate = JSON.parse(text);
+    console.log(JSON.stringify(template));
+  }
+
   exportFile(fileName: string) {
     const body: ConjugationTemplate = ConjugationTemplate.createConjugationTemplate(null, this.data);
     FileSaver.saveAs(new Blob([JSON.stringify(body)]), fileName);

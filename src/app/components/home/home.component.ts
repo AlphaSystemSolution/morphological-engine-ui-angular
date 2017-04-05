@@ -87,7 +87,7 @@ export class HomeComponent implements OnInit {
       reader.onload = () => {
         // this 'text' is the content of the file
         const text = reader.result;
-        console.log('>>>>>>>> ' + text);
+        this.applicationController.importFile(text);
         this.importDialog = false;
       };
       reader.onerror = () => {
