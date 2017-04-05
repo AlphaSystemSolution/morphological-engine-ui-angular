@@ -311,10 +311,11 @@ export const verbalNounPatterns: VerbalNoun[] = [
 ];
 
 export const formITemplates: VerbalNoun[][] = [
-  [verbalNounPatterns[0], verbalNounPatterns[1], verbalNounPatterns[3], verbalNounPatterns[4]],
-  [verbalNounPatterns[5], verbalNounPatterns[6], verbalNounPatterns[7], verbalNounPatterns[8]],
-  [verbalNounPatterns[9], verbalNounPatterns[10], verbalNounPatterns[11], verbalNounPatterns[12]],
-  [verbalNounPatterns[13], verbalNounPatterns[14], verbalNounPatterns[26], verbalNounPatterns[27]]
+  [VerbalNoun.VERBAL_NOUN_V1, VerbalNoun.VERBAL_NOUN_V2, VerbalNoun.VERBAL_NOUN_V3, VerbalNoun.VERBAL_NOUN_V4],
+  [VerbalNoun.VERBAL_NOUN_V5, VerbalNoun.VERBAL_NOUN_V6, VerbalNoun.VERBAL_NOUN_V7, VerbalNoun.VERBAL_NOUN_V8],
+  [VerbalNoun.VERBAL_NOUN_V9, VerbalNoun.VERBAL_NOUN_V10, VerbalNoun.VERBAL_NOUN_V11, VerbalNoun.VERBAL_NOUN_V12],
+  [VerbalNoun.VERBAL_NOUN_V13, VerbalNoun.VERBAL_NOUN_V14, VerbalNoun.VERBAL_NOUN_V15, VerbalNoun.VERBAL_NOUN_V27],
+  [VerbalNoun.VERBAL_NOUN_V28]
 ];
 
 export const formIITemplates: VerbalNoun[][] = [
