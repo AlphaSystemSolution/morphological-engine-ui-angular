@@ -49,6 +49,15 @@ export class FileComponent implements OnInit {
       let result: string = null;
       if ('submit' === action) {
         result = this.input.nativeElement.value;
+        const extensionIndex = result.lastIndexOf('.');
+        let addExtension = extensionIndex < 0;
+        if (!addExtension) {
+          const extension = result.substring(extensionIndex + 1);
+          addExtension = 'json' !== extension;
+        }
+        if (addExtension) {
+          result += '.json';
+        }
       }
       this.onClose.emit({ originalEvent: event, file: result });
     }
