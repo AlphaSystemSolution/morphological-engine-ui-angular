@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   displayDialog: boolean;
   newRow: boolean;
   importDialog: boolean;
+  exportDialog: boolean;
   selectedRow: MorphologicalInput;
   selectedRows: MorphologicalInput[] = [];
 
@@ -48,6 +49,9 @@ export class HomeComponent implements OnInit {
       case 'IMPORT':
         this.import();
         break;
+      case 'EXPORT':
+        this.export();
+        break;
       case 'ADD':
         this.doAdd();
         break;
@@ -76,7 +80,7 @@ export class HomeComponent implements OnInit {
     this.selectedRow = event.data;
   }
 
-  loadFile(event) {
+  importFile(event) {
     const file: File = event.file;
     if (file) {
       const reader = new FileReader();
@@ -95,12 +99,20 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  exportFile(event) {
+    this.exportDialog = false;
+    const fileName: string = event.file;
+    if (fileName) {
+      this.applicationController.exportFile(fileName);
+    }
+  }
+
   private import() {
     this.importDialog = true;
   }
 
   private export() {
-    // TODO:
+    this.exportDialog = true;
   }
 
   private save(result: MorphologicalInput) {

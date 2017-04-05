@@ -7,6 +7,7 @@ import { ConjugationTemplate, RootLetters, MorphologicalInput } from './shared/m
 import { MorphologicalChart } from './components/model';
 import { environment } from '../environments/environment';
 import 'rxjs/add/operator/map';
+import * as FileSaver from 'file-saver';
 
 @Injectable()
 export class ApplicationControllerService {
@@ -78,6 +79,11 @@ export class ApplicationControllerService {
     const searcString = rootLetters.firstRadical.code + rootLetters.secondRadical.code + rootLetters.thirdRadical.code;
     const url = environment.dictionaryUrl + searcString;
     window.open(url, 'dictionary');
+  }
+
+  exportFile(fileName: string) {
+    const body: ConjugationTemplate = ConjugationTemplate.createConjugationTemplate(null, this.data);
+    FileSaver.saveAs(new Blob([JSON.stringify(body)]), fileName);
   }
 
 }
