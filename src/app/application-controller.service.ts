@@ -84,8 +84,10 @@ export class ApplicationControllerService {
   }
 
   importFile(text: string) {
+    this.data = [];
     const template: ConjugationTemplate = JSON.parse(text);
-    console.log(JSON.stringify(template));
+    const data = template.data;
+    data.forEach(d => this.data.push(MorphologicalInput.fromConjugationData(d)));
   }
 
   exportFile(fileName: string) {
