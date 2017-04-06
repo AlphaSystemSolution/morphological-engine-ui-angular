@@ -6,6 +6,5 @@
 export const environment = {
   production: false,
   dictionaryUrl: 'http://ejtaal.net/aa/index.html#bwq=',
-  morphologicalEngineBaseUrl: 'http://localhost:8080/morphologicalEngine/',
-  morphologicalChartPath: 'morphologicalChart/form/%s/firstRadical/%s/secondRadical/%s/thirdRadical/%s/'
+  morphologicalEngineBaseUrl: 'http://localhost:8080/morphologicalEngine/'
 };
