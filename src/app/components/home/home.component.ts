@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   selectedRow: MorphologicalInput;
   selectedRows: MorphologicalInput[] = [];
 
-  constructor(private applicationController: ApplicationControllerService, private confirmationService: ConfirmationService,
+  constructor(public applicationController: ApplicationControllerService, private confirmationService: ConfirmationService,
     private router: Router) {
   }
 

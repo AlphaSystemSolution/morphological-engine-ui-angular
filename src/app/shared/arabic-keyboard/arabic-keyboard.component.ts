@@ -84,7 +84,7 @@ export class ArabicKeyboardComponent implements OnInit {
     this.updateState(this.currentIndex, true);
   }
 
-  private handleHide(event): void {
+  handleHide(event): void {
     this.onClose.emit({ 'rootLetters': this.rootLetters });
   }
 
