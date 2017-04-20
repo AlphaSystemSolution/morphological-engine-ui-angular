@@ -1,33 +1,39 @@
 <app-toolbar (onAction)="performAction($event)"></app-toolbar>
 <div>&nbsp;</div>
 
-<p-dataTable [value]="applicationController.data" [(selection)]="selectedRows" selectionMode="multiple" [responsive]="true" [editable]="true" (onRowSelect)="selectRow($event)">
-  <p-column [style]="&#123;'width':'38px'&#125;" selectionMode="multiple"></p-column>
-  <p-column field="rootLetters" header="Root Letters" [style]="{'width': '200px'}">
-    <template let-mi="rowData" pTemplate="body">
-      <div class="arabicNormal">{{ mi.rootLetters.label }}</div>
-    </template>
-  </p-column>
-  <p-column field="template" header="Family" [style]="{'width': '350px'}" [editable]="true">
-    <template let-mi="rowData" pTemplate="body">
-      <div style="direction: rtl">
-        <span class="arabicNormal">{{ mi.template.label }}</span> &mdash; <span>{{ mi.template.code}}</span>
-      </div>
-    </template>
-  </p-column>
-  <p-column field="verbalNounsText" header="Verbal Nouns">
-    <template let-mi="rowData" pTemplate="body">
-      <div class="arabicNormal">{{ mi.verbalNounsText }}</div>
-    </template>
-  </p-column>
-  <p-column field="translation" header="Translation">
-    <template let-mi="rowData" pTemplate="body">
-      <div style="font-size: 14px">{{ mi.translation }}</div>
-    </template>
-  </p-column>
-</p-dataTable>
-
-<app-morphological-chart></app-morphological-chart>
+<p-tabView (onChange)="handleChange($event)">
+  <p-tabPanel header="Table">
+    <p-dataTable [value]="applicationController.data" [(selection)]="selectedRows" selectionMode="multiple" [responsive]="true"
+      [editable]="true" (onRowSelect)="selectRow($event)">
+      <p-column [style]="&#123;'width':'38px'&#125;" selectionMode="multiple"></p-column>
+      <p-column field="rootLetters" header="Root Letters" [style]="{'width': '200px'}">
+        <template let-mi="rowData" pTemplate="body">
+          <div class="arabicNormal">{{ mi.rootLetters.label }}</div>
+        </template>
+      </p-column>
+      <p-column field="template" header="Family" [style]="{'width': '350px'}" [editable]="true">
+        <template let-mi="rowData" pTemplate="body">
+          <div style="direction: rtl">
+            <span class="arabicNormal">{{ mi.template.label }}</span> &mdash; <span>{{ mi.template.code}}</span>
+          </div>
+        </template>
+      </p-column>
+      <p-column field="verbalNounsText" header="Verbal Nouns">
+        <template let-mi="rowData" pTemplate="body">
+          <div class="arabicNormal">{{ mi.verbalNounsText }}</div>
+        </template>
+      </p-column>
+      <p-column field="translation" header="Translation">
+        <template let-mi="rowData" pTemplate="body">
+          <div style="font-size: 14px">{{ mi.translation }}</div>
+        </template>
+      </p-column>
+    </p-dataTable>
+  </p-tabPanel>
+  <p-tabPanel header="Conjugation">
+   <app-morphological-chart #chart></app-morphological-chart>
+  </p-tabPanel>
+</p-tabView>
 
 <p-confirmDialog width="425"></p-confirmDialog>
 <app-morphological-input-form #form [(visible)]="displayDialog" (onHide)="hnadleHide($event)"></app-morphological-input-form>

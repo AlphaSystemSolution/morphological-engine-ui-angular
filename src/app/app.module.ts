@@ -11,6 +11,7 @@ import {
   InputSwitchModule,
   PanelModule,
   SplitButtonModule,
+  TabViewModule,
   ToolbarModule
 } from 'primeng/primeng';
 import { ApplicationControllerService } from './application-controller.service';
@@ -56,6 +57,7 @@ import { FileComponent } from './components/file/file.component';
     InputSwitchModule,
     PanelModule,
     SplitButtonModule,
+    TabViewModule,
     ToolbarModule,
     SharedModule,
     appRoutes

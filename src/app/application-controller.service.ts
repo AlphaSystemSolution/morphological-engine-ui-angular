@@ -6,7 +6,7 @@ import { MorphologicalInputFormModel } from './shared/morphological-input-form-m
 import { ConjugationTemplate } from './model/conjugation-template';
 import { RootLetters } from './model/root-letters';
 import { MorphologicalInput } from './model/morphological-input';
-import { MorphologicalChart } from './components/model';
+import { MorphologicalChart, AbbreviatedConjugation } from './components/model';
 import { environment } from '../environments/environment';
 import 'rxjs/add/operator/map';
 import * as FileSaver from 'file-saver';
@@ -16,10 +16,31 @@ export class ApplicationControllerService {
 
   private _morphologicalChartSubject: BehaviorSubject<MorphologicalChart[]>;
   public morphologicalCharts: Observable<MorphologicalChart[]>;
+  public abbreviatedConjugations: AbbreviatedConjugation[] = [];
   data: MorphologicalInput[] = [];
 
   constructor(private http: Http) {
     this.data[0] = MorphologicalInputFormModel.createDefaultValue();
+  }
+
+  doConjugation(inputs: MorphologicalInput[]) {
+    const url = environment.morphologicalEngineBaseUrl + 'AbbreviatedConjugation/format/UNICODE';
+
+    const headers = new Headers();
+    headers.set('Content-Type', 'application/json;charset=UTF-8');
+    const options = new RequestOptions({ headers: headers });
+
+    const body: ConjugationTemplate = ConjugationTemplate.createConjugationTemplate(null, inputs);
+    this.http.post(url, body, options).map(resp => resp.json())
+      .subscribe(
+      data => {
+        this.abbreviatedConjugations = this.abbreviatedConjugations.concat(<AbbreviatedConjugation>data);
+        this.abbreviatedConjugations.sort((a1, a2) => a1.id.localeCompare(a2.id));
+      },
+      err => {
+        console.log('ERROR: ' + JSON.stringify(err));
+      }
+      );
   }
 
   getMorphologicalChart(inputs: MorphologicalInput[], format: string = 'UNICODE'): void {

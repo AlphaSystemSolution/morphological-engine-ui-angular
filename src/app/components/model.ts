@@ -118,8 +118,22 @@ export class ConjugationHeader {
 }
 
 export class AbbreviatedConjugation {
-  constructor(public conjugationHeader: ConjugationHeader, public activeLine: ActiveLine, public passiveLine: PassiveLine,
-    public imperativeAndForbiddingLine: ImperativeAndForbiddingLine, public adverbLine: AdverbLine) { }
+  public id: string;
+  public conjugationHeader: ConjugationHeader;
+  public pastTense: string;
+  public presentTense: string;
+  public activeParticiple: string;
+  public pastPassiveTense: string;
+  public presentPassiveTense: string;
+  public passiveParticiple: string;
+  public imperative: string;
+  public forbidding: string;
+  public verbalNouns: string[];
+  public adverbs: string[];
+
+  get showPassiveLine(): boolean {
+    return this.pastPassiveTense !== null || this.presentPassiveTense !== null || this.passiveParticiple !== null;
+  }
 }
 
 export class DetailedConjugation {
@@ -127,6 +141,7 @@ export class DetailedConjugation {
     public activeParticiplePair: NounDetailedConjugationPair, public passiveTensePair: VerbDetailedConjugationPair,
     public passiveParticiplePair: NounDetailedConjugationPair, public imperativeAndForbiddingPair: VerbDetailedConjugationPair,
     public adverbPairs: NounDetailedConjugationPair[]) { }
+
 }
 
 export class MorphologicalChart {

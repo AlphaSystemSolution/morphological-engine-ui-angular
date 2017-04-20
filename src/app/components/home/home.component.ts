@@ -4,6 +4,7 @@ import { ConfirmationService } from 'primeng/primeng';
 import { ApplicationControllerService } from '../../application-controller.service';
 import { MorphologicalInputFormComponent } from '../morphological-input-form/morphological-input-form.component';
 import { MorphologicalInputFormModel } from '../../shared/morphological-input-form-model';
+import { MorphologicalChartComponent } from '../morphological-chart/morphological-chart.component';
 import { ConjugationConfiguration } from '../../model/common';
 import { MorphologicalInput } from '../../model/morphological-input';
 
@@ -15,6 +16,7 @@ import { MorphologicalInput } from '../../model/morphological-input';
 export class HomeComponent implements OnInit {
 
   @ViewChild(MorphologicalInputFormComponent) form: MorphologicalInputFormComponent;
+  @ViewChild(MorphologicalChartComponent) chart: MorphologicalChartComponent;
   displayDialog: boolean;
   newRow: boolean;
   importDialog: boolean;
@@ -108,6 +110,13 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  handleChange(event) {
+    const index: number = event.index;
+    if (index === 1) {
+      this.chart.abbreviatedConjugations = this.applicationController.abbreviatedConjugations;
+    }
+  }
+
   private import() {
     this.importDialog = true;
   }
@@ -187,10 +196,10 @@ export class HomeComponent implements OnInit {
     if (!this.selectedRows) {
       return;
     }
-    this.applicationController.getMorphologicalChart(this.selectedRows);
-    this.router.navigate(['staging']).then(() => {
+    this.applicationController.doConjugation(this.selectedRows);
+    /*this.router.navigate(['staging']).then(() => {
       this.router.navigate(['home']);
-    });
+    });*/
     this.clearSelectedRows();
   }
 

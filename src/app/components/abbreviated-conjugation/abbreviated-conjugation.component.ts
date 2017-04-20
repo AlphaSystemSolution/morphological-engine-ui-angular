@@ -38,7 +38,7 @@ export class AbbreviatedConjugationComponent implements OnInit {
         this.typeLabel2 = conjugationHeader.typeLabel2;
         this.typeLabel3 = conjugationHeader.typeLabel3;
       }
-      this.showPassive = this.abbreviatedConjugation.passiveLine !== null;
+      this.showPassive = this.abbreviatedConjugation.showPassiveLine;
     }
   }
 
