@@ -31,19 +31,7 @@ export class AbbreviatedConjugationComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.show = this.abbreviatedConjugation != null;
-    if (this.show) {
-      const conjugationHeader = this.abbreviatedConjugation.conjugationHeader;
-      if (conjugationHeader) {
-        this.title = conjugationHeader.title;
-        this.translation = conjugationHeader.translation;
-        this.typeLabel1 = conjugationHeader.typeLabel1;
-        this.typeLabel2 = conjugationHeader.typeLabel2;
-        this.typeLabel3 = conjugationHeader.typeLabel3;
-      }
-      this.showPassive = this.abbreviatedConjugation.showPassiveLine;
-      this.updateTexts();
-    }
+    this.updateTexts();
   }
 
   @Input() get abbreviatedConjugation(): AbbreviatedConjugation {
@@ -68,8 +56,29 @@ export class AbbreviatedConjugationComponent implements OnInit {
   }
 
   private updateTexts() {
-    this.verbalNounsText = this.concatenatedStringWithAnd(this.abbreviatedConjugation.verbalNouns);
-    this.adverbsText = this.concatenatedStringWithAnd(this.abbreviatedConjugation.adverbs);
+    this.show = this.abbreviatedConjugation != null;
+    if (this.show) {
+      const conjugationHeader = this.abbreviatedConjugation.conjugationHeader;
+      if (conjugationHeader) {
+        this.title = conjugationHeader.title;
+        this.translation = conjugationHeader.translation;
+        this.typeLabel1 = conjugationHeader.typeLabel1;
+        this.typeLabel2 = conjugationHeader.typeLabel2;
+        this.typeLabel3 = conjugationHeader.typeLabel3;
+      }
+      this.showPassive = this.abbreviatedConjugation.showPassiveLine;
+      this.verbalNounsText = this.concatenatedStringWithAnd(this.abbreviatedConjugation.verbalNouns);
+      this.adverbsText = this.concatenatedStringWithAnd(this.abbreviatedConjugation.adverbs);
+    } else {
+      this.title = null;
+      this.translation = null;
+      this.typeLabel1 = null;
+      this.typeLabel2 = null;
+      this.typeLabel3 = null;
+      this.showPassive = null;
+      this.verbalNounsText = null;
+      this.adverbsText = null;
+    }
   }
 
 }
