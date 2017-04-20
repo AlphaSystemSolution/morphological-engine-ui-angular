@@ -70,3 +70,12 @@ export class ConversationType extends ArabicLabel {
 export enum DisplayType {
   LABEL_ONLY, CODE_ONLY, LABEL_AND_CODE
 }
+
+export class ArabicConstants {
+  static PARTICIPLE_PREFIX = new ArabicLabel('PARTICIPLE_PREFIX', 'فهو', 'Participle prefix');
+  static IMPERATIVE_PREFIX = new ArabicLabel('IMPERATIVE_PREFIX', 'الأمر منه', 'Imperative prefix');
+  static FORBIDDING_PREFIX = new ArabicLabel('FORBIDDING_PREFIX', 'ونهي عنه', 'Forbidding prefix');
+  static ADVERBS_PREFIX = new ArabicLabel('ADVERBS_PREFIX', 'والظرف منه', 'Adverbs prefix');
+  static AND = new ArabicLabel('AND', 'و', 'AND');
+  static AND_SPACE = new ArabicLabel('AND_SPACE', ' و ', 'AND_SPACE');
+}

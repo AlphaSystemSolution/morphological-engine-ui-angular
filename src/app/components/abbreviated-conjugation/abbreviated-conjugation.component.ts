@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ArabicConstants } from '../../model/common';
 import { ArabicLetter } from '../../model/arabic-letter';
 import {
   ActiveLine,
@@ -24,6 +25,8 @@ export class AbbreviatedConjugationComponent implements OnInit {
   typeLabel1: string;
   typeLabel2: string;
   typeLabel3: string;
+  verbalNounsText: string;
+  adverbsText: string;
 
   constructor() { }
 
@@ -39,7 +42,21 @@ export class AbbreviatedConjugationComponent implements OnInit {
         this.typeLabel3 = conjugationHeader.typeLabel3;
       }
       this.showPassive = this.abbreviatedConjugation.showPassiveLine;
+      this.verbalNounsText = this.concatenatedStringWithAnd(this.abbreviatedConjugation.verbalNouns);
+      this.adverbsText = this.concatenatedStringWithAnd(this.abbreviatedConjugation.adverbs);
     }
+  }
+
+  private concatenatedStringWithAnd(values: string[]): string {
+    if (!values) {
+      return null;
+    }
+    let result = values[0];
+    for (let i = 1; i < values.length; i++) {
+      result += ArabicConstants.AND_SPACE.label + values[i];
+    }
+
+    return result;
   }
 
 }
