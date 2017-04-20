@@ -17,7 +17,7 @@ import {
 })
 export class AbbreviatedConjugationComponent implements OnInit {
 
-  @Input() abbreviatedConjugation: AbbreviatedConjugation;
+  private _abbreviatedConjugation: AbbreviatedConjugation;
   show: boolean;
   showPassive: boolean;
   title: string;
@@ -42,9 +42,17 @@ export class AbbreviatedConjugationComponent implements OnInit {
         this.typeLabel3 = conjugationHeader.typeLabel3;
       }
       this.showPassive = this.abbreviatedConjugation.showPassiveLine;
-      this.verbalNounsText = this.concatenatedStringWithAnd(this.abbreviatedConjugation.verbalNouns);
-      this.adverbsText = this.concatenatedStringWithAnd(this.abbreviatedConjugation.adverbs);
+      this.updateTexts();
     }
+  }
+
+  @Input() get abbreviatedConjugation(): AbbreviatedConjugation {
+    return this._abbreviatedConjugation;
+  }
+
+  set abbreviatedConjugation(value: AbbreviatedConjugation) {
+    this._abbreviatedConjugation = value;
+    this.updateTexts();
   }
 
   private concatenatedStringWithAnd(values: string[]): string {
@@ -57,6 +65,11 @@ export class AbbreviatedConjugationComponent implements OnInit {
     }
 
     return result;
+  }
+
+  private updateTexts() {
+    this.verbalNounsText = this.concatenatedStringWithAnd(this.abbreviatedConjugation.verbalNouns);
+    this.adverbsText = this.concatenatedStringWithAnd(this.abbreviatedConjugation.adverbs);
   }
 
 }

@@ -49,7 +49,7 @@ export class ArabicDropdownComponent implements OnInit, AfterViewInit, AfterCont
 
   @Input() panelStyle: any;
 
-  @Input() styleClass: string;
+  @Input() styleClass = 'arabicDropdown';
 
   @Input() panelStyleClass: string;
 

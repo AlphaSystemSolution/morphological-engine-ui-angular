@@ -103,8 +103,18 @@ export class AdverbLine {
 }
 
 export class RootLetters {
-  constructor(public id: string, public displayName: string, public firstRadical: string, public secondRadical: string,
-    public thirdRadical: string, public fourthRadical: string, public name: string, public empty: string) { }
+  public id: string;
+  public displayName: string;
+  public firstRadical: string;
+  public secondRadical: string;
+  public thirdRadical: string;
+  public fourthRadical: string;
+  public name: string;
+  public empty: string;
+
+  get label(): string {
+    return this.firstRadical + this.secondRadical + this.thirdRadical;
+  }
 }
 
 export class ChartMode {

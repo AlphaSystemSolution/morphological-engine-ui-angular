@@ -1,11 +1,11 @@
 <div #container [ngClass]="{'ui-dropdown ui-widget ui-state-default ui-corner-all ui-helper-clearfix':true,
             'ui-state-disabled':disabled,'ui-dropdown-open':panelVisible,'ui-state-focus':focus}" (click)="onMouseclick($event,in)"
-  [ngStyle]="style" [class]="styleClass">
+  [ngStyle]="style">
   <div class="ui-helper-hidden-accessible" *ngIf="autoWidth">
     <select [required]="required" tabindex="-1">
                     <option *ngFor="let option of options" [value]="option.name" [selected]="selectedOption == option">
                         <template [ngIf]="showCode"><span class="code"> ({{option.code}}) &mdash; </span></template>
-                        <span class="arabicDropdown">  {{option.label}} </span>
+                        <span [class]="styleClass">{{option.label}} </span>
                      </option>
                 </select>
   </div>
@@ -20,7 +20,7 @@
       </span>
       &mdash;
     </template>
-    <span class="arabicDropdown" *ngIf="!itemTemplate">
+    <span [class]="styleClass" *ngIf="!itemTemplate">
       {{label||'empty'}}
     </span>
   </label>
@@ -44,11 +44,9 @@
             <span class="code">
                {{option.code||'empty'}}
             </span>
-           &mdash;
+            &mdash;
           </template>
-          <span class="arabicDropdown" *ngIf="!itemTemplate">
-            {{option.label||'empty'}}
-          </span>
+          <span [class]="styleClass" *ngIf="!itemTemplate"> {{option.label||'empty'}} </span>
           <template [pTemplateWrapper]="itemTemplate" [item]="option" *ngIf="itemTemplate"></template>
         </li>
       </ul>
