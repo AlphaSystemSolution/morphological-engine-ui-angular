@@ -47,6 +47,11 @@
   font-size:12pt
 }
 
+.translation {
+  font-family: Candara;
+  font-size:14pt
+}
+
 table.morphological-chart {
   border-collapse: collapse;
   width: 100%;

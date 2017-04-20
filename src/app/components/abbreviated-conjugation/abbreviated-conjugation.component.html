@@ -1,12 +1,22 @@
 <div *ngIf="show">
   <p-panel [collapsed]="true" [toggleable]="true" [style]="{'direction': 'rtl', 'margin-bottom': '20px'}">
-   <p-header>
+    <p-header>
       <div class="ui-helper-clearfix" style="text-align: center;">
         <span class="ui-panel-title arabicTitle" style="display:inline-block;margin-top:2px">
          {{ abbreviatedConjugation.conjugationHeader.title || '&nbsp;' }}
          </span>
       </div>
     </p-header>
+    <div class="ui-g">
+      <div class="ui-g-12 ui-md-12 ui-lg-6" style="text-align: right;">
+        <div class="arabicNormalBig"> {{ typeLabel1 || '&nbsp;'}} </div>
+        <div class="arabicNormalBig"> {{ typeLabel2 || '&nbsp;'}} </div>
+        <div class="arabicNormalBig"> {{ typeLabel3 || '&nbsp;'}} </div>
+      </div>
+      <div class="ui-g-12 ui-md-12 ui-lg-6" style="text-align: left;">
+         <div class="translation"> {{ translation || '&nbsp;'}} </div>
+      </div>
+    </div>
     <div class="ui-g">
       <div class="ui-g-12 ui-md-6 ui-lg-3" style="text-align: center;">
         <div class="arabicNormalBig"> {{ abbreviatedConjugation.pastTense || '&nbsp;'}} </div>
