@@ -108,6 +108,7 @@ export class ApplicationControllerService {
     const data = template.data;
     if (data) {
       data.forEach(d => this.data.push(MorphologicalInput.fromConjugationData(d)));
+      this.doConjugation(this.data);
     }
   }
 
