@@ -66,7 +66,9 @@ export class AbbreviatedConjugationComponent implements OnInit {
         this.typeLabel2 = conjugationHeader.typeLabel2;
         this.typeLabel3 = conjugationHeader.typeLabel3;
       }
-      this.showPassive = this.abbreviatedConjugation.showPassiveLine;
+      this.showPassive = this.abbreviatedConjugation.pastPassiveTense !== null
+        || this.abbreviatedConjugation.presentPassiveTense !== null
+        || this.abbreviatedConjugation.passiveParticiple !== null;
       this.verbalNounsText = this.concatenatedStringWithAnd(this.abbreviatedConjugation.verbalNouns);
       this.adverbsText = this.concatenatedStringWithAnd(this.abbreviatedConjugation.adverbs);
     } else {
@@ -75,7 +77,7 @@ export class AbbreviatedConjugationComponent implements OnInit {
       this.typeLabel1 = null;
       this.typeLabel2 = null;
       this.typeLabel3 = null;
-      this.showPassive = null;
+      this.showPassive = false;
       this.verbalNounsText = null;
       this.adverbsText = null;
     }
