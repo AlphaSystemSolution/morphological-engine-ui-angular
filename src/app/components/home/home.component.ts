@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/primeng';
 import { ApplicationControllerService } from '../../application-controller.service';
 import { MorphologicalInputFormComponent } from '../morphological-input-form/morphological-input-form.component';
@@ -24,9 +23,7 @@ export class HomeComponent implements OnInit {
   selectedRow: MorphologicalInput;
   selectedRows: MorphologicalInput[] = [];
 
-  constructor(public applicationController: ApplicationControllerService, private confirmationService: ConfirmationService,
-    private router: Router) {
-  }
+  constructor(public applicationController: ApplicationControllerService, private confirmationService: ConfirmationService) { }
 
   ngOnInit() {
   }
@@ -197,9 +194,6 @@ export class HomeComponent implements OnInit {
       return;
     }
     this.applicationController.doConjugation(this.selectedRows);
-    /*this.router.navigate(['staging']).then(() => {
-      this.router.navigate(['home']);
-    });*/
     this.clearSelectedRows();
   }
 
