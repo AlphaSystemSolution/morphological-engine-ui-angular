@@ -148,4 +148,12 @@ export class MorphologicalInput extends Document {
     }
     return result;
   }
+
+  public compareTo(other: MorphologicalInput): number {
+    let result = this.template.compareTo(other.template);
+    if (result === 0) {
+      result = this.rootLetters.compareTo(other.rootLetters);
+    }
+    return result;
+  }
 }

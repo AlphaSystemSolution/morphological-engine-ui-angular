@@ -74,4 +74,8 @@ export class ArabicLetter extends ArabicLabel {
   constructor(public name: string, public label: string, public code: string) {
     super(name, label, code);
   }
+
+  public compareTo(other: ArabicLabel): number {
+    return this.label.localeCompare(other.label);
+  }
 }

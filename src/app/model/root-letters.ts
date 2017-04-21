@@ -24,7 +24,27 @@ export class RootLetters {
     return this.fourthRadical !== null && this.fourthRadical.name !== 'TATWEEL';
   }
 
-  equals(other: RootLetters): boolean {
+  public compareTo(other: RootLetters): number {
+    let result = this.firstRadical.compareTo(other.firstRadical);
+    if (result !== 0) {
+      return result;
+    }
+    result = this.secondRadical.compareTo(other.secondRadical);
+    if (result !== 0) {
+      return result;
+    }
+    result = this.thirdRadical.compareTo(other.thirdRadical);
+    if (result !== 0) {
+      return result;
+    }
+    result = this.fourthRadical.compareTo(other.fourthRadical);
+    if (result !== 0) {
+      return result;
+    }
+    return result;
+  }
+
+  public equals(other: RootLetters): boolean {
     let result = (this.firstRadical.equals(other.firstRadical)) && (this.secondRadical.equals(other.secondRadical))
       && (this.thirdRadical.equals(other.thirdRadical));
     if (this.fourthRadical !== null) {
