@@ -67,9 +67,6 @@ export class HomeComponent implements OnInit {
       case 'DICTIONARY':
         this.viewDictionary();
         break;
-      case 'CONJUGATION':
-        this.viewConjugations();
-        break;
       default:
         console.log(action);
         break;
@@ -190,14 +187,6 @@ export class HomeComponent implements OnInit {
       return;
     }
     this.applicationController.openWithRootLetters(this.selectedRow.rootLetters);
-    this.clearSelectedRows();
-  }
-
-  private viewConjugations() {
-    if (!this.selectedRows) {
-      return;
-    }
-    this.applicationController.doConjugation(this.selectedRows);
     this.clearSelectedRows();
   }
 

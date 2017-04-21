@@ -25,7 +25,6 @@ export class ToolbarComponent implements OnInit {
       { label: 'Remove', icon: 'fa-times', command: () => this.handleButtonClick('REMOVE') }
     ];
     this.viewItems = [
-      { label: 'Conjugation(s)', command: () => this.handleButtonClick('CONJUGATION') },
       { label: 'Dictionary', command: () => this.handleButtonClick('DICTIONARY') }
     ];
   }
