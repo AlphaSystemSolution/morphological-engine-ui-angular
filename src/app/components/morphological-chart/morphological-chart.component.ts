@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ArabicLabel, DisplayType } from '../../model/common';
 import { ArabicLetter } from '../../model/arabic-letter';
-import { AbbreviatedConjugation } from '../model';
+import { AbbreviatedConjugation } from '../../model/abbreviated-conjugation';
 
 @Component({
   selector: 'app-morphological-chart',

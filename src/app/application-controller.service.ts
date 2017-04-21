@@ -6,7 +6,8 @@ import { MorphologicalInputFormModel } from './shared/morphological-input-form-m
 import { ConjugationTemplate } from './model/conjugation-template';
 import { RootLetters } from './model/root-letters';
 import { MorphologicalInput } from './model/morphological-input';
-import { MorphologicalChart, AbbreviatedConjugation } from './components/model';
+import { AbbreviatedConjugation } from './model/abbreviated-conjugation';
+import { MorphologicalChart } from './components/model';
 import { environment } from '../environments/environment';
 import 'rxjs/add/operator/map';
 import * as FileSaver from 'file-saver';

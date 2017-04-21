@@ -1,14 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ArabicConstants } from '../../model/common';
 import { ArabicLetter } from '../../model/arabic-letter';
-import {
-  ActiveLine,
-  AdverbLine,
-  AbbreviatedConjugation,
-  ConjugationHeader,
-  ImperativeAndForbiddingLine,
-  PassiveLine
-} from '../model';
+import { ConjugationHeader } from '../../model/conjugation-header';
+import { AbbreviatedConjugation } from '../../model/abbreviated-conjugation';
 
 @Component({
   selector: 'app-abbreviated-conjugation',
