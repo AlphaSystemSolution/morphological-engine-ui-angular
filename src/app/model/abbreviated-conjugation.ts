@@ -13,8 +13,4 @@ export class AbbreviatedConjugation {
   public forbidding: string;
   public verbalNouns: string[];
   public adverbs: string[];
-
-  get showPassiveLine(): boolean {
-    return this.pastPassiveTense !== null || this.presentPassiveTense !== null || this.passiveParticiple !== null;
-  }
 }
