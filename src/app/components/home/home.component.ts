@@ -178,7 +178,7 @@ export class HomeComponent implements OnInit {
       header: 'Remove Confirmation',
       icon: 'fa fa-times',
       accept: () => {
-        this.applicationController.data.splice(this.findSelectedRowIndex(), 1);
+        this.applicationController.removeData(this.findSelectedRowIndex());
         this.clearSelectedRows();
       },
       reject: () => this.clearSelectedRows()

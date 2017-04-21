@@ -133,4 +133,9 @@ export class ApplicationControllerService {
     this.doConjugation([result], index);
   }
 
+  removeData(index: number) {
+    this.data.splice(index, 1);
+    this.abbreviatedConjugations.splice(index, 1);
+  };
+
 }
