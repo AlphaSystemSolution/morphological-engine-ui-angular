@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ConjugationTuple, NounConjugationGroup, SarfTermType } from '../../model';
+import { SarfTermType } from '../../../model/sarf-term-type';
+import { ConjugationTuple, NounConjugationGroup } from '../../model';
 import { NounStatus, NumberType } from '../../../model/common';
 
 @Component({
@@ -16,7 +17,7 @@ export class NounConjugationComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.termType = SarfTermType.getByName(this.group.termType).value;
+    this.termType = SarfTermType.getByName(this.group.termType).label;
     this.numbers = NumberType.VALUES;
     this.createValues();
   }

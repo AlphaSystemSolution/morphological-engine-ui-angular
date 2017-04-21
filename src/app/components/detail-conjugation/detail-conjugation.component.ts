@@ -4,7 +4,6 @@ import {
   DetailedConjugation,
   NounConjugationGroup,
   NounDetailedConjugationPair,
-  SarfTermType,
   VerbConjugationGroup,
   VerbDetailedConjugationPair
 } from '../model';
