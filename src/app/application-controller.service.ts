@@ -20,10 +20,10 @@ export class ApplicationControllerService {
   data: MorphologicalInput[] = [];
 
   constructor(private http: Http) {
-    this.data[0] = MorphologicalInputFormModel.createDefaultValue();
+    // this.data[0] = MorphologicalInputFormModel.createDefaultValue();
   }
 
-  doConjugation(inputs: MorphologicalInput[]) {
+  doConjugation(inputs: MorphologicalInput[], index: number = -1) {
     const url = environment.morphologicalEngineBaseUrl + 'AbbreviatedConjugation/format/UNICODE';
 
     const headers = new Headers();
@@ -34,7 +34,12 @@ export class ApplicationControllerService {
     this.http.post(url, body, options).map(resp => resp.json())
       .subscribe(
       data => {
-        this.abbreviatedConjugations = this.abbreviatedConjugations.concat(<AbbreviatedConjugation>data);
+        const results = <AbbreviatedConjugation[]>data;
+        if (index > -1 && results.length === 1) {
+          this.abbreviatedConjugations[index] = results[0];
+        } else {
+          this.abbreviatedConjugations = this.abbreviatedConjugations.concat(results);
+        }
         this.abbreviatedConjugations.sort((a1, a2) => a1.id.localeCompare(a2.id));
       },
       err => {
@@ -116,6 +121,16 @@ export class ApplicationControllerService {
   exportFile(fileName: string) {
     const body: ConjugationTemplate = ConjugationTemplate.createConjugationTemplate(null, this.data);
     FileSaver.saveAs(new Blob([JSON.stringify(body)]), fileName);
+  }
+
+  addData(result: MorphologicalInput, index: number) {
+    if (index > -1) {
+      this.data[index] = result;
+    } else {
+      this.data.push(result);
+    }
+    this.data.sort((d1, d2) => d1.templateId.localeCompare(d2.templateId));
+    this.doConjugation([result], index);
   }
 
 }

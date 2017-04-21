@@ -123,12 +123,16 @@ export class HomeComponent implements OnInit {
   }
 
   private save(result: MorphologicalInput) {
+    let index = -1;
+    let data: MorphologicalInput = null;
     if (this.newRow) {
-      this.applicationController.data.push(result);
+      data = result;
       this.newRow = false;
     } else {
-      this.applicationController.data[this.findSelectedRowIndex()] = this.selectedRow;
+      index = this.findSelectedRowIndex();
+      data = this.selectedRow;
     }
+    this.applicationController.addData(data, index);
   }
 
   private findSelectedRowIndex(): number {
