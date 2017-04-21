@@ -8,6 +8,7 @@ import { RootLetters } from './model/root-letters';
 import { MorphologicalInput } from './model/morphological-input';
 import { AbbreviatedConjugation } from './model/abbreviated-conjugation';
 import { MorphologicalChart } from './components/model';
+import { ComparisonUtil } from './utils/utils';
 import { environment } from '../environments/environment';
 import 'rxjs/add/operator/map';
 import * as FileSaver from 'file-saver';
@@ -33,13 +34,12 @@ export class ApplicationControllerService {
     this.http.post(url, body, options).map(resp => resp.json())
       .subscribe(
       data => {
-        const results = <AbbreviatedConjugation[]>data;
-        if (index > -1 && results.length === 1) {
-          this.abbreviatedConjugations[index] = results[0];
+        if (index > -1 && data.length === 1) {
+          this.abbreviatedConjugations[index] = data[0];
         } else {
-          this.abbreviatedConjugations = this.abbreviatedConjugations.concat(results);
+          this.abbreviatedConjugations = this.abbreviatedConjugations.concat(data);
         }
-        this.abbreviatedConjugations.sort((a1, a2) => a1.id.localeCompare(a2.id));
+        this.abbreviatedConjugations.sort((a1, a2) => ComparisonUtil.compareAbbreviatedConjugatios(a1, a2));
       },
       err => {
         console.log('ERROR: ' + JSON.stringify(err));
@@ -112,7 +112,7 @@ export class ApplicationControllerService {
     const data = template.data;
     if (data) {
       data.forEach(d => this.data.push(MorphologicalInput.fromConjugationData(d)));
-      this.data.sort((d1, d2) => d1.templateId.localeCompare(d2.templateId));
+      this.data.sort((d1, d2) => d1.compareTo(d2));
       this.doConjugation(this.data);
     }
   }
@@ -128,7 +128,7 @@ export class ApplicationControllerService {
     } else {
       this.data.push(result);
     }
-    this.data.sort((d1, d2) => d1.templateId.localeCompare(d2.templateId));
+    this.data.sort((d1, d2) => d1.compareTo(d2));
     this.doConjugation([result], index);
   }
 
