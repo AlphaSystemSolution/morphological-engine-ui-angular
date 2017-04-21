@@ -14,6 +14,7 @@ export class MorphologicalInput extends Document {
   private _configuration: ConjugationConfiguration;
   private _verbalNouns: VerbalNoun[];
   private _nounOfPlaceAndTimes: NounOfPlaceAndTime[];
+  private _templateId: string;
 
   static copy(src: MorphologicalInput, copyId: boolean): MorphologicalInput {
     if (!src) {
@@ -88,6 +89,10 @@ export class MorphologicalInput extends Document {
       value = NamedTemplate.FORM_I_CATEGORY_A_GROUP_U_TEMPLATE;
     }
     this._template = value;
+  }
+
+  get templateId(): string {
+    return this.template.name + '_' + this.rootLetters.name;
   }
 
   get translation(): string {

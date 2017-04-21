@@ -6,10 +6,22 @@ export class RootLetters {
 
   get label(): string {
     let label = this.firstRadical.label + this.secondRadical.label + this.thirdRadical.label;
-    if (this.fourthRadical !== null && this.fourthRadical.name !== 'TATWEEL') {
+    if (this.hasFourthRadical) {
       label += this.fourthRadical.label;
     }
     return label;
+  }
+
+  get name(): string {
+    let result = this.firstRadical.name + '_' + this.secondRadical.name + '_' + this.thirdRadical.name;
+    if (this.hasFourthRadical) {
+      result += '_' + this.fourthRadical.name;
+    }
+    return result;
+  }
+
+  get hasFourthRadical(): boolean {
+    return this.fourthRadical !== null && this.fourthRadical.name !== 'TATWEEL';
   }
 
   equals(other: RootLetters): boolean {

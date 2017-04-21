@@ -108,6 +108,7 @@ export class ApplicationControllerService {
     const data = template.data;
     if (data) {
       data.forEach(d => this.data.push(MorphologicalInput.fromConjugationData(d)));
+      this.data.sort((d1, d2) => d1.templateId.localeCompare(d2.templateId));
       this.doConjugation(this.data);
     }
   }
