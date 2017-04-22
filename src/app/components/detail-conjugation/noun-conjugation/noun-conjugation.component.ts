@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SarfTermType } from '../../../model/sarf-term-type';
-import { ConjugationTuple, NounConjugationGroup } from '../../model';
+import { ConjugationTuple, NounConjugationGroup } from '../../../model/detailed-conjugation';
 import { NounStatus, NumberType } from '../../../model/common';
 
 @Component({
