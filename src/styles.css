@@ -68,3 +68,14 @@ td.morphological-chart {
 td.morphological-chart-no-border {
   border: 0;
 }
+
+.btn {
+    display: inline-block;
+   /* background-color: #f44336;
+   color: #FFFFFF;*/
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    margin-left: 20px;
+    opacity: 0.9;
+}

@@ -1,8 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ApplicationControllerService } from '../../application-controller.service';
 import { ArabicConstants } from '../../model/common';
 import { ArabicLetter } from '../../model/arabic-letter';
 import { ConjugationHeader } from '../../model/conjugation-header';
 import { AbbreviatedConjugation } from '../../model/abbreviated-conjugation';
+import { NounConjugationGroup, VerbConjugationGroup } from '../../model/detailed-conjugation';
+import { SarfTermType } from '../../model/sarf-term-type';
 
 @Component({
   selector: 'app-abbreviated-conjugation',
@@ -21,8 +24,10 @@ export class AbbreviatedConjugationComponent implements OnInit {
   typeLabel3: string;
   verbalNounsText: string;
   adverbsText: string;
+  nounGroup: NounConjugationGroup;
+  verbGroup: VerbConjugationGroup;
 
-  constructor() { }
+  constructor(private applicationController: ApplicationControllerService) { }
 
   ngOnInit() {
     this.updateTexts();
@@ -35,6 +40,37 @@ export class AbbreviatedConjugationComponent implements OnInit {
   set abbreviatedConjugation(value: AbbreviatedConjugation) {
     this._abbreviatedConjugation = value;
     this.updateTexts();
+  }
+
+  public displayConjugation(type: string) {
+    const template = this.abbreviatedConjugation.conjugationHeader.chartMode.template;
+    const rootLetters = this.abbreviatedConjugation.conjugationHeader.rootLetters;
+    const d = this.applicationController.doDetailedConjugation(type, template, rootLetters, null, false);
+    d.subscribe(
+      data => this.initializeDetailedConjugation(data[0]),
+      err => {
+        console.log(JSON.stringify(err));
+      }
+    );
+  }
+
+  private initializeDetailedConjugation(data) {
+    this.nounGroup = null;
+    this.verbGroup = null;
+    const termType = data.termType;
+    switch (termType) {
+      case 'PAST_TENSE':
+      case 'PRESENT_TENSE':
+      case 'PAST_PASSIVE_TENSE':
+      case 'PRESENT_PASSIVE_TENSE':
+      case 'IMPERATIVE':
+      case 'FORBIDDING':
+        this.verbGroup = <VerbConjugationGroup>data;
+        break;
+      default:
+        this.nounGroup = <NounConjugationGroup>data;
+        break;
+    }
   }
 
   private concatenatedStringWithAnd(values: string[]): string {

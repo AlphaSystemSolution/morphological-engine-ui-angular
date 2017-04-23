@@ -4,7 +4,9 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { MorphologicalInputFormModel } from './shared/morphological-input-form-model';
 import { ConjugationTemplate } from './model/conjugation-template';
+import { ArabicLetter } from './model/arabic-letter';
 import { RootLetters } from './model/root-letters';
+import { RootLetters as _RootLetters } from './model/conjugation-header';
 import { MorphologicalInput } from './model/morphological-input';
 import { AbbreviatedConjugation } from './model/abbreviated-conjugation';
 import { MorphologicalChart } from './components/model';
@@ -45,6 +47,27 @@ export class ApplicationControllerService {
         console.log('ERROR: ' + JSON.stringify(err));
       }
       );
+  }
+
+  doDetailedConjugation(type: string, templat: string, rootLetters: _RootLetters, verbalNouns: string[], skipRuleProcessing: boolean) {
+    let url = environment.morphologicalEngineBaseUrl + 'DetailedConjugation/type/%TYPE%/template/%TEMPLATE%/format/UNICODE';
+    const replacements = { '%TYPE%': type, '%TEMPLATE%': templat };
+    url = url.replace(/%\w+%/g, function (all) {
+      return replacements[all] || all;
+    });
+
+    const headers = new Headers();
+    headers.set('Content-Type', 'application/json;charset=UTF-8');
+    headers.set('firstRadical', rootLetters.firstRadical);
+    headers.set('secondRadical', rootLetters.secondRadical);
+    headers.set('thirdRadical', rootLetters.thirdRadical);
+    const fourthRadical = rootLetters.fourthRadical;
+    if (fourthRadical && ArabicLetter.TATWEEL.name !== fourthRadical) {
+      headers.set('fourthRadical', fourthRadical);
+    }
+    const options = new RequestOptions({ headers: headers });
+
+    return this.http.get(url, options).map(resp => resp.json());
   }
 
   getMorphologicalChart(inputs: MorphologicalInput[], format: string = 'UNICODE'): void {
