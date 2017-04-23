@@ -11,6 +11,7 @@ import { NounStatus, NumberType } from '../../../model/common';
 export class NounConjugationComponent implements OnInit {
 
   @Input() group: NounConjugationGroup;
+  @Input() collapsed = false;
   termType: string;
   values: ConjugationTuple[] = [];
   numbers: NumberType[] = [];

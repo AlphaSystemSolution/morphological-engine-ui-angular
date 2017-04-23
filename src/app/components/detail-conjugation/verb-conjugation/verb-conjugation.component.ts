@@ -11,6 +11,7 @@ import { ConversationType, NumberType } from '../../../model/common';
 export class VerbConjugationComponent implements OnInit {
 
   @Input() group: VerbConjugationGroup;
+  @Input() collapsed = false;
   termType: string;
   values: ConjugationTuple[] = [];
   numbers: NumberType[] = [];

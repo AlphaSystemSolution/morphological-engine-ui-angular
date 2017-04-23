@@ -15,6 +15,8 @@ import { SarfTermType } from '../../model/sarf-term-type';
 export class AbbreviatedConjugationComponent implements OnInit {
 
   private _abbreviatedConjugation: AbbreviatedConjugation;
+  @Input() collaspPanel = false;
+  @Input() collaspDetailedConjugationPanel = true;
   show: boolean;
   showPassive: boolean;
   title: string;
@@ -39,10 +41,18 @@ export class AbbreviatedConjugationComponent implements OnInit {
 
   set abbreviatedConjugation(value: AbbreviatedConjugation) {
     this._abbreviatedConjugation = value;
+    this.collaspPanel = false;
+    this.collaspDetailedConjugationPanel = true;
+    this.nounGroup = null;
+    this.verbGroup = null;
     this.updateTexts();
   }
 
   public displayConjugation(type: string) {
+    this.collaspPanel = true;
+    this.collaspDetailedConjugationPanel = false;
+    this.nounGroup = null;
+    this.verbGroup = null;
     const template = this.abbreviatedConjugation.conjugationHeader.chartMode.template;
     const rootLetters = this.abbreviatedConjugation.conjugationHeader.rootLetters;
     const d = this.applicationController.doDetailedConjugation(type, template, rootLetters, null, false);
@@ -54,9 +64,13 @@ export class AbbreviatedConjugationComponent implements OnInit {
     );
   }
 
+  handleToggle(event) {
+    console.log(JSON.stringify(event));
+    this.collaspPanel = event.collapsed;
+    this.collaspDetailedConjugationPanel = !event.collapsed;
+  }
+
   private initializeDetailedConjugation(data) {
-    this.nounGroup = null;
-    this.verbGroup = null;
     const termType = data.termType;
     switch (termType) {
       case 'PAST_TENSE':
