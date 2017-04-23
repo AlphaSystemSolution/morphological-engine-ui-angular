@@ -126,20 +126,10 @@ export class HomeComponent implements OnInit {
       data = result;
       this.newRow = false;
     } else {
-      index = this.findSelectedRowIndex();
+      index = this.applicationController.findSelectedRowIndex(this.selectedRow);
       data = this.selectedRow;
     }
     this.applicationController.addData(data, index);
-  }
-
-  private findSelectedRowIndex(): number {
-    let index = -1;
-    this.applicationController.data.filter((o, i) => {
-      if (o.id === this.selectedRow.id) {
-        index = i;
-      }
-    });
-    return index;
   }
 
   private doAdd() {
@@ -175,7 +165,7 @@ export class HomeComponent implements OnInit {
       header: 'Remove Confirmation',
       icon: 'fa fa-times',
       accept: () => {
-        this.applicationController.removeData(this.findSelectedRowIndex());
+        this.applicationController.removeData(this.applicationController.findSelectedRowIndex(this.selectedRow));
         this.clearSelectedRows();
       },
       reject: () => this.clearSelectedRows()
