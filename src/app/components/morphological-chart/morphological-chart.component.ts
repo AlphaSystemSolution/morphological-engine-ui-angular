@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApplicationControllerService } from '../../application-controller.service';
 import { ArabicLabel, DisplayType } from '../../model/common';
 import { ArabicLetter } from '../../model/arabic-letter';
 import { AbbreviatedConjugation } from '../../model/abbreviated-conjugation';
@@ -12,8 +13,11 @@ export class MorphologicalChartComponent implements OnInit {
 
   private _abbreviatedConjugations: AbbreviatedConjugation[];
   private _selectedAbbreviatedConjugation: AbbreviatedConjugation;
+  private _selectedIndex = 0;
   displayType = DisplayType.LABEL_ONLY;
   private _titles: ArabicLabel[] = [];
+
+  constructor(private applicationControllerService: ApplicationControllerService) { }
 
   ngOnInit() {
   }
@@ -37,7 +41,8 @@ export class MorphologicalChartComponent implements OnInit {
 
   handleChange(event) {
     const selectedValue = <ArabicLabel>event.value;
-    this._selectedAbbreviatedConjugation = this.abbreviatedConjugations.filter((value) => selectedValue.code === value.id)[0];
+    this._selectedAbbreviatedConjugation = this.abbreviatedConjugations.filter((value, index) =>
+      this.filter(selectedValue, value, index))[0];
   }
 
   private updateDropdownValues() {
@@ -56,6 +61,15 @@ export class MorphologicalChartComponent implements OnInit {
       this._titles.push(new ArabicLabel(ac.id, label, ac.id));
     });
     this._selectedAbbreviatedConjugation = this.abbreviatedConjugations[0];
+    this._selectedIndex = 0;
+  }
+
+  private filter(selectedValue: ArabicLabel, value, index): boolean {
+    const result = selectedValue.code === value.id;
+    if (result) {
+      this._selectedIndex = index;
+    }
+    return result;
   }
 
 }
