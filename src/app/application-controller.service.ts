@@ -160,7 +160,7 @@ export class ApplicationControllerService {
     this.abbreviatedConjugations.splice(index, 1);
   };
 
-  findSelectedRowIndex(input: MorphologicalInput): number {
+  findInputRowIndex(input: MorphologicalInput): number {
     let index = -1;
     this.data.filter((o, i) => {
       if (o.id === input.id) {

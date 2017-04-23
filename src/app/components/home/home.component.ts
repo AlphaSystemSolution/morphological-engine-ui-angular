@@ -126,7 +126,7 @@ export class HomeComponent implements OnInit {
       data = result;
       this.newRow = false;
     } else {
-      index = this.applicationController.findSelectedRowIndex(this.selectedRow);
+      index = this.applicationController.findInputRowIndex(this.selectedRow);
       data = this.selectedRow;
     }
     this.applicationController.addData(data, index);
@@ -165,7 +165,7 @@ export class HomeComponent implements OnInit {
       header: 'Remove Confirmation',
       icon: 'fa fa-times',
       accept: () => {
-        this.applicationController.removeData(this.applicationController.findSelectedRowIndex(this.selectedRow));
+        this.applicationController.removeData(this.applicationController.findInputRowIndex(this.selectedRow));
         this.clearSelectedRows();
       },
       reject: () => this.clearSelectedRows()
