@@ -65,7 +65,6 @@ export class AbbreviatedConjugationComponent implements OnInit {
   }
 
   handleToggle(event) {
-    console.log(JSON.stringify(event));
     this.collaspPanel = event.collapsed;
     this.collaspDetailedConjugationPanel = !event.collapsed;
   }
