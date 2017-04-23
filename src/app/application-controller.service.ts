@@ -23,7 +23,7 @@ export class ApplicationControllerService {
 
   constructor(private http: Http) { }
 
-  doConjugation(inputs: MorphologicalInput[], index: number = -1) {
+  doAbbreviatedConjugation(inputs: MorphologicalInput[], index: number = -1) {
     const url = environment.morphologicalEngineBaseUrl + 'AbbreviatedConjugation/format/UNICODE';
 
     const headers = new Headers();
@@ -113,7 +113,7 @@ export class ApplicationControllerService {
     if (data) {
       data.forEach(d => this.data.push(MorphologicalInput.fromConjugationData(d)));
       this.data.sort((d1, d2) => d1.compareTo(d2));
-      this.doConjugation(this.data);
+      this.doAbbreviatedConjugation(this.data);
     }
   }
 
@@ -129,7 +129,7 @@ export class ApplicationControllerService {
       this.data.push(result);
     }
     this.data.sort((d1, d2) => d1.compareTo(d2));
-    this.doConjugation([result], index);
+    this.doAbbreviatedConjugation([result], index);
   }
 
   removeData(index: number) {
