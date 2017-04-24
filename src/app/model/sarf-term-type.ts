@@ -2,44 +2,57 @@ import { ArabicLabel } from './common';
 
 export class SarfTermType extends ArabicLabel {
 
+  static PAST_TENSE = new SarfTermType('PAST_TENSE', 'فعل ماضي');
+  static PRESENT_TENSE = new SarfTermType('PRESENT_TENSE', 'فعل مضارع');
+  static VERBAL_NOUN = new SarfTermType('VERBAL_NOUN', 'مصدر');
+  static ACTIVE_PARTICIPLE_MASCULINE = new SarfTermType('ACTIVE_PARTICIPLE_MASCULINE', 'إسم فاعل مذكر');
+  static ACTIVE_PARTICIPLE_FEMININE = new SarfTermType('ACTIVE_PARTICIPLE_FEMININE', 'إسم فاعل مؤنث');
+  static PAST_PASSIVE_TENSE = new SarfTermType('PAST_PASSIVE_TENSE', 'فعل ماضي مبني على المجهول');
+  static PRESENT_PASSIVE_TENSE = new SarfTermType('PRESENT_PASSIVE_TENSE', 'فعل مضارع مبني على المجهول');
+  static PASSIVE_PARTICIPLE_MASCULINE = new SarfTermType('PASSIVE_PARTICIPLE_MASCULINE', 'إسم مفعول مذكر');
+  static PASSIVE_PARTICIPLE_FEMININE = new SarfTermType('PASSIVE_PARTICIPLE_FEMININE', 'إسم مفعول مؤنث');
+  static IMPERATIVE = new SarfTermType('IMPERATIVE', 'أمر');
+  static FORBIDDING = new SarfTermType('FORBIDDING', 'نهي');
+  static NOUN_OF_PLACE_AND_TIME = new SarfTermType('NOUN_OF_PLACE_AND_TIME', 'ظرف');
+
   static getByName(name: string): SarfTermType {
     let result: SarfTermType;
     switch (name) {
       case 'PAST_TENSE':
-        result = new SarfTermType('PAST_TENSE', 'فعل ماضي');
+        result = SarfTermType.PAST_TENSE;
         break;
       case 'PRESENT_TENSE':
-        result = new SarfTermType('PRESENT_TENSE', 'فعل مضارع');
+        result = SarfTermType.PRESENT_TENSE;
         break;
       case 'VERBAL_NOUN':
-        result = new SarfTermType('VERBAL_NOUN', 'مصدر');
+        result = SarfTermType.VERBAL_NOUN;
         break;
       case 'ACTIVE_PARTICIPLE_MASCULINE':
-        result = new SarfTermType('ACTIVE_PARTICIPLE_MASCULINE', 'إسم فاعل مذكر');
+        result = SarfTermType.ACTIVE_PARTICIPLE_MASCULINE;
         break;
       case 'ACTIVE_PARTICIPLE_FEMININE':
-        result = new SarfTermType('ACTIVE_PARTICIPLE_FEMININE', 'إسم فاعل مؤنث');
+        result = SarfTermType.ACTIVE_PARTICIPLE_FEMININE;
         break;
       case 'PAST_PASSIVE_TENSE':
-        result = new SarfTermType('PAST_PASSIVE_TENSE', 'فعل ماضي مبني على المجهول');
+        result = SarfTermType.PAST_PASSIVE_TENSE;
         break;
       case 'PRESENT_PASSIVE_TENSE':
-        result = new SarfTermType('PRESENT_PASSIVE_TENSE', 'فعل مضارع مبني على المجهول');
+        result = SarfTermType.PRESENT_PASSIVE_TENSE;
         break;
       case 'PASSIVE_PARTICIPLE_MASCULINE':
-        result = new SarfTermType('PASSIVE_PARTICIPLE_MASCULINE', 'إسم مفعول مذكر');
+        result = SarfTermType.PASSIVE_PARTICIPLE_MASCULINE;
         break;
       case 'PASSIVE_PARTICIPLE_FEMININE':
-        result = new SarfTermType('PASSIVE_PARTICIPLE_FEMININE', 'إسم مفعول مؤنث');
+        result = SarfTermType.PASSIVE_PARTICIPLE_FEMININE;
         break;
       case 'IMPERATIVE':
-        result = new SarfTermType('IMPERATIVE', 'أمر');
+        result = SarfTermType.IMPERATIVE;
         break;
       case 'FORBIDDING':
-        result = new SarfTermType('FORBIDDING', 'نهي');
+        result = SarfTermType.FORBIDDING;
         break;
       case 'NOUN_OF_PLACE_AND_TIME':
-        result = new SarfTermType('NOUN_OF_PLACE_AND_TIME', 'ظرف');
+        result = SarfTermType.NOUN_OF_PLACE_AND_TIME;
         break;
     }
     return result;
