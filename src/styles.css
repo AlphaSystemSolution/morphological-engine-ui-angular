@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 .arabicTitle, .arabicNormal, .arabicNormalBig, .arabicCaption, .arabicToggleButton, .arabicButton, .arabicDropdown,
-.verbalNounToggleButton, .verbalNounToggleSelector {
+.verbalNounToggleButton, .verbalNounToggleSelector, .abbreviatedConjugationSelector {
 	font-family: 'KFGQPC Uthman Taha Naskh';
 	direction: rtl;
 }
@@ -23,6 +23,11 @@
 
 .arabicToggleButton {
   font-size: 30px;
+}
+
+.abbreviatedConjugationSelector{
+  font-size: 36px;
+  /* width: 196px; */
 }
 
 .verbalNounToggleSelector {
