@@ -3,6 +3,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { MorphologicalInputFormModel } from './shared/morphological-input-form-model';
+import { ConjugationConfiguration } from './model/common';
 import { ConjugationTemplate } from './model/conjugation-template';
 import { ArabicLetter } from './model/arabic-letter';
 import { RootLetters } from './model/root-letters';
@@ -37,9 +38,9 @@ export class ApplicationControllerService {
       .subscribe(
       data => {
         if (index > -1 && data.length === 1) {
-          this.abbreviatedConjugations[index] = data[0];
+          this.abbreviatedConjugations[index] = new AbbreviatedConjugation(data[0]);
         } else {
-          this.abbreviatedConjugations = this.abbreviatedConjugations.concat(data);
+          data.forEach(d => this.abbreviatedConjugations.push(new AbbreviatedConjugation(d)));
         }
         this.abbreviatedConjugations.sort((a1, a2) => ComparisonUtil.compareAbbreviatedConjugatios(a1, a2));
       },
@@ -168,6 +169,10 @@ export class ApplicationControllerService {
       }
     });
     return index;
+  }
+
+  getCurrentConfiguration(index: number): ConjugationConfiguration {
+    return this.data[index].configuration;
   }
 
 }
