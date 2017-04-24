@@ -111,9 +111,9 @@ export class AbbreviatedConjugationComponent implements OnInit {
       }
       this.showPassive = this.abbreviatedConjugation.pastPassiveTense !== null
         || this.abbreviatedConjugation.presentPassiveTense !== null
-        || this.abbreviatedConjugation.passiveParticiple !== null;
-      this.verbalNounsText = this.concatenatedStringWithAnd(this.abbreviatedConjugation.verbalNouns);
-      this.adverbsText = this.concatenatedStringWithAnd(this.abbreviatedConjugation.adverbs);
+        || this.abbreviatedConjugation.passiveParticipleMasculine !== null;
+     // this.verbalNounsText = this.concatenatedStringWithAnd(this.abbreviatedConjugation.verbalNouns);
+      // this.adverbsText = this.concatenatedStringWithAnd(this.abbreviatedConjugation.adverbs);
     } else {
       this.title = null;
       this.translation = null;

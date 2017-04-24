@@ -7,66 +7,89 @@
          </span>
       </div>
     </p-header>
-    <div class="ui-g">
-      <div class="ui-g-12 ui-md-12 ui-lg-6" style="text-align: right;">
-        <div class="arabicNormalBig"> {{ typeLabel1 || '&nbsp;'}} </div>
-        <div class="arabicNormalBig"> {{ typeLabel2 || '&nbsp;'}} </div>
-        <div class="arabicNormalBig"> {{ typeLabel3 || '&nbsp;'}} </div>
+    <div class="content-section implementation ui-fluid">
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-6">
+          <div class="translation" style="text-align: left;"> {{ translation || '&nbsp;'}} </div>
+        </div>
+        <div class="ui-grid-col-6">
+          <div class="arabicNormalBig" style="text-align: right;"> {{ typeLabel1 || '&nbsp;'}} </div>
+          <div class="arabicNormalBig" style="text-align: right;"> {{ typeLabel2 || '&nbsp;'}} </div>
+          <div class="arabicNormalBig" style="text-align: right;"> {{ typeLabel3 || '&nbsp;'}} </div>
+        </div>
       </div>
-      <div class="ui-g-12 ui-md-12 ui-lg-6" style="text-align: left;">
-        <div class="translation"> {{ translation || '&nbsp;'}} </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-12">&nbsp;</div>
+      </div>
+      <!-- start of active tense row -->
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-6">
+          <app-toggle-selector [value]="abbreviatedConjugation.presentTense" styleClass="abbreviatedConjugationSelector"></app-toggle-selector>
+        </div>
+        <div class="ui-grid-col-6">
+          <app-toggle-selector [value]="abbreviatedConjugation.pastTense" styleClass="abbreviatedConjugationSelector"></app-toggle-selector>
+        </div>
+      </div>
+      <!-- end of active tense row -->
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-12">&nbsp;</div>
+      </div>
+      <!-- start of active participle row -->
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-6">
+          <app-toggle-selector [value]="abbreviatedConjugation.activeParticipleFeminine" styleClass="abbreviatedConjugationSelector"></app-toggle-selector>
+        </div>
+        <div class="ui-grid-col-6">
+          <app-toggle-selector [value]="abbreviatedConjugation.activeParticipleMasculine" styleClass="abbreviatedConjugationSelector"></app-toggle-selector>
+        </div>
+      </div>
+      <!-- end of active participle row -->
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-12">&nbsp;</div>
+      </div>
+      <template [ngIf]="showPassive">
+        <!-- start of passive tense row -->
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-6">
+            <app-toggle-selector [value]="abbreviatedConjugation.presentPassiveTense" styleClass="abbreviatedConjugationSelector"></app-toggle-selector>
+          </div>
+          <div class="ui-grid-col-6">
+            <app-toggle-selector [value]="abbreviatedConjugation.pastPassiveTense" styleClass="abbreviatedConjugationSelector"></app-toggle-selector>
+          </div>
+        </div>
+        <!-- end of passive tense row -->
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-12">&nbsp;</div>
+        </div>
+        <!-- start of passive participle row -->
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-6">
+            <app-toggle-selector [value]="abbreviatedConjugation.passiveParticipleFeminine" styleClass="abbreviatedConjugationSelector"></app-toggle-selector>
+          </div>
+          <div class="ui-grid-col-6">
+            <app-toggle-selector [value]="abbreviatedConjugation.passiveParticipleMasculine" styleClass="abbreviatedConjugationSelector"></app-toggle-selector>
+          </div>
+        </div>
+        <!-- end of passive participle row -->
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-12">&nbsp;</div>
+        </div>
+      </template>
+      <!-- start of imperative and forbidding row -->
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-6">
+          <app-toggle-selector [value]="abbreviatedConjugation.imperative" styleClass="abbreviatedConjugationSelector"></app-toggle-selector>
+        </div>
+        <div class="ui-grid-col-6">
+          <app-toggle-selector [value]="abbreviatedConjugation.forbidding" styleClass="abbreviatedConjugationSelector"></app-toggle-selector>
+        </div>
+      </div>
+      <!-- end of imperative and forbidding row -->
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-12">&nbsp;</div>
       </div>
     </div>
-    <div class="ui-g">
-      <div class="ui-g-12 ui-md-6 ui-lg-3" style="text-align: center;">
-        <div class="arabicNormalBig">
-          <a href="javascript:void(0);" class="btn" (click)="displayConjugation('PAST_TENSE')">
-            {{ abbreviatedConjugation.pastTense }}
-          </a>
-        </div>
-      </div>
-      <div class="ui-g-12 ui-md-6 ui-lg-3" style="text-align: center;">
-        <div class="arabicNormalBig">
-          <a href="javascript:void(0);" class="btn" (click)="displayConjugation('PRESENT_TENSE')">
-            {{ abbreviatedConjugation.presentTense }}
-          </a>
-        </div>
-      </div>
-      <div class="ui-g-12 ui-md-6 ui-lg-3" style="text-align: center;">
-        <div class="arabicNormalBig"> {{ verbalNounsText || '&nbsp;'}} </div>
-      </div>
-      <div class="ui-g-12 ui-md-6 ui-lg-3" style="text-align: center;">
-        <div class="arabicNormalBig">
-          <a href="javascript:void(0);" class="btn" (click)="displayConjugation('ACTIVE_PARTICIPLE_MASCULINE')">
-            {{ abbreviatedConjugation.activeParticiple }}
-          </a>
-        </div>
-      </div>
-    </div>
-    <template [ngIf]="showPassive">
-      <div class="ui-g">
-        <div class="ui-g-12 ui-md-6 ui-lg-3" style="text-align: center;">
-          <div class="arabicNormalBig"> {{ abbreviatedConjugation.pastPassiveTense || '&nbsp;'}} </div>
-        </div>
-        <div class="ui-g-12 ui-md-6 ui-lg-3" style="text-align: center;">
-          <div class="arabicNormalBig"> {{ abbreviatedConjugation.presentPassiveTense}} </div>
-        </div>
-        <div class="ui-g-12 ui-md-6 ui-lg-3" style="text-align: center;">
-          <div class="arabicNormalBig"> {{ abbreviatedConjugation.verbalNouns || '&nbsp;'}} </div>
-        </div>
-        <div class="ui-g-12 ui-md-6 ui-lg-3" style="text-align: center;">
-          <div class="arabicNormalBig" style="text-align: center;"> {{ abbreviatedConjugation.passiveParticiple || '&nbsp;'}} </div>
-        </div>
-      </div>
-    </template>
-    <div class="ui-g">
-      <div class="ui-g-12 ui-md-12 ui-lg-6" style="text-align: center;">
-        <div class="arabicNormalBig"> {{ abbreviatedConjugation.imperative || '&nbsp;'}} </div>
-      </div>
-      <div class="ui-g-12 ui-md-12 ui-lg-6" style="text-align: center;">
-        <div class="arabicNormalBig"> {{ abbreviatedConjugation.forbidding || '&nbsp;'}} </div>
-      </div>
-    </div>
+
     <div class="ui-g">
       <div class="ui-g-12 ui-md-12 ui-lg-12" style="text-align: center;">
         <div class="arabicNormalBig"> {{ adverbsText || '&nbsp;'}} </div>
