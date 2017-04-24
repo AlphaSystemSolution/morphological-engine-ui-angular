@@ -47,7 +47,7 @@
       <div class="ui-grid-row">
         <div class="ui-grid-col-12">&nbsp;</div>
       </div>
-      <template [ngIf]="showPassive">
+      <ng-template [ngIf]="showPassive">
         <!-- start of passive tense row -->
         <div class="ui-grid-row">
           <div class="ui-grid-col-6">
@@ -74,7 +74,7 @@
         <div class="ui-grid-row">
           <div class="ui-grid-col-12">&nbsp;</div>
         </div>
-      </template>
+      </ng-template>
       <!-- start of imperative and forbidding row -->
       <div class="ui-grid-row">
         <div class="ui-grid-col-6">
@@ -98,10 +98,10 @@
   </p-panel>
 </div>
 
-<template [ngIf]="nounGroup">
+<ng-template [ngIf]="nounGroup">
   <app-noun-conjugation [group]="nounGroup" [collapsed]="collaspDetailedConjugationPanel"></app-noun-conjugation>
-</template>
+</ng-template>
 
-<template [ngIf]="verbGroup">
+<ng-template [ngIf]="verbGroup">
   <app-verb-conjugation [group]="verbGroup" [collapsed]="collaspDetailedConjugationPanel"></app-verb-conjugation>
-</template>
+</ng-template>

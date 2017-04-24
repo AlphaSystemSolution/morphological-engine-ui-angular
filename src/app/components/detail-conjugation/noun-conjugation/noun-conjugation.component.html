@@ -10,46 +10,46 @@
     <p-headerColumnGroup>
       <p-row>
         <p-column>
-          <template pTemplate="header">
+          <ng-template pTemplate="header">
             <div class="arabicCaption">&nbsp;</div>
-          </template>
+          </ng-template>
         </p-column>
         <p-column>
-          <template pTemplate="header">
+          <ng-template pTemplate="header">
             <div class="arabicCaption">{{ numbers[0].label }}</div>
-          </template>
+          </ng-template>
         </p-column>
         <p-column>
-          <template pTemplate="header">
+          <ng-template pTemplate="header">
             <div class="arabicCaption">{{ numbers[1].label }}</div>
-          </template>
+          </ng-template>
         </p-column>
         <p-column>
-          <template pTemplate="header">
+          <ng-template pTemplate="header">
             <div class="arabicCaption">{{ numbers[2].label }}</div>
-          </template>
+          </ng-template>
         </p-column>
       </p-row>
     </p-headerColumnGroup>
     <p-column [style]="{'text-align': 'center'}">
-      <template let-mi="rowData" pTemplate="body">
+      <ng-template let-mi="rowData" pTemplate="body">
         <div class="arabicCaption">{{ mi.type }}</div>
-      </template>
+      </ng-template>
     </p-column>
     <p-column [style]="{'text-align': 'center'}">
-      <template let-mi="rowData" pTemplate="body">
+      <ng-template let-mi="rowData" pTemplate="body">
         <div class="arabicNormal">{{ mi.singular }}</div>
-      </template>
+      </ng-template>
     </p-column>
     <p-column [style]="{'text-align': 'center'}">
-      <template let-mi="rowData" pTemplate="body">
+      <ng-template let-mi="rowData" pTemplate="body">
         <div class="arabicNormal">{{ mi.dual }}</div>
-      </template>
+      </ng-template>
     </p-column>
     <p-column [style]="{'text-align': 'center'}">
-      <template let-mi="rowData" pTemplate="body">
+      <ng-template let-mi="rowData" pTemplate="body">
         <div class="arabicNormal">{{ mi.plural }}</div>
-      </template>
+      </ng-template>
     </p-column>
   </p-dataTable>
 </p-panel>

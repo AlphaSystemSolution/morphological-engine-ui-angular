@@ -7,27 +7,27 @@
     </p-header>
     <app-verb-conjugation [group]="detailedConjugation.pastTense"></app-verb-conjugation>
     <app-verb-conjugation [group]="detailedConjugation.presentTense"></app-verb-conjugation>
-    <template ngFor let-group [ngForOf]="detailedConjugation.verbalNouns">
+    <ng-template ngFor let-group [ngForOf]="detailedConjugation.verbalNouns">
       <app-noun-conjugation [group]="group"></app-noun-conjugation>
-    </template>
+    </ng-template>
     <app-noun-conjugation [group]="detailedConjugation.activeParticipleMasculine"></app-noun-conjugation>
     <app-noun-conjugation [group]="detailedConjugation.activeParticipleFeminine"></app-noun-conjugation>
-    <template [ngIf]="detailedConjugation.pastPassiveTense">
+    <ng-template [ngIf]="detailedConjugation.pastPassiveTense">
       <app-verb-conjugation [group]="detailedConjugation.pastPassiveTense"></app-verb-conjugation>
-    </template>
-    <template [ngIf]="detailedConjugation.presentPassiveTense">
+    </ng-template>
+    <ng-template [ngIf]="detailedConjugation.presentPassiveTense">
       <app-verb-conjugation [group]="detailedConjugation.presentPassiveTense"></app-verb-conjugation>
-    </template>
-    <template [ngIf]="detailedConjugation.passiveParticipleMasculine">
+    </ng-template>
+    <ng-template [ngIf]="detailedConjugation.passiveParticipleMasculine">
       <app-noun-conjugation [group]="detailedConjugation.passiveParticipleMasculine"></app-noun-conjugation>
-    </template>
-    <template [ngIf]="detailedConjugation.passiveParticipleFeminine">
+    </ng-template>
+    <ng-template [ngIf]="detailedConjugation.passiveParticipleFeminine">
       <app-noun-conjugation [group]="detailedConjugation.passiveParticipleFeminine"></app-noun-conjugation>
-    </template>
+    </ng-template>
     <app-verb-conjugation [group]="detailedConjugation.imperative"></app-verb-conjugation>
     <app-verb-conjugation [group]="detailedConjugation.forbidding"></app-verb-conjugation>
-    <template ngFor let-group [ngForOf]="detailedConjugation.adverbs">
+    <ng-template ngFor let-group [ngForOf]="detailedConjugation.adverbs">
       <app-noun-conjugation [group]="group"></app-noun-conjugation>
-    </template>
+    </ng-template>
   </p-panel>
 </div>

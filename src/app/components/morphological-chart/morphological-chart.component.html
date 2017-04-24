@@ -1,4 +1,4 @@
-<template [ngIf]="abbreviatedConjugations">
+<ng-template [ngIf]="abbreviatedConjugations">
   <div class="ui-grid-row" style="margin-bottom: 20px">
     <div class="ui-grid-col-10">
       <app-arabic-dropdown [options]="titles" styleClass="arabicNormalBig" [displayType]="displayType" [style]="{'width': '400px', 'font-size': '24px'}"
@@ -6,7 +6,7 @@
     </div>
     <div class="ui-grid-col-2">&nbsp;</div>
   </div>
-</template>
+</ng-template>
 
 <div *ngIf="selectedAbbreviatedConjugation">
   <app-abbreviated-conjugation [abbreviatedConjugation]="selectedAbbreviatedConjugation"></app-abbreviated-conjugation>
