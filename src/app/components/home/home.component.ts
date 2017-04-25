@@ -6,6 +6,7 @@ import { MorphologicalInputFormModel } from '../../shared/morphological-input-fo
 import { MorphologicalChartComponent } from '../morphological-chart/morphological-chart.component';
 import { ConjugationConfiguration } from '../../model/common';
 import { MorphologicalInput } from '../../model/morphological-input';
+import { RootLetters } from '../../model/root-letters';
 
 @Component({
   selector: 'app-home',
@@ -22,6 +23,7 @@ export class HomeComponent implements OnInit {
   exportDialog: boolean;
   selectedRow: MorphologicalInput;
   selectedRows: MorphologicalInput[] = [];
+  private currentTabIndex = 0;
 
   constructor(public applicationController: ApplicationControllerService, private confirmationService: ConfirmationService) { }
 
@@ -105,8 +107,8 @@ export class HomeComponent implements OnInit {
   }
 
   handleChange(event) {
-    const index: number = event.index;
-    if (index === 1) {
+    this.currentTabIndex = event.index;
+    if (this.currentTabIndex === 1) {
       this.chart.abbreviatedConjugations = this.applicationController.abbreviatedConjugations;
     }
   }
@@ -173,10 +175,18 @@ export class HomeComponent implements OnInit {
   }
 
   private viewDictionary() {
-    if (!this.selectedRow) {
+    let rootLetters: RootLetters = null;
+    // table tab and selectedRow exists
+    if (this.currentTabIndex === 0 && this.selectedRow) {
+      rootLetters = this.selectedRow.rootLetters;
+    } else if (this.currentTabIndex === 1) {
+      // conjugation tab
+      rootLetters = this.chart.selectedAbbreviatedConjugation.rootLetters;
+    }
+    if (!rootLetters) {
       return;
     }
-    this.applicationController.openWithRootLetters(this.selectedRow.rootLetters);
+    this.applicationController.openWithRootLetters(rootLetters);
     this.clearSelectedRows();
   }
 
