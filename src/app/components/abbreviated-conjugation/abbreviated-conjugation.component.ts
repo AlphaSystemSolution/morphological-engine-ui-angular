@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ApplicationControllerService } from '../../application-controller.service';
-import { ArabicConstants } from '../../model/common';
+import { ArabicConstants, ArabicLabel } from '../../model/common';
 import { ArabicLetter } from '../../model/arabic-letter';
 import { ConjugationHeader } from '../../model/conjugation-header';
 import { AbbreviatedConjugation } from '../../model/abbreviated-conjugation';
@@ -24,8 +24,8 @@ export class AbbreviatedConjugationComponent implements OnInit {
   typeLabel1: string;
   typeLabel2: string;
   typeLabel3: string;
-  verbalNounsText: string;
-  adverbsText: string;
+  verbalNouns: ArabicLabel[][];
+  adverbs: ArabicLabel[][];
   nounGroup: NounConjugationGroup;
   verbGroup: VerbConjugationGroup;
 
@@ -112,8 +112,8 @@ export class AbbreviatedConjugationComponent implements OnInit {
       this.showPassive = this.abbreviatedConjugation.pastPassiveTense !== null
         || this.abbreviatedConjugation.presentPassiveTense !== null
         || this.abbreviatedConjugation.passiveParticipleMasculine !== null;
-     // this.verbalNounsText = this.concatenatedStringWithAnd(this.abbreviatedConjugation.verbalNouns);
-      // this.adverbsText = this.concatenatedStringWithAnd(this.abbreviatedConjugation.adverbs);
+      this.verbalNouns = this.slice(this.abbreviatedConjugation.verbalNouns);
+      this.adverbs = this.slice(this.abbreviatedConjugation.adverbs);
     } else {
       this.title = null;
       this.translation = null;
@@ -121,9 +121,29 @@ export class AbbreviatedConjugationComponent implements OnInit {
       this.typeLabel2 = null;
       this.typeLabel3 = null;
       this.showPassive = false;
-      this.verbalNounsText = null;
-      this.adverbsText = null;
+      this.verbalNouns = null;
+      this.adverbs = null;
     }
+  }
+
+  private slice(srcArray: ArabicLabel[]) {
+    if (!srcArray || srcArray.length <= 0) {
+      return null;
+    }
+    const result: ArabicLabel[][] = [];
+    let start = 0;
+    let end = 2;
+    while (start < srcArray.length) {
+      let subArray = srcArray.slice(start, end);
+      subArray = subArray.reverse();
+      while (subArray.length % 2 !== 0) {
+        subArray.splice(0, 0, null);
+      }
+      result.push(subArray);
+      start = end;
+      end += 2;
+    }
+    return result;
   }
 
 }

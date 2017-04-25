@@ -21,53 +21,135 @@
       <div class="ui-grid-row">
         <div class="ui-grid-col-12">&nbsp;</div>
       </div>
+
       <!-- start of active tense row -->
       <div class="ui-grid-row">
         <div class="ui-grid-col-6">
-          <app-toggle-selector [value]="abbreviatedConjugation.presentTense" styleClass="abbreviatedConjugationSelector"></app-toggle-selector>
+          <div class="arabicNormal" style="text-align: center; color: #2E74B5;">
+            {{abbreviatedConjugation.presentTense.code}}
+          </div>
         </div>
         <div class="ui-grid-col-6">
-          <app-toggle-selector [value]="abbreviatedConjugation.pastTense" styleClass="abbreviatedConjugationSelector"></app-toggle-selector>
+          <div class="arabicNormal" style="text-align: center; color: #2E74B5;">
+            {{abbreviatedConjugation.pastTense.code}}
+          </div>
+        </div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-6">
+          <app-toggle-selector [value]="abbreviatedConjugation.presentTense" styleClass="arabicNormal"></app-toggle-selector>
+        </div>
+        <div class="ui-grid-col-6">
+          <app-toggle-selector [value]="abbreviatedConjugation.pastTense" styleClass="arabicNormal"></app-toggle-selector>
         </div>
       </div>
       <!-- end of active tense row -->
       <div class="ui-grid-row">
         <div class="ui-grid-col-12">&nbsp;</div>
       </div>
+
+      <!-- start of verbal noun rows -->
+      <ng-template ngFor let-items [ngForOf]="verbalNouns">
+        <div class="ui-grid-row">
+          <ng-template ngFor let-item [ngForOf]="items">
+            <div class="ui-grid-col-6">
+              <ng-template [ngIf]="item !== null" [ngIfElse]="none">
+                <div class="arabicNormal" style="text-align: center; color: #2E74B5;">
+                  {{item.code}}
+                </div>
+              </ng-template>
+              <ng-template #none>&nbsp;</ng-template>
+            </div>
+          </ng-template>
+        </div>
+        <div class="ui-grid-row">
+          <ng-template ngFor let-item [ngForOf]="items">
+            <div class="ui-grid-col-6">
+              <ng-template [ngIf]="item !== null" [ngIfElse]="none">
+                <app-toggle-selector [value]="item" styleClass="arabicNormal"></app-toggle-selector>
+              </ng-template>
+              <ng-template #none>&nbsp;</ng-template>
+            </div>
+          </ng-template>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-12">&nbsp;</div>
+        </div>
+      </ng-template>
+      <!-- end of verbal noun rows -->
+
       <!-- start of active participle row -->
       <div class="ui-grid-row">
         <div class="ui-grid-col-6">
-          <app-toggle-selector [value]="abbreviatedConjugation.activeParticipleFeminine" styleClass="abbreviatedConjugationSelector"></app-toggle-selector>
+          <div class="arabicNormal" style="text-align: center; color: #2E74B5;">
+            {{abbreviatedConjugation.activeParticipleFeminine.code}}
+          </div>
         </div>
         <div class="ui-grid-col-6">
-          <app-toggle-selector [value]="abbreviatedConjugation.activeParticipleMasculine" styleClass="abbreviatedConjugationSelector"></app-toggle-selector>
+          <div class="arabicNormal" style="text-align: center; color: #2E74B5;">
+            {{abbreviatedConjugation.activeParticipleMasculine.code}}
+          </div>
+        </div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-6">
+          <app-toggle-selector [value]="abbreviatedConjugation.activeParticipleFeminine" styleClass="arabicNormal"></app-toggle-selector>
+        </div>
+        <div class="ui-grid-col-6">
+          <app-toggle-selector [value]="abbreviatedConjugation.activeParticipleMasculine" styleClass="arabicNormal"></app-toggle-selector>
         </div>
       </div>
       <!-- end of active participle row -->
       <div class="ui-grid-row">
         <div class="ui-grid-col-12">&nbsp;</div>
       </div>
+
       <ng-template [ngIf]="showPassive">
         <!-- start of passive tense row -->
         <div class="ui-grid-row">
           <div class="ui-grid-col-6">
-            <app-toggle-selector [value]="abbreviatedConjugation.presentPassiveTense" styleClass="abbreviatedConjugationSelector"></app-toggle-selector>
+            <div class="arabicNormal" style="text-align: center; color: #2E74B5;">
+              {{abbreviatedConjugation.presentPassiveTense.code}}
+            </div>
           </div>
           <div class="ui-grid-col-6">
-            <app-toggle-selector [value]="abbreviatedConjugation.pastPassiveTense" styleClass="abbreviatedConjugationSelector"></app-toggle-selector>
+            <div class="arabicNormal" style="text-align: center; color: #2E74B5;">
+              {{abbreviatedConjugation.pastPassiveTense.code}}
+            </div>
+          </div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-6">
+            <app-toggle-selector [value]="abbreviatedConjugation.presentPassiveTense" styleClass="arabicNormal"></app-toggle-selector>
+          </div>
+          <div class="ui-grid-col-6">
+            <app-toggle-selector [value]="abbreviatedConjugation.pastPassiveTense" styleClass="arabicNormal"></app-toggle-selector>
           </div>
         </div>
         <!-- end of passive tense row -->
         <div class="ui-grid-row">
           <div class="ui-grid-col-12">&nbsp;</div>
         </div>
+
         <!-- start of passive participle row -->
         <div class="ui-grid-row">
           <div class="ui-grid-col-6">
-            <app-toggle-selector [value]="abbreviatedConjugation.passiveParticipleFeminine" styleClass="abbreviatedConjugationSelector"></app-toggle-selector>
+            <div class="arabicNormal" style="text-align: center; color: #2E74B5;">
+              {{abbreviatedConjugation.passiveParticipleFeminine.code}}
+            </div>
           </div>
           <div class="ui-grid-col-6">
-            <app-toggle-selector [value]="abbreviatedConjugation.passiveParticipleMasculine" styleClass="abbreviatedConjugationSelector"></app-toggle-selector>
+            <div class="arabicNormal" style="text-align: center; color: #2E74B5;">
+              {{abbreviatedConjugation.passiveParticipleMasculine.code}}
+            </div>
+          </div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-6">
+            <app-toggle-selector [value]="abbreviatedConjugation.passiveParticipleFeminine" styleClass="arabicNormal"></app-toggle-selector>
+          </div>
+          <div class="ui-grid-col-6">
+            <app-toggle-selector [value]="abbreviatedConjugation.passiveParticipleMasculine" styleClass="arabicNormal"></app-toggle-selector>
           </div>
         </div>
         <!-- end of passive participle row -->
@@ -75,26 +157,64 @@
           <div class="ui-grid-col-12">&nbsp;</div>
         </div>
       </ng-template>
+
       <!-- start of imperative and forbidding row -->
       <div class="ui-grid-row">
         <div class="ui-grid-col-6">
-          <app-toggle-selector [value]="abbreviatedConjugation.imperative" styleClass="abbreviatedConjugationSelector"></app-toggle-selector>
+          <div class="arabicNormal" style="text-align: center; color: #2E74B5;">
+            {{abbreviatedConjugation.forbidding.code}}
+          </div>
         </div>
         <div class="ui-grid-col-6">
-          <app-toggle-selector [value]="abbreviatedConjugation.forbidding" styleClass="abbreviatedConjugationSelector"></app-toggle-selector>
+          <div class="arabicNormal" style="text-align: center; color: #2E74B5;">
+            {{abbreviatedConjugation.imperative.code}}
+          </div>
+        </div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-6">
+          <app-toggle-selector [value]="abbreviatedConjugation.forbidding" styleClass="arabicNormal"></app-toggle-selector>
+        </div>
+        <div class="ui-grid-col-6">
+          <app-toggle-selector [value]="abbreviatedConjugation.imperative" styleClass="arabicNormal"></app-toggle-selector>
         </div>
       </div>
       <!-- end of imperative and forbidding row -->
       <div class="ui-grid-row">
         <div class="ui-grid-col-12">&nbsp;</div>
       </div>
+
+      <!-- start of adverbs rows -->
+      <ng-template ngFor let-items [ngForOf]="adverbs">
+        <div class="ui-grid-row">
+          <ng-template ngFor let-item [ngForOf]="items">
+            <div class="ui-grid-col-6">
+              <ng-template [ngIf]="item !== null" [ngIfElse]="none">
+                <div class="arabicNormal" style="text-align: center; color: #2E74B5;">
+                  {{item.code}}
+                </div>
+              </ng-template>
+              <ng-template #none>&nbsp;</ng-template>
+            </div>
+          </ng-template>
+        </div>
+        <div class="ui-grid-row">
+          <ng-template ngFor let-item [ngForOf]="items">
+            <div class="ui-grid-col-6">
+              <ng-template [ngIf]="item !== null" [ngIfElse]="none">
+                <app-toggle-selector [value]="item" styleClass="arabicNormal"></app-toggle-selector>
+              </ng-template>
+              <ng-template #none>&nbsp;</ng-template>
+            </div>
+          </ng-template>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-12">&nbsp;</div>
+        </div>
+      </ng-template>
+      <!-- end of adverbs rows -->
     </div>
 
-    <div class="ui-g">
-      <div class="ui-g-12 ui-md-12 ui-lg-12" style="text-align: center;">
-        <div class="arabicNormalBig"> {{ adverbsText || '&nbsp;'}} </div>
-      </div>
-    </div>
   </p-panel>
 </div>
 

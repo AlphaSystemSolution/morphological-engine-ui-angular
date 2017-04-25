@@ -20,7 +20,7 @@ export class AbbreviatedConjugation {
   public adverbs: ArabicLabel[];
 
   private static getLabel(type: SarfTermType, value: string): ArabicLabel {
-    return value ? new ArabicLabel(type.name, value, type.name) : null;
+    return value ? new ArabicLabel(type.name, value, type.label) : null;
   }
 
   private static getLabels(type: SarfTermType, values: string[]): ArabicLabel[] {
