@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
+  ButtonModule,
   InputTextModule,
   OverlayPanelModule,
   PanelModule,
@@ -19,6 +20,7 @@ import { ToggleSelectorComponent } from './toggle-selector/toggle-selector.compo
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
+    ButtonModule,
     InputTextModule,
     OverlayPanelModule,
     PanelModule,
@@ -31,7 +33,7 @@ import { ToggleSelectorComponent } from './toggle-selector/toggle-selector.compo
     TemplateWrapper,
     VerbalNounPickerComponent,
     ToggleSelectorComponent
-    ],
+  ],
   declarations: [
     ArabicButtonComponent,
     ArabicKeyboardComponent,

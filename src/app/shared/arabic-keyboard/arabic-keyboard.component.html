@@ -45,8 +45,6 @@
     <app-arabic-button #b25 [letter]="letters[25]" (click)="selectLetter(b25.letter)"></app-arabic-button>
     <app-arabic-button #b26 [letter]="letters[26]" (click)="selectLetter(b26.letter)"></app-arabic-button>
     <app-arabic-button #b27 [letter]="letters[27]" (click)="selectLetter(b27.letter)"></app-arabic-button>
-    <button type="text" pButton (click)="resetSelection()">
-      <span class="ui-button-text ui-c" style="display: inline-block; margin-bottom: 5px;vertical-align: top;">    Reset     </span>
-    </button>
+    <button pButton type="button" (click)="resetSelection()" label="     Reset     "></button>
   </div>
 </p-overlayPanel>
