@@ -1,6 +1,9 @@
 import { ConjugationHeader } from './conjugation-header';
 import { ArabicLabel } from './common';
 import { SarfTermType } from './sarf-term-type';
+import { RootLetters } from '../model/root-letters';
+import { NamedTemplate } from '../model/named-template';
+import { ArabicLetter } from '../model/arabic-letter';
 import { IdGenerator } from '../utils/IdGenerator';
 
 export class ConjugationLabel extends ArabicLabel {
@@ -31,6 +34,8 @@ export class AbbreviatedConjugation {
   public forbidding: ConjugationLabel;
   public verbalNouns: ConjugationLabel[];
   public adverbs: ConjugationLabel[];
+  private _rootLetters: RootLetters;
+  private _namedTemplate: NamedTemplate;
 
   private static getLabel(type: SarfTermType, value: string): ConjugationLabel {
     return value ? new ConjugationLabel(type, value) : null;
@@ -45,9 +50,28 @@ export class AbbreviatedConjugation {
     return labels;
   }
 
+  private static getRootLetters(conjugationHeader: ConjugationHeader): RootLetters {
+    if (conjugationHeader === null) {
+      return null;
+    }
+    const rl = conjugationHeader.rootLetters;
+    return new RootLetters(ArabicLetter.getByName(rl.firstRadical), ArabicLetter.getByName(rl.secondRadical),
+      ArabicLetter.getByName(rl.thirdRadical), ArabicLetter.getByName(rl.fourthRadical));
+  }
+
+  private static getNamedTemplate(conjugationHeader: ConjugationHeader): NamedTemplate {
+    if (conjugationHeader === null || conjugationHeader.chartMode === null) {
+      return null;
+    }
+    const template = conjugationHeader.chartMode.template;
+    return NamedTemplate.getByName(template);
+  }
+
   constructor(src?: any) {
     this.id = src && src.id || IdGenerator.nextId();
     this.conjugationHeader = src && src.conjugationHeader || null;
+    this._rootLetters = AbbreviatedConjugation.getRootLetters(this.conjugationHeader);
+    this._namedTemplate = AbbreviatedConjugation.getNamedTemplate(this.conjugationHeader);
     this.pastTense = AbbreviatedConjugation.getLabel(SarfTermType.PAST_TENSE, src && src.pastTense || null);
     this.presentTense = AbbreviatedConjugation.getLabel(SarfTermType.PRESENT_TENSE, src && src.presentTense || null);
     this.activeParticipleMasculine = AbbreviatedConjugation.getLabel(SarfTermType.ACTIVE_PARTICIPLE_MASCULINE,
@@ -64,5 +88,21 @@ export class AbbreviatedConjugation {
     this.forbidding = AbbreviatedConjugation.getLabel(SarfTermType.FORBIDDING, src && src.forbidding || null);
     this.verbalNouns = AbbreviatedConjugation.getLabels(SarfTermType.VERBAL_NOUN, src && src.verbalNouns || null);
     this.adverbs = AbbreviatedConjugation.getLabels(SarfTermType.NOUN_OF_PLACE_AND_TIME, src && src.adverbs || null);
+  }
+
+  get rootLetters(): RootLetters {
+    return this._rootLetters;
+  }
+
+  get namedTemplate(): NamedTemplate {
+    return this._namedTemplate;
+  }
+
+  compareTo(other: AbbreviatedConjugation): number {
+    let result = this.namedTemplate.compareTo(other.namedTemplate);
+    if (result === 0) {
+      result = this.rootLetters.compareTo(other.rootLetters);
+    }
+    return result;
   }
 }
