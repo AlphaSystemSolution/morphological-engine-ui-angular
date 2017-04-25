@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, QueryList, ViewChildren } from '@angular/core';
 import { ApplicationControllerService } from '../../application-controller.service';
 import { ArabicConstants, ArabicLabel } from '../../model/common';
 import { ArabicLetter } from '../../model/arabic-letter';
 import { ConjugationHeader } from '../../model/conjugation-header';
 import { AbbreviatedConjugation } from '../../model/abbreviated-conjugation';
+import { ToggleSelectorComponent } from '../../shared/toggle-selector/toggle-selector.component';
 import { NounConjugationGroup, VerbConjugationGroup } from '../../model/detailed-conjugation';
 import { SarfTermType } from '../../model/sarf-term-type';
 
@@ -15,6 +16,7 @@ import { SarfTermType } from '../../model/sarf-term-type';
 export class AbbreviatedConjugationComponent implements OnInit {
 
   private _abbreviatedConjugation: AbbreviatedConjugation;
+  @ViewChildren(ToggleSelectorComponent) buttons: QueryList<ToggleSelectorComponent>;
   @Input() collaspPanel = false;
   @Input() collaspDetailedConjugationPanel = true;
   show: boolean;
@@ -32,7 +34,7 @@ export class AbbreviatedConjugationComponent implements OnInit {
   constructor(private applicationController: ApplicationControllerService) { }
 
   ngOnInit() {
-    this.updateTexts();
+    this.update();
   }
 
   @Input() get abbreviatedConjugation(): AbbreviatedConjugation {
@@ -45,7 +47,7 @@ export class AbbreviatedConjugationComponent implements OnInit {
     this.collaspDetailedConjugationPanel = true;
     this.nounGroup = null;
     this.verbGroup = null;
-    this.updateTexts();
+    this.update();
   }
 
   public displayConjugation(type: string) {
@@ -86,19 +88,10 @@ export class AbbreviatedConjugationComponent implements OnInit {
     }
   }
 
-  private concatenatedStringWithAnd(values: string[]): string {
-    if (!values) {
-      return null;
+  private update() {
+    if (this.buttons) {
+      this.buttons.forEach(button => button.select = false);
     }
-    let result = values[0];
-    for (let i = 1; i < values.length; i++) {
-      result += ArabicConstants.AND_SPACE.label + values[i];
-    }
-
-    return result;
-  }
-
-  private updateTexts() {
     this.show = this.abbreviatedConjugation != null;
     if (this.show) {
       const conjugationHeader = this.abbreviatedConjugation.conjugationHeader;
