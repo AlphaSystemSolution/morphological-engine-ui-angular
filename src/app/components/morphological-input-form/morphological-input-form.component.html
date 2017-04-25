@@ -76,6 +76,7 @@
   </div>
   <p-footer>
     <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+      <button pButton type="button" label="View Dictionary" (click)="viewDictionary($event)"></button>
       <button pButton type="button" label="Add / Update" (click)="hideDialog($event, 'submit')"></button>
       <button pButton type="button" label="Cancel" (click)="hideDialog($event, 'cancel')"></button>
     </div>

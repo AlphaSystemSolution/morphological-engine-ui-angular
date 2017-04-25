@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ApplicationControllerService } from '../../application-controller.service';
 import { MorphologicalInputFormModel } from '../../shared/morphological-input-form-model';
 import { ArabicKeyboardComponent } from '../../shared/arabic-keyboard/arabic-keyboard.component';
 import { ArabicDropdownComponent } from '../../shared/arabic-dropdown/arabic-dropdown.component';
@@ -18,7 +19,7 @@ export class MorphologicalInputFormComponent implements OnInit {
   @Input() visible: boolean;
   @Output() onHide: EventEmitter<any> = new EventEmitter();
 
-  constructor() {
+  constructor(private applicationController: ApplicationControllerService, ) {
     this._model = new MorphologicalInputFormModel();
   }
 
@@ -50,6 +51,10 @@ export class MorphologicalInputFormComponent implements OnInit {
     }
     this._model = new MorphologicalInputFormModel();
     this.onHide.emit({ 'originalEvent': event, 'status': status, 'result': _result });
+  }
+
+  viewDictionary(event) {
+    this.applicationController.openWithRootLetters(this._model.rootLetters);
   }
 
   handleClose(event) {
