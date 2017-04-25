@@ -11,7 +11,6 @@ import { RootLetters as _RootLetters } from './model/conjugation-header';
 import { MorphologicalInput } from './model/morphological-input';
 import { AbbreviatedConjugation } from './model/abbreviated-conjugation';
 import { MorphologicalChart } from './components/model';
-import { ComparisonUtil } from './utils/utils';
 import { environment } from '../environments/environment';
 import 'rxjs/add/operator/map';
 import * as FileSaver from 'file-saver';
@@ -42,7 +41,7 @@ export class ApplicationControllerService {
         } else {
           data.forEach(d => this.abbreviatedConjugations.push(new AbbreviatedConjugation(d)));
         }
-        this.abbreviatedConjugations.sort((a1, a2) => ComparisonUtil.compareAbbreviatedConjugatios(a1, a2));
+        this.abbreviatedConjugations.sort((a1, a2) => a1.compareTo(a2));
       },
       err => {
         console.log('ERROR: ' + JSON.stringify(err));
