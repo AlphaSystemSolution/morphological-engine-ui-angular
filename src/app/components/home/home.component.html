@@ -3,8 +3,8 @@
 
 <p-tabView (onChange)="handleChange($event)">
   <p-tabPanel header="Table">
-    <p-dataTable [value]="applicationController.data" [(selection)]="selectedRows" selectionMode="multiple" [responsive]="true"
-      [editable]="true" (onRowSelect)="selectRow($event)">
+    <p-dataTable [value]="applicationController.data" [(selection)]="selectedRows" selectionMode="multiple" [rows]="20" [paginator]="true"
+      [responsive]="true" [editable]="true" (onRowSelect)="selectRow($event)">
       <p-column [style]="&#123;'width':'38px'&#125;" selectionMode="multiple"></p-column>
       <p-column field="rootLetters" header="Root Letters" [style]="{'width': '200px'}">
         <ng-template let-mi="rowData" pTemplate="body">
@@ -31,7 +31,7 @@
     </p-dataTable>
   </p-tabPanel>
   <p-tabPanel header="Conjugation">
-   <app-morphological-chart #chart></app-morphological-chart>
+    <app-morphological-chart #chart></app-morphological-chart>
   </p-tabPanel>
 </p-tabView>
 
