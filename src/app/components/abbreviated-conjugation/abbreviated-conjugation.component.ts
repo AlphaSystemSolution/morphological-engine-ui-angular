@@ -20,14 +20,12 @@ export class AbbreviatedConjugationComponent implements OnInit {
   @Input() collaspPanel = false;
   @Input() collaspDetailedConjugationPanel = true;
   show: boolean;
-  showPassive: boolean;
   title: string;
   translation: string;
   typeLabel1: string;
   typeLabel2: string;
   typeLabel3: string;
-  verbalNouns: ConjugationLabel[][];
-  adverbs: ConjugationLabel[][];
+  labels: ConjugationLabel[][] = [];
   nounGroup: NounConjugationGroup;
   verbGroup: VerbConjugationGroup;
 
@@ -102,21 +100,50 @@ export class AbbreviatedConjugationComponent implements OnInit {
         this.typeLabel2 = conjugationHeader.typeLabel2;
         this.typeLabel3 = conjugationHeader.typeLabel3;
       }
-      this.showPassive = this.abbreviatedConjugation.pastPassiveTense !== null
-        || this.abbreviatedConjugation.presentPassiveTense !== null
-        || this.abbreviatedConjugation.passiveParticipleMasculine !== null;
-      this.verbalNouns = this.slice(this.abbreviatedConjugation.verbalNouns);
-      this.adverbs = this.slice(this.abbreviatedConjugation.adverbs);
+      this.labels = [];
+
+      this.addLabels(this.abbreviatedConjugation.presentTense, this.abbreviatedConjugation.pastTense);
+
+      const verbalNouns = this.slice(this.abbreviatedConjugation.verbalNouns);
+      if (verbalNouns) {
+        verbalNouns.forEach(items => this.labels.push(items));
+      }
+
+      this.addLabels(this.abbreviatedConjugation.activeParticipleFeminine, this.abbreviatedConjugation.activeParticipleMasculine);
+      this.addLabels(this.abbreviatedConjugation.presentPassiveTense, this.abbreviatedConjugation.pastPassiveTense);
+      this.addLabels(this.abbreviatedConjugation.passiveParticipleFeminine, this.abbreviatedConjugation.passiveParticipleMasculine);
+      this.addLabels(this.abbreviatedConjugation.forbidding, this.abbreviatedConjugation.imperative);
+
+      const adverbs = this.slice(this.abbreviatedConjugation.adverbs);
+      if (adverbs) {
+        adverbs.forEach(items => this.labels.push(items));
+      }
     } else {
       this.title = null;
       this.translation = null;
       this.typeLabel1 = null;
       this.typeLabel2 = null;
       this.typeLabel3 = null;
-      this.showPassive = false;
-      this.verbalNouns = null;
-      this.adverbs = null;
+      this.labels = [];
     }
+  }
+
+  private addLabel(label: ConjugationLabel, labelGroup: ConjugationLabel[]) {
+    if (label) {
+      labelGroup.push(label);
+    } else {
+      labelGroup.push(null);
+    }
+  }
+
+  private addLabels(leftLabel: ConjugationLabel, rightLabel: ConjugationLabel) {
+    if (leftLabel === null && rightLabel === null) {
+      return;
+    }
+    const labelGroup: ConjugationLabel[] = [];
+    this.addLabel(leftLabel, labelGroup);
+    this.addLabel(rightLabel, labelGroup);
+    this.labels.push(labelGroup);
   }
 
   private slice(srcArray: ConjugationLabel[]) {
