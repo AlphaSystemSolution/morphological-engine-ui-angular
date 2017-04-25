@@ -26,12 +26,12 @@
       <div class="ui-grid-row">
         <div class="ui-grid-col-6">
           <div class="arabicNormal" style="text-align: center; color: #2E74B5;">
-            {{abbreviatedConjugation.presentTense.code}}
+            {{abbreviatedConjugation.presentTense.type.label}}
           </div>
         </div>
         <div class="ui-grid-col-6">
           <div class="arabicNormal" style="text-align: center; color: #2E74B5;">
-            {{abbreviatedConjugation.pastTense.code}}
+            {{abbreviatedConjugation.pastTense.type.label}}
           </div>
         </div>
       </div>
@@ -55,7 +55,7 @@
             <div class="ui-grid-col-6">
               <ng-template [ngIf]="item !== null" [ngIfElse]="none">
                 <div class="arabicNormal" style="text-align: center; color: #2E74B5;">
-                  {{item.code}}
+                  {{item.type.label}}
                 </div>
               </ng-template>
               <ng-template #none>&nbsp;</ng-template>
@@ -82,12 +82,12 @@
       <div class="ui-grid-row">
         <div class="ui-grid-col-6">
           <div class="arabicNormal" style="text-align: center; color: #2E74B5;">
-            {{abbreviatedConjugation.activeParticipleFeminine.code}}
+            {{abbreviatedConjugation.activeParticipleFeminine.type.label}}
           </div>
         </div>
         <div class="ui-grid-col-6">
           <div class="arabicNormal" style="text-align: center; color: #2E74B5;">
-            {{abbreviatedConjugation.activeParticipleMasculine.code}}
+            {{abbreviatedConjugation.activeParticipleMasculine.type.label}}
           </div>
         </div>
       </div>
@@ -109,12 +109,12 @@
         <div class="ui-grid-row">
           <div class="ui-grid-col-6">
             <div class="arabicNormal" style="text-align: center; color: #2E74B5;">
-              {{abbreviatedConjugation.presentPassiveTense.code}}
+              {{abbreviatedConjugation.presentPassiveTense.type.label}}
             </div>
           </div>
           <div class="ui-grid-col-6">
             <div class="arabicNormal" style="text-align: center; color: #2E74B5;">
-              {{abbreviatedConjugation.pastPassiveTense.code}}
+              {{abbreviatedConjugation.pastPassiveTense.type.label}}
             </div>
           </div>
         </div>
@@ -135,12 +135,12 @@
         <div class="ui-grid-row">
           <div class="ui-grid-col-6">
             <div class="arabicNormal" style="text-align: center; color: #2E74B5;">
-              {{abbreviatedConjugation.passiveParticipleFeminine.code}}
+              {{abbreviatedConjugation.passiveParticipleFeminine.type.label}}
             </div>
           </div>
           <div class="ui-grid-col-6">
             <div class="arabicNormal" style="text-align: center; color: #2E74B5;">
-              {{abbreviatedConjugation.passiveParticipleMasculine.code}}
+              {{abbreviatedConjugation.passiveParticipleMasculine.type.label}}
             </div>
           </div>
         </div>
@@ -162,12 +162,12 @@
       <div class="ui-grid-row">
         <div class="ui-grid-col-6">
           <div class="arabicNormal" style="text-align: center; color: #2E74B5;">
-            {{abbreviatedConjugation.forbidding.code}}
+            {{abbreviatedConjugation.forbidding.type.label}}
           </div>
         </div>
         <div class="ui-grid-col-6">
           <div class="arabicNormal" style="text-align: center; color: #2E74B5;">
-            {{abbreviatedConjugation.imperative.code}}
+            {{abbreviatedConjugation.imperative.type.label}}
           </div>
         </div>
       </div>
@@ -191,7 +191,7 @@
             <div class="ui-grid-col-6">
               <ng-template [ngIf]="item !== null" [ngIfElse]="none">
                 <div class="arabicNormal" style="text-align: center; color: #2E74B5;">
-                  {{item.code}}
+                  {{item.type.label}}
                 </div>
               </ng-template>
               <ng-template #none>&nbsp;</ng-template>
@@ -218,10 +218,10 @@
   </p-panel>
 </div>
 
-<ng-template [ngIf]="nounGroup">
+<!--ng-template [ngIf]="nounGroup">
   <app-noun-conjugation [group]="nounGroup" [collapsed]="collaspDetailedConjugationPanel"></app-noun-conjugation>
 </ng-template>
 
 <ng-template [ngIf]="verbGroup">
   <app-verb-conjugation [group]="verbGroup" [collapsed]="collaspDetailedConjugationPanel"></app-verb-conjugation>
-</ng-template>
+</ng-template-->

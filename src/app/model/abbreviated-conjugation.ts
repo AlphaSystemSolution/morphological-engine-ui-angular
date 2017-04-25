@@ -3,31 +3,44 @@ import { ArabicLabel } from './common';
 import { SarfTermType } from './sarf-term-type';
 import { IdGenerator } from '../utils/IdGenerator';
 
+export class ConjugationLabel extends ArabicLabel {
+  private _type: SarfTermType;
+
+  constructor(type: SarfTermType, label: string) {
+    super(type.name, label, type.code);
+    this._type = type;
+  }
+
+  get type(): SarfTermType {
+    return this._type;
+  }
+}
+
 export class AbbreviatedConjugation {
   public id: string;
   public conjugationHeader: ConjugationHeader;
-  public pastTense: ArabicLabel;
-  public presentTense: ArabicLabel;
-  public activeParticipleMasculine: ArabicLabel;
-  public activeParticipleFeminine: ArabicLabel;
-  public pastPassiveTense: ArabicLabel;
-  public presentPassiveTense: ArabicLabel;
-  public passiveParticipleMasculine: ArabicLabel;
-  public passiveParticipleFeminine: ArabicLabel;
-  public imperative: ArabicLabel;
-  public forbidding: ArabicLabel;
-  public verbalNouns: ArabicLabel[];
-  public adverbs: ArabicLabel[];
+  public pastTense: ConjugationLabel;
+  public presentTense: ConjugationLabel;
+  public activeParticipleMasculine: ConjugationLabel;
+  public activeParticipleFeminine: ConjugationLabel;
+  public pastPassiveTense: ConjugationLabel;
+  public presentPassiveTense: ConjugationLabel;
+  public passiveParticipleMasculine: ConjugationLabel;
+  public passiveParticipleFeminine: ConjugationLabel;
+  public imperative: ConjugationLabel;
+  public forbidding: ConjugationLabel;
+  public verbalNouns: ConjugationLabel[];
+  public adverbs: ConjugationLabel[];
 
-  private static getLabel(type: SarfTermType, value: string): ArabicLabel {
-    return value ? new ArabicLabel(type.name, value, type.label) : null;
+  private static getLabel(type: SarfTermType, value: string): ConjugationLabel {
+    return value ? new ConjugationLabel(type, value) : null;
   }
 
-  private static getLabels(type: SarfTermType, values: string[]): ArabicLabel[] {
+  private static getLabels(type: SarfTermType, values: string[]): ConjugationLabel[] {
     if (!values) {
       return null;
     }
-    const labels: ArabicLabel[] = [];
+    const labels: ConjugationLabel[] = [];
     values.forEach(value => labels.push(AbbreviatedConjugation.getLabel(type, value)));
     return labels;
   }

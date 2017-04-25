@@ -3,7 +3,7 @@ import { ApplicationControllerService } from '../../application-controller.servi
 import { ArabicConstants, ArabicLabel } from '../../model/common';
 import { ArabicLetter } from '../../model/arabic-letter';
 import { ConjugationHeader } from '../../model/conjugation-header';
-import { AbbreviatedConjugation } from '../../model/abbreviated-conjugation';
+import { AbbreviatedConjugation, ConjugationLabel } from '../../model/abbreviated-conjugation';
 import { ToggleSelectorComponent } from '../../shared/toggle-selector/toggle-selector.component';
 import { NounConjugationGroup, VerbConjugationGroup } from '../../model/detailed-conjugation';
 import { SarfTermType } from '../../model/sarf-term-type';
@@ -26,8 +26,8 @@ export class AbbreviatedConjugationComponent implements OnInit {
   typeLabel1: string;
   typeLabel2: string;
   typeLabel3: string;
-  verbalNouns: ArabicLabel[][];
-  adverbs: ArabicLabel[][];
+  verbalNouns: ConjugationLabel[][];
+  adverbs: ConjugationLabel[][];
   nounGroup: NounConjugationGroup;
   verbGroup: VerbConjugationGroup;
 
@@ -119,11 +119,11 @@ export class AbbreviatedConjugationComponent implements OnInit {
     }
   }
 
-  private slice(srcArray: ArabicLabel[]) {
+  private slice(srcArray: ConjugationLabel[]) {
     if (!srcArray || srcArray.length <= 0) {
       return null;
     }
-    const result: ArabicLabel[][] = [];
+    const result: ConjugationLabel[][] = [];
     let start = 0;
     let end = 2;
     while (start < srcArray.length) {
