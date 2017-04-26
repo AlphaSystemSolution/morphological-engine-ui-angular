@@ -1,3 +1,5 @@
+import { IdGenerator } from '../utils/IdGenerator';
+
 export class ConjugationTuple {
   private _type: string;
   public singular: string;
@@ -60,6 +62,8 @@ export class NounConjugationGroup implements ConjugationGroup {
 }
 
 export class DetailedConjugation {
+  public id: string;
+
   // active values
   public pastTense: VerbConjugationGroup;
   public presentTense: VerbConjugationGroup;
@@ -91,6 +95,7 @@ export class DetailedConjugation {
   }
 
   constructor(src?: any) {
+    this.id = src && src.id || IdGenerator.nextId();
     this.pastTense = DetailedConjugation.getVerbConjugationGroup(src && src.pastTense || null);
     this.presentTense = DetailedConjugation.getVerbConjugationGroup(src && src.presentTense || null);
     this.activeParticipleMasculine = DetailedConjugation.getNounConjugationGroup(src && src.activeParticipleMasculine || null);
