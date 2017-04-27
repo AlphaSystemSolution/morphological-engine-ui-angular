@@ -1,4 +1,7 @@
 import { IdGenerator } from '../utils/IdGenerator';
+import { RootLetters } from './root-letters';
+import { NamedTemplate } from './named-template';
+import { SarfTermType } from './sarf-term-type';
 
 export class ConjugationTuple {
   private _type: string;
@@ -11,9 +14,12 @@ export class ConjugationTuple {
   }
 
   constructor(src?: any) {
-    this.singular = src && src.singular || null;
-    this.dual = src && src.dual || null;
-    this.plural = src && src.plural || null;
+    if (src) {
+      this.singular = src.singular || null;
+      this.dual = src.dual || null;
+      this.plural = src.plural || null;
+    }
+
   }
 
   get type(): string {
@@ -38,12 +44,14 @@ export class VerbConjugationGroup implements ConjugationGroup {
   public firstPerson: ConjugationTuple;
 
   constructor(src?: any) {
-    this.termType = src && src.termType || null;
-    this.masculineThirdPerson = ConjugationTuple.getTuple(src && src.masculineThirdPerson || null);
-    this.feminineThirdPerson = ConjugationTuple.getTuple(src && src.feminineThirdPerson || null);
-    this.masculineSecondPerson = ConjugationTuple.getTuple(src && src.masculineSecondPerson || null);
-    this.feminineSecondPerson = ConjugationTuple.getTuple(src && src.feminineSecondPerson || null);
-    this.firstPerson = ConjugationTuple.getTuple(src && src.firstPerson || null);
+    if (src) {
+      this.termType = src.termType || null;
+      this.masculineThirdPerson = ConjugationTuple.getTuple(src.masculineThirdPerson || null);
+      this.feminineThirdPerson = ConjugationTuple.getTuple(src.feminineThirdPerson || null);
+      this.masculineSecondPerson = ConjugationTuple.getTuple(src.masculineSecondPerson || null);
+      this.feminineSecondPerson = ConjugationTuple.getTuple(src.feminineSecondPerson || null);
+      this.firstPerson = ConjugationTuple.getTuple(src.firstPerson || null);
+    }
   }
 }
 
@@ -54,10 +62,12 @@ export class NounConjugationGroup implements ConjugationGroup {
   public genitive: ConjugationTuple;
 
   constructor(src?: any) {
-    this.termType = src && src.termType || null;
-    this.nominative = ConjugationTuple.getTuple(src && src.nominative || null);
-    this.accusative = ConjugationTuple.getTuple(src && src.accusative || null);
-    this.genitive = ConjugationTuple.getTuple(src && src.genitive || null);
+    if (src) {
+      this.termType = src.termType || null;
+      this.nominative = ConjugationTuple.getTuple(src.nominative || null);
+      this.accusative = ConjugationTuple.getTuple(src.accusative || null);
+      this.genitive = ConjugationTuple.getTuple(src.genitive || null);
+    }
   }
 }
 
@@ -86,6 +96,9 @@ export class DetailedConjugation {
   // adverb values
   public adverbs: NounConjugationGroup[];
 
+  private _rootLetters: RootLetters;
+  private _namedTemplate: NamedTemplate;
+
   private static getVerbConjugationGroup(src: any): VerbConjugationGroup {
     return src ? new VerbConjugationGroup(src) : null;
   }
@@ -95,28 +108,111 @@ export class DetailedConjugation {
   }
 
   constructor(src?: any) {
-    this.id = src && src.id || IdGenerator.nextId();
-    this.pastTense = DetailedConjugation.getVerbConjugationGroup(src && src.pastTense || null);
-    this.presentTense = DetailedConjugation.getVerbConjugationGroup(src && src.presentTense || null);
-    this.activeParticipleMasculine = DetailedConjugation.getNounConjugationGroup(src && src.activeParticipleMasculine || null);
-    this.activeParticipleFeminine = DetailedConjugation.getNounConjugationGroup(src && src.activeParticipleFeminine || null);
+    if (src) {
+      this.id = src.id || IdGenerator.nextId();
+      this.pastTense = DetailedConjugation.getVerbConjugationGroup(src.pastTense || null);
+      this.presentTense = DetailedConjugation.getVerbConjugationGroup(src.presentTense || null);
+      this.activeParticipleMasculine = DetailedConjugation.getNounConjugationGroup(src.activeParticipleMasculine || null);
+      this.activeParticipleFeminine = DetailedConjugation.getNounConjugationGroup(src.activeParticipleFeminine || null);
 
-    this.pastPassiveTense = DetailedConjugation.getVerbConjugationGroup(src && src.pastPassiveTense || null);
-    this.pastPassiveTense = DetailedConjugation.getVerbConjugationGroup(src && src.pastPassiveTense || null);
-    this.passiveParticipleMasculine = DetailedConjugation.getNounConjugationGroup(src && src.passiveParticipleMasculine || null);
-    this.passiveParticipleFeminine = DetailedConjugation.getNounConjugationGroup(src && src.passiveParticipleFeminine || null);
+      this.pastPassiveTense = DetailedConjugation.getVerbConjugationGroup(src.pastPassiveTense || null);
+      this.pastPassiveTense = DetailedConjugation.getVerbConjugationGroup(src.pastPassiveTense || null);
+      this.passiveParticipleMasculine = DetailedConjugation.getNounConjugationGroup(src.passiveParticipleMasculine || null);
+      this.passiveParticipleFeminine = DetailedConjugation.getNounConjugationGroup(src.passiveParticipleFeminine || null);
 
-    this.imperative = DetailedConjugation.getVerbConjugationGroup(src && src.imperative || null);
-    this.forbidding = DetailedConjugation.getVerbConjugationGroup(src && src.forbidding || null);
+      this.imperative = DetailedConjugation.getVerbConjugationGroup(src.imperative || null);
+      this.forbidding = DetailedConjugation.getVerbConjugationGroup(src.forbidding || null);
 
-    if (src && src.verbalNouns && src.verbalNouns.length > 0) {
-      this.verbalNouns = [];
-      src.verbalNouns.foreach(value => this.verbalNouns.push(DetailedConjugation.getNounConjugationGroup(value)));
+      if (src.verbalNouns && src.verbalNouns.length > 0) {
+        this.verbalNouns = [];
+        src.verbalNouns.foreach(value => this.verbalNouns.push(DetailedConjugation.getNounConjugationGroup(value)));
+      }
+
+      if (src.adverbs && src.adverbs.length > 0) {
+        this.adverbs = [];
+        src.adverbs.foreach(value => this.adverbs.push(DetailedConjugation.getNounConjugationGroup(value)));
+      }
     }
+  }
 
-    if (src && src.adverbs && src.adverbs.length > 0) {
-      this.adverbs = [];
-      src.adverbs.foreach(value => this.adverbs.push(DetailedConjugation.getNounConjugationGroup(value)));
+  get rootLetters(): RootLetters {
+    return this._rootLetters;
+  }
+
+  set rootLetters(value: RootLetters) {
+    this._rootLetters = value;
+    this.updateId();
+  }
+
+  get namedTemplate(): NamedTemplate {
+    return this._namedTemplate;
+  }
+
+  set namedTemplate(value: NamedTemplate) {
+    this._namedTemplate = value;
+    this.updateId();
+  }
+
+  getConjugation(type: SarfTermType): NounConjugationGroup | VerbConjugationGroup | NounConjugationGroup[] {
+    let result = null;
+    switch (type.name) {
+      case SarfTermType.PAST_TENSE.name:
+        result = this.pastTense;
+        break;
+      case SarfTermType.PRESENT_TENSE.name:
+        result = this.presentTense;
+        break;
+      case SarfTermType.ACTIVE_PARTICIPLE_MASCULINE.name:
+        result = this.activeParticipleMasculine;
+        break;
+      case SarfTermType.ACTIVE_PARTICIPLE_FEMININE.name:
+        result = this.activeParticipleFeminine;
+        break;
+      case SarfTermType.PAST_PASSIVE_TENSE.name:
+        result = this.pastPassiveTense;
+        break;
+      case SarfTermType.PRESENT_PASSIVE_TENSE.name:
+        result = this.presentPassiveTense;
+        break;
+      case SarfTermType.PASSIVE_PARTICIPLE_MASCULINE.name:
+        result = this.passiveParticipleMasculine;
+        break;
+      case SarfTermType.PASSIVE_PARTICIPLE_FEMININE.name:
+        result = this.passiveParticipleFeminine;
+        break;
+      case SarfTermType.IMPERATIVE.name:
+        result = this.imperative;
+        break;
+      case SarfTermType.FORBIDDING.name:
+        result = this.forbidding;
+        break;
+      case SarfTermType.VERBAL_NOUN.name:
+        result = this.verbalNouns;
+        break;
+      case SarfTermType.NOUN_OF_PLACE_AND_TIME.name:
+        result = this.adverbs;
+        break;
+    }
+    return result;
+  }
+
+  equals(other: DetailedConjugation) {
+    return other && this.id === other.id;
+  }
+
+  compareTo(other: DetailedConjugation): number {
+    let result = this.namedTemplate.compareTo(other.namedTemplate);
+    if (result === 0) {
+      result = this.rootLetters.compareTo(other.rootLetters);
+    }
+    return result;
+  }
+
+  private updateId() {
+    if (this.namedTemplate && this.rootLetters) {
+      this.id = this.namedTemplate.name + '_' + this.rootLetters.name;
+    } else {
+      this.id = IdGenerator.nextId();
     }
   }
 }
