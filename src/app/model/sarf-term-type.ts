@@ -62,4 +62,10 @@ export class SarfTermType extends ArabicLabel {
     super(name, label, null);
     this.code = this.name;
   }
+
+  get isVerbType(): boolean {
+    return this.name === SarfTermType.PAST_TENSE.name || this.name === SarfTermType.PRESENT_TENSE.name
+      || this.name === SarfTermType.PAST_PASSIVE_TENSE.name || this.name === SarfTermType.PRESENT_PASSIVE_TENSE.name
+      || this.name === SarfTermType.IMPERATIVE.name || this.name === SarfTermType.FORBIDDING.name;
+  }
 }
