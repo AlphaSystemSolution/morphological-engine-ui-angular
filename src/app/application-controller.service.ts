@@ -65,9 +65,8 @@ export class ApplicationControllerService {
     headers.set('firstRadical', rootLetters.firstRadical.name);
     headers.set('secondRadical', rootLetters.secondRadical.name);
     headers.set('thirdRadical', rootLetters.thirdRadical.name);
-    const fourthRadical = rootLetters.fourthRadical;
-    if (fourthRadical && ArabicLetter.TATWEEL.name !== fourthRadical.name) {
-      headers.set('fourthRadical', fourthRadical.name);
+    if (rootLetters.hasFourthRadical) {
+      headers.set('fourthRadical', rootLetters.fourthRadical.name);
     }
     const options = new RequestOptions({ headers: headers });
 
