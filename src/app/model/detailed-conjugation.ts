@@ -196,6 +196,47 @@ export class DetailedConjugation {
     return result;
   }
 
+  setConjugation(type: SarfTermType, group: NounConjugationGroup | VerbConjugationGroup) {
+    switch (type.name) {
+      case SarfTermType.PAST_TENSE.name:
+        this.pastTense = <VerbConjugationGroup>group;
+        break;
+      case SarfTermType.PRESENT_TENSE.name:
+        this.presentTense = <VerbConjugationGroup>group;
+        break;
+      case SarfTermType.ACTIVE_PARTICIPLE_MASCULINE.name:
+        this.activeParticipleMasculine = <NounConjugationGroup>group;
+        break;
+      case SarfTermType.ACTIVE_PARTICIPLE_FEMININE.name:
+        this.activeParticipleFeminine = <NounConjugationGroup>group;
+        break;
+      case SarfTermType.PAST_PASSIVE_TENSE.name:
+        this.pastPassiveTense = <VerbConjugationGroup>group;
+        break;
+      case SarfTermType.PRESENT_PASSIVE_TENSE.name:
+        this.presentPassiveTense = <VerbConjugationGroup>group;
+        break;
+      case SarfTermType.PASSIVE_PARTICIPLE_MASCULINE.name:
+        this.passiveParticipleMasculine = <NounConjugationGroup>group;
+        break;
+      case SarfTermType.PASSIVE_PARTICIPLE_FEMININE.name:
+        this.passiveParticipleFeminine = <NounConjugationGroup>group;
+        break;
+      case SarfTermType.IMPERATIVE.name:
+        this.imperative = <VerbConjugationGroup>group;
+        break;
+      case SarfTermType.FORBIDDING.name:
+        this.forbidding = <VerbConjugationGroup>group;
+        break;
+      case SarfTermType.VERBAL_NOUN.name:
+        this.verbalNouns.push(<NounConjugationGroup>group);
+        break;
+      case SarfTermType.NOUN_OF_PLACE_AND_TIME.name:
+        this.adverbs.push(<NounConjugationGroup>group);
+        break;
+    }
+  }
+
   equals(other: DetailedConjugation) {
     return other && this.id === other.id;
   }

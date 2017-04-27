@@ -69,14 +69,16 @@ export class AbbreviatedConjugationComponent implements OnInit {
     const template = this.abbreviatedConjugation.namedTemplate;
     const rootLetters = this.abbreviatedConjugation.rootLetters;
     this.applicationController.doDetailedConjugation(type, template, rootLetters, null, false)
-      .subscribe(data => this.handleData(type, data), err => this.handleError(err));
+      .subscribe(data => this.handleData(type, template, rootLetters, data), err => this.handleError(err));
   }
 
-  private handleData(type: SarfTermType, data) {
+  private handleData(type, template, rootLetters, data) {
     if (type.isVerbType) {
       this.verbGroup = new VerbConjugationGroup(data[0]);
+      this.applicationController.updateDetailedConjugation(type, template, rootLetters, this.verbGroup);
     } else {
       this.nounGroup = new NounConjugationGroup(data[0]);
+      this.applicationController.updateDetailedConjugation(type, template, rootLetters, this.nounGroup);
     }
   }
 

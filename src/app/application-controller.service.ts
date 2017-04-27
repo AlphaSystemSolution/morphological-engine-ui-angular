@@ -74,6 +74,7 @@ export class ApplicationControllerService {
     const currentConjugationGroup: NounConjugationGroup | VerbConjugationGroup = null;
     const detailedConjugation = this.getDetailedConjugation(template, rootLetters);
     const conjugationGroup = detailedConjugation.getConjugation(type);
+    console.log('>>>>>>>>>>>>>>>>>>>>>> ' + JSON.stringify(conjugationGroup));
     if (!conjugationGroup) {
       console.log('New');
       return this.http.get(url, options).map(resp => resp.json());
@@ -185,6 +186,11 @@ export class ApplicationControllerService {
       }
     });
     return index;
+  }
+
+  updateDetailedConjugation(type: SarfTermType, template: NamedTemplate, rootLetters: RootLetters,
+    value: NounConjugationGroup | VerbConjugationGroup) {
+    this.getDetailedConjugation(template, rootLetters).setConjugation(type, value);
   }
 
   getCurrentConfiguration(index: number): ConjugationConfiguration {
