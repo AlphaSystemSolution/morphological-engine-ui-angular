@@ -48,42 +48,40 @@ export class AbbreviatedConjugationComponent implements OnInit {
     this.update();
   }
 
-  public displayConjugation(type: string) {
-    this.collaspPanel = true;
-    this.collaspDetailedConjugationPanel = false;
-    this.nounGroup = null;
-    this.verbGroup = null;
-    const template = this.abbreviatedConjugation.conjugationHeader.chartMode.template;
-    const rootLetters = this.abbreviatedConjugation.conjugationHeader.rootLetters;
-    const d = this.applicationController.doDetailedConjugation(type, template, rootLetters, null, false);
-    d.subscribe(
-      data => this.initializeDetailedConjugation(data[0]),
-      err => {
-        console.log(JSON.stringify(err));
-      }
-    );
-  }
-
   handleToggle(event) {
     this.collaspPanel = event.collapsed;
     this.collaspDetailedConjugationPanel = !event.collapsed;
   }
 
-  private initializeDetailedConjugation(data) {
-    const termType = data.termType;
-    switch (termType) {
-      case 'PAST_TENSE':
-      case 'PRESENT_TENSE':
-      case 'PAST_PASSIVE_TENSE':
-      case 'PRESENT_PASSIVE_TENSE':
-      case 'IMPERATIVE':
-      case 'FORBIDDING':
-        this.verbGroup = <VerbConjugationGroup>data;
-        break;
-      default:
-        this.nounGroup = <NounConjugationGroup>data;
-        break;
+  handleChange(event, label: ConjugationLabel) {
+    if (!event.checked) {
+      return;
     }
+    this.displayConjugation(label.type);
+    this.buttons.forEach(button => button.select = false);
+  }
+
+  private displayConjugation(type: SarfTermType) {
+    this.collaspPanel = true;
+    this.collaspDetailedConjugationPanel = false;
+    this.nounGroup = null;
+    this.verbGroup = null;
+    const template = this.abbreviatedConjugation.namedTemplate;
+    const rootLetters = this.abbreviatedConjugation.rootLetters;
+    this.applicationController.doDetailedConjugation(type, template, rootLetters, null, false)
+      .subscribe(data => this.handleData(type, data), err => this.handleError(err));
+  }
+
+  private handleData(type: SarfTermType, data) {
+    if (type.isVerbType) {
+      this.verbGroup = new VerbConjugationGroup(data[0]);
+    } else {
+      this.nounGroup = new NounConjugationGroup(data[0]);
+    }
+  }
+
+  private handleError(err) {
+    console.log(JSON.stringify(err));
   }
 
   private update() {

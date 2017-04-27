@@ -7,9 +7,11 @@ import { ConjugationConfiguration } from './model/common';
 import { ConjugationTemplate } from './model/conjugation-template';
 import { ArabicLetter } from './model/arabic-letter';
 import { RootLetters } from './model/root-letters';
-import { RootLetters as _RootLetters } from './model/conjugation-header';
 import { MorphologicalInput } from './model/morphological-input';
 import { AbbreviatedConjugation } from './model/abbreviated-conjugation';
+import { SarfTermType } from './model/sarf-term-type';
+import { NamedTemplate } from './model/named-template';
+import { DetailedConjugation, NounConjugationGroup, VerbConjugationGroup } from './model/detailed-conjugation';
 import { MorphologicalChart } from './components/model';
 import { environment } from '../environments/environment';
 import 'rxjs/add/operator/map';
@@ -18,6 +20,7 @@ import * as FileSaver from 'file-saver';
 @Injectable()
 export class ApplicationControllerService {
 
+  private detailedConjugations: DetailedConjugation[] = [];
   private _morphologicalChartSubject: BehaviorSubject<MorphologicalChart[]>;
   public morphologicalCharts: Observable<MorphologicalChart[]>;
   public abbreviatedConjugations: AbbreviatedConjugation[] = [];
@@ -49,25 +52,39 @@ export class ApplicationControllerService {
       );
   }
 
-  doDetailedConjugation(type: string, templat: string, rootLetters: _RootLetters, verbalNouns: string[], skipRuleProcessing: boolean) {
+  doDetailedConjugation(type: SarfTermType, template: NamedTemplate, rootLetters: RootLetters, verbalNouns: string[],
+    skipRuleProcessing: boolean) {
     let url = environment.morphologicalEngineBaseUrl + 'DetailedConjugation/type/%TYPE%/template/%TEMPLATE%/format/UNICODE';
-    const replacements = { '%TYPE%': type, '%TEMPLATE%': templat };
+    const replacements = { '%TYPE%': type.name, '%TEMPLATE%': template.name };
     url = url.replace(/%\w+%/g, function (all) {
       return replacements[all] || all;
     });
 
     const headers = new Headers();
     headers.set('Content-Type', 'application/json;charset=UTF-8');
-    headers.set('firstRadical', rootLetters.firstRadical);
-    headers.set('secondRadical', rootLetters.secondRadical);
-    headers.set('thirdRadical', rootLetters.thirdRadical);
+    headers.set('firstRadical', rootLetters.firstRadical.name);
+    headers.set('secondRadical', rootLetters.secondRadical.name);
+    headers.set('thirdRadical', rootLetters.thirdRadical.name);
     const fourthRadical = rootLetters.fourthRadical;
-    if (fourthRadical && ArabicLetter.TATWEEL.name !== fourthRadical) {
-      headers.set('fourthRadical', fourthRadical);
+    if (fourthRadical && ArabicLetter.TATWEEL.name !== fourthRadical.name) {
+      headers.set('fourthRadical', fourthRadical.name);
     }
     const options = new RequestOptions({ headers: headers });
 
-    return this.http.get(url, options).map(resp => resp.json());
+    const currentConjugationGroup: NounConjugationGroup | VerbConjugationGroup = null;
+    const detailedConjugation = this.getDetailedConjugation(template, rootLetters);
+    const conjugationGroup = detailedConjugation.getConjugation(type);
+    if (!conjugationGroup) {
+      console.log('New');
+      return this.http.get(url, options).map(resp => resp.json());
+    } else {
+      console.log('Existing');
+      return Observable.create(observer => {
+        console.log('HERE2');
+        observer.next([currentConjugationGroup]);
+        observer.complete();
+      });
+    }
   }
 
   getMorphologicalChart(inputs: MorphologicalInput[], format: string = 'UNICODE'): void {
@@ -172,6 +189,19 @@ export class ApplicationControllerService {
 
   getCurrentConfiguration(index: number): ConjugationConfiguration {
     return this.data[index].configuration;
+  }
+
+  private getDetailedConjugation(template: NamedTemplate, rootLetters): DetailedConjugation {
+    let result: DetailedConjugation = new DetailedConjugation();
+    result.namedTemplate = template;
+    result.rootLetters = rootLetters;
+    const results = this.detailedConjugations.filter(d => d.equals(result));
+    if (results && results.length > 0) {
+      result = results[0];
+      this.detailedConjugations.push(result);
+      this.detailedConjugations.sort((d1, d2) => d1.compareTo(d2));
+    }
+    return result;
   }
 
 }

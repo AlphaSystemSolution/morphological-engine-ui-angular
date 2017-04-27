@@ -43,7 +43,7 @@
           <ng-template ngFor let-label [ngForOf]="pairs">
             <div class="ui-grid-col-6">
               <ng-template [ngIf]="label !== null" [ngIfElse]="none">
-                <app-toggle-selector [value]="label" styleClass="arabicNormal"></app-toggle-selector>
+                <app-toggle-selector [value]="label" styleClass="arabicNormal" (onChange)="handleChange($event, label)"></app-toggle-selector>
               </ng-template>
               <ng-template #none>&nbsp;</ng-template>
             </div>
@@ -58,10 +58,10 @@
   </p-panel>
 </div>
 
-<!--ng-template [ngIf]="nounGroup">
+<ng-template [ngIf]="nounGroup">
   <app-noun-conjugation [group]="nounGroup" [collapsed]="collaspDetailedConjugationPanel"></app-noun-conjugation>
 </ng-template>
 
 <ng-template [ngIf]="verbGroup">
   <app-verb-conjugation [group]="verbGroup" [collapsed]="collaspDetailedConjugationPanel"></app-verb-conjugation>
-</ng-template-->
+</ng-template>
