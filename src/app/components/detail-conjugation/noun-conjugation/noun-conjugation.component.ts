@@ -10,7 +10,7 @@ import { NounStatus, NumberType } from '../../../model/common';
 })
 export class NounConjugationComponent implements OnInit {
 
-  @Input() group: NounConjugationGroup;
+  private _group: NounConjugationGroup;
   @Input() collapsed = false;
   termType: string;
   values: ConjugationTuple[] = [];
@@ -18,9 +18,21 @@ export class NounConjugationComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.termType = SarfTermType.getByName(this.group.termType).label;
     this.numbers = NumberType.VALUES;
-    this.createValues();
+  }
+
+  @Input() get group(): NounConjugationGroup {
+    return this._group;
+  }
+
+  set group(value: NounConjugationGroup) {
+    this._group = value;
+    if (this.group) {
+      if (this.group.termType) {
+        this.termType = SarfTermType.getByName(this.group.termType).label;
+      }
+      this.createValues();
+    }
   }
 
   private addTuple(tuple: ConjugationTuple, status: NounStatus) {

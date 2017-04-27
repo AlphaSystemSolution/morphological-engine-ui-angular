@@ -10,7 +10,7 @@ import { ConversationType, NumberType } from '../../../model/common';
 })
 export class VerbConjugationComponent implements OnInit {
 
-  @Input() group: VerbConjugationGroup;
+  private _group: VerbConjugationGroup;
   @Input() collapsed = false;
   termType: string;
   values: ConjugationTuple[] = [];
@@ -18,9 +18,21 @@ export class VerbConjugationComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.termType = SarfTermType.getByName(this.group.termType).label;
     this.numbers = NumberType.VALUES;
-    this.createValues();
+  }
+
+  @Input() get group(): VerbConjugationGroup {
+    return this._group;
+  }
+
+  set group(value: VerbConjugationGroup) {
+    this._group = value;
+    if (this.group) {
+      if (this.group.termType) {
+        this.termType = SarfTermType.getByName(this.group.termType).label;
+      }
+      this.createValues();
+    }
   }
 
   private addTuple(tuple: ConjugationTuple, conversationType: ConversationType) {
