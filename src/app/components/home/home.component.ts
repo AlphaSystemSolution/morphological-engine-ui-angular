@@ -48,6 +48,9 @@ export class HomeComponent implements OnInit {
 
   performAction(action) {
     switch (action) {
+      case 'NEW':
+        this.newFile();
+        break;
       case 'IMPORT':
         this.import();
         break;
@@ -110,6 +113,24 @@ export class HomeComponent implements OnInit {
     this.currentTabIndex = event.index;
     if (this.currentTabIndex === 1) {
       this.chart.abbreviatedConjugations = this.applicationController.abbreviatedConjugations;
+    }
+  }
+
+  private newFile() {
+    if (this.applicationController.data.length > 0) {
+      /*this.confirmationService.confirm({
+        message: 'Do you want to export your file?',
+        header: 'New File Confirmation',
+        icon: 'fa fa-upload',
+        accept: () => {
+          this.export();
+          this.applicationController.removeData(this.applicationController.findInputRowIndex(this.selectedRow));
+          this.clearSelectedRows();
+        },
+        reject: () => this.clearSelectedRows()
+      });*/
+    } else {
+
     }
   }
 

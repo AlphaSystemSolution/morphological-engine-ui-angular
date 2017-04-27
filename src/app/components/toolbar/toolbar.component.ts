@@ -15,6 +15,7 @@ export class ToolbarComponent implements OnInit {
 
   ngOnInit() {
     this.fileItems = [
+      // { label: 'New', icon: 'fa-file', command: () => this.handleButtonClick('NEW') },
       { label: 'Import', icon: 'fa-download', command: () => this.handleButtonClick('IMPORT') },
       { label: 'Export', icon: 'fa-upload', command: () => this.handleButtonClick('EXPORT') }
     ];
