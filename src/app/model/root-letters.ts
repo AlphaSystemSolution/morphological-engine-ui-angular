@@ -21,7 +21,7 @@ export class RootLetters {
   }
 
   get hasFourthRadical(): boolean {
-    return this.fourthRadical !== null && this.fourthRadical.name !== 'TATWEEL';
+    return this.fourthRadical !== null && this.fourthRadical.name !== ArabicLetter.TATWEEL.name;
   }
 
   public compareTo(other: RootLetters): number {
