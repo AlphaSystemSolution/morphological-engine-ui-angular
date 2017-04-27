@@ -204,6 +204,7 @@ export class ApplicationControllerService {
     const results = this.detailedConjugations.filter(d => d.equals(result));
     if (results && results.length > 0) {
       result = results[0];
+    } else {
       this.detailedConjugations.push(result);
       this.detailedConjugations.sort((d1, d2) => d1.compareTo(d2));
     }
