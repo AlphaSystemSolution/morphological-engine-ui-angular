@@ -7,15 +7,32 @@ import { ArabicLetter } from '../model/arabic-letter';
 import { IdGenerator } from '../utils/IdGenerator';
 
 export class ConjugationLabel extends ArabicLabel {
-  private _type: SarfTermType;
+  public id: string;
+  private _sarfTermType: SarfTermType;
+  private _type: string;
 
-  constructor(type: SarfTermType, label: string) {
-    super(type.name, label, type.code);
-    this._type = type;
+  constructor(src?: any) {
+    super(null, null, null);
+    if (src) {
+      this.id = src.id || IdGenerator.nextId();
+      this.type = src.type || SarfTermType.PAST_TENSE.name;
+      this.label = src.label || null;
+      this.name = src.source || null;
+       this.code = this.name;
+    }
   }
 
-  get type(): SarfTermType {
+  get type(): string {
     return this._type;
+  }
+
+  set type(value: string) {
+    this._type = value;
+    this._sarfTermType = SarfTermType.getByName(this.type);
+  }
+
+  get sarfTermType(): SarfTermType {
+    return this._sarfTermType;
   }
 }
 
@@ -37,16 +54,16 @@ export class AbbreviatedConjugation {
   private _rootLetters: RootLetters;
   private _namedTemplate: NamedTemplate;
 
-  private static getLabel(type: SarfTermType, value: string): ConjugationLabel {
-    return value ? new ConjugationLabel(type, value) : null;
+  private static getLabel(value?: any): ConjugationLabel {
+    return value ? new ConjugationLabel(value) : null;
   }
 
-  private static getLabels(type: SarfTermType, values: string[]): ConjugationLabel[] {
+  private static getLabels(values: any[]): ConjugationLabel[] {
     if (!values) {
       return null;
     }
     const labels: ConjugationLabel[] = [];
-    values.forEach(value => labels.push(AbbreviatedConjugation.getLabel(type, value)));
+    values.forEach(value => labels.push(AbbreviatedConjugation.getLabel(value)));
     return labels;
   }
 
@@ -68,26 +85,24 @@ export class AbbreviatedConjugation {
   }
 
   constructor(src?: any) {
-    this.id = src && src.id || IdGenerator.nextId();
-    this.conjugationHeader = src && src.conjugationHeader || null;
-    this._rootLetters = AbbreviatedConjugation.getRootLetters(this.conjugationHeader);
-    this._namedTemplate = AbbreviatedConjugation.getNamedTemplate(this.conjugationHeader);
-    this.pastTense = AbbreviatedConjugation.getLabel(SarfTermType.PAST_TENSE, src && src.pastTense || null);
-    this.presentTense = AbbreviatedConjugation.getLabel(SarfTermType.PRESENT_TENSE, src && src.presentTense || null);
-    this.activeParticipleMasculine = AbbreviatedConjugation.getLabel(SarfTermType.ACTIVE_PARTICIPLE_MASCULINE,
-      src && src.activeParticipleMasculine || null);
-    this.activeParticipleFeminine = AbbreviatedConjugation.getLabel(SarfTermType.ACTIVE_PARTICIPLE_FEMININE,
-      src && src.activeParticipleFeminine || null);
-    this.pastPassiveTense = AbbreviatedConjugation.getLabel(SarfTermType.PAST_PASSIVE_TENSE, src && src.pastPassiveTense || null);
-    this.presentPassiveTense = AbbreviatedConjugation.getLabel(SarfTermType.PRESENT_PASSIVE_TENSE, src && src.presentPassiveTense || null);
-    this.passiveParticipleMasculine = AbbreviatedConjugation.getLabel(SarfTermType.PASSIVE_PARTICIPLE_MASCULINE,
-      src && src.passiveParticipleMasculine || null);
-    this.passiveParticipleFeminine = AbbreviatedConjugation.getLabel(SarfTermType.PASSIVE_PARTICIPLE_FEMININE,
-      src && src.passiveParticipleFeminine || null);
-    this.imperative = AbbreviatedConjugation.getLabel(SarfTermType.IMPERATIVE, src && src.imperative || null);
-    this.forbidding = AbbreviatedConjugation.getLabel(SarfTermType.FORBIDDING, src && src.forbidding || null);
-    this.verbalNouns = AbbreviatedConjugation.getLabels(SarfTermType.VERBAL_NOUN, src && src.verbalNouns || null);
-    this.adverbs = AbbreviatedConjugation.getLabels(SarfTermType.NOUN_OF_PLACE_AND_TIME, src && src.adverbs || null);
+    if (src) {
+      this.id = src.id || IdGenerator.nextId();
+      this.conjugationHeader = src.conjugationHeader || null;
+      this._rootLetters = AbbreviatedConjugation.getRootLetters(this.conjugationHeader);
+      this._namedTemplate = AbbreviatedConjugation.getNamedTemplate(this.conjugationHeader);
+      this.pastTense = AbbreviatedConjugation.getLabel(src.pastTense || null);
+      this.presentTense = AbbreviatedConjugation.getLabel(src.presentTense || null);
+      this.activeParticipleMasculine = AbbreviatedConjugation.getLabel(src.activeParticipleMasculine || null);
+      this.activeParticipleFeminine = AbbreviatedConjugation.getLabel(src.activeParticipleFeminine || null);
+      this.pastPassiveTense = AbbreviatedConjugation.getLabel(src.pastPassiveTense || null);
+      this.presentPassiveTense = AbbreviatedConjugation.getLabel(src.presentPassiveTense || null);
+      this.passiveParticipleMasculine = AbbreviatedConjugation.getLabel(src.passiveParticipleMasculine || null);
+      this.passiveParticipleFeminine = AbbreviatedConjugation.getLabel(src.passiveParticipleFeminine || null);
+      this.imperative = AbbreviatedConjugation.getLabel(src.imperative || null);
+      this.forbidding = AbbreviatedConjugation.getLabel(src.forbidding || null);
+      this.verbalNouns = AbbreviatedConjugation.getLabels(src.verbalNouns || null);
+      this.adverbs = AbbreviatedConjugation.getLabels(src.adverbs || null);
+    }
   }
 
   get rootLetters(): RootLetters {
