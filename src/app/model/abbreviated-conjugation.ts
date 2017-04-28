@@ -8,31 +8,17 @@ import { IdGenerator } from '../utils/IdGenerator';
 
 export class ConjugationLabel extends ArabicLabel {
   public id: string;
-  private _sarfTermType: SarfTermType;
-  private _type: string;
+  public type: SarfTermType;
 
   constructor(src?: any) {
     super(null, null, null);
     if (src) {
       this.id = src.id || IdGenerator.nextId();
-      this.type = src.type || SarfTermType.PAST_TENSE.name;
+      this.type = src.type && SarfTermType.getByName(src.type) || SarfTermType.PAST_TENSE;
       this.label = src.label || null;
       this.name = src.source || null;
-       this.code = this.name;
+      this.code = this.name;
     }
-  }
-
-  get type(): string {
-    return this._type;
-  }
-
-  set type(value: string) {
-    this._type = value;
-    this._sarfTermType = SarfTermType.getByName(this.type);
-  }
-
-  get sarfTermType(): SarfTermType {
-    return this._sarfTermType;
   }
 }
 
