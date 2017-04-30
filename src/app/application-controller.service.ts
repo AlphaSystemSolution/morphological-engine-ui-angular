@@ -52,7 +52,7 @@ export class ApplicationControllerService {
       );
   }
 
-  doDetailedConjugation(type: SarfTermType, template: NamedTemplate, rootLetters: RootLetters, verbalNouns: string[],
+  doDetailedConjugation(id: string, type: SarfTermType, template: NamedTemplate, rootLetters: RootLetters, verbalNouns: string[],
     skipRuleProcessing: boolean) {
     let url = environment.morphologicalEngineBaseUrl + 'DetailedConjugation/type/%TYPE%/template/%TEMPLATE%/format/UNICODE';
     const replacements = { '%TYPE%': type.name, '%TEMPLATE%': template.name };
@@ -68,22 +68,36 @@ export class ApplicationControllerService {
     if (rootLetters.hasFourthRadical) {
       headers.set('fourthRadical', rootLetters.fourthRadical.name);
     }
+    if (verbalNouns && verbalNouns.length > 0) {
+      headers.set('verbalNouns', verbalNouns);
+    }
     const options = new RequestOptions({ headers: headers });
 
-    const currentConjugationGroup: NounConjugationGroup | VerbConjugationGroup = null;
+    let currentConjugationGroup: NounConjugationGroup | VerbConjugationGroup = null;
     const detailedConjugation = this.getDetailedConjugation(template, rootLetters);
-    const conjugationGroup = detailedConjugation.getConjugation(type);
-    console.log('>>>>>>>>>>>>>>>>>>>>>> ' + JSON.stringify(conjugationGroup));
-    if (!conjugationGroup) {
-      console.log('New');
-      return this.http.get(url, options).map(resp => resp.json());
-    } else {
+    const conjugationGroup = detailedConjugation.getConjugation(id, type);
+
+    if (conjugationGroup) {
+      if (conjugationGroup instanceof Array) {
+        const array: NounConjugationGroup[] = <NounConjugationGroup[]>conjugationGroup;
+        if (array.length > 0) {
+          currentConjugationGroup = array[0];
+        }
+      } else {
+        currentConjugationGroup = conjugationGroup;
+      }
+    }
+
+    if (currentConjugationGroup) {
       console.log('Existing');
       return Observable.create(observer => {
         console.log('HERE2');
         observer.next([currentConjugationGroup]);
         observer.complete();
       });
+    } else {
+      console.log('New');
+      return this.http.get(url, options).map(resp => resp.json());
     }
   }
 
