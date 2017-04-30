@@ -34,8 +34,8 @@ export class HomeComponent implements OnInit {
       { label: 'Edit', icon: 'fa-pencil-square', command: () => this.doEdit() },
       { label: 'Duplicate', icon: 'fa-clone', command: () => this.doDuplicate() },
       { label: 'Remove', icon: 'fa-times', command: () => this.doRemove() },
-      { label: 'View Conjugation', command: () => this.viewConjugation() },
-      { label: 'View Dictionary', command: () => this.viewDictionary() }
+      { label: 'View Conjugation', icon: 'fa-search', command: () => this.viewConjugation() },
+      { label: 'View Dictionary', icon: 'fa-search', command: () => this.viewDictionary() }
     ];
   }
 
