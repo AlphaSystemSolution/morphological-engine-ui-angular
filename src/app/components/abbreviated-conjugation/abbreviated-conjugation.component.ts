@@ -57,27 +57,34 @@ export class AbbreviatedConjugationComponent implements OnInit {
     if (!event.checked) {
       return;
     }
-    this.displayConjugation(label.type);
+    this.displayConjugation(label);
     this.buttons.forEach(button => button.select = false);
   }
 
-  private displayConjugation(type: SarfTermType) {
+  private displayConjugation(label: ConjugationLabel) {
     this.collaspPanel = true;
     this.collaspDetailedConjugationPanel = false;
     this.nounGroup = null;
     this.verbGroup = null;
     const template = this.abbreviatedConjugation.namedTemplate;
     const rootLetters = this.abbreviatedConjugation.rootLetters;
-    this.applicationController.doDetailedConjugation(type, template, rootLetters, null, false)
-      .subscribe(data => this.handleData(type, template, rootLetters, data), err => this.handleError(err));
+    const type = label.type;
+    let verbalNouns = null;
+    if (SarfTermType.VERBAL_NOUN.equals(type)) {
+      verbalNouns = [label.name];
+    }
+    this.applicationController.doDetailedConjugation(label.id, type, template, rootLetters, verbalNouns, false)
+      .subscribe(data => this.handleData(label.id, type, template, rootLetters, data), err => this.handleError(err));
   }
 
-  private handleData(type, template, rootLetters, data) {
+  private handleData(id, type, template, rootLetters, data) {
     if (type.isVerbType) {
       this.verbGroup = new VerbConjugationGroup(data[0]);
+      this.verbGroup.id = id;
       this.applicationController.updateDetailedConjugation(type, template, rootLetters, this.verbGroup);
     } else {
       this.nounGroup = new NounConjugationGroup(data[0]);
+      this.nounGroup.id = id;
       this.applicationController.updateDetailedConjugation(type, template, rootLetters, this.nounGroup);
     }
   }
