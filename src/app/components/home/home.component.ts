@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ConfirmationService } from 'primeng/primeng';
+import { ConfirmationService, MenuItem } from 'primeng/primeng';
 import { ApplicationControllerService } from '../../application-controller.service';
 import { MorphologicalInputFormComponent } from '../morphological-input-form/morphological-input-form.component';
 import { MorphologicalInputFormModel } from '../../shared/morphological-input-form-model';
@@ -23,11 +23,20 @@ export class HomeComponent implements OnInit {
   exportDialog: boolean;
   selectedRow: MorphologicalInput;
   selectedRows: MorphologicalInput[] = [];
+  operations: MenuItem[] = [];
   private currentTabIndex = 0;
 
   constructor(public applicationController: ApplicationControllerService, private confirmationService: ConfirmationService) { }
 
   ngOnInit() {
+    this.operations = [
+      { label: 'Add', icon: 'fa-plus-square', command: () => this.doAdd() },
+      { label: 'Edit', icon: 'fa-pencil-square', command: () => this.doEdit() },
+      { label: 'Duplicate', icon: 'fa-clone', command: () => this.doDuplicate() },
+      { label: 'Remove', icon: 'fa-times', command: () => this.doRemove() },
+      { label: 'View Conjugation', command: () => this.viewConjugation() },
+      { label: 'View Dictionary', command: () => this.viewDictionary() }
+    ];
   }
 
   /**
@@ -80,14 +89,6 @@ export class HomeComponent implements OnInit {
 
   selectRow(event) {
     this.selectedRow = event.data;
-  }
-
-  viewConjugation(row: MorphologicalInput) {
-    const index = this.applicationController.findInputRowIndex(row);
-    console.log('SELECTED ROW: ' + index);
-    if (index >= 0) {
-      this.chart.viewConjugation(index);
-    }
   }
 
   importFile(event) {
@@ -169,34 +170,25 @@ export class HomeComponent implements OnInit {
   }
 
   private doEdit() {
-    if (!this.selectedRow) {
-      return;
-    }
-    this.selectedRow = MorphologicalInput.copy(this.selectedRow, true);
+    this.selectedRow = MorphologicalInput.copy(this.selectedRows[0], true);
     this.form.model.mInput = this.selectedRow;
     this.newRow = false;
     this.displayDialog = true;
   }
 
   private doDuplicate() {
-    if (!this.selectedRow) {
-      return;
-    }
     this.displayDialog = true;
     this.newRow = true;
-    this.form.model.mInput = MorphologicalInput.copy(this.selectedRow, false);
+    this.form.model.mInput = MorphologicalInput.copy(this.selectedRows[0], false);
   }
 
   private doRemove() {
-    if (!this.selectedRow) {
-      return;
-    }
     this.confirmationService.confirm({
       message: 'Do you want to remove this record?',
       header: 'Remove Confirmation',
       icon: 'fa fa-times',
       accept: () => {
-        this.applicationController.removeData(this.applicationController.findInputRowIndex(this.selectedRow));
+        this.applicationController.removeData(this.applicationController.findInputRowIndex(this.selectedRows[0]));
         this.clearSelectedRows();
       },
       reject: () => this.clearSelectedRows()
@@ -206,8 +198,8 @@ export class HomeComponent implements OnInit {
   private viewDictionary() {
     let rootLetters: RootLetters = null;
     // table tab and selectedRow exists
-    if (this.currentTabIndex === 0 && this.selectedRow) {
-      rootLetters = this.selectedRow.rootLetters;
+    if (this.currentTabIndex === 0) {
+      rootLetters = this.selectedRows[0].rootLetters;
     } else if (this.currentTabIndex === 1) {
       // conjugation tab
       rootLetters = this.chart.selectedAbbreviatedConjugation.rootLetters;
@@ -216,6 +208,14 @@ export class HomeComponent implements OnInit {
       return;
     }
     this.applicationController.openWithRootLetters(rootLetters);
+    this.clearSelectedRows();
+  }
+
+  private viewConjugation() {
+    const index = this.applicationController.findInputRowIndex(this.selectedRows[0]);
+    if (index >= 0) {
+      this.chart.viewConjugation(index);
+    }
     this.clearSelectedRows();
   }
 

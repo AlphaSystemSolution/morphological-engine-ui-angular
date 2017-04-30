@@ -4,7 +4,7 @@
 <p-tabView (onChange)="handleChange($event)">
   <p-tabPanel header="Table">
     <p-dataTable [value]="applicationController.data" [(selection)]="selectedRows" selectionMode="multiple" [rows]="20" [paginator]="true"
-      [responsive]="true" [editable]="true" (onRowSelect)="selectRow($event)">
+      [responsive]="true" [editable]="true" (onRowSelect)="selectRow($event)" [contextMenu]="cm">
       <p-column [style]="&#123;'width':'38px'&#125;" selectionMode="multiple"></p-column>
       <p-column field="rootLetters" header="Root Letters" [style]="{'width': '200px'}">
         <ng-template let-mi="rowData" pTemplate="body">
@@ -28,11 +28,6 @@
           <div style="font-size: 14px">{{ mi.translation }}</div>
         </ng-template>
       </p-column>
-      <p-column styleClass="col-button" [style]="{'width': '60px'}">
-        <ng-template let-row="rowData" pTemplate="body">
-          <button type="button" pButton (click)="viewConjugation(row)" icon="fa-search"></button>
-        </ng-template>
-      </p-column>
     </p-dataTable>
   </p-tabPanel>
   <p-tabPanel header="Conjugation">
@@ -44,3 +39,4 @@
 <app-morphological-input-form #form [(visible)]="displayDialog" (onHide)="hnadleHide($event)"></app-morphological-input-form>
 <app-file [visible]="importDialog" mode="import" (onClose)="importFile($event)"></app-file>
 <app-file [visible]="exportDialog" mode="export" (onClose)="exportFile($event)"></app-file>
+<p-contextMenu #cm [model]="operations"></p-contextMenu>
