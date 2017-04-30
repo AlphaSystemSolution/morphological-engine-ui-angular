@@ -26,7 +26,11 @@ export class ApplicationControllerService {
   public abbreviatedConjugations: AbbreviatedConjugation[] = [];
   data: MorphologicalInput[] = [];
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
+    this.data = [
+      MorphologicalInput.createDefaultMorphologicalInput()
+    ];
+  }
 
   doAbbreviatedConjugation(inputs: MorphologicalInput[], index: number = -1) {
     const url = environment.morphologicalEngineBaseUrl + 'AbbreviatedConjugation/format/UNICODE';
