@@ -16,27 +16,31 @@ export class MorphologicalInput extends Document {
   private _nounOfPlaceAndTimes: NounOfPlaceAndTime[];
   private _templateId: string;
 
-  static copy(src: MorphologicalInput, copyId: boolean): MorphologicalInput {
+  static copy(src: any, copyId: boolean): MorphologicalInput {
     if (!src) {
       return null;
     }
-    const srcRootLetters = src.rootLetters;
+    const srcRootLetters = src.rootLetters || new RootLetters();
     const rootLetters: RootLetters = new RootLetters(srcRootLetters.firstRadical, srcRootLetters.secondRadical,
       srcRootLetters.thirdRadical, srcRootLetters.fourthRadical);
-    const srcConjugationConfiguration = src.configuration;
+    const srcConjugationConfiguration = src.configuration || new ConjugationConfiguration();
     const conjugationConfiguration: ConjugationConfiguration = new ConjugationConfiguration(srcConjugationConfiguration.removePassiveLine,
       srcConjugationConfiguration.skipRuleProcessing);
     const result: MorphologicalInput = new MorphologicalInput();
-    result.rootLetters = src.rootLetters;
-    result.template = src.template;
-    result.translation = src.translation;
-    result.configuration = src.configuration;
-    result.verbalNouns = src.verbalNouns;
-    result.nounOfPlaceAndTimes = src.nounOfPlaceAndTimes;
+    result.rootLetters = rootLetters;
+    result.template = src.template || NamedTemplate.FORM_I_CATEGORY_A_GROUP_U_TEMPLATE;
+    result.translation = src.translation || null;
+    result.configuration = srcConjugationConfiguration;
+    result.verbalNouns = src.verbalNouns || [];
+    result.nounOfPlaceAndTimes = src.nounOfPlaceAndTimes || [];
     if (copyId) {
       result.id = src.id;
     }
     return result;
+  }
+
+  static createDefaultMorphologicalInput(): MorphologicalInput {
+    return MorphologicalInput.copy({}, false);
   }
 
   static fromConjugationData(src: ConjugationData): MorphologicalInput {
