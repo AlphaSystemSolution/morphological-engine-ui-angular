@@ -15,7 +15,6 @@ export class MorphologicalChartComponent implements OnInit {
   private _selectedAbbreviatedConjugation: AbbreviatedConjugation;
   private _selectedIndex = 0;
   displayType = DisplayType.LABEL_ONLY;
-  private _titles: ArabicLabel[] = [];
 
   constructor(private applicationControllerService: ApplicationControllerService) { }
 
@@ -28,48 +27,16 @@ export class MorphologicalChartComponent implements OnInit {
 
   set abbreviatedConjugations(value: AbbreviatedConjugation[]) {
     this._abbreviatedConjugations = value;
-    this.updateDropdownValues();
   }
 
   get selectedAbbreviatedConjugation(): AbbreviatedConjugation {
     return this._selectedAbbreviatedConjugation;
   }
 
-  get titles(): ArabicLabel[] {
-    return this._titles;
-  }
-
-  handleChange(event) {
-    const selectedValue = <ArabicLabel>event.value;
-    this._selectedAbbreviatedConjugation = this.abbreviatedConjugations.filter((value, index) =>
-      this.filter(selectedValue, value, index))[0];
-  }
-
-  private updateDropdownValues() {
-    this._titles = [];
-    if (!this.abbreviatedConjugations) {
-      return;
+  viewConjugation(index: number) {
+    if (this.abbreviatedConjugations && this.abbreviatedConjugations.length > 0) {
+      this._selectedAbbreviatedConjugation = this.abbreviatedConjugations[index];
     }
-    this.abbreviatedConjugations.forEach(ac => {
-      const conjugationHeader = ac.conjugationHeader;
-      const rootLetters = conjugationHeader.rootLetters;
-      const rootLettersLabel = ArabicLetter.getByName(rootLetters.firstRadical).label +
-        ArabicLetter.getByName(rootLetters.secondRadical).label
-        + ArabicLetter.getByName(rootLetters.thirdRadical).label;
-      const label = '      ' + rootLettersLabel + ' - ' + conjugationHeader.pastTenseRoot + ' '
-        + conjugationHeader.presentTenseRoot + '     ';
-      this._titles.push(new ArabicLabel(ac.id, label, ac.id));
-    });
-    this._selectedAbbreviatedConjugation = this.abbreviatedConjugations[0];
-    this._selectedIndex = 0;
-  }
-
-  private filter(selectedValue: ArabicLabel, value, index): boolean {
-    const result = selectedValue.code === value.id;
-    if (result) {
-      this._selectedIndex = index;
-    }
-    return result;
   }
 
 }

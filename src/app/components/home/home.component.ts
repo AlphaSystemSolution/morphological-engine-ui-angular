@@ -82,6 +82,14 @@ export class HomeComponent implements OnInit {
     this.selectedRow = event.data;
   }
 
+  viewConjugation(row: MorphologicalInput) {
+    const index = this.applicationController.findInputRowIndex(row);
+    console.log('SELECTED ROW: ' + index);
+    if (index >= 0) {
+      this.chart.viewConjugation(index);
+    }
+  }
+
   importFile(event) {
     const file: File = event.file;
     if (file) {

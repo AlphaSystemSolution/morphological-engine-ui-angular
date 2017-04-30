@@ -28,6 +28,11 @@
           <div style="font-size: 14px">{{ mi.translation }}</div>
         </ng-template>
       </p-column>
+      <p-column styleClass="col-button" [style]="{'width': '60px'}">
+        <ng-template let-row="rowData" pTemplate="body">
+          <button type="button" pButton (click)="viewConjugation(row)" icon="fa-search"></button>
+        </ng-template>
+      </p-column>
     </p-dataTable>
   </p-tabPanel>
   <p-tabPanel header="Conjugation">
