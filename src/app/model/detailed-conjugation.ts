@@ -31,12 +31,16 @@ export class ConjugationTuple {
   }
 }
 
-export interface ConjugationGroup {
-  termType: string;
+export class ConjugationGroup {
+  public id: string;
+  public termType: string;
+
+  equals(other: ConjugationGroup): boolean {
+    return other && this.id === other.id;
+  }
 }
 
-export class VerbConjugationGroup implements ConjugationGroup {
-  public termType: string;
+export class VerbConjugationGroup extends ConjugationGroup {
   public masculineThirdPerson: ConjugationTuple;
   public feminineThirdPerson: ConjugationTuple;
   public masculineSecondPerson: ConjugationTuple;
@@ -44,7 +48,9 @@ export class VerbConjugationGroup implements ConjugationGroup {
   public firstPerson: ConjugationTuple;
 
   constructor(src?: any) {
+    super();
     if (src) {
+      this.id = src.id || IdGenerator.nextId();
       this.termType = src.termType || null;
       this.masculineThirdPerson = ConjugationTuple.getTuple(src.masculineThirdPerson || null);
       this.feminineThirdPerson = ConjugationTuple.getTuple(src.feminineThirdPerson || null);
@@ -55,14 +61,15 @@ export class VerbConjugationGroup implements ConjugationGroup {
   }
 }
 
-export class NounConjugationGroup implements ConjugationGroup {
-  public termType: string;
+export class NounConjugationGroup extends ConjugationGroup {
   public nominative: ConjugationTuple;
   public accusative: ConjugationTuple;
   public genitive: ConjugationTuple;
 
   constructor(src?: any) {
+    super();
     if (src) {
+      this.id = src.id || IdGenerator.nextId();
       this.termType = src.termType || null;
       this.nominative = ConjugationTuple.getTuple(src.nominative || null);
       this.accusative = ConjugationTuple.getTuple(src.accusative || null);
@@ -91,10 +98,10 @@ export class DetailedConjugation {
   public forbidding: VerbConjugationGroup;
 
   // verbal noun values
-  public verbalNouns: NounConjugationGroup[];
+  public verbalNouns: NounConjugationGroup[] = [];
 
   // adverb values
-  public adverbs: NounConjugationGroup[];
+  public adverbs: NounConjugationGroup[] = [];
 
   private _rootLetters: RootLetters;
   private _namedTemplate: NamedTemplate;
@@ -153,7 +160,7 @@ export class DetailedConjugation {
     this.updateId();
   }
 
-  getConjugation(type: SarfTermType): NounConjugationGroup | VerbConjugationGroup | NounConjugationGroup[] {
+  getConjugation(id: string, type: SarfTermType): NounConjugationGroup | VerbConjugationGroup {
     let result = null;
     switch (type.name) {
       case SarfTermType.PAST_TENSE.name:
@@ -187,10 +194,16 @@ export class DetailedConjugation {
         result = this.forbidding;
         break;
       case SarfTermType.VERBAL_NOUN.name:
-        result = this.verbalNouns;
+        let values = this.verbalNouns.filter(v => v.id === id);
+        if (values && values.length > 0) {
+          result = values[0];
+        }
         break;
       case SarfTermType.NOUN_OF_PLACE_AND_TIME.name:
-        result = this.adverbs;
+        values = this.adverbs.filter(v => v.id === id);
+        if (values && values.length > 0) {
+          result = values[0];
+        }
         break;
     }
     return result;
@@ -229,10 +242,10 @@ export class DetailedConjugation {
         this.forbidding = <VerbConjugationGroup>group;
         break;
       case SarfTermType.VERBAL_NOUN.name:
-        this.verbalNouns.push(<NounConjugationGroup>group);
+        this.updateValue(<NounConjugationGroup>group, this.verbalNouns);
         break;
       case SarfTermType.NOUN_OF_PLACE_AND_TIME.name:
-        this.adverbs.push(<NounConjugationGroup>group);
+        this.updateValue(<NounConjugationGroup>group, this.adverbs);
         break;
     }
   }
@@ -254,6 +267,21 @@ export class DetailedConjugation {
       this.id = this.namedTemplate.name + '_' + this.rootLetters.name;
     } else {
       this.id = IdGenerator.nextId();
+    }
+  }
+
+  private updateValue(value: NounConjugationGroup, values: NounConjugationGroup[]) {
+    let index = -1;
+    values.filter((v, i) => {
+      if (v.equals(value)) {
+        index = i;
+        return true;
+      }
+    });
+    if (index > -1) {
+      values[index] = value;
+    } else {
+      values.push(value);
     }
   }
 }
