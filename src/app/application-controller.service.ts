@@ -89,14 +89,11 @@ export class ApplicationControllerService {
     }
 
     if (currentConjugationGroup) {
-      console.log('Existing');
       return Observable.create(observer => {
-        console.log('HERE2');
         observer.next([currentConjugationGroup]);
         observer.complete();
       });
     } else {
-      console.log('New');
       return this.http.get(url, options).map(resp => resp.json());
     }
   }
