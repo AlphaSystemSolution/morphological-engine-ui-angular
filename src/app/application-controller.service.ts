@@ -30,7 +30,6 @@ export class ApplicationControllerService {
   }
 
   doAbbreviatedConjugation(input: MorphologicalInput, index: number = -1): Observable<AbbreviatedConjugation[]> {
-    console.log('INDEX: ' + index);
     const filteredValues = this.abbreviatedConjugations.filter((value) => value.id === input.templateId);
     if (index <= -1 && filteredValues && filteredValues.length > 0) {
       return Observable.create(observer => {
@@ -50,7 +49,6 @@ export class ApplicationControllerService {
           return resp.json().map(item => {
             const selectedAbbreviatedConjugation = new AbbreviatedConjugation(item);
             if (index > -1) {
-              console.log('HERE');
               this.abbreviatedConjugations[index] = selectedAbbreviatedConjugation;
             } else {
               this.abbreviatedConjugations.push(selectedAbbreviatedConjugation);
@@ -161,7 +159,6 @@ export class ApplicationControllerService {
     if (data) {
       data.forEach(d => this.data.push(MorphologicalInput.fromConjugationData(d)));
       this.data.sort((d1, d2) => d1.compareTo(d2));
-      // this.doAbbreviatedConjugation(this.data);
     }
   }
 
@@ -179,7 +176,6 @@ export class ApplicationControllerService {
       this.data.push(result);
     }
     this.data.sort((d1, d2) => d1.compareTo(d2));
-    // this.doAbbreviatedConjugation(result, index);
   }
 
   removeData(index: number) {
