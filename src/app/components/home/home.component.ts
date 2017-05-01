@@ -200,7 +200,9 @@ export class HomeComponent implements OnInit {
       rootLetters = this.selectedRows[0].rootLetters;
     } else if (this.currentTabIndex === 1) {
       // conjugation tab
-      // rootLetters = this.chart.selectedAbbreviatedConjugation.rootLetters;
+      if (this.selectedAbbreviatedConjugation) {
+        rootLetters = this.selectedAbbreviatedConjugation.rootLetters;
+      }
     }
     if (!rootLetters) {
       return;
