@@ -74,18 +74,14 @@ export class AbbreviatedConjugationComponent implements OnInit {
       verbalNouns = [label.name];
     }
     this.applicationController.doDetailedConjugation(label.id, type, template, rootLetters, verbalNouns, false)
-      .subscribe(data => this.handleData(label.id, type, template, rootLetters, data), err => this.handleError(err));
+      .subscribe(items => this.handleData(type, items), err => this.handleError(err));
   }
 
-  private handleData(id, type, template, rootLetters, data) {
+  private handleData(type, items) {
     if (type.isVerbType) {
-      this.verbGroup = new VerbConjugationGroup(data[0]);
-      this.verbGroup.id = id;
-      this.applicationController.updateDetailedConjugation(type, template, rootLetters, this.verbGroup);
+      this.verbGroup = items[0];
     } else {
-      this.nounGroup = new NounConjugationGroup(data[0]);
-      this.nounGroup.id = id;
-      this.applicationController.updateDetailedConjugation(type, template, rootLetters, this.nounGroup);
+      this.nounGroup = items[0];
     }
   }
 

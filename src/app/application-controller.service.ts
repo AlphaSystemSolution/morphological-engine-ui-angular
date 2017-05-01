@@ -47,7 +47,7 @@ export class ApplicationControllerService {
       return this.http.post(url, body, options)
         .map(resp => {
           return resp.json().map(item => {
-           const selectedAbbreviatedConjugation = new AbbreviatedConjugation(item);
+            const selectedAbbreviatedConjugation = new AbbreviatedConjugation(item);
             if (index > -1) {
               this.abbreviatedConjugations[index] = selectedAbbreviatedConjugation;
             } else {
@@ -61,26 +61,7 @@ export class ApplicationControllerService {
   }
 
   doDetailedConjugation(id: string, type: SarfTermType, template: NamedTemplate, rootLetters: RootLetters, verbalNouns: string[],
-    skipRuleProcessing: boolean) {
-    let url = environment.morphologicalEngineBaseUrl + 'DetailedConjugation/type/%TYPE%/template/%TEMPLATE%/format/UNICODE';
-    const replacements = { '%TYPE%': type.name, '%TEMPLATE%': template.name };
-    url = url.replace(/%\w+%/g, function (all) {
-      return replacements[all] || all;
-    });
-
-    const headers = new Headers();
-    headers.set('Content-Type', 'application/json;charset=UTF-8');
-    headers.set('firstRadical', rootLetters.firstRadical.name);
-    headers.set('secondRadical', rootLetters.secondRadical.name);
-    headers.set('thirdRadical', rootLetters.thirdRadical.name);
-    if (rootLetters.hasFourthRadical) {
-      headers.set('fourthRadical', rootLetters.fourthRadical.name);
-    }
-    if (verbalNouns && verbalNouns.length > 0) {
-      headers.set('verbalNouns', verbalNouns);
-    }
-    const options = new RequestOptions({ headers: headers });
-
+    skipRuleProcessing: boolean): Observable<NounConjugationGroup[] | VerbConjugationGroup[]> {
     let currentConjugationGroup: NounConjugationGroup | VerbConjugationGroup = null;
     const detailedConjugation = this.getDetailedConjugation(template, rootLetters);
     const conjugationGroup = detailedConjugation.getConjugation(id, type);
@@ -102,7 +83,38 @@ export class ApplicationControllerService {
         observer.complete();
       });
     } else {
-      return this.http.get(url, options).map(resp => resp.json());
+      let url = environment.morphologicalEngineBaseUrl + 'DetailedConjugation/type/%TYPE%/template/%TEMPLATE%/format/UNICODE';
+      const replacements = { '%TYPE%': type.name, '%TEMPLATE%': template.name };
+      url = url.replace(/%\w+%/g, function (all) {
+        return replacements[all] || all;
+      });
+
+      const headers = new Headers();
+      headers.set('Content-Type', 'application/json;charset=UTF-8');
+      headers.set('firstRadical', rootLetters.firstRadical.name);
+      headers.set('secondRadical', rootLetters.secondRadical.name);
+      headers.set('thirdRadical', rootLetters.thirdRadical.name);
+      if (rootLetters.hasFourthRadical) {
+        headers.set('fourthRadical', rootLetters.fourthRadical.name);
+      }
+      if (verbalNouns && verbalNouns.length > 0) {
+        headers.set('verbalNouns', verbalNouns);
+      }
+      const options = new RequestOptions({ headers: headers });
+
+      return this.http.get(url, options).map(resp => {
+        return resp.json().map(item => {
+          let group: NounConjugationGroup | VerbConjugationGroup = null;
+          if (type.isVerbType) {
+            group = new VerbConjugationGroup(item);
+          } else {
+            group = new NounConjugationGroup(item);
+          }
+          group.id = id;
+          this.updateDetailedConjugation(type, template, rootLetters, group);
+          return group;
+        });
+      });
     }
   }
 
@@ -181,7 +193,7 @@ export class ApplicationControllerService {
     return index;
   }
 
-  updateDetailedConjugation(type: SarfTermType, template: NamedTemplate, rootLetters: RootLetters,
+  private updateDetailedConjugation(type: SarfTermType, template: NamedTemplate, rootLetters: RootLetters,
     value: NounConjugationGroup | VerbConjugationGroup) {
     this.getDetailedConjugation(template, rootLetters).setConjugation(type, value);
   }
