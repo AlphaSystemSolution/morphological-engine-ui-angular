@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { MorphologicalInputFormModel } from './shared/morphological-input-form-model';
 import { ConjugationConfiguration } from './model/common';
 import { ConjugationTemplate } from './model/conjugation-template';
@@ -21,8 +20,6 @@ import * as FileSaver from 'file-saver';
 export class ApplicationControllerService {
 
   private detailedConjugations: DetailedConjugation[] = [];
-  private _morphologicalChartSubject: BehaviorSubject<MorphologicalChart[]>;
-  public morphologicalCharts: Observable<MorphologicalChart[]>;
   private abbreviatedConjugations: AbbreviatedConjugation[] = [];
   data: MorphologicalInput[] = [];
 
@@ -109,31 +106,6 @@ export class ApplicationControllerService {
     }
   }
 
-  getMorphologicalChart(inputs: MorphologicalInput[], format: string = 'UNICODE'): void {
-    this._morphologicalChartSubject = new BehaviorSubject<MorphologicalChart[]>([]);
-    this.morphologicalCharts = this._morphologicalChartSubject.asObservable();
-
-    const path = 'morphologicalChart/format/';
-    const url = environment.morphologicalEngineBaseUrl + path + format;
-    const headers = new Headers();
-    headers.set('Content-Type', 'application/json;charset=UTF-8');
-
-    const options = new RequestOptions({ headers: headers });
-    const body: ConjugationTemplate = ConjugationTemplate.createConjugationTemplate(null, inputs);
-    const response = this.http.post(url, body, options);
-    if ('STREAM' === format) {
-      // TODO: figure out how to convert response into BLOB
-      response.map(resp => resp.text()).subscribe(_blob => {
-        const blob = new Blob([_blob]);
-
-        console.log('/////////////////// ' + JSON.stringify(_blob));
-        console.log('>>>>>>>>>>>>>>> ' + JSON.stringify(blob));
-      });
-    } else {
-      response.map(resp => resp.json()).subscribe(this._morphologicalChartSubject);
-    }
-  }
-
   exportMorphologicalChart(input: MorphologicalInput) {
     const rl: RootLetters = input.rootLetters;
     const path = 'morphologicalChart2/form/' + input.template.name + '/firstRadical/' + rl.firstRadical.name +
@@ -212,10 +184,6 @@ export class ApplicationControllerService {
   updateDetailedConjugation(type: SarfTermType, template: NamedTemplate, rootLetters: RootLetters,
     value: NounConjugationGroup | VerbConjugationGroup) {
     this.getDetailedConjugation(template, rootLetters).setConjugation(type, value);
-  }
-
-  getCurrentConfiguration(index: number): ConjugationConfiguration {
-    return this.data[index].configuration;
   }
 
   private getDetailedConjugation(template: NamedTemplate, rootLetters): DetailedConjugation {
