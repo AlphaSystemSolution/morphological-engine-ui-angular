@@ -170,6 +170,10 @@ export class HomeComponent implements OnInit {
 
   private doEdit() {
     this.selectedRow = MorphologicalInput.copy(this.selectedRows[0], true);
+    if (this.selectedAbbreviatedConjugation && this.selectedAbbreviatedConjugation.id === this.selectedRow.templateId) {
+      this.selectedAbbreviatedConjugation = null;
+      this.disableConjugationTab = true;
+    }
     this.form.model.mInput = this.selectedRow;
     this.newRow = false;
     this.displayDialog = true;
