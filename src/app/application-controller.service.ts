@@ -30,6 +30,7 @@ export class ApplicationControllerService {
   }
 
   doAbbreviatedConjugation(input: MorphologicalInput, index: number = -1): Observable<AbbreviatedConjugation[]> {
+    console.log('INDEX: ' + index);
     const filteredValues = this.abbreviatedConjugations.filter((value) => value.id === input.templateId);
     if (index <= -1 && filteredValues && filteredValues.length > 0) {
       return Observable.create(observer => {
@@ -49,6 +50,7 @@ export class ApplicationControllerService {
           return resp.json().map(item => {
             const selectedAbbreviatedConjugation = new AbbreviatedConjugation(item);
             if (index > -1) {
+              console.log('HERE');
               this.abbreviatedConjugations[index] = selectedAbbreviatedConjugation;
             } else {
               this.abbreviatedConjugations.push(selectedAbbreviatedConjugation);
@@ -171,11 +173,13 @@ export class ApplicationControllerService {
   addData(result: MorphologicalInput, index: number) {
     if (index > -1) {
       this.data[index] = result;
+      this.removeAbbreviatedConjugation(result.templateId);
+      this.removeDetailedConjugation(result.templateId);
     } else {
       this.data.push(result);
     }
     this.data.sort((d1, d2) => d1.compareTo(d2));
-    this.doAbbreviatedConjugation(result, index);
+    // this.doAbbreviatedConjugation(result, index);
   }
 
   removeData(index: number) {
@@ -200,8 +204,8 @@ export class ApplicationControllerService {
 
   private getDetailedConjugation(template: NamedTemplate, rootLetters): DetailedConjugation {
     let result: DetailedConjugation = new DetailedConjugation();
-    result.namedTemplate = template;
     result.rootLetters = rootLetters;
+    result.namedTemplate = template;
     const results = this.detailedConjugations.filter(d => d.equals(result));
     if (results && results.length > 0) {
       result = results[0];
@@ -210,6 +214,30 @@ export class ApplicationControllerService {
       this.detailedConjugations.sort((d1, d2) => d1.compareTo(d2));
     }
     return result;
+  }
+
+  private removeAbbreviatedConjugation(id: string) {
+    let index = -1;
+    this.abbreviatedConjugations.filter((o, i) => {
+      if (o.id === id) {
+        index = i;
+      }
+    });
+    if (index > -1) {
+      this.abbreviatedConjugations.splice(index, 1);
+    }
+  }
+
+  private removeDetailedConjugation(id: string) {
+    let index = -1;
+    this.detailedConjugations.filter((o, i) => {
+      if (o.id === id) {
+        index = i;
+      }
+    });
+    if (index > -1) {
+      this.detailedConjugations.splice(index, 1);
+    }
   }
 
 }
