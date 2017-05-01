@@ -23,7 +23,7 @@ export class ApplicationControllerService {
   private detailedConjugations: DetailedConjugation[] = [];
   private _morphologicalChartSubject: BehaviorSubject<MorphologicalChart[]>;
   public morphologicalCharts: Observable<MorphologicalChart[]>;
-  public abbreviatedConjugations: AbbreviatedConjugation[] = [];
+  private abbreviatedConjugations: AbbreviatedConjugation[] = [];
   data: MorphologicalInput[] = [];
 
   constructor(private http: Http) {
@@ -32,28 +32,35 @@ export class ApplicationControllerService {
     ];
   }
 
-  doAbbreviatedConjugation(inputs: MorphologicalInput[], index: number = -1) {
-    const url = environment.morphologicalEngineBaseUrl + 'AbbreviatedConjugation/format/UNICODE';
+  doAbbreviatedConjugation(input: MorphologicalInput, index: number = -1): Observable<AbbreviatedConjugation[]> {
+    const filteredValues = this.abbreviatedConjugations.filter((value) => value.id === input.templateId);
+    if (index <= -1 && filteredValues && filteredValues.length > 0) {
+      return Observable.create(observer => {
+        observer.next([filteredValues[0]]);
+        observer.complete();
+      });
+    } else {
+      const url = environment.morphologicalEngineBaseUrl + 'AbbreviatedConjugation/format/UNICODE';
 
-    const headers = new Headers();
-    headers.set('Content-Type', 'application/json;charset=UTF-8');
-    const options = new RequestOptions({ headers: headers });
+      const headers = new Headers();
+      headers.set('Content-Type', 'application/json;charset=UTF-8');
+      const options = new RequestOptions({ headers: headers });
 
-    const body: ConjugationTemplate = ConjugationTemplate.createConjugationTemplate(null, inputs);
-    this.http.post(url, body, options).map(resp => resp.json())
-      .subscribe(
-      data => {
-        if (index > -1 && data.length === 1) {
-          this.abbreviatedConjugations[index] = new AbbreviatedConjugation(data[0]);
-        } else {
-          data.forEach(d => this.abbreviatedConjugations.push(new AbbreviatedConjugation(d)));
-        }
-        this.abbreviatedConjugations.sort((a1, a2) => a1.compareTo(a2));
-      },
-      err => {
-        console.log('ERROR: ' + JSON.stringify(err));
-      }
-      );
+      const body: ConjugationTemplate = ConjugationTemplate.createConjugationTemplate(null, [input]);
+      return this.http.post(url, body, options)
+        .map(resp => {
+          return resp.json().map(item => {
+           const selectedAbbreviatedConjugation = new AbbreviatedConjugation(item);
+            if (index > -1) {
+              this.abbreviatedConjugations[index] = selectedAbbreviatedConjugation;
+            } else {
+              this.abbreviatedConjugations.push(selectedAbbreviatedConjugation);
+              this.abbreviatedConjugations.sort((a1, a2) => a1.compareTo(a2));
+            }
+            return selectedAbbreviatedConjugation;
+          });
+        });
+    }
   }
 
   doDetailedConjugation(id: string, type: SarfTermType, template: NamedTemplate, rootLetters: RootLetters, verbalNouns: string[],
@@ -168,7 +175,7 @@ export class ApplicationControllerService {
     if (data) {
       data.forEach(d => this.data.push(MorphologicalInput.fromConjugationData(d)));
       this.data.sort((d1, d2) => d1.compareTo(d2));
-      this.doAbbreviatedConjugation(this.data);
+      // this.doAbbreviatedConjugation(this.data);
     }
   }
 
@@ -184,7 +191,7 @@ export class ApplicationControllerService {
       this.data.push(result);
     }
     this.data.sort((d1, d2) => d1.compareTo(d2));
-    this.doAbbreviatedConjugation([result], index);
+    this.doAbbreviatedConjugation(result, index);
   }
 
   removeData(index: number) {
