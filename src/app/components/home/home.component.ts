@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ConfirmationService, MenuItem } from 'primeng/primeng';
+import { ConfirmationService, MenuItem, TabView } from 'primeng/primeng';
 import { ApplicationControllerService } from '../../application-controller.service';
 import { MorphologicalInputFormComponent } from '../morphological-input-form/morphological-input-form.component';
 import { MorphologicalInputFormModel } from '../../shared/morphological-input-form-model';
-import { MorphologicalChartComponent } from '../morphological-chart/morphological-chart.component';
 import { ConjugationConfiguration } from '../../model/common';
 import { MorphologicalInput } from '../../model/morphological-input';
+import { AbbreviatedConjugation } from '../../model/abbreviated-conjugation';
 import { RootLetters } from '../../model/root-letters';
 
 @Component({
@@ -16,7 +16,8 @@ import { RootLetters } from '../../model/root-letters';
 export class HomeComponent implements OnInit {
 
   @ViewChild(MorphologicalInputFormComponent) form: MorphologicalInputFormComponent;
-  @ViewChild(MorphologicalChartComponent) chart: MorphologicalChartComponent;
+  @ViewChild(TabView) tabView: TabView;
+  selectedAbbreviatedConjugation: AbbreviatedConjugation;
   displayDialog: boolean;
   newRow: boolean;
   importDialog: boolean;
@@ -120,9 +121,6 @@ export class HomeComponent implements OnInit {
 
   handleChange(event) {
     this.currentTabIndex = event.index;
-    if (this.currentTabIndex === 1) {
-      this.chart.abbreviatedConjugations = this.applicationController.abbreviatedConjugations;
-    }
   }
 
   private newFile() {
@@ -202,7 +200,7 @@ export class HomeComponent implements OnInit {
       rootLetters = this.selectedRows[0].rootLetters;
     } else if (this.currentTabIndex === 1) {
       // conjugation tab
-      rootLetters = this.chart.selectedAbbreviatedConjugation.rootLetters;
+      // rootLetters = this.chart.selectedAbbreviatedConjugation.rootLetters;
     }
     if (!rootLetters) {
       return;
@@ -212,10 +210,16 @@ export class HomeComponent implements OnInit {
   }
 
   private viewConjugation() {
-    const index = this.applicationController.findInputRowIndex(this.selectedRows[0]);
-    if (index >= 0) {
-      this.chart.viewConjugation(index);
-    }
+    this.applicationController.doAbbreviatedConjugation(this.selectedRows[0])
+      .subscribe(
+      (results: AbbreviatedConjugation[]) => {
+        this.selectedAbbreviatedConjugation = results[0];
+        this.tabView.activeIndex = 1;
+      },
+      (err: any) => {
+        console.log('ERROR: ' + JSON.stringify(err));
+      }
+      );
     this.clearSelectedRows();
   }
 

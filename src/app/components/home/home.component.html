@@ -2,7 +2,7 @@
 <div>&nbsp;</div>
 
 <p-tabView (onChange)="handleChange($event)">
-  <p-tabPanel header="Table">
+  <p-tabPanel #tabPanel header="Table">
     <p-dataTable [value]="applicationController.data" [(selection)]="selectedRows" selectionMode="multiple" [rows]="20" [paginator]="true"
       [responsive]="true" [editable]="true" (onRowSelect)="selectRow($event)" [contextMenu]="cm">
       <p-column [style]="&#123;'width':'38px'&#125;" selectionMode="multiple"></p-column>
@@ -31,7 +31,12 @@
     </p-dataTable>
   </p-tabPanel>
   <p-tabPanel header="Conjugation">
-    <app-morphological-chart #chart></app-morphological-chart>
+    <ng-template [ngIf]="selectedAbbreviatedConjugation" [ngIfElse]="loading">
+      <app-abbreviated-conjugation [abbreviatedConjugation]="selectedAbbreviatedConjugation"></app-abbreviated-conjugation>
+    </ng-template>
+    <ng-template #loading>
+      <div>Loading, Please wait ...</div>
+    </ng-template>
   </p-tabPanel>
 </p-tabView>
 
