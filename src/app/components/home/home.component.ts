@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
   selectedRows: MorphologicalInput[] = [];
   operations: MenuItem[] = [];
   private currentTabIndex = 0;
+  disableConjugationTab = true;
 
   constructor(public applicationController: ApplicationControllerService, private confirmationService: ConfirmationService) { }
 
@@ -216,9 +217,11 @@ export class HomeComponent implements OnInit {
       .subscribe(
       (results: AbbreviatedConjugation[]) => {
         this.selectedAbbreviatedConjugation = results[0];
+        this.disableConjugationTab = false;
         this.tabView.activeIndex = 1;
       },
       (err: any) => {
+        this.disableConjugationTab = true;
         console.log('ERROR: ' + JSON.stringify(err));
       }
       );

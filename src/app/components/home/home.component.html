@@ -30,7 +30,7 @@
       </p-column>
     </p-dataTable>
   </p-tabPanel>
-  <p-tabPanel header="Conjugation">
+  <p-tabPanel header="Conjugation" [disabled]="disableConjugationTab">
     <ng-template [ngIf]="selectedAbbreviatedConjugation" [ngIfElse]="loading">
       <app-abbreviated-conjugation [abbreviatedConjugation]="selectedAbbreviatedConjugation"></app-abbreviated-conjugation>
     </ng-template>
