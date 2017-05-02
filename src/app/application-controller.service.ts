@@ -21,6 +21,8 @@ export class ApplicationControllerService {
 
   private detailedConjugations: DetailedConjugation[] = [];
   private abbreviatedConjugations: AbbreviatedConjugation[] = [];
+  private sortField = 'rootLetters';
+  private sortOrder = 1;
   data: MorphologicalInput[] = [];
 
   constructor(private http: Http) {
@@ -52,7 +54,7 @@ export class ApplicationControllerService {
               this.abbreviatedConjugations[index] = selectedAbbreviatedConjugation;
             } else {
               this.abbreviatedConjugations.push(selectedAbbreviatedConjugation);
-              this.abbreviatedConjugations.sort((a1, a2) => a1.compareTo(a2));
+              this.abbreviatedConjugations.sort(this.getSortFunction(this.sortField, this.sortOrder));
             }
             return selectedAbbreviatedConjugation;
           });
@@ -158,7 +160,7 @@ export class ApplicationControllerService {
     const data = template.data;
     if (data) {
       data.forEach(d => this.data.push(MorphologicalInput.fromConjugationData(d)));
-      this.data.sort((d1, d2) => d1.compareTo(d2));
+      this.data.sort(this.getSortFunction(this.sortField, this.sortOrder));
     }
   }
 
@@ -175,7 +177,7 @@ export class ApplicationControllerService {
     } else {
       this.data.push(result);
     }
-    this.data.sort((d1, d2) => d1.compareTo(d2));
+    this.data.sort(this.getSortFunction(this.sortField, this.sortOrder));
   }
 
   removeData(index: number) {
@@ -194,17 +196,23 @@ export class ApplicationControllerService {
   }
 
   sort(sortField: string, sortOrder: number) {
-    let comparer;
+    this.sortField = sortField;
+    this.sortOrder = sortOrder;
+    this.data.sort(this.getSortFunction(this.sortField, this.sortOrder));
+  }
+
+  private getSortFunction(sortField: string, sortOrder: number) {
+    let comparator;
     if (sortField === 'rootLetters') {
-      comparer = function (o1: MorphologicalInput, o2: MorphologicalInput): number {
+      comparator = function (o1, o2): number {
         return o1.rootLetters.compareTo(o2.rootLetters) * sortOrder;
       };
     } else if (sortField === 'template') {
-      comparer = function (o1: MorphologicalInput, o2: MorphologicalInput): number {
+      comparator = function (o1, o2): number {
         return o1.template.compareTo(o2.template) * sortOrder;
       };
     }
-    this.data.sort(comparer);
+    return comparator;
   }
 
   private updateDetailedConjugation(type: SarfTermType, template: NamedTemplate, rootLetters: RootLetters,
@@ -221,7 +229,7 @@ export class ApplicationControllerService {
       result = results[0];
     } else {
       this.detailedConjugations.push(result);
-      this.detailedConjugations.sort((d1, d2) => d1.compareTo(d2));
+      this.detailedConjugations.sort(this.getSortFunction(this.sortField, this.sortOrder));
     }
     return result;
   }
