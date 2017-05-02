@@ -193,6 +193,20 @@ export class ApplicationControllerService {
     return index;
   }
 
+  sort(sortField: string, sortOrder: number) {
+    let comparer;
+    if (sortField === 'rootLetters') {
+      comparer = function (o1: MorphologicalInput, o2: MorphologicalInput): number {
+        return o1.rootLetters.compareTo(o2.rootLetters) * sortOrder;
+      };
+    } else if (sortField === 'template') {
+      comparer = function (o1: MorphologicalInput, o2: MorphologicalInput): number {
+        return o1.template.compareTo(o2.template) * sortOrder;
+      };
+    }
+    this.data.sort(comparer);
+  }
+
   private updateDetailedConjugation(type: SarfTermType, template: NamedTemplate, rootLetters: RootLetters,
     value: NounConjugationGroup | VerbConjugationGroup) {
     this.getDetailedConjugation(template, rootLetters).setConjugation(type, value);

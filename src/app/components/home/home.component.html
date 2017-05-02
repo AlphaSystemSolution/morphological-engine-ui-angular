@@ -6,12 +6,13 @@
     <p-dataTable [value]="applicationController.data" [(selection)]="selectedRows" selectionMode="multiple" [rows]="20" [paginator]="true"
       [responsive]="true" [editable]="true" (onRowSelect)="selectRow($event)" [contextMenu]="cm">
       <p-column [style]="&#123;'width':'38px'&#125;" selectionMode="multiple"></p-column>
-      <p-column field="rootLetters" header="Root Letters" [style]="{'width': '200px'}">
+      <p-column field="rootLetters" header="Root Letters" sortable="custom" (sortFunction)="handleSort($event)" [style]="{'width': '200px'}">
         <ng-template let-mi="rowData" pTemplate="body">
           <div class="arabicNormal">{{ mi.rootLetters.label }}</div>
         </ng-template>
       </p-column>
-      <p-column field="template" header="Family" [style]="{'width': '350px'}" [editable]="true">
+      <p-column field="template" header="Family" sortable="custom" (sortFunction)="handleSort($event)" [style]="{'width': '350px'}"
+        [editable]="true">
         <ng-template let-mi="rowData" pTemplate="body">
           <div style="direction: rtl">
             <span class="arabicNormal">{{ mi.template.label }}</span> &mdash; <span>{{ mi.template.code}}</span>

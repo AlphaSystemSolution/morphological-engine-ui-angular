@@ -124,6 +124,10 @@ export class HomeComponent implements OnInit {
     this.currentTabIndex = event.index;
   }
 
+  handleSort(event) {
+    this.applicationController.sort(event.field, event.order);
+  }
+
   private newFile() {
     if (this.applicationController.data.length > 0) {
       /*this.confirmationService.confirm({
