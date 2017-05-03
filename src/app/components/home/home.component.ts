@@ -44,23 +44,6 @@ export class HomeComponent implements OnInit {
     ];
   }
 
-  /**
-   * Hide dialog.
-   *
-   * @param {any} event
-   *
-   * @memberOf HomeComponent
-   */
-  hnadleHide(event) {
-    const result: MorphologicalInput = event.result;
-    this.displayDialog = false;
-    this.clearSelectedRows();
-    if (result) {
-      this.save(result);
-      this.selectedRows.push(result);
-    }
-  }
-
   performAction(action) {
     switch (action) {
       case 'NEW':
@@ -121,6 +104,23 @@ export class HomeComponent implements OnInit {
     const fileName: string = event.file;
     if (fileName) {
       this.applicationController.exportFile(fileName);
+    }
+  }
+
+  /**
+     * Hide dialog.
+     *
+     * @param {any} event
+     *
+     * @memberOf HomeComponent
+     */
+  handleHide(event) {
+    const result: MorphologicalInput = event.result;
+    this.displayDialog = false;
+    this.clearSelectedRows();
+    if (result) {
+      this.save(result);
+      this.selectedRows.push(result);
     }
   }
 

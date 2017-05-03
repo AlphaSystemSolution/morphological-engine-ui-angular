@@ -42,7 +42,7 @@
 </p-tabView>
 
 <p-confirmDialog width="425"></p-confirmDialog>
-<app-morphological-input-form #form [(visible)]="displayDialog" (onHide)="hnadleHide($event)"></app-morphological-input-form>
+<app-morphological-input-form #form [(visible)]="displayDialog" (onHide)="handleHide($event)"></app-morphological-input-form>
 <app-file [visible]="importDialog" mode="import" (onClose)="importFile($event)"></app-file>
 <app-file [visible]="exportDialog" mode="export" (onClose)="exportFile($event)"></app-file>
 <p-contextMenu #cm [model]="operations"></p-contextMenu>
