@@ -53,11 +53,12 @@ export class HomeComponent implements OnInit {
    */
   hnadleHide(event) {
     const result: MorphologicalInput = event.result;
-    if (result) {
-      this.save(result);
-    }
     this.displayDialog = false;
     this.clearSelectedRows();
+    if (result) {
+      this.save(result);
+      this.selectedRows.push(result);
+    }
   }
 
   performAction(action) {
