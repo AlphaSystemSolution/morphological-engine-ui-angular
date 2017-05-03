@@ -188,7 +188,7 @@ export class ApplicationControllerService {
     }
     const page = Math.floor(index / environment.numOfRows);
     const first = page * environment.numOfRows;
-    return {first: first, rows: environment.numOfRows};
+    return { first: first, rows: environment.numOfRows };
   }
 
   removeData(index: number) {
