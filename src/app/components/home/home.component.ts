@@ -7,6 +7,7 @@ import { ConjugationConfiguration } from '../../model/common';
 import { MorphologicalInput } from '../../model/morphological-input';
 import { AbbreviatedConjugation } from '../../model/abbreviated-conjugation';
 import { RootLetters } from '../../model/root-letters';
+import { environment as env } from '../../../environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -25,6 +26,7 @@ export class HomeComponent implements OnInit {
   selectedRow: MorphologicalInput;
   selectedRows: MorphologicalInput[] = [];
   operations: MenuItem[] = [];
+  numOfRows = env.numOfRows;
   private currentTabIndex = 0;
   disableConjugationTab = true;
 
