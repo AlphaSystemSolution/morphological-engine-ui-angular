@@ -3,8 +3,8 @@
 
 <p-tabView (onChange)="handleChange($event)">
   <p-tabPanel #tabPanel header="Table">
-    <p-dataTable [value]="applicationController.data" [(selection)]="selectedRows" selectionMode="multiple" [rows]="numOfRows" [paginator]="true"
-      [responsive]="true" [editable]="true" (onRowSelect)="selectRow($event)" [contextMenu]="cm">
+    <p-dataTable #dataTable [value]="applicationController.data" [(selection)]="selectedRows" selectionMode="multiple" [rows]="numOfRows"
+      [paginator]="true" [responsive]="true" [editable]="true" (onRowSelect)="selectRow($event)" [contextMenu]="cm">
       <p-column [style]="&#123;'width':'38px'&#125;" selectionMode="multiple"></p-column>
       <p-column field="rootLetters" header="Root Letters" sortable="custom" (sortFunction)="handleSort($event)" [style]="{'width': '200px'}">
         <ng-template let-mi="rowData" pTemplate="body">

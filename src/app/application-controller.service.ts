@@ -184,7 +184,11 @@ export class ApplicationControllerService {
     } else {
       this.data.push(result);
       this.data.sort(this.getSortFunction(this.sortField, this.sortOrder));
+      index = this.findInputRowIndex(result);
     }
+    const page = Math.floor(index / environment.numOfRows);
+    const first = page * environment.numOfRows;
+    return {first: first, rows: environment.numOfRows};
   }
 
   removeData(index: number) {

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ConfirmationService, MenuItem, TabView } from 'primeng/primeng';
+import { ConfirmationService, DataTable, MenuItem, TabView } from 'primeng/primeng';
 import { ApplicationControllerService } from '../../application-controller.service';
 import { MorphologicalInputFormComponent } from '../morphological-input-form/morphological-input-form.component';
 import { MorphologicalInputFormModel } from '../../shared/morphological-input-form-model';
@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
 
   @ViewChild(MorphologicalInputFormComponent) form: MorphologicalInputFormComponent;
   @ViewChild(TabView) tabView: TabView;
+  @ViewChild(DataTable) dataTable: DataTable;
   selectedAbbreviatedConjugation: AbbreviatedConjugation;
   displayDialog: boolean;
   newRow: boolean;
@@ -161,12 +162,15 @@ export class HomeComponent implements OnInit {
     let data: MorphologicalInput = null;
     if (this.newRow) {
       data = result;
-      this.newRow = false;
     } else {
       index = this.applicationController.findInputRowIndex(this.selectedRow);
       data = this.selectedRow;
     }
-    this.applicationController.addData(data, index);
+    const page = this.applicationController.addData(data, index);
+    if (this.newRow) {
+      this.dataTable.paginate(page);
+      this.newRow = false;
+    }
   }
 
   private doAdd() {
