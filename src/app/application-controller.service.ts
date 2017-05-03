@@ -176,8 +176,8 @@ export class ApplicationControllerService {
       this.removeDetailedConjugation(result.templateId);
     } else {
       this.data.push(result);
+      this.data.sort(this.getSortFunction(this.sortField, this.sortOrder));
     }
-    this.data.sort(this.getSortFunction(this.sortField, this.sortOrder));
   }
 
   removeData(index: number) {
@@ -205,11 +205,19 @@ export class ApplicationControllerService {
     let comparator;
     if (sortField === 'rootLetters') {
       comparator = function (o1, o2): number {
-        return o1.rootLetters.compareTo(o2.rootLetters) * sortOrder;
+        let result = (o2 && o1.rootLetters.compareTo(o2.rootLetters) * sortOrder) || 1;
+        if (result === 0) {
+          result = (o2 && o1.template.compareTo(o2.template)) || 1;
+        }
+        return result;
       };
     } else if (sortField === 'template') {
       comparator = function (o1, o2): number {
-        return o1.template.compareTo(o2.template) * sortOrder;
+        let result = (o2 && o1.template.compareTo(o2.template) * sortOrder) || 1;
+        if (result === 0) {
+          result = (o2 && o1.rootLetters.compareTo(o2.rootLetters)) || 1;
+        }
+        return result;
       };
     }
     return comparator;
