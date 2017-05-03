@@ -194,6 +194,7 @@ export class ApplicationControllerService {
   removeData(index: number) {
     this.data.splice(index, 1);
     this.abbreviatedConjugations.splice(index, 1);
+    this.detailedConjugations.splice(index, 1);
   };
 
   findInputRowIndex(input: MorphologicalInput): number {
