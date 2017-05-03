@@ -149,8 +149,15 @@ export class ApplicationControllerService {
   }
 
   openWithRootLetters(rootLetters: RootLetters): void {
-    const searcString = rootLetters.firstRadical.code + rootLetters.secondRadical.code + rootLetters.thirdRadical.code;
-    const url = environment.dictionaryUrl + searcString;
+    let searchString = this.getLetterCode(rootLetters.firstRadical) + this.getLetterCode(rootLetters.secondRadical);
+    if (!rootLetters.secondRadical.equals(rootLetters.thirdRadical)) {
+      searchString += this.getLetterCode(rootLetters.thirdRadical);
+    }
+    const fourthRadical = rootLetters.fourthRadical;
+    if (fourthRadical && !ArabicLetter.TATWEEL.equals(fourthRadical)) {
+      searchString += this.getLetterCode(fourthRadical);
+    }
+    const url = environment.dictionaryUrl + searchString;
     window.open(url, 'dictionary');
   }
 
@@ -264,6 +271,10 @@ export class ApplicationControllerService {
     if (index > -1) {
       this.detailedConjugations.splice(index, 1);
     }
+  }
+
+  private getLetterCode(letter: ArabicLetter): string {
+    return ArabicLetter.HAMZA.equals(letter) ? ArabicLetter.ALIF.code : letter.code;
   }
 
 }

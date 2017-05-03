@@ -2,6 +2,7 @@ import { ArabicLabel } from './common';
 
 export class ArabicLetter extends ArabicLabel {
   static HAMZA = new ArabicLetter('HAMZA', 'ء', '\'');
+  static ALIF = new ArabicLetter('ALIF', 'ا', 'A');
   static BA = new ArabicLetter('BA', 'ب', 'b');
   static TA = new ArabicLetter('TA', 'ت', 't');
   static THA = new ArabicLetter('THA', 'ث', 'v');
