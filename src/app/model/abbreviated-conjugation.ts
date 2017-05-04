@@ -1,9 +1,9 @@
 import { ConjugationHeader } from './conjugation-header';
 import { ArabicLabel } from './common';
 import { SarfTermType } from './sarf-term-type';
-import { RootLetters } from '../model/root-letters';
-import { NamedTemplate } from '../model/named-template';
-import { ArabicLetter } from '../model/arabic-letter';
+import { RootLetters } from './root-letters';
+import { NamedTemplate } from './named-template';
+import { ArabicLetter } from './arabic-letter';
 import { IdGenerator } from '../utils/IdGenerator';
 
 export class ConjugationLabel extends ArabicLabel {
@@ -97,6 +97,10 @@ export class AbbreviatedConjugation {
 
   get namedTemplate(): NamedTemplate {
     return this._namedTemplate;
+  }
+
+  equals(other: AbbreviatedConjugation) {
+    return other && this.id === other.id;
   }
 
   compareTo(other: AbbreviatedConjugation): number {
