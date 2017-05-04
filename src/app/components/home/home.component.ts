@@ -159,14 +159,8 @@ export class HomeComponent implements OnInit {
   }
 
   private save(result: MorphologicalInput) {
-    let index = -1;
-    let data: MorphologicalInput = null;
-    if (this.newRow) {
-      data = result;
-    } else {
-      index = this.applicationController.findInputRowIndex(this.selectedRow);
-      data = this.selectedRow;
-    }
+    const index = this.newRow ? -1 : this.applicationController.findInputRowIndex(result);
+    const data: MorphologicalInput = result;
     const page = this.applicationController.addData(data, index);
     if (this.newRow) {
       this.dataTable.paginate(page);
