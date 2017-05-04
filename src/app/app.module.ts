@@ -31,6 +31,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { VerbConjugationComponent } from './components/detail-conjugation/verb-conjugation/verb-conjugation.component';
 import { NounConjugationComponent } from './components/detail-conjugation/noun-conjugation/noun-conjugation.component';
 import { FileComponent } from './components/file/file.component';
+import { NewProjectComponent } from './components/new-project/new-project.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { FileComponent } from './components/file/file.component';
     ToolbarComponent,
     VerbConjugationComponent,
     NounConjugationComponent,
-    FileComponent
+    FileComponent,
+    NewProjectComponent
   ],
   imports: [
     BrowserModule,
