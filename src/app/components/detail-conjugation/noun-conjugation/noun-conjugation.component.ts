@@ -27,6 +27,7 @@ export class NounConjugationComponent implements OnInit {
 
   set group(value: NounConjugationGroup) {
     this._group = value;
+    this.values = [];
     if (this.group) {
       if (this.group.termType) {
         this.termType = SarfTermType.getByName(this.group.termType).label;

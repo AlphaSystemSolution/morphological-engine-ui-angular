@@ -27,6 +27,7 @@ export class VerbConjugationComponent implements OnInit {
 
   set group(value: VerbConjugationGroup) {
     this._group = value;
+    this.values = [];
     if (this.group) {
       if (this.group.termType) {
         this.termType = SarfTermType.getByName(this.group.termType).label;
