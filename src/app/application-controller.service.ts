@@ -11,7 +11,7 @@ import { AbbreviatedConjugation } from './model/abbreviated-conjugation';
 import { SarfTermType } from './model/sarf-term-type';
 import { NamedTemplate } from './model/named-template';
 import { DetailedConjugation, NounConjugationGroup, VerbConjugationGroup } from './model/detailed-conjugation';
-import { MorphologicalChart } from './components/model';
+import { MorphologicalChart } from './model/morphological-chart';
 import { environment } from '../environments/environment';
 import 'rxjs/add/operator/map';
 import * as FileSaver from 'file-saver';
