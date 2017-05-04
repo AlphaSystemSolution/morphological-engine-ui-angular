@@ -19,8 +19,7 @@ import * as FileSaver from 'file-saver';
 @Injectable()
 export class ApplicationControllerService {
 
-  private detailedConjugations: DetailedConjugation[] = [];
-  private abbreviatedConjugations: AbbreviatedConjugation[] = [];
+  private morphologicalCharts: MorphologicalChart[] = [];
   private sortField = 'rootLetters';
   private sortOrder = 1;
   data: MorphologicalInput[] = [];
@@ -32,10 +31,10 @@ export class ApplicationControllerService {
   }
 
   doAbbreviatedConjugation(input: MorphologicalInput, index: number = -1): Observable<AbbreviatedConjugation[]> {
-    const filteredValues = this.abbreviatedConjugations.filter((value) => value.id === input.templateId);
+    const filteredValues = this.morphologicalCharts.filter((value) => value.id === input.templateId);
     if (index <= -1 && filteredValues && filteredValues.length > 0) {
       return Observable.create(observer => {
-        observer.next([filteredValues[0]]);
+        observer.next([filteredValues[0].abbreviatedConjugation]);
         observer.complete();
       });
     } else {
@@ -49,12 +48,17 @@ export class ApplicationControllerService {
       return this.http.post(url, body, options)
         .map(resp => {
           return resp.json().map(item => {
+            let morphologicalChart;
             const selectedAbbreviatedConjugation = new AbbreviatedConjugation(item);
             if (index > -1) {
-              this.abbreviatedConjugations[index] = selectedAbbreviatedConjugation;
+              morphologicalChart = this.morphologicalCharts[index];
+              morphologicalChart.abbreviatedConjugation = selectedAbbreviatedConjugation;
+              morphologicalChart.detailedConjugation = null;
+              this.morphologicalCharts[index] = morphologicalChart;
             } else {
-              this.abbreviatedConjugations.push(selectedAbbreviatedConjugation);
-              this.abbreviatedConjugations.sort(this.getSortFunction(this.sortField, this.sortOrder));
+              morphologicalChart = new MorphologicalChart(selectedAbbreviatedConjugation);
+              this.morphologicalCharts.push(morphologicalChart);
+              this.morphologicalCharts.sort(this.getSortFunction(this.sortField, this.sortOrder));
             }
             return selectedAbbreviatedConjugation;
           });
@@ -179,8 +183,7 @@ export class ApplicationControllerService {
   addData(result: MorphologicalInput, index: number) {
     if (index > -1) {
       this.data[index] = result;
-      this.removeAbbreviatedConjugation(result.templateId);
-      this.removeDetailedConjugation(result.templateId);
+      this.removeMorphologicalChart(result.templateId);
     } else {
       this.data.push(result);
       this.data.sort(this.getSortFunction(this.sortField, this.sortOrder));
@@ -193,8 +196,7 @@ export class ApplicationControllerService {
 
   removeData(index: number) {
     this.data.splice(index, 1);
-    this.abbreviatedConjugations.splice(index, 1);
-    this.detailedConjugations.splice(index, 1);
+    this.morphologicalCharts.splice(index, 1);
   };
 
   findInputRowIndex(input: MorphologicalInput): number {
@@ -244,37 +246,25 @@ export class ApplicationControllerService {
     let result: DetailedConjugation = new DetailedConjugation();
     result.rootLetters = rootLetters;
     result.namedTemplate = template;
-    const results = this.detailedConjugations.filter(d => d.equals(result));
-    if (results && results.length > 0) {
-      result = results[0];
+    const results = this.morphologicalCharts.filter(d => d.id === result.id);
+    const current = results[0].detailedConjugation;
+    if (current) {
+      result = current;
     } else {
-      this.detailedConjugations.push(result);
-      this.detailedConjugations.sort(this.getSortFunction(this.sortField, this.sortOrder));
+      results[0].detailedConjugation = result;
     }
     return result;
   }
 
-  private removeAbbreviatedConjugation(id: string) {
+  private removeMorphologicalChart(id: string) {
     let index = -1;
-    this.abbreviatedConjugations.filter((o, i) => {
+    this.morphologicalCharts.filter((o, i) => {
       if (o.id === id) {
         index = i;
       }
     });
     if (index > -1) {
-      this.abbreviatedConjugations.splice(index, 1);
-    }
-  }
-
-  private removeDetailedConjugation(id: string) {
-    let index = -1;
-    this.detailedConjugations.filter((o, i) => {
-      if (o.id === id) {
-        index = i;
-      }
-    });
-    if (index > -1) {
-      this.detailedConjugations.splice(index, 1);
+      this.morphologicalCharts.splice(index, 1);
     }
   }
 
