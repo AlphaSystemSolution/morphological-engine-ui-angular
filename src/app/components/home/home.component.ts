@@ -24,7 +24,6 @@ export class HomeComponent implements OnInit {
   newRow: boolean;
   importDialog: boolean;
   exportDialog: boolean;
-  selectedRow: MorphologicalInput;
   selectedRows: MorphologicalInput[] = [];
   operations: MenuItem[] = [];
   numOfRows = env.numOfRows;
@@ -74,10 +73,6 @@ export class HomeComponent implements OnInit {
         console.log(action);
         break;
     }
-  }
-
-  selectRow(event) {
-    this.selectedRow = event.data;
   }
 
   importFile(event) {
@@ -174,12 +169,12 @@ export class HomeComponent implements OnInit {
   }
 
   private doEdit() {
-    this.selectedRow = MorphologicalInput.copy(this.selectedRows[0], true);
-    if (this.selectedAbbreviatedConjugation && this.selectedAbbreviatedConjugation.id === this.selectedRow.templateId) {
+    const selectedRow = MorphologicalInput.copy(this.selectedRows[0], true);
+    if (this.selectedAbbreviatedConjugation && this.selectedAbbreviatedConjugation.id === selectedRow.templateId) {
       this.selectedAbbreviatedConjugation = null;
       this.disableConjugationTab = true;
     }
-    this.form.model.mInput = this.selectedRow;
+    this.form.model.mInput = selectedRow;
     this.newRow = false;
     this.displayDialog = true;
   }
@@ -239,7 +234,6 @@ export class HomeComponent implements OnInit {
 
   private clearSelectedRows() {
     this.selectedRows = [];
-    this.selectedRow = null;
   }
 
 }
