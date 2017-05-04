@@ -62,8 +62,6 @@ export class AbbreviatedConjugationComponent implements OnInit {
   }
 
   private displayConjugation(label: ConjugationLabel) {
-    this.collaspPanel = true;
-    this.collaspDetailedConjugationPanel = false;
     this.nounGroup = null;
     this.verbGroup = null;
     const template = this.abbreviatedConjugation.namedTemplate;
@@ -78,6 +76,8 @@ export class AbbreviatedConjugationComponent implements OnInit {
   }
 
   private handleData(type, items) {
+    this.collaspPanel = true;
+    this.collaspDetailedConjugationPanel = false;
     if (type.isVerbType) {
       this.verbGroup = items[0];
     } else {
