@@ -8,6 +8,7 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild }
 export class FileComponent implements OnInit {
 
   @ViewChild('input') input: ElementRef;
+  @Input() exportFileName: string;
   @Input() visible: boolean;
   @Input() mode = 'import';
   @Output() onClose: EventEmitter<any> = new EventEmitter();
