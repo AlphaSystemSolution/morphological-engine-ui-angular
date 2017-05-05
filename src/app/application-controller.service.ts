@@ -10,6 +10,7 @@ import { MorphologicalInput } from './model/morphological-input';
 import { AbbreviatedConjugation } from './model/abbreviated-conjugation';
 import { SarfTermType } from './model/sarf-term-type';
 import { NamedTemplate } from './model/named-template';
+import { Project } from './model/project';
 import { DetailedConjugation, NounConjugationGroup, VerbConjugationGroup } from './model/detailed-conjugation';
 import { MorphologicalChart } from './model/morphological-chart';
 import { environment } from '../environments/environment';
@@ -22,13 +23,10 @@ export class ApplicationControllerService {
   private morphologicalCharts: MorphologicalChart[] = [];
   private sortField = 'rootLetters';
   private sortOrder = 1;
+  private project: Project;
   data: MorphologicalInput[] = [];
 
-  constructor(private http: Http) {
-    this.data = [
-      MorphologicalInput.createDefaultMorphologicalInput()
-    ];
-  }
+  constructor(private http: Http) { }
 
   doAbbreviatedConjugation(input: MorphologicalInput, index: number = -1): Observable<AbbreviatedConjugation[]> {
     const filteredValues = this.morphologicalCharts.filter((value) => value.id === input.templateId);
@@ -167,7 +165,9 @@ export class ApplicationControllerService {
 
   importFile(text: string) {
     this.data = [];
-    const template: ConjugationTemplate = JSON.parse(text);
+    const projectData = JSON.parse(text);
+    this.project = projectData.project;
+    const template: ConjugationTemplate = projectData.template;
     const data = template.data;
     if (data) {
       data.forEach(d => this.data.push(MorphologicalInput.fromConjugationData(d)));
@@ -176,8 +176,9 @@ export class ApplicationControllerService {
   }
 
   exportFile(fileName: string) {
-    const body: ConjugationTemplate = ConjugationTemplate.createConjugationTemplate(null, this.data);
-    FileSaver.saveAs(new Blob([JSON.stringify(body)]), fileName);
+    const template: ConjugationTemplate = ConjugationTemplate.createConjugationTemplate(null, this.data);
+    const projectData = { project: this.project, template: template };
+    FileSaver.saveAs(new Blob([JSON.stringify(projectData)]), fileName);
   }
 
   addData(result: MorphologicalInput, index: number) {
@@ -213,6 +214,11 @@ export class ApplicationControllerService {
     this.sortField = sortField;
     this.sortOrder = sortOrder;
     this.data.sort(this.getSortFunction(this.sortField, this.sortOrder));
+  }
+
+  createProject(project: Project) {
+    this.project = project;
+    this.data = [MorphologicalInput.createDefaultMorphologicalInput()];
   }
 
   private getSortFunction(sortField: string, sortOrder: number) {

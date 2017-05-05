@@ -7,6 +7,7 @@ import { ConjugationConfiguration } from '../../model/common';
 import { MorphologicalInput } from '../../model/morphological-input';
 import { AbbreviatedConjugation } from '../../model/abbreviated-conjugation';
 import { RootLetters } from '../../model/root-letters';
+import { Project } from '../../model/project';
 import { environment as env } from '../../../environments/environment';
 
 @Component({
@@ -24,6 +25,7 @@ export class HomeComponent implements OnInit {
   newRow: boolean;
   importDialog: boolean;
   exportDialog: boolean;
+  createNewProject: boolean;
   selectedRows: MorphologicalInput[] = [];
   operations: MenuItem[] = [];
   numOfRows = env.numOfRows;
@@ -46,7 +48,7 @@ export class HomeComponent implements OnInit {
   performAction(action) {
     switch (action) {
       case 'NEW':
-        this.newFile();
+        this.newProject();
         break;
       case 'IMPORT':
         this.import();
@@ -102,6 +104,14 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  createProject(event) {
+    this.createNewProject = false;
+    const project: Project = event.result;
+    if (project) {
+      this.applicationController.createProject(project);
+    }
+  }
+
   /**
      * Hide dialog.
      *
@@ -127,7 +137,7 @@ export class HomeComponent implements OnInit {
     this.applicationController.sort(event.field, event.order);
   }
 
-  private newFile() {
+  private newProject() {
     if (this.applicationController.data.length > 0) {
       /*this.confirmationService.confirm({
         message: 'Do you want to export your file?',
@@ -143,6 +153,11 @@ export class HomeComponent implements OnInit {
     } else {
 
     }
+    this.showNewProjectDialog();
+  }
+
+  private showNewProjectDialog() {
+    this.createNewProject = true;
   }
 
   private import() {
