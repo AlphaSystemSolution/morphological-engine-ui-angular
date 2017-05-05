@@ -1,3 +1,23 @@
-<p>
-  new-project works!
-</p>
+<p-dialog header="Create New Project" [(visible)]="visible" [responsive]="true" showEffect="fade" [modal]="true" [closable]="false">
+  <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-4"> Please enter the name of the project: </div>
+      <div class="ui-grid-col-8">
+        <input #projectName type="text" pInputText [(ngModel)]="project.projectName" style="font-size: 18px; font-family: 'Candara'"
+        />
+      </div>
+    </div>
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-4"> Please enter the name of the file: </div>
+      <div class="ui-grid-col-8">
+        <input type="text" pInputText [(ngModel)]="project.fileName" style="font-size: 18px; font-family: 'Candara'" />
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+      <button pButton type="button" label="OK" (click)="submit($event, 'submit')" [disabled]="inactive"></button>
+      <button pButton type="button" label="Cancel" (click)="submit($event, 'cancel')"></button>
+    </div>
+  </p-footer>
+</p-dialog>
