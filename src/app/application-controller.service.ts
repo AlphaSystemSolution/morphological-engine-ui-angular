@@ -177,6 +177,9 @@ export class ApplicationControllerService {
 
   exportFile(fileName: string) {
     const template: ConjugationTemplate = ConjugationTemplate.createConjugationTemplate(null, this.data);
+    if (fileName !== this.project.fileName) {
+      this.project.fileName = fileName;
+    }
     const projectData = { project: this.project, template: template };
     FileSaver.saveAs(new Blob([JSON.stringify(projectData)]), fileName);
   }
