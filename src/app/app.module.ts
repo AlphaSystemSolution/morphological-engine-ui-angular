@@ -30,7 +30,7 @@ import { ExportConjugationComponent } from './components/export-conjugation/expo
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { VerbConjugationComponent } from './components/detail-conjugation/verb-conjugation/verb-conjugation.component';
 import { NounConjugationComponent } from './components/detail-conjugation/noun-conjugation/noun-conjugation.component';
-import { FileComponent } from './components/file/file.component';
+import { ImportProjectComponent } from './components/project/import-project/import-project.component';
 import { NewProjectComponent } from './components/project/new-project/new-project.component';
 import { ExportProjectComponent } from './components/project/export-project/export-project.component';
 
@@ -47,7 +47,7 @@ import { ExportProjectComponent } from './components/project/export-project/expo
     ToolbarComponent,
     VerbConjugationComponent,
     NounConjugationComponent,
-    FileComponent,
+    ImportProjectComponent,
     NewProjectComponent,
     ExportProjectComponent
   ],
@@ -82,8 +82,7 @@ import { ExportProjectComponent } from './components/project/export-project/expo
     ExportConjugationComponent,
     ToolbarComponent,
     VerbConjugationComponent,
-    NounConjugationComponent,
-    FileComponent
+    NounConjugationComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
