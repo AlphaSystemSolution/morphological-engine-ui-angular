@@ -1,14 +1,14 @@
 <p-dialog header="Create New Project" [(visible)]="visible" [responsive]="true" showEffect="fade" [modal]="true" [closable]="false">
   <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
     <div class="ui-grid-row">
-      <div class="ui-grid-col-4"> Please enter the name of the project: </div>
+      <div class="ui-grid-col-4"> Project Name: </div>
       <div class="ui-grid-col-8">
         <input #projectName type="text" pInputText [(ngModel)]="project.projectName" style="font-size: 18px; font-family: 'Candara'"
         />
       </div>
     </div>
     <div class="ui-grid-row">
-      <div class="ui-grid-col-4"> Please enter the name of the file: </div>
+      <div class="ui-grid-col-4"> Project File Name: </div>
       <div class="ui-grid-col-8">
         <input type="text" pInputText [(ngModel)]="project.fileName" style="font-size: 18px; font-family: 'Candara'" />
       </div>
