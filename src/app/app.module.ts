@@ -33,7 +33,6 @@ import { NounConjugationComponent } from './components/detail-conjugation/noun-c
 import { FileComponent } from './components/file/file.component';
 import { NewProjectComponent } from './components/project/new-project/new-project.component';
 import { ExportProjectComponent } from './components/project/export-project/export-project.component';
-import { ImportProjectComponent } from './components/project/import-project/import-project.component';
 
 @NgModule({
   declarations: [
@@ -50,8 +49,7 @@ import { ImportProjectComponent } from './components/project/import-project/impo
     NounConjugationComponent,
     FileComponent,
     NewProjectComponent,
-    ExportProjectComponent,
-    ImportProjectComponent
+    ExportProjectComponent
   ],
   imports: [
     BrowserModule,
