@@ -1,11 +1,11 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 
 @Component({
-  selector: 'app-file',
-  templateUrl: './file.component.html',
-  styleUrls: ['./file.component.css']
+  selector: 'app-import-project',
+  templateUrl: './import-project.component.html',
+  styleUrls: ['./import-project.component.css']
 })
-export class FileComponent implements OnInit {
+export class ImportProjectComponent implements OnInit {
 
   @ViewChild('input') input: ElementRef;
   @Input() exportFileName: string;
