@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-export-project',
@@ -7,7 +7,6 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild }
 })
 export class ExportProjectComponent implements OnInit {
 
-  @ViewChild('input') input: ElementRef;
   private _exportFileName: string;
   @Input() visible: boolean;
   @Output() onClose: EventEmitter<any> = new EventEmitter();
