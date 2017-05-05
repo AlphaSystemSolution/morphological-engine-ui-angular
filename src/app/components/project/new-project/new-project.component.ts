@@ -29,7 +29,7 @@ export class NewProjectComponent implements OnInit {
         this.inactive = text.length <= 1;
         return !this.inactive;
       }) // filter out if empty
-      .debounceTime(500) // only once every 500ms
+      .debounceTime(250) // only once every 2500ms
       .subscribe(
       (text: string) => this.project.fileName = text.replace(/ /g, '_').toLocaleLowerCase() + '.json',
       (err) => {
