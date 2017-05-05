@@ -8,6 +8,7 @@ import { MorphologicalInput } from '../../model/morphological-input';
 import { AbbreviatedConjugation } from '../../model/abbreviated-conjugation';
 import { RootLetters } from '../../model/root-letters';
 import { Project } from '../../model/project';
+import { FileComponent } from '../file/file.component';
 import { environment as env } from '../../../environments/environment';
 
 @Component({
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit {
   @ViewChild(MorphologicalInputFormComponent) form: MorphologicalInputFormComponent;
   @ViewChild(TabView) tabView: TabView;
   @ViewChild(DataTable) dataTable: DataTable;
+  @ViewChild('exportProject') exportProject: FileComponent;
   selectedAbbreviatedConjugation: AbbreviatedConjugation;
   displayDialog: boolean;
   newRow: boolean;
@@ -165,6 +167,7 @@ export class HomeComponent implements OnInit {
   }
 
   private export() {
+    this.exportProject.exportFileName = this.applicationController.project.fileName;
     this.exportDialog = true;
   }
 

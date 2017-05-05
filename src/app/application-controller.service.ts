@@ -23,7 +23,7 @@ export class ApplicationControllerService {
   private morphologicalCharts: MorphologicalChart[] = [];
   private sortField = 'rootLetters';
   private sortOrder = 1;
-  private project: Project;
+  public project: Project;
   data: MorphologicalInput[] = [];
 
   constructor(private http: Http) { }

@@ -43,7 +43,7 @@
 
 <p-confirmDialog width="425"></p-confirmDialog>
 <app-morphological-input-form #form [(visible)]="displayDialog" (onHide)="handleHide($event)"></app-morphological-input-form>
-<app-file [visible]="importDialog" mode="import" (onClose)="importFile($event)"></app-file>
-<app-file [visible]="exportDialog" mode="export" (onClose)="exportFile($event)"></app-file>
+<app-file #importProject [visible]="importDialog" mode="import" (onClose)="importFile($event)"></app-file>
+<app-file #exportProject [visible]="exportDialog" mode="export" (onClose)="exportFile($event)"></app-file>
 <app-new-project [visible]="createNewProject" (onClose)="createProject($event)"></app-new-project>
 <p-contextMenu #cm [model]="operations"></p-contextMenu>
