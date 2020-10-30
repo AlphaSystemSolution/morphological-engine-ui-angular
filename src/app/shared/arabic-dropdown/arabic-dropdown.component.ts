@@ -1,12 +1,13 @@
 import {
   NgModule, Component, ElementRef, OnInit, AfterViewInit, AfterContentInit, AfterViewChecked,
-  DoCheck, OnDestroy, Input, Output, Renderer, EventEmitter, ContentChildren, QueryList, ViewChild,
-  TemplateRef, IterableDiffers, forwardRef, trigger, state, style, transition, animate, ChangeDetectorRef
+  DoCheck, OnDestroy, Input, Output, Renderer2, EventEmitter, ContentChildren, QueryList, ViewChild,
+  TemplateRef, IterableDiffers, forwardRef, ChangeDetectorRef
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { PrimeTemplate } from 'primeng/components/common/shared';
-import { DomHandler } from 'primeng/components/dom/domhandler';
-import { ObjectUtils } from 'primeng/components/utils/ObjectUtils';
+import { style, state, trigger, transition, animate } from '@angular/animations';
+// import { CommonModule } from '@angular/common';
+// import { PrimeTemplate } from 'primeng/components/common/shared';
+import { DomHandler } from 'primeng/dom';
+import { ObjectUtils } from 'primeng/utils';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { ArabicLabel, DisplayType } from '../../model/common';
 
@@ -32,7 +33,7 @@ export const DROPDOWN_VALUE_ACCESSOR: any = {
       transition('hidden => visible', animate('400ms ease-out'))
     ])
   ],
-  providers: [DomHandler, ObjectUtils, DROPDOWN_VALUE_ACCESSOR]
+  providers: [DROPDOWN_VALUE_ACCESSOR]
 })
 export class ArabicDropdownComponent implements OnInit, AfterViewInit, AfterContentInit, AfterViewChecked,
   DoCheck, OnDestroy, ControlValueAccessor {
@@ -85,7 +86,7 @@ export class ArabicDropdownComponent implements OnInit, AfterViewInit, AfterCont
 
   @ViewChild('filter') filterViewChild: ElementRef;
 
-  @ContentChildren(PrimeTemplate) templates: QueryList<any>;
+ // @ContentChildren(PrimeTemplate) templates: QueryList<any>;
 
   public itemTemplate: TemplateRef<any>;
 
@@ -129,13 +130,12 @@ export class ArabicDropdownComponent implements OnInit, AfterViewInit, AfterCont
 
   onModelTouched: Function = () => { };
 
-  constructor(public el: ElementRef, public domHandler: DomHandler, public renderer: Renderer, differs: IterableDiffers,
-    private cd: ChangeDetectorRef, public objectUtils: ObjectUtils) {
+  constructor(public el: ElementRef, public renderer: Renderer2, differs: IterableDiffers, private cd: ChangeDetectorRef) {
     this.differ = differs.find([]).create(null);
   }
 
   ngAfterContentInit() {
-    this.templates.forEach((item) => {
+    /*this.templates.forEach((item) => {
       switch (item.getType()) {
         case 'item':
           this.itemTemplate = item.template;
@@ -144,7 +144,7 @@ export class ArabicDropdownComponent implements OnInit, AfterViewInit, AfterCont
           this.itemTemplate = item.template;
           break;
       }
-    });
+    });*/
   }
 
   ngOnInit() {
@@ -176,7 +176,7 @@ export class ArabicDropdownComponent implements OnInit, AfterViewInit, AfterCont
       if (this.appendTo === 'body') {
         document.body.appendChild(this.panel);
       } else {
-        this.domHandler.appendChild(this.panel, this.appendTo);
+       DomHandler.appendChild(this.panel, this.appendTo);
       }
     }
   }
@@ -213,17 +213,17 @@ export class ArabicDropdownComponent implements OnInit, AfterViewInit, AfterCont
   ngAfterViewChecked() {
     if (this.optionsChanged) {
       if (this.appendTo) {
-        this.domHandler.absolutePosition(this.panel, this.container);
+        DomHandler.absolutePosition(this.panel, this.container);
       } else {
-        this.domHandler.relativePosition(this.panel, this.container);
+        DomHandler.relativePosition(this.panel, this.container);
       }
       this.optionsChanged = false;
     }
 
     if (this.selectedOptionUpdated && this.itemsWrapper) {
-      const selectedItem = this.domHandler.findSingle(this.panel, 'li.ui-state-highlight');
+      const selectedItem = DomHandler.findSingle(this.panel, 'li.ui-state-highlight');
       if (selectedItem) {
-        this.domHandler.scrollInView(this.itemsWrapper, this.domHandler.findSingle(this.panel, 'li.ui-state-highlight'));
+        DomHandler.scrollInView(this.itemsWrapper, DomHandler.findSingle(this.panel, 'li.ui-state-highlight'));
       }
       this.selectedOptionUpdated = false;
     }
@@ -257,7 +257,7 @@ export class ArabicDropdownComponent implements OnInit, AfterViewInit, AfterCont
 
   updateDimensions() {
     if (this.autoWidth) {
-      const select = this.domHandler.findSingle(this.el.nativeElement, 'select');
+      const select = DomHandler.findSingle(this.el.nativeElement, 'select');
       if (!this.style || (!this.style['width'] && !this.style['min-width'])) {
         this.el.nativeElement.children[0].style.width = select.offsetWidth + 30 + 'px';
       }
@@ -314,9 +314,9 @@ export class ArabicDropdownComponent implements OnInit, AfterViewInit, AfterCont
       panel.style.zIndex = ++DomHandler.zindex;
 
       if (this.appendTo) {
-        this.domHandler.absolutePosition(panel, container);
+        DomHandler.absolutePosition(panel, container);
       } else {
-        this.domHandler.relativePosition(panel, container);
+        DomHandler.relativePosition(panel, container);
       }
       this.bindDocumentClickListener();
     }
@@ -417,7 +417,7 @@ export class ArabicDropdownComponent implements OnInit, AfterViewInit, AfterCont
     let index: number = -1;
     if (opts) {
       for (let i = 0; i < opts.length; i++) {
-        if ((val == null && opts[i].name == null) || this.objectUtils.equals(name, opts[i].name)) {
+        if ((val == null && opts[i].name == null) || ObjectUtils.equals(name, opts[i].name)) {
           index = i;
           break;
         }
@@ -449,15 +449,15 @@ export class ArabicDropdownComponent implements OnInit, AfterViewInit, AfterCont
 
   applyFocus(): void {
     if (this.editable) {
-      this.domHandler.findSingle(this.el.nativeElement, '.ui-dropdown-label.ui-inputtext').focus();
+      DomHandler.findSingle(this.el.nativeElement, '.ui-dropdown-label.ui-inputtext').focus();
     } else {
-      this.domHandler.findSingle(this.el.nativeElement, 'input[readonly]').focus();
+      DomHandler.findSingle(this.el.nativeElement, 'input[readonly]').focus();
     }
   }
 
   bindDocumentClickListener() {
     if (!this.documentClickListener) {
-      this.documentClickListener = this.renderer.listenGlobal('body', 'click', () => {
+      this.documentClickListener = this.renderer.listen('body', 'click', () => {
         if (!this.selfClick && !this.itemClick) {
           this.panelVisible = false;
           this.unbindDocumentClickListener();

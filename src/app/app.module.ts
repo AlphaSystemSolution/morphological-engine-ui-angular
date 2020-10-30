@@ -2,20 +2,18 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import {
-  ButtonModule,
-  ConfirmDialogModule,
-  ConfirmationService,
-  ContextMenuModule,
-  DataTableModule,
-  DialogModule,
-  InputSwitchModule,
-  PanelModule,
-  SplitButtonModule,
-  TabViewModule,
-  ToolbarModule
-} from 'primeng/primeng';
+import { HttpClientModule } from '@angular/common/http';
+import { ButtonModule } from 'primeng/button';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ContextMenuModule } from 'primeng/contextmenu';
+import { DialogModule } from 'primeng/dialog';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { PanelModule } from 'primeng/panel';
+import { SplitButtonModule} from 'primeng/splitbutton';
+import { TabViewModule } from 'primeng/tabview';
+import { ToolbarModule } from 'primeng/toolbar';
+import { TableModule } from 'primeng/table';
+import { ConfirmationService } from 'primeng/api';
 import { ApplicationControllerService } from './application-controller.service';
 import { SharedModule } from './shared/shared.module';
 import { appRoutes } from './app.routes';
@@ -55,12 +53,12 @@ import { ExportProjectComponent } from './components/project/export-project/expo
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     ButtonModule,
     ConfirmDialogModule,
     ContextMenuModule,
-    DataTableModule,
+    TableModule,
     DialogModule,
     InputSwitchModule,
     PanelModule,

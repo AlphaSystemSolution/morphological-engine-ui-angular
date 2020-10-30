@@ -3,33 +3,39 @@
 
 <p-tabView (onChange)="handleChange($event)">
   <p-tabPanel #tabPanel header="Table">
-    <p-dataTable #dataTable [value]="applicationController.data" [(selection)]="selectedRows" selectionMode="multiple" [rows]="numOfRows"
-      [paginator]="true" [responsive]="true" [editable]="true" [contextMenu]="cm">
-      <p-column [style]="&#123;'width':'38px'&#125;" selectionMode="multiple"></p-column>
-      <p-column field="rootLetters" header="Root Letters" sortable="custom" (sortFunction)="handleSort($event)" [style]="{'width': '200px'}">
-        <ng-template let-mi="rowData" pTemplate="body">
-          <div class="arabicNormal">{{ mi.rootLetters.label }}</div>
-        </ng-template>
-      </p-column>
-      <p-column field="template" header="Family" sortable="custom" (sortFunction)="handleSort($event)" [style]="{'width': '350px'}"
-        [editable]="true">
-        <ng-template let-mi="rowData" pTemplate="body">
-          <div style="direction: rtl">
-            <span class="arabicNormal">{{ mi.template.label }}</span> &mdash; <span>{{ mi.template.code}}</span>
-          </div>
-        </ng-template>
-      </p-column>
-      <p-column field="verbalNounsText" header="Verbal Nouns">
-        <ng-template let-mi="rowData" pTemplate="body">
-          <div class="arabicNormal">{{ mi.verbalNounsText }}</div>
-        </ng-template>
-      </p-column>
-      <p-column field="translation" header="Translation">
-        <ng-template let-mi="rowData" pTemplate="body">
-          <div style="font-size: 14px">{{ mi.translation }}</div>
-        </ng-template>
-      </p-column>
-    </p-dataTable>
+    <p-table [value]="applicationController.data" [(selection)]="selectedRows" [rows]="numOfRows"
+      [paginator]="true" [editable]="true" [contextMenu]="cm" [customSort]="true" (sortFunction)="handleSort($event)">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 3rem;">
+            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+          </th>
+          <th style="width: '200px';">Root Letters</th>
+          <th style="width: '350px';">Family</th>
+          <th style="width: '350px';">Verbal Nouns</th>
+          <th>Translation</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-mi>
+        <tr>
+          <td>
+            <p-tableCheckbox [value]="mi"></p-tableCheckbox>
+          </td>
+          <td>
+            <span style="direction: rtl" class="arabicNormal">{{mi.rootLetters.label}}</span>
+          </td>
+          <td>
+            <span style="direction: rtl" class="arabicNormal">{{ mi.template.label }}</span> &mdash; <span>{{ mi.template.code}}</span>
+          </td>
+          <td>
+            <span style="direction: rtl" class="arabicNormal">{{ mi.verbalNounsText }}</span>
+          </td>
+          <td>
+            <span style="font-size: 14px">{{ mi.translation }}</span>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
   </p-tabPanel>
   <p-tabPanel header="Conjugation" [disabled]="disableConjugationTab">
     <ng-template [ngIf]="selectedAbbreviatedConjugation" [ngIfElse]="loading">
@@ -46,4 +52,4 @@
 <app-import-project [visible]="importDialog" (onClose)="importFile($event)"></app-import-project>
 <app-export-project #exportProject [visible]="exportDialog" (onClose)="exportFile($event)"></app-export-project>
 <app-new-project [visible]="createNewProject" (onClose)="createProject($event)"></app-new-project>
-<p-contextMenu #cm [model]="operations"></p-contextMenu>
+<p-contextMenu #cm [global]="true" [model]="operations"></p-contextMenu>

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewChildren, QueryList } from '@angular/core';
-import { OverlayPanel } from 'primeng/primeng';
+import { OverlayPanel } from 'primeng/overlaypanel';
 import { NamedTemplate } from '../../model/named-template';
 import { VerbalNoun } from '../../model/verbal-noun';
 import { ToggleSelectorComponent } from '../toggle-selector/toggle-selector.component';

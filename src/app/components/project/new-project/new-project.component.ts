@@ -1,17 +1,15 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, AfterViewInit, Output, ViewChild } from '@angular/core';
 import { Project } from '../../../model/project';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromEvent';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/map';
+import { fromEvent } from 'rxjs';
+import { map, filter, debounceTime } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-new-project',
   templateUrl: './new-project.component.html',
   styleUrls: ['./new-project.component.css']
 })
-export class NewProjectComponent implements OnInit {
+export class NewProjectComponent implements OnInit, AfterViewInit {
 
   @ViewChild('projectName') projectNameInput: ElementRef;
   @Input() visible: boolean;
@@ -23,19 +21,20 @@ export class NewProjectComponent implements OnInit {
 
   ngOnInit() {
     this.project = new Project();
-    Observable.fromEvent(this.projectNameInput.nativeElement, 'keyup')
-      .map((e: any) => e.target.value) // extract the value of the input
-      .filter((text: string) => {
-        this.inactive = text.length <= 1;
-        return !this.inactive;
-      }) // filter out if empty
-      .debounceTime(250) // only once every 2500ms
-      .subscribe(
-      (text: string) => this.project.fileName = text.replace(/ /g, '_').toLocaleLowerCase() + '.json',
-      (err) => {
-        console.log('------------ ' + JSON.stringify(err));
-      }
-      );
+  }
+
+  ngAfterViewInit(): void {
+    fromEvent(this.projectNameInput.nativeElement, 'keyup')
+      .pipe(
+        map((e: any) => e.target.value), // extract the value of the input
+        filter((text: string, _) => {
+          this.inactive = text.length <= 1;
+          return !this.inactive;
+        }),  // filter out if empty
+        debounceTime(250) // only once every 2500ms
+      )
+      .subscribe((text: string) => this.project.fileName = text.replace(/ /g, '_').toLocaleLowerCase() + '.json',
+        (err) => console.log('------------ ' + JSON.stringify(err)));
   }
 
   get inactive(): boolean {

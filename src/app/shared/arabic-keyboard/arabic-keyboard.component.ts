@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ViewChildren, Input, Output, EventEmitter, QueryList } from '@angular/core';
 
-import { OverlayPanel } from 'primeng/primeng';
+import { OverlayPanel } from 'primeng/overlaypanel';
 
 import { ToggleSelectorComponent } from '../toggle-selector/toggle-selector.component';
 import { ArabicLetter } from '../../model/arabic-letter';

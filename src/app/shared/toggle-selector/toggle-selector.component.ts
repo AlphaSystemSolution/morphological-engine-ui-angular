@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ArabicLabel } from '../../model/common';
-import { ToggleButton } from 'primeng/primeng';
+import { ToggleButton } from 'primeng/togglebutton';
 @Component({
   selector: 'app-toggle-selector',
   templateUrl: './toggle-selector.component.html',
@@ -30,7 +30,7 @@ export class ToggleSelectorComponent implements OnInit {
 
   set select(value: boolean) {
     this._select = value;
-    this.toggle.checked = this.select;
+    //this.toggle.checked = this.select;
   }
 
   handleOnChange(event) {

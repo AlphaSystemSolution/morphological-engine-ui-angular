@@ -1,4 +1,4 @@
-<p-overlayPanel #rootLettersPicker [showCloseIcon]="true" [dismissable]="false" (onBeforeShow)="handleShow($event)" (onAfterHide)="handleHide($event)">
+<p-overlayPanel #rootLettersPicker [showCloseIcon]="true" [dismissable]="false" (onShow)="handleShow($event)" (onHide)="handleHide($event)">
   <div style="direction: rtl;  text-align: center;">
     <app-toggle-selector [value]="rootLetters.firstRadical" (onChange)="handleSelect($event, 0)" styleClass="arabicToggleButton"
       [select]="true"></app-toggle-selector>

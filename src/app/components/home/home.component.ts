@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ConfirmationService, DataTable, MenuItem, TabView } from 'primeng/primeng';
+import { ConfirmationService, MenuItem } from 'primeng/api';
+import { TabView } from 'primeng/tabview';
 import { ApplicationControllerService } from '../../application-controller.service';
 import { MorphologicalInputFormComponent } from '../morphological-input-form/morphological-input-form.component';
-import { MorphologicalInputFormModel } from '../../shared/morphological-input-form-model';
-import { ConjugationConfiguration } from '../../model/common';
+// import { MorphologicalInputFormModel } from '../../shared/morphological-input-form-model';
+// import { ConjugationConfiguration } from '../../model/common';
 import { MorphologicalInput } from '../../model/morphological-input';
 import { AbbreviatedConjugation } from '../../model/abbreviated-conjugation';
 import { RootLetters } from '../../model/root-letters';
@@ -20,7 +21,6 @@ export class HomeComponent implements OnInit {
 
   @ViewChild(MorphologicalInputFormComponent) form: MorphologicalInputFormComponent;
   @ViewChild(TabView) tabView: TabView;
-  @ViewChild(DataTable) dataTable: DataTable;
   @ViewChild('exportProject') exportProject: ExportProjectComponent;
   selectedAbbreviatedConjugation: AbbreviatedConjugation;
   displayDialog: boolean;
@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
     ];
   }
 
-  performAction(action) {
+  performAction(action: string) {
     switch (action) {
       case 'NEW':
         this.newProject();
@@ -85,7 +85,7 @@ export class HomeComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = () => {
         // this 'text' is the content of the file
-        const text = reader.result;
+        const text = reader.result as string;
         this.applicationController.importFile(text);
         this.importDialog = false;
       };
@@ -141,19 +141,18 @@ export class HomeComponent implements OnInit {
 
   private newProject() {
     if (this.applicationController.data.length > 0) {
-      /*this.confirmationService.confirm({
+      this.confirmationService.confirm({
         message: 'Do you want to export your file?',
         header: 'New File Confirmation',
         icon: 'fa fa-upload',
         accept: () => {
           this.export();
-          this.applicationController.removeData(this.applicationController.findInputRowIndex(this.selectedRow));
+          //this.applicationController.removeData(this.applicationController.findInputRowIndex(this.selectedRow));
           this.clearSelectedRows();
         },
         reject: () => this.clearSelectedRows()
-      });*/
+      });
     } else {
-
     }
     this.showNewProjectDialog();
   }
@@ -174,9 +173,8 @@ export class HomeComponent implements OnInit {
   private save(result: MorphologicalInput) {
     const index = this.newRow ? -1 : this.applicationController.findInputRowIndex(result);
     const data: MorphologicalInput = result;
-    const page = this.applicationController.addData(data, index);
+    this.applicationController.addData(data, index);
     if (this.newRow) {
-      this.dataTable.paginate(page);
       this.newRow = false;
     }
   }
@@ -237,15 +235,15 @@ export class HomeComponent implements OnInit {
   private viewConjugation() {
     this.applicationController.doAbbreviatedConjugation(this.selectedRows[0])
       .subscribe(
-      (results: AbbreviatedConjugation[]) => {
-        this.selectedAbbreviatedConjugation = results[0];
-        this.disableConjugationTab = false;
-        this.tabView.activeIndex = 1;
-      },
-      (err: any) => {
-        this.disableConjugationTab = true;
-        console.log('ERROR: ' + JSON.stringify(err));
-      }
+        (results: AbbreviatedConjugation[]) => {
+          this.selectedAbbreviatedConjugation = results[0];
+          this.disableConjugationTab = false;
+          this.tabView.activeIndex = 1;
+        },
+        (err: any) => {
+          this.disableConjugationTab = true;
+          console.log('ERROR: ' + JSON.stringify(err));
+        }
       );
     this.clearSelectedRows();
   }
